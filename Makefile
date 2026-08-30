@@ -647,10 +647,7 @@ modules/vmc/genvmc/genvmc.irx: modules/vmc/genvmc
 $(EE_ASM_DIR)genvmc.c: modules/vmc/genvmc/genvmc.irx | $(EE_ASM_DIR)
 	$(BIN2C) $< $@ $(*F)_irx
 
-modules/network/lwNBD:
-	git clone --depth 1 https://github.com/ps2homebrew/lwNBD.git modules/network/lwNBD || true
-
-modules/network/lwNBD/lwnbdsvr.irx: modules/network/lwNBD
+modules/network/lwNBD/lwnbdsvr.irx:
 	$(MAKE) TARGET=iop -C modules/network/lwNBD
 
 $(EE_ASM_DIR)lwnbdsvr.c: modules/network/lwNBD/lwnbdsvr.irx | $(EE_ASM_DIR)
