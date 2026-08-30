@@ -72,7 +72,6 @@ enum GAME_MENU_IDs {
 };
 
 void ps5LoadFavorites(void);
-item_list_t *resolveThemeGameItem(void *userdata, int id, int *sourceId);
 
 #define PS5_SMB_SETTINGS_COUNT 11
 #define PS5_CAROUSEL_REPEAT_DELAY 120
@@ -3718,11 +3717,13 @@ void menuHandleInputMain()
         if (gPS5Mode && gPS5ActiveTab == 0) {
             submenu_list_t *cur = ps5MenuGetActionGame();
             if (cur != NULL) {
-                int sourceId;
-                item_list_t *support = resolveThemeGameItem(menuGetMainMenu()->item.userdata, cur->item.id, &sourceId);
-                if (support && support->itemGetStartup) {
-                    const char *startup = support->itemGetStartup(support, sourceId);
-                    if (startup) ps5RecordRecentlyPlayed(startup);
+                if (selected_item && selected_item->item && selected_item->item->userdata) {
+                    item_list_t *support = (item_list_t *)selected_item->item->userdata;
+                    int sourceId = cur->item.id;
+                    if (oplResolveGameItem(cur->item.id, support, &support, &sourceId) && support && support->itemGetStartup) {
+                        const char *startup = support->itemGetStartup(support, sourceId);
+                        if (startup) ps5RecordRecentlyPlayed(startup);
+                    }
                 }
                 if (selected_item && selected_item->item && selected_item->item->execCross) {
                     selected_item->item->execCross(selected_item->item);
@@ -3737,11 +3738,13 @@ void menuHandleInputMain()
         if (gPS5Mode && gPS5ActiveTab == 0) {
             submenu_list_t *cur = ps5MenuGetActionGame();
             if (cur != NULL) {
-                int sourceId;
-                item_list_t *support = resolveThemeGameItem(menuGetMainMenu()->item.userdata, cur->item.id, &sourceId);
                 const char *startup = NULL;
-                if (support && support->itemGetStartup) {
-                    startup = support->itemGetStartup(support, sourceId);
+                if (selected_item && selected_item->item && selected_item->item->userdata) {
+                    item_list_t *support = (item_list_t *)selected_item->item->userdata;
+                    int sourceId = cur->item.id;
+                    if (oplResolveGameItem(cur->item.id, support, &support, &sourceId) && support && support->itemGetStartup) {
+                        startup = support->itemGetStartup(support, sourceId);
+                    }
                 }
                 if (startup != NULL && startup[0] != '\0') {
                     sfxPlay(SFX_CONFIRM);
