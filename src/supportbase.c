@@ -400,6 +400,10 @@ int sbReadList(base_game_info_t **list, const char *prefix, int *fsize, int *gam
     // count and process games in ul.cfg
     snprintf(path, sizeof(path), "%sul.cfg", prefix);
     fd = openFile(path, O_RDONLY);
+    if (fd < 0) {
+        snprintf(path, sizeof(path), "%sUL/ul.cfg", prefix);
+        fd = openFile(path, O_RDONLY);
+    }
     if (fd >= 0) {
         USBExtreme_game_entry_t GameEntry;
 
