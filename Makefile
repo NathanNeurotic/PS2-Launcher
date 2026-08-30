@@ -312,7 +312,7 @@ clean:	download_lwNBD
 	echo " -genvmc"
 	$(MAKE) -C modules/vmc/genvmc clean
 	echo " -lwnbdsvr"
-	$(MAKE) -C modules/network/lwNBD/ TARGET=iop clean
+	-[ -d modules/network/lwNBD ] && $(MAKE) -C modules/network/lwNBD/ TARGET=iop clean || true
 	echo " -udptty-ingame"
 	$(MAKE) -C modules/debug/udptty-ingame clean
 	echo " -ps2link"

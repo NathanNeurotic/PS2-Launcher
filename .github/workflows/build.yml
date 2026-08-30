@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: Install host dependencies
         run: |
+          git config --global --add safe.directory "*"
           if command -v apk >/dev/null 2>&1; then
             apk add --no-cache bash make git zip coreutils findutils sed grep || true
           elif command -v apt-get >/dev/null 2>&1; then
@@ -29,18 +30,18 @@ jobs:
 
       - name: Fetch and configure lwNBD module
         run: |
+          git config --global --add safe.directory "*"
           if [ ! -d "modules/network/lwNBD" ] || [ ! -f "modules/network/lwNBD/Makefile" ]; then
             rm -rf modules/network/lwNBD
-            git clone --depth 1 https://github.com/ps2homebrew/lwNBD.git modules/network/lwNBD || true
+            git clone --depth 1 https://github.com/ps2homebrew/lwNBD.git modules/network/lwNBD
           fi
-          if [ -d "modules/network/lwNBD" ]; then
-            touch modules/network/lwNBD/.config
-            echo "CONFIG_NBD=y" > modules/network/lwNBD/.config
-            echo "CONFIG_BLOCK=y" >> modules/network/lwNBD/.config
-          fi
+          touch modules/network/lwNBD/.config
+          echo "CONFIG_NBD=y" > modules/network/lwNBD/.config
+          echo "CONFIG_BLOCK=y" >> modules/network/lwNBD/.config
 
       - name: Build PS2-Launcher
         run: |
+          git config --global --add safe.directory "*"
           export PS2DEV=/usr/local/ps2dev
           export PS2SDK=$PS2DEV/ps2sdk
           export GSKIT=$PS2DEV/gsKit
