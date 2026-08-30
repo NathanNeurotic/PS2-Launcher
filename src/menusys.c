@@ -541,6 +541,7 @@ void menuInit()
     if (menuListSemaId < 0) {
         menuListSemaId = sbCreateSemaphore();
     }
+    ps5LoadFavorites();
 }
 
 void menuEnd()
@@ -2396,6 +2397,135 @@ static int ps5WriteControllerLogPath(const char *path)
     return 1;
 }
 
+#define PS5_MAX_FAVORITES 128
+#define PS5_MAX_RECENT    32
+
+static char gPS5Favorites[PS5_MAX_FAVORITES][32];
+static int gPS5FavoritesCount = 0;
+static char gPS5Recent[PS5_MAX_RECENT][32];
+static int gPS5RecentCount = 0;
+int gPS5MappingWizardVisible = 0;
+int gPS5MappingStep = 0;
+int gPS5MappingCapturedCount = 0;
+char gPS5MappingPrompt[128] = "Connect a USB controller to begin mapping.";
+char gPS5MappingStatus[128] = "Connect by USB. Hold the requested input, then press Cross on a PS2 controller.";
+
+void ps5LoadFavorites(void)
+{
+    int fd = openFile("mc0:/PS2L/FAVORITES.CFG", O_RDONLY);
+    if (fd < 0) fd = openFile("mass0:/PS2L/FAVORITES.CFG", O_RDONLY);
+    if (fd >= 0) {
+        char buf[2048];
+        int bytes = read(fd, buf, sizeof(buf) - 1);
+        if (bytes > 0) {
+            char *line;
+            buf[bytes] = '\0';
+            gPS5FavoritesCount = 0;
+            line = strtok(buf, "\r\n");
+            while (line && gPS5FavoritesCount < PS5_MAX_FAVORITES) {
+                if (line[0] != '\0') {
+                    strncpy(gPS5Favorites[gPS5FavoritesCount++], line, 31);
+                }
+                line = strtok(NULL, "\r\n");
+            }
+        }
+        close(fd);
+    }
+}
+
+void ps5SaveFavorites(void)
+{
+    int fd, i;
+    mkdir("mc0:/PS2L", 0777);
+    fd = openFile("mc0:/PS2L/FAVORITES.CFG", O_WRONLY | O_CREAT | O_TRUNC);
+    if (fd < 0) {
+        mkdir("mass0:/PS2L", 0777);
+        fd = openFile("mass0:/PS2L/FAVORITES.CFG", O_WRONLY | O_CREAT | O_TRUNC);
+    }
+    if (fd >= 0) {
+        for (i = 0; i < gPS5FavoritesCount; i++) {
+            write(fd, gPS5Favorites[i], strlen(gPS5Favorites[i]));
+            write(fd, "\n", 1);
+        }
+        close(fd);
+    }
+}
+
+int ps5IsGameFavorite(const char *startup)
+{
+    int i;
+    if (startup == NULL || startup[0] == '\0') return 0;
+    for (i = 0; i < gPS5FavoritesCount; i++) {
+        if (strcasecmp(gPS5Favorites[i], startup) == 0) return 1;
+    }
+    return 0;
+}
+
+void ps5ToggleGameFavorite(const char *startup)
+{
+    int i;
+    if (startup == NULL || startup[0] == '\0') return;
+    for (i = 0; i < gPS5FavoritesCount; i++) {
+        if (strcasecmp(gPS5Favorites[i], startup) == 0) {
+            for (; i < gPS5FavoritesCount - 1; i++) {
+                strncpy(gPS5Favorites[i], gPS5Favorites[i + 1], 31);
+            }
+            gPS5FavoritesCount--;
+            ps5SaveFavorites();
+            return;
+        }
+    }
+    if (gPS5FavoritesCount < PS5_MAX_FAVORITES) {
+        strncpy(gPS5Favorites[gPS5FavoritesCount++], startup, 31);
+        ps5SaveFavorites();
+    }
+}
+
+void ps5RecordRecentlyPlayed(const char *startup)
+{
+    int fd, i;
+    if (startup == NULL || startup[0] == '\0') return;
+
+    for (i = 0; i < gPS5RecentCount; i++) {
+        if (strcasecmp(gPS5Recent[i], startup) == 0) {
+            for (; i > 0; i--) {
+                strncpy(gPS5Recent[i], gPS5Recent[i - 1], 31);
+            }
+            strncpy(gPS5Recent[0], startup, 31);
+            goto save_recent;
+        }
+    }
+    if (gPS5RecentCount < PS5_MAX_RECENT) gPS5RecentCount++;
+    for (i = gPS5RecentCount - 1; i > 0; i--) {
+        strncpy(gPS5Recent[i], gPS5Recent[i - 1], 31);
+    }
+    strncpy(gPS5Recent[0], startup, 31);
+
+save_recent:
+    mkdir("mc0:/PS2L", 0777);
+    fd = openFile("mc0:/PS2L/RECENT.CFG", O_WRONLY | O_CREAT | O_TRUNC);
+    if (fd < 0) {
+        mkdir("mass0:/PS2L", 0777);
+        fd = openFile("mass0:/PS2L/RECENT.CFG", O_WRONLY | O_CREAT | O_TRUNC);
+    }
+    if (fd >= 0) {
+        for (i = 0; i < gPS5RecentCount; i++) {
+            write(fd, gPS5Recent[i], strlen(gPS5Recent[i]));
+            write(fd, "\n", 1);
+        }
+        close(fd);
+    }
+}
+
+void ps5StartControllerMapping(void)
+{
+    gPS5MappingWizardVisible = 1;
+    gPS5MappingStep = 0;
+    gPS5MappingCapturedCount = 0;
+    snprintf(gPS5MappingPrompt, sizeof(gPS5MappingPrompt), "Connect a USB controller to begin mapping.");
+    snprintf(gPS5MappingStatus, sizeof(gPS5MappingStatus), "Connect by USB. Hold the requested input, then press Cross on a PS2 controller.");
+}
+
 static void ps5SaveControllerLog(void)
 {
     mkdir("mass0:/PS2L", 0777);
@@ -2416,7 +2546,7 @@ static void ps5SaveControllerLog(void)
         return;
     }
 
-    snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Save failed. Check USB or memory card.");
+    snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Save failed. Check USB drive or memory card.");
 }
 
 static void ps5LoadSmbGamesTask(void)
@@ -3560,14 +3690,43 @@ void menuHandleInputMain()
         }
     }
     if (getKeyOn(KEY_CROSS)) {
-        if (gPS5Mode && gPS5ActiveTab == 0 && ps5MenuGetActionGame() == NULL) {
-            sfxPlay(SFX_MESSAGE);
+        if (gPS5Mode && gPS5ActiveTab == 0) {
+            submenu_list_t *cur = ps5MenuGetActionGame();
+            if (cur != NULL) {
+                int sourceId;
+                item_list_t *support = resolveThemeGameItem(menuGetMainMenu()->item->userdata, cur->item.id, &sourceId);
+                if (support && support->itemGetStartup) {
+                    const char *startup = support->itemGetStartup(support, sourceId);
+                    if (startup) ps5RecordRecentlyPlayed(startup);
+                }
+                if (selected_item && selected_item->item && selected_item->item->execCross) {
+                    selected_item->item->execCross(selected_item->item);
+                }
+            } else {
+                sfxPlay(SFX_MESSAGE);
+            }
         } else if (selected_item && selected_item->item && selected_item->item->execCross) {
             selected_item->item->execCross(selected_item->item);
         }
     } else if (getKeyOn(KEY_TRIANGLE)) {
-        if (gPS5Mode && gPS5ActiveTab == 0 && ps5MenuGetActionGame() == NULL) {
-            sfxPlay(SFX_MESSAGE);
+        if (gPS5Mode && gPS5ActiveTab == 0) {
+            submenu_list_t *cur = ps5MenuGetActionGame();
+            if (cur != NULL) {
+                int sourceId;
+                item_list_t *support = resolveThemeGameItem(menuGetMainMenu()->item->userdata, cur->item.id, &sourceId);
+                const char *startup = NULL;
+                if (support && support->itemGetStartup) {
+                    startup = support->itemGetStartup(support, sourceId);
+                }
+                if (startup != NULL && startup[0] != '\0') {
+                    sfxPlay(SFX_CONFIRM);
+                    ps5ToggleGameFavorite(startup);
+                } else {
+                    sfxPlay(SFX_MESSAGE);
+                }
+            } else {
+                sfxPlay(SFX_MESSAGE);
+            }
         } else if (selected_item && selected_item->item && selected_item->item->execTriangle) {
             selected_item->item->execTriangle(selected_item->item);
         }

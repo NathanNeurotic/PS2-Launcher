@@ -3221,8 +3221,9 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
         int playIcon = gSelectButton == KEY_CIRCLE ? CIRCLE_ICON : CROSS_ICON;
         u64 actionColor = ps5FocusedGameAvailable ? GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80) : GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x50);
         int nextX = drawPS5IconAndText(playIcon, "Play", gPS5SemiBoldFont, 50, helperY, actionColor);
-        nextX = drawPS5IconAndText(SQUARE_ICON, "Refresh", gPS5SemiBoldFont, nextX + 20, helperY, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
-        drawPS5IconAndText(TRIANGLE_ICON, "Options", gPS5SemiBoldFont, nextX + 20, helperY, actionColor);
+        extern int ps5IsGameFavorite(const char *startup);
+        const char *favText = (selectedVisibleItem && startup && ps5IsGameFavorite(startup)) ? "Remove from favourite" : "Add to favourite";
+        drawPS5IconAndText(TRIANGLE_ICON, favText, gPS5SemiBoldFont, nextX + 20, helperY, actionColor);
 
         // 5. Draw Vertical Alphabet Carousel at the right end of the screen
         if (item) {
