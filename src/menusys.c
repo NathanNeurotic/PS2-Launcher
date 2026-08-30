@@ -474,12 +474,18 @@ void menuInitGameMenu(void)
 
     if (gPS5Mode) {
         submenuAppendItem(&gameMenu, -1, "Resolution", GAME_PS5_GSM_RESOLUTION, -1);
+        submenuAppendItem(&gameMenu, -1, "Language", GAME_PS5_LANGUAGE, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 1", GAME_PS5_MODE_BASE, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 2", GAME_PS5_MODE_BASE + 1, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 3", GAME_PS5_MODE_BASE + 2, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 4", GAME_PS5_MODE_BASE + 3, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 5", GAME_PS5_MODE_BASE + 4, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 6", GAME_PS5_MODE_BASE + 5, -1);
+        submenuAppendItem(&gameMenu, -1, "Mode 7", GAME_PS5_MODE_BASE + 6, -1);
+        submenuAppendItem(&gameMenu, -1, "Mode 8", GAME_PS5_MODE_BASE + 7, -1);
+        submenuAppendItem(&gameMenu, -1, "Slot 1", GAME_PS5_VMC_SLOT1, -1);
+        submenuAppendItem(&gameMenu, -1, "Slot 2", GAME_PS5_VMC_SLOT2, -1);
+        submenuAppendItem(&gameMenu, -1, "Enable Cheat", GAME_PS5_CHEAT_ENABLE, -1);
         gameMenuCurrent = gameMenu;
         return;
     }
@@ -4037,9 +4043,21 @@ void menuRenderGameMenu()
             }
         }
 
-        for (index = 0; index < COMPAT_MODE_COUNT; index++) {
-            int y = listY + (index + 1) * rowStep;
-            int focused = selected == index + 1;
+        {
+            int langY = listY + rowStep;
+            int focused = selected == 1;
+            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+            if (langY >= listTop - rowStep && langY <= listBottom + rowStep) {
+                if (focused)
+                    drawPS5GameFocusIndicator(labelX, langY);
+                fntRenderString(rowFont, labelX, langY, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Language", focused ? focusedColor : rowColor);
+                fntRenderString(rowFont, labelX + rowW, langY, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, "<System Default>", focused ? focusedColor : rowColor);
+            }
+        }
+
+        for (index = 0; index < 8; index++) {
+            int y = listY + (index + 2) * rowStep;
+            int focused = selected == index + 2;
             int enabled = (ps5GameCompatMode & (1 << index)) != 0;
             u64 text = focused ? focusedColor : rowColor;
             u64 status = focused ? focusedColor : rowColor;
@@ -4052,6 +4070,42 @@ void menuRenderGameMenu()
                 drawPS5GameFocusIndicator(labelX, y);
             fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, value, text);
             fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, enabled ? "<On>" : "<Off>", status);
+        }
+
+        {
+            int slot1Y = listY + 10 * rowStep;
+            int focused = selected == 10;
+            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+            if (slot1Y >= listTop - rowStep && slot1Y <= listBottom + rowStep) {
+                if (focused)
+                    drawPS5GameFocusIndicator(labelX, slot1Y);
+                fntRenderString(rowFont, labelX, slot1Y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Virtual Memory Card (Slot 1)", focused ? focusedColor : rowColor);
+                fntRenderString(rowFont, labelX + rowW, slot1Y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, "<Not Created - Create>", focused ? focusedColor : rowColor);
+            }
+        }
+
+        {
+            int slot2Y = listY + 11 * rowStep;
+            int focused = selected == 11;
+            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+            if (slot2Y >= listTop - rowStep && slot2Y <= listBottom + rowStep) {
+                if (focused)
+                    drawPS5GameFocusIndicator(labelX, slot2Y);
+                fntRenderString(rowFont, labelX, slot2Y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Virtual Memory Card (Slot 2)", focused ? focusedColor : rowColor);
+                fntRenderString(rowFont, labelX + rowW, slot2Y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, "<Not Created - Create>", focused ? focusedColor : rowColor);
+            }
+        }
+
+        {
+            int cheatY = listY + 12 * rowStep;
+            int focused = selected == 12;
+            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+            if (cheatY >= listTop - rowStep && cheatY <= listBottom + rowStep) {
+                if (focused)
+                    drawPS5GameFocusIndicator(labelX, cheatY);
+                fntRenderString(rowFont, labelX, cheatY, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Enable Cheat", focused ? focusedColor : rowColor);
+                fntRenderString(rowFont, labelX + rowW, cheatY, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, "<Off>", focused ? focusedColor : rowColor);
+            }
         }
 
         {
