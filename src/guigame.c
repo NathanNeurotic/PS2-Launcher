@@ -943,7 +943,7 @@ int guiGameGetPadEmuGlobalController(void)
     config_set_t *configGame = configGetByType(CONFIG_GAME);
 
     configGetInt(configOPL, PS5_CONTROLLER_TYPE_KEY, &controllerType);
-    if (controllerType >= 0 && controllerType <= 3)
+    if (controllerType >= 0 && controllerType <= 4)
         return controllerType;
 
     configGetInt(configGame, CONFIG_ITEM_ENABLEPADEMU, &enablePadEmu);
@@ -972,6 +972,10 @@ void guiGameSetPadEmuGlobalController(int controllerType)
             PadEmuSettings = 1 | (1 << 8) | (1 << 16);
             break;
         case 3: // Xbox USB.
+            EnablePadEmu = 1;
+            PadEmuSettings = (1 << 8) | (1 << 16);
+            break;
+        case 4: // PS5 DualSense USB.
             EnablePadEmu = 1;
             PadEmuSettings = (1 << 8) | (1 << 16);
             break;

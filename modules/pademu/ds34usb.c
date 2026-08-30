@@ -112,7 +112,7 @@ int usb_probe(int devId)
         return 1;
     }
 
-    if (device->idVendor == DS34_VID && (device->idProduct == DS3_PID || device->idProduct == DS4_PID || device->idProduct == DS4_PID_SLIM))
+    if (device->idVendor == DS34_VID && (device->idProduct == DS3_PID || device->idProduct == DS4_PID || device->idProduct == DS4_PID_SLIM || device->idProduct == DUALSENSE_PID || device->idProduct == DUALSENSE_EDGE_PID))
         return 1;
 
     if (device->idVendor == XBOX_VENDOR_MICROSOFT)
@@ -174,6 +174,9 @@ int usb_connect(int devId)
     } else if (device->idProduct == ROCK_BAND_PS3_PID) {
         ds34pad[pad].type = GUITAR_RB;
         epCount = interface->bNumEndpoints - 1;
+    } else if (device->idProduct == DUALSENSE_PID || device->idProduct == DUALSENSE_EDGE_PID) {
+        ds34pad[pad].type = DS5;
+        epCount = 20;
     } else {
         ds34pad[pad].type = DS4;
         epCount = 20; // ds4 v2 returns interface->bNumEndpoints as 0
@@ -291,7 +294,7 @@ static void usb_config_set(int result, int count, void *arg)
         DelayThread(10000);
         led[0] = led_patterns[pad][1];
         led[3] = 0;
-    } else if (ds34pad[pad].type == DS4) {
+    } else if (ds34pad[pad].type == DS4 || ds34pad[pad].type == DS5) {
         led[0] = rgbled_patterns[pad][1][0];
         led[1] = rgbled_patterns[pad][1][1];
         led[2] = rgbled_patterns[pad][1][2];
@@ -382,7 +385,7 @@ static void readReport(u8 *data, int pad_idx)
             else
                 pad->oldled[3] = 0;
 
-        } else if (pad->type == DS4) {
+        } else if (pad->type == DS4 || pad->type == DS5) {
             struct ds4report *report;
             report = (struct ds4report *)data;
             translate_pad_ds4(report, &pad->ds2, 1);

@@ -10,6 +10,13 @@
 #define GUITAR_GH 2
 #define GUITAR_RB 3
 #define XBOX_USB  4
+#define DS5       5
+
+#define DUALSENSE_PID      0x0CE6
+#define DUALSENSE_EDGE_PID 0x0DF2
+
+#define DS5_01_REPORT_ID   0x01
+#define DS5_01_REPORT_LEN  64
 
 #define MODEL_GUITAR 1
 #define MODEL_PS2    3

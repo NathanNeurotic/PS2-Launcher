@@ -3671,6 +3671,8 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
             controllerText = "PS3/PS4 Bluetooth";
         else if (gPS5TempControllerType == 3)
             controllerText = "Xbox USB";
+        else if (gPS5TempControllerType == 4)
+            controllerText = "PS5 DualSense USB";
         snprintf(controllerStr, sizeof(controllerStr), "< %s >", controllerText);
         drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 6), ALIGN_LEFT, "Controller", gPS5SubSel == 6);
         drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 6), ALIGN_RIGHT, controllerStr, gPS5SubSel == 6);

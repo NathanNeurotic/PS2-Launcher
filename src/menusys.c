@@ -1612,19 +1612,29 @@ static int ps5ReadControllerRaw(u8 *raw)
         unsigned int ep = raw[6];
         unsigned int packet = raw[7];
         char bytes[170];
+        const char *ctrlName = "USB Controller";
+
+        if (vid == 0x054C && (pid == 0x0CE6 || pid == 0x0DF2))
+            ctrlName = "DualSense";
+        else if (vid == 0x045E)
+            ctrlName = "Xbox USB";
+        else if (vid == 0x054C && (pid == 0x05C4 || pid == 0x09CC))
+            ctrlName = "DualShock 4";
+        else if (vid == 0x054C && pid == 0x0268)
+            ctrlName = "DualShock 3";
 
         ps5FormatControllerBytes(bytes, sizeof(bytes), raw + 8, reportLen ? reportLen : 64);
 
         if (vid || pid)
-            snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "DEVICE VID=%04X PID=%04X STATUS=%02X EP_IN=%02X PACKET=%u REPORT_LEN=%u", vid, pid, status, ep, packet, reportLen);
+            snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "USB: Connected  %s  VID=%04X PID=%04X  STATUS=%02X EP_IN=%02X  PACKET=%u LEN=%u", ctrlName, vid, pid, status, ep, packet, reportLen);
         else
-            snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "DEVICE: not detected");
+            snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "USB DEVICE: Not Connected");
 
         snprintf(gPS5ControllerLogLatest, sizeof(gPS5ControllerLogLatest), "Latest: %s", bytes[0] ? bytes : "no report");
         return vid || pid || reportLen;
     }
     memset(raw, 0, 72);
-    snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "DEVICE: Xbox USB logger not ready");
+    snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "USB DEVICE: Logger Not Ready");
     snprintf(gPS5ControllerLogLatest, sizeof(gPS5ControllerLogLatest), "Latest: no report");
     return 0;
 }
@@ -1640,11 +1650,74 @@ static void ps5AppendPressed(char *dst, int dstSize, int *first, const char *nam
     *first = 0;
 }
 
-static void ps5UpdateControllerBridgeStatus(const u8 *data)
+static void ps5UpdateControllerBridgeStatus(const u8 *data, unsigned int vid, unsigned int pid)
 {
     unsigned int padData = 0;
-    u16 lt, rt;
-    int lx, ly;
+    int isDualSense = (vid == 0x054C && (pid == 0x0CE6 || pid == 0x0DF2));
+
+    if (isDualSense) {
+        u8 dpad;
+        u8 lx, ly;
+
+        if (data[0] != 0x01 && data[0] != 0x31) {
+            gPS5ControllerLogBridgePadData = 0;
+            if (!gPS5ControllerLogVisible)
+                gPS5XboxNavPadData = 0;
+            snprintf(gPS5ControllerLogBridge, sizeof(gPS5ControllerLogBridge), "Bridge: ignored non-DualSense report");
+            return;
+        }
+
+        // DualSense Dpad hat switch in data[8] lower 4 bits
+        dpad = data[8] & 0x0F;
+        switch (dpad) {
+            case 0: padData |= PAD_UP; break;
+            case 1: padData |= (PAD_UP | PAD_RIGHT); break;
+            case 2: padData |= PAD_RIGHT; break;
+            case 3: padData |= (PAD_DOWN | PAD_RIGHT); break;
+            case 4: padData |= PAD_DOWN; break;
+            case 5: padData |= (PAD_DOWN | PAD_LEFT); break;
+            case 6: padData |= PAD_LEFT; break;
+            case 7: padData |= (PAD_UP | PAD_LEFT); break;
+            default: break;
+        }
+
+        // DualSense shape buttons in data[8] upper 4 bits
+        if (data[8] & 0x10) padData |= PAD_SQUARE;
+        if (data[8] & 0x20) padData |= PAD_CROSS;
+        if (data[8] & 0x40) padData |= PAD_CIRCLE;
+        if (data[8] & 0x80) padData |= PAD_TRIANGLE;
+
+        // DualSense shoulders/system buttons in data[9]
+        if (data[9] & 0x01) padData |= PAD_L1;
+        if (data[9] & 0x02) padData |= PAD_R1;
+        if (data[9] & 0x04) padData |= PAD_L2;
+        if (data[9] & 0x08) padData |= PAD_R2;
+        if (data[9] & 0x10) padData |= PAD_SELECT; // Create / Share
+        if (data[9] & 0x20) padData |= PAD_START;  // Options
+        if (data[9] & 0x40) padData |= PAD_L3;
+        if (data[9] & 0x80) padData |= PAD_R3;
+
+        // DualSense analog stick in data[1] (LX), data[2] (LY)
+        lx = data[1];
+        ly = data[2];
+        if (lx < 64)
+            padData |= PAD_LEFT;
+        else if (lx > 192)
+            padData |= PAD_RIGHT;
+        if (ly < 64)
+            padData |= PAD_UP;
+        else if (ly > 192)
+            padData |= PAD_DOWN;
+
+        gPS5ControllerLogBridgePadData = padData;
+        if (!gPS5ControllerLogVisible)
+            gPS5XboxNavPadData = padData;
+        if (padData)
+            snprintf(gPS5ControllerLogBridge, sizeof(gPS5ControllerLogBridge), "Bridge: DualSense paddata=0x%04X%s", padData & 0xFFFF, gPS5ControllerLogNavTestEnabled ? " (nav on)" : "");
+        else
+            snprintf(gPS5ControllerLogBridge, sizeof(gPS5ControllerLogBridge), "Bridge: DualSense neutral%s", gPS5ControllerLogNavTestEnabled ? " (nav on)" : "");
+        return;
+    }
 
     if (data[0] != 0x20) {
         gPS5ControllerLogBridgePadData = 0;
@@ -1684,23 +1757,25 @@ static void ps5UpdateControllerBridgeStatus(const u8 *data)
     if (data[4] & 0x80)
         padData |= PAD_TRIANGLE;
 
-    lt = data[6] | (data[7] << 8);
-    rt = data[8] | (data[9] << 8);
-    if (lt > 0)
-        padData |= PAD_L2;
-    if (rt > 0)
-        padData |= PAD_R2;
+    {
+        u16 lt = data[6] | (data[7] << 8);
+        u16 rt = data[8] | (data[9] << 8);
+        int lx = (short)((data[11] << 8) | data[10]);
+        int ly = (short)((data[13] << 8) | data[12]);
+        if (lt > 0)
+            padData |= PAD_L2;
+        if (rt > 0)
+            padData |= PAD_R2;
 
-    lx = (short)((data[11] << 8) | data[10]);
-    ly = (short)((data[13] << 8) | data[12]);
-    if (lx < -8192)
-        padData |= PAD_LEFT;
-    else if (lx > 8192)
-        padData |= PAD_RIGHT;
-    if (ly < -8192)
-        padData |= PAD_UP;
-    else if (ly > 8192)
-        padData |= PAD_DOWN;
+        if (lx < -8192)
+            padData |= PAD_LEFT;
+        else if (lx > 8192)
+            padData |= PAD_RIGHT;
+        if (ly < -8192)
+            padData |= PAD_UP;
+        else if (ly > 8192)
+            padData |= PAD_DOWN;
+    }
 
     gPS5ControllerLogBridgePadData = padData;
     if (!gPS5ControllerLogVisible)
@@ -1718,8 +1793,8 @@ static void ps5UpdateControllerLiveStatus(void)
     u8 *data;
     int first = 1;
     int hasSignal = 0;
-    u16 lt, rt;
-    int lx, ly, rx, ry;
+    unsigned int vid, pid;
+    int isDualSense;
 
     if (!ps5ReadControllerRaw(raw)) {
         gPS5ControllerLogBridgePadData = 0;
@@ -1732,8 +1807,95 @@ static void ps5UpdateControllerLiveStatus(void)
         return;
     }
 
+    vid = raw[0] | (raw[1] << 8);
+    pid = raw[2] | (raw[3] << 8);
     data = raw + 8;
-    ps5UpdateControllerBridgeStatus(data);
+    isDualSense = (vid == 0x054C && (pid == 0x0CE6 || pid == 0x0DF2));
+
+    ps5UpdateControllerBridgeStatus(data, vid, pid);
+
+    if (isDualSense) {
+        u8 dpad, btn1, btn2, special, l2_analog, r2_analog;
+        u8 lx, ly, rx, ry;
+
+        if (data[0] != 0x01 && data[0] != 0x31) {
+            snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: non-DualSense packet b0=%02X", data[0]);
+            snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: packet b0-b9=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
+                     data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
+            snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: waiting for input packet");
+            return;
+        }
+
+        lx = data[1];
+        ly = data[2];
+        rx = data[3];
+        ry = data[4];
+        l2_analog = data[5];
+        r2_analog = data[6];
+        dpad = data[8] & 0x0F;
+        btn1 = data[8] & 0xF0;
+        btn2 = data[9];
+        special = data[10];
+
+        snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: ");
+
+        switch (dpad) {
+            case 0: ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Dpad Up"); break;
+            case 1: ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Dpad Up+Right"); break;
+            case 2: ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Dpad Right"); break;
+            case 3: ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Dpad Down+Right"); break;
+            case 4: ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Dpad Down"); break;
+            case 5: ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Dpad Down+Left"); break;
+            case 6: ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Dpad Left"); break;
+            case 7: ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Dpad Up+Left"); break;
+            default: break;
+        }
+
+        if (btn1 & 0x10) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Square");
+        if (btn1 & 0x20) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Cross");
+        if (btn1 & 0x40) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Circle");
+        if (btn1 & 0x80) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Triangle");
+
+        if (btn2 & 0x01) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "L1");
+        if (btn2 & 0x02) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "R1");
+        if (btn2 & 0x04 || l2_analog > 32) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "L2");
+        if (btn2 & 0x08 || r2_analog > 32) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "R2");
+        if (btn2 & 0x10) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Create/Select");
+        if (btn2 & 0x20) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Options/Start");
+        if (btn2 & 0x40) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "L3");
+        if (btn2 & 0x80) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "R3");
+
+        if (special & 0x01) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "PS Button");
+        if (special & 0x02) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Touchpad Click");
+        if (special & 0x04) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Mute");
+
+        if (lx < 64 || lx > 192 || ly < 64 || ly > 192)
+            ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Left Stick");
+        if (rx < 64 || rx > 192 || ry < 64 || ry > 192)
+            ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Right Stick");
+
+        snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: LX=%02X LY=%02X RX=%02X RY=%02X L2=%02X R2=%02X BTN=%02X/%02X SPECIAL=%02X",
+                 lx, ly, rx, ry, l2_analog, r2_analog, btn1 | dpad, btn2, special);
+
+        if (ps5GetXboxUsbDs2Report(ds2)) {
+            u16 buttons = ds2[0] | (ds2[1] << 8);
+            snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: btn=%04X LX=%u LY=%u RX=%u RY=%u L2=%u R2=%u",
+                     buttons, ds2[4], ds2[5], ds2[2], ds2[3], ds2[16], ds2[17]);
+        } else {
+            snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: data not ready");
+        }
+
+        if (first) {
+            hasSignal = (dpad != 8) || btn1 || btn2 || special || (l2_analog > 10) || (r2_analog > 10) ||
+                        lx < 64 || lx > 192 || ly < 64 || ly > 192 || rx < 64 || rx > 192 || ry < 64 || ry > 192;
+            if (hasSignal)
+                snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: signal BTN=%02X/%02X", btn1 | dpad, btn2);
+            else
+                snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input found");
+        }
+        return;
+    }
+
     if (data[0] != 0x20) {
         if (data[0] || data[1] || data[2] || data[3])
             snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: non-input packet b0-b9=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
@@ -1778,48 +1940,51 @@ static void ps5UpdateControllerLiveStatus(void)
     if (data[4] & 0x80)
         ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Triangle/Y");
 
-    lt = data[6] | (data[7] << 8);
-    rt = data[8] | (data[9] << 8);
-    if (lt > 0)
-        ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "L2/LT");
-    if (rt > 0)
-        ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "R2/RT");
+    {
+        u16 lt = data[6] | (data[7] << 8);
+        u16 rt = data[8] | (data[9] << 8);
+        int lx = (short)((data[11] << 8) | data[10]);
+        int ly = (short)((data[13] << 8) | data[12]);
+        int rx = (short)((data[15] << 8) | data[14]);
+        int ry = (short)((data[17] << 8) | data[16]);
+        if (lt > 0)
+            ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "L2/LT");
+        if (rt > 0)
+            ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "R2/RT");
 
-    lx = (short)((data[11] << 8) | data[10]);
-    ly = (short)((data[13] << 8) | data[12]);
-    rx = (short)((data[15] << 8) | data[14]);
-    ry = (short)((data[17] << 8) | data[16]);
-    snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: b4=%02X b5=%02X LT=%u RT=%u LX=%d LY=%d RX=%d RY=%d",
-             data[4], data[5], lt, rt, lx, ly, rx, ry);
-    if (ps5GetXboxUsbDs2Report(ds2)) {
-        u16 buttons = ds2[0] | (ds2[1] << 8);
-        snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: btn=%04X LX=%u LY=%u RX=%u RY=%u L2=%u R2=%u",
-                 buttons, ds2[4], ds2[5], ds2[2], ds2[3], ds2[16], ds2[17]);
-    } else {
-        snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: data not ready");
-    }
-    if (lx < -8192 || lx > 8192 || ly < -8192 || ly > 8192)
-        ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Left Stick");
-    if (rx < -8192 || rx > 8192 || ry < -8192 || ry > 8192)
-        ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Right Stick");
+        snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: b4=%02X b5=%02X LT=%u RT=%u LX=%d LY=%d RX=%d RY=%d",
+                 data[4], data[5], lt, rt, lx, ly, rx, ry);
+        if (ps5GetXboxUsbDs2Report(ds2)) {
+            u16 buttons = ds2[0] | (ds2[1] << 8);
+            snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: btn=%04X LX=%u LY=%u RX=%u RY=%u L2=%u R2=%u",
+                     buttons, ds2[4], ds2[5], ds2[2], ds2[3], ds2[16], ds2[17]);
+        } else {
+            snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: data not ready");
+        }
+        if (lx < -8192 || lx > 8192 || ly < -8192 || ly > 8192)
+            ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Left Stick");
+        if (rx < -8192 || rx > 8192 || ry < -8192 || ry > 8192)
+            ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Right Stick");
 
-    if (first) {
-        hasSignal = data[4] || data[5] || data[6] || data[7] || data[8] || data[9] ||
-                    lx < -8192 || lx > 8192 || ly < -8192 || ly > 8192 ||
-                    rx < -8192 || rx > 8192 || ry < -8192 || ry > 8192;
-        if (hasSignal)
-            snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: signal b0-b9=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
-                     data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
-        else
-            snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input found");
+        if (first) {
+            hasSignal = data[4] || data[5] || data[6] || data[7] || data[8] || data[9] ||
+                        lx < -8192 || lx > 8192 || ly < -8192 || ly > 8192 ||
+                        rx < -8192 || rx > 8192 || ry < -8192 || ry > 8192;
+            if (hasSignal)
+                snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: signal b0-b9=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
+                         data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
+            else
+                snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input found");
+        }
     }
 }
 
 static void ps5PollXboxNavigation(void)
 {
     u8 raw[72];
+    int ctrlType = gPS5TempControllerType != 0 ? gPS5TempControllerType : guiGameGetPadEmuGlobalController();
 
-    gPS5XboxNavEnabled = (gPS5TempControllerType == 3 || guiGameGetPadEmuGlobalController() == 3);
+    gPS5XboxNavEnabled = (ctrlType == 1 || ctrlType == 3 || ctrlType == 4);
     if (!gPS5XboxNavEnabled || gPS5ControllerLogVisible) {
         if (!gPS5ControllerLogVisible)
             gPS5XboxNavPadData = 0;
@@ -1831,7 +1996,11 @@ static void ps5PollXboxNavigation(void)
         return;
     }
 
-    ps5UpdateControllerBridgeStatus(raw + 8);
+    {
+        unsigned int vid = raw[0] | (raw[1] << 8);
+        unsigned int pid = raw[2] | (raw[3] << 8);
+        ps5UpdateControllerBridgeStatus(raw + 8, vid, pid);
+    }
 }
 
 static void ps5CaptureControllerLogStep(void)
@@ -1887,6 +2056,12 @@ static int ps5WriteControllerLogPath(const char *path)
 
 static void ps5SaveControllerLog(void)
 {
+    mkdir("mass0:/PS2L", 0777);
+    if (ps5WriteControllerLogPath("mass0:/PS2L/CTRL_LOG.TXT")) {
+        snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Saved: mass0:/PS2L/CTRL_LOG.TXT");
+        return;
+    }
+
     mkdir("mc0:/PS2L", 0777);
     if (ps5WriteControllerLogPath("mc0:/PS2L/CTRL_LOG.TXT")) {
         snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Saved: mc0:/PS2L/CTRL_LOG.TXT");
@@ -1899,7 +2074,7 @@ static void ps5SaveControllerLog(void)
         return;
     }
 
-    snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Save failed. Check memory card.");
+    snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Save failed. Check USB or memory card.");
 }
 
 static void ps5LoadSmbGamesTask(void)
@@ -2689,11 +2864,11 @@ void menuHandleInputMenu()
         } else if (gPS5SubSel == 6) { // Focus is on Controller
             if (getKeyOn(KEY_LEFT)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5TempControllerType = gPS5TempControllerType > 0 ? gPS5TempControllerType - 1 : 3;
+                gPS5TempControllerType = gPS5TempControllerType > 0 ? gPS5TempControllerType - 1 : 4;
             }
             if (getKeyOn(KEY_RIGHT)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5TempControllerType = gPS5TempControllerType < 3 ? gPS5TempControllerType + 1 : 0;
+                gPS5TempControllerType = gPS5TempControllerType < 4 ? gPS5TempControllerType + 1 : 0;
             }
             if (getKeyOn(KEY_CROSS) || getKeyOn(gSelectButton)) {
                 int i;
