@@ -3246,6 +3246,14 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
             gPS5AlphaAnimPos += ((float)gPS5AlphaIdx - gPS5AlphaAnimPos) * 0.20f;
             
             int alphabetX = 612;
+            if (gPS5AlphaIdx == 0) {
+                fntRenderString(gPS5RegFont, 50, 290, ALIGN_LEFT, 0, 0, "Showing all games", GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x56));
+            } else {
+                char filterHint[48];
+                snprintf(filterHint, sizeof(filterHint), "Showing games starting with %c", gPS5AlphaChars[gPS5AlphaIdx]);
+                fntRenderString(gPS5RegFont, 50, 290, ALIGN_LEFT, 0, 0, filterHint, GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x56));
+            }
+
             int i;
             for (i = 0; i < 27; i++) {
                 float diff = (float)i - gPS5AlphaAnimPos;
