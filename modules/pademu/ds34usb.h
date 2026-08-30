@@ -15,6 +15,21 @@
 #define DUALSENSE_PID      0x0CE6
 #define DUALSENSE_EDGE_PID 0x0DF2
 
+#define HORI_VID         0x0F0D
+#define POWERA_VID       0x24C6
+#define PDP_VID          0x0E6F
+#define RAZER_VID        0x1532
+#define MADCATZ_VID      0x0738
+#define EIGHTBITDO_VID   0x2DC8
+#define LOGITECH_VID     0x046D
+#define SHANWAN_VID      0x2563
+#define DRAGONRISE_VID   0x0079
+#define MAYFLASH_VID     0x12AB
+#define BETOP_VID        0x11C0
+#define THRUSTMASTER_VID 0x044F
+#define STEELSERIES_VID  0x1038
+#define NINTENDO_VID     0x057E
+
 #define DS5_01_REPORT_ID   0x01
 #define DS5_01_REPORT_LEN  64
 

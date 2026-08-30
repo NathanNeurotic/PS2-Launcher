@@ -100,7 +100,21 @@ static int usb_probe(int devId)
     if (device == NULL)
         return 0;
 
-    return device->idVendor == XBOX_VENDOR_MICROSOFT;
+    return (device->idVendor == XBOX_VENDOR_MICROSOFT ||
+            device->idVendor == 0x0F0D || // Hori
+            device->idVendor == 0x24C6 || // PowerA
+            device->idVendor == 0x0E6F || // PDP
+            device->idVendor == 0x1532 || // Razer
+            device->idVendor == 0x0738 || // Mad Catz
+            device->idVendor == 0x2DC8 || // 8BitDo
+            device->idVendor == 0x046D || // Logitech
+            device->idVendor == 0x2563 || // ShanWan
+            device->idVendor == 0x0079 || // DragonRise / Generic
+            device->idVendor == 0x12AB || // Mayflash
+            device->idVendor == 0x11C0 || // Betop
+            device->idVendor == 0x044F || // Thrustmaster
+            device->idVendor == 0x1038 || // SteelSeries
+            device->idVendor == 0x057E);   // Nintendo Switch Pro / Joy-Con
 }
 
 static int usb_connect(int devId)

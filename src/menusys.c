@@ -1953,6 +1953,16 @@ static int ps5ReadControllerRaw(u8 *raw)
             ctrlName = "DualSense";
         else if (vid == 0x045E)
             ctrlName = "Xbox USB";
+        else if (vid == 0x057E)
+            ctrlName = "Nintendo Switch Pro";
+        else if (vid == 0x2DC8)
+            ctrlName = "8BitDo Controller";
+        else if (vid == 0x046D)
+            ctrlName = "Logitech Gamepad";
+        else if (vid == 0x0F0D || vid == 0x24C6 || vid == 0x0E6F || vid == 0x1532 || vid == 0x0738)
+            ctrlName = "Xbox 3rd Party USB";
+        else if (vid == 0x2563 || vid == 0x0079 || vid == 0x12AB || vid == 0x11C0 || vid == 0x044F || vid == 0x1038)
+            ctrlName = "Generic USB Gamepad";
         else if (vid == 0x054C && (pid == 0x05C4 || pid == 0x09CC))
             ctrlName = "DualShock 4";
         else if (vid == 0x054C && pid == 0x0268)

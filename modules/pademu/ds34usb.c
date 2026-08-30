@@ -115,7 +115,21 @@ int usb_probe(int devId)
     if (device->idVendor == DS34_VID && (device->idProduct == DS3_PID || device->idProduct == DS4_PID || device->idProduct == DS4_PID_SLIM || device->idProduct == DUALSENSE_PID || device->idProduct == DUALSENSE_EDGE_PID))
         return 1;
 
-    if (device->idVendor == XBOX_VENDOR_MICROSOFT)
+    if (device->idVendor == XBOX_VENDOR_MICROSOFT ||
+        device->idVendor == HORI_VID ||
+        device->idVendor == POWERA_VID ||
+        device->idVendor == PDP_VID ||
+        device->idVendor == RAZER_VID ||
+        device->idVendor == MADCATZ_VID ||
+        device->idVendor == EIGHTBITDO_VID ||
+        device->idVendor == LOGITECH_VID ||
+        device->idVendor == SHANWAN_VID ||
+        device->idVendor == DRAGONRISE_VID ||
+        device->idVendor == MAYFLASH_VID ||
+        device->idVendor == BETOP_VID ||
+        device->idVendor == THRUSTMASTER_VID ||
+        device->idVendor == STEELSERIES_VID ||
+        device->idVendor == NINTENDO_VID)
         return 1;
 
     return 0;
@@ -160,7 +174,21 @@ int usb_connect(int devId)
 
     interface = (UsbInterfaceDescriptor *)((char *)config + config->bLength);
 
-    if (device->idVendor == XBOX_VENDOR_MICROSOFT) {
+    if (device->idVendor == XBOX_VENDOR_MICROSOFT ||
+        device->idVendor == HORI_VID ||
+        device->idVendor == POWERA_VID ||
+        device->idVendor == PDP_VID ||
+        device->idVendor == RAZER_VID ||
+        device->idVendor == MADCATZ_VID ||
+        device->idVendor == EIGHTBITDO_VID ||
+        device->idVendor == LOGITECH_VID ||
+        device->idVendor == SHANWAN_VID ||
+        device->idVendor == DRAGONRISE_VID ||
+        device->idVendor == MAYFLASH_VID ||
+        device->idVendor == BETOP_VID ||
+        device->idVendor == THRUSTMASTER_VID ||
+        device->idVendor == STEELSERIES_VID ||
+        device->idVendor == NINTENDO_VID) {
         ds34pad[pad].type = XBOX_USB;
         ds34pad[pad].analog_btn = 1;
         xbox_axis_center_valid[pad] = 0;
