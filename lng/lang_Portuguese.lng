@@ -1,0 +1,527 @@
+# Portuguese translation by danielb
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Portuguese
+Salvar alterações
+Voltar
+Configurações de Rede
+Opções avançadas
+<sem valores>
+Configurações guardadas em %s
+Erro ao salvar configurações!
+Sair
+Configurações
+Menu
+Jogos por BDM
+Jogos por HDD
+Jogos por Rede
+Aplicações
+Temas
+Idioma
+O sistema irá desligar.
+Sair para o Navegador?
+Cancelar atualização?
+%d: Disco Rigido não detetado
+%d: Disco Rigido não formatado
+%d: Erro ao iniciar rede
+%d: Adaptador de Rede não detetado
+%d: Não foi possível ligar ao servidor SMB
+%d: Não foi possível efetuar login no servidor SMB
+%d: Não foi possível abrir a partilha SMB
+%d: Impossivel listar partilhas SMB
+%d: Impossivel listar jogos
+%d: Servidor DHCP indisponivel
+%d: Sem ligação de rede
+Ativ.
+Desactiv.
+Aceitar
+Selecionar
+Cancelar
+Circulo
+Cruz
+Lista de Jogos
+Aj. do jogo
+Remover configurações
+Rolagem
+Lento
+Médio
+Rápido
+Menu padrão
+Carregar do disco
+Por favor espere
+Erro ao carregar ID do jogo
+Ordenar automaticamente
+Erro ao carregar ficheiro de idioma
+Cores de Depuração
+Comando não detectado, esperando…
+Artes de capa
+Ecrâ Panorâmico
+Desligar PS2
+Carregando configurações
+A guardar configurações…
+Iniciar dispositivo
+Atualizar
+Modo de inicio para BDM
+Modo de inicio para dispositivo HDD
+Modo de inicio para dispositivo Rede
+Modo de inicio para Aplicações
+Automático
+Manual
+Iniciar servidor NBD
+Servidor NBD a iniciar…
+Servidor NBD a executar…
+Erro a iniciar o servidor de NBD Dump.
+Servidor NBD a fechar…
+Definir saída do IGR
+Cor de fundo
+Cor do texto
+- Servidor SMB -
+Endereço IP
+Estático
+DHCP
+Endereço IP
+Endereço
+Máscara de sub-rede
+Gateway padrão
+Servidor de DNS
+Porta
+Partiha
+Utilizador
+Senha
+<não usado>
+Tipo de Endereço
+IP
+NetBIOS
+Confirmar
+O item será PERMANENTEMENTE apagado! Continuar?
+Renomear
+Apagar
+Iniciar
+Configurações de Ecrâ
+Opções de Escritas
+Lembrar último jogo executado
+Botão de Seleção
+Erro, o jogo está fragmentado
+Erro, não foi possível iniciar o item
+Testar Alterações
+Deixar vazio para ligar como convidado (GUEST)
+Carregar núcleo alternativo
+Modo Síncrono
+Desativar chamadas do sistema
+Saltar vídeos
+Emular DVD-DL
+Desativar IGR
+Alterar o tamanho (Irá reformatar o VMC!)
+Criar
+Iniciar
+Modificar
+Abortar
+Resetar
+Usar genérico
+Configurar VMC
+Nome
+Tamanho
+Estado
+Progresso
+Arquivo VMC já existe
+Arquivo VMC inválido, o tamanho está incorreto
+Arquivo VMC precisa ser criado!
+Erro ao aceder ao VMC %s. Continuar com o Cartão de Memória na ranhura %d?
+Atualização automática
+Créditos
+Desenvolvedores
+Controlo de qualidade
+Prefixo de caminho BDM
+Iniciar ELF personalizado depois do IGR
+Valor em minuto(s), 0 p/ desativar
+Desligamento automático do HDD
+Modo de vídeo
+Cor do diálogo
+Cor selecionada
+Reiniciar cores
+Info
+ELF personalizado
+Seleção de Cor
+Voltar A Lig.
+Deixar vazio para listar partilhas
+Prefixo de caminho ETH
+Retroceder
+Espaço
+Aceitar
+Modo
+VMC Slot 1
+VMC Slot 2
+ID do Jogo
+Modo DMA
+Sincronização do vídeo
+Modo 1
+Modo 2
+Modo 3
+Modo 4
+Modo 5
+Modo 6
+Configurar GSM
+Velocidade Ethernet e sistema Duplex
+100Mbit full-duplex
+100Mbit half-duplex
+10Mbit full-duplex
+10Mbit half-duplex
+Opções do GSM
+Seletor GSM
+Permitir que o GSM ative o modo de vídeo escolhido
+Modo de vídeo a ser ativado
+Ajuste horizontal
+Definir compensação horizontal
+Ajuste vertical
+Definir compensação vertical
+Overscan
+Ajustar Overscan
+Saltar FMV
+Saltar vídeos
+Opções de Cheat
+Motor de Trapaças PS2RD
+Permite PS2RD Cheat Engine injetar código nos jogos.
+Modo da PS2RD Cheat Engine
+Auto-Selecionar ou Selecionar cheats de jogo
+Auto-Selecionar cheats
+Selecionar cheats do jogo
+Erro: falha ao abrir o ficheiro de Cheat
+Nenhum Cheat encontrado
+Pré-definições de download
+Atualização por Internet
+Substituir Registos Existentes
+Atualizaçao falhou.
+Falha a ligar ao servidor de atualização.
+Atualização completa.
+Atualização cancelada.
+Descarregar definições da Internet?
+Definições personalizadas
+Pré-definições de download
+Início automático em %i s…
+Auto iniciar
+Valor em segundos, 0 para desativar
+Logo PS2
+Apenas é exibido para um disco válido e que seja da mesma região da consola
+Configurar PADEMU
+Definições do Emulador de Comando
+Emular Pad
+Ligar/Desligar o emulador para o jogo selecionado.
+Modo do Emulador de Comando
+Selecione o modo do Emulador de Comando.
+DualShock3/4 USB
+DualShock3/4 BT
+Definições para a porta:
+Selecione a porta do Emulador de Comando para as definições
+Emulação
+Ligar/Desligar o emulador para a porta selecionada.
+Vibração
+Ligar/Desligar vibração na porta selecionada.
+Endereço MAC do adaptador Bluetooth USB:
+Comando DS emparelhado ao endereço MAC:
+Emparelhar
+Emparelhar comando DS
+Emparelhar comando DS com endereço MAC do adaptador Bluetooth.
+Não ligado
+Informação do adaptador Bluetooth
+Mostrar mais informação e recursos suportados
+Versão HCI:
+Versão LMP:
+ID do Fabricante:
+Recursos suportados:
+Sim
+Não
+O adaptador Bluetooth deve ser completamente compatível com comandos DS3/DS4.
+O adaptador Bluetooth pode não funcionar corretamente com comandos DS3/DS4.
+Emular Multitap
+Ligar/Desligar a emulação Multitap para o jogo selecionado
+Emulador Multitap na porta
+Selecionar porta para o emulador de Multitap.
+Soluções Alternativas para Comandos DS3 Falsos
+Alguns Comandos DS3s falsos precisam de uma soluções alternativas, esta opção permitirá que isso aconteça.
+Emular inversão de CAMPO
+Correção para jogos que apresentam falhas nos modos de vídeo progressivo.
+Definições do Controlo Parental
+Password do Controlo Parental
+Deixe em branco para desativar o Controlo Parental.
+Introduza a password do Controlo Parental
+Password do Controlo Parental incorreta.
+Controlo Parental desativado.
+Opções de compilação:
+Erro - esta password não pode ser usada.
+O ficheiro VMC %s está fragmentado. Continuar com o Cartão de Memoria na ranhura %d?
+Definições de Áudio
+Efeitos Sonoros
+Som de Inicialização
+Volume dos sons
+Volume do som de arranque
+Confirmar alteração do modo de vídeo?
+Cache da lista de jogos (HDD)
+Notificações
+Definições carregadas do %s
+Tema carregado de %s
+Idioma carregado de %s
+Partição %s montada.
+Opções
+Configurações do jogo guardadas.
+%s configurações removidas.
+Substitui configurações de compatibilidade de jogos existentes quando ativado.
+Modo de configurações
+Global
+Por jogo
+Todos
+Selecione as configurações para remover.
+Fóruns de suporte:
+Título
+Gênero
+Data de lançamento
+Desenvolvedor
+Descrição
+Definições de Dispositivos
+Definições do Controlador
+Ligar/desligar o Gestor de Dispositivos.
+Liga/desliga dispositivos (por exemplo, USB).
+Jogos no USB
+Jogos no iLink
+Jogos no MX4SIO
+Configurar PADMACRO
+Configurações Pad macro
+Macros do Controle
+Redução analógica:
+Reduz o alcance do analógico quando o botão é pressionado
+Analógico Esquerdo
+Analógico Direito
+Inverter eixo do analógico:
+Inverter eixo do analógico
+Velocidade do botão Turbo
+A que velocidade premir o botão quando o turbo está activo
+Enquanto o botão é pressionado
+Ao pressionar o botão
+JAPONÊS
+INGLÊS
+FRANCÊS
+ESPANHOL
+ALEMÃO
+ITALIANO
+HOLANDÊS
+PORTUGUÊS
+RUSSO
+COREANO
+CHINÊS (TRADICIONAL)
+CHINÊS (SIMPLIFICADO)
+DEFINIÇÕES OSD
+IDIOMA OSD
+Forçar uma configuração de idioma personalizada
+Mudar Idioma
+Tamanho do ecrã
+Ecrã inteiro
+Modo de vídeo
+Predefinição do sistema
+Música de Fundo
+Volume da Música de Fundo
+Música Padrão do Tema
+Definir caminho para transmitir a música do tema interno.
+Alta
+Baixa
+Sensibilidade analógica do eixo X
+Sensibilidade analógica do eixo Y
+Ficheiros encontrados: %i
+Seleção de batotas
+Só é permitido um HDD; ativá-lo bloqueia APA ou GPT.
+Não foi possível gravar as definições em %s (erro %d)
+Lançar Disco PS2
+Nenhum disco PS2 na unidade.
+Apoio Financeiro
+Predefinição
+A carregar definições...
+Pronto.
+Favoritos
+Modo de Arranque de Favoritos
+Favorito
+%s não é permitido no Menu de Favoritos.
+%s não é permitido enquanto o item estiver marcado como favorito.
+Advanced Arguments
+Advanced
+Artwork Settings
+Aplicar VCD BDMA ao iniciar
+Modo BDMA
+BDMA Settings
+Fonte BDMA
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Núcleo do Carregador
+Velocidade de Animação
+Número de Capas
+Escurecer Capas Laterais
+Escala Central
+Definições de Coverflow
+Núcleo de Carregamento Padrão
+Display
+Imagem de Cheats PS2RD
+Arquivo .tar de capas
+Navegar por pastas na lista de jogos
+Game Launching
+Game List Settings
+Game Sources
+Ligado: equipa automaticamente o controlador exFAT correspondente do VCD iniciado no cartão de memória antes do arranque (recomendado). Desligado: gira manualmente com os seletores de Origem/Modo BDMA abaixo.
+Driver de dispositivo de bloco exFAT que o POPSTARTER carrega. Alterá-lo copia os módulos para o cartão; FAT32 = nenhum (driver integrado).
+Dispositivo cuja pasta POPS contém os ficheiros do driver BDMAssault (usbd.irx.* / usbhdfsd.irx.*).
+Núcleo padrão global para jogos cujo Loader Core por jogo está definido como Padrão. <OPL> é o núcleo nativo; o Neutrino encadeia o neutrino.elf externo. Uma escolha por jogo sempre substitui isto.
+Aplica um patch .img PS2RD pré-compilado ao seu jogo.
+Mostra subpastas de CD/DVD como entradas navegáveis; selecionar para abrir, cancelar para voltar
+O comando para mudar para bootcard será enviado ao(s) slot(s) selecionado(s) no IGR
+DESLIGADO pode ajudar o desempenho mas pode causar bloqueios por tempo limite MMCE
+Valores mais baixos podem melhorar o desempenho mas causar instabilidades
+Apenas Neutrino -- corrige jogos que ultrapassam um buffer IOP (-gc=7)
+Flags extra do Neutrino, separadas por espaço (ex. -mt=dvd). Global aplica-se a todos os jogos; por jogo acrescenta. Prefixe uma flag com $ para desativá-la sem apagar.
+Força o sistema de arquivos de dispositivo de bloco do Neutrino (-bsdfs). Auto = padrão por dispositivo. hdl/bd são opções avançadas; combine-as com um -dvd= correspondente nos argumentos de inicialização se o formato do caminho automático não se encaixar.
+Dispositivo que contém neutrino.elf (numa pasta NEUTRINO/ ou neutrino/). Auto analisa mc0 e depois mc1.
+Correção de inversão de campo para jogos que tremem ou rasgam sob um modo de Vídeo Neutrino forçado. Requer um modo de Vídeo Neutrino definido.
+Força o modo de vídeo GS do Neutrino (-gsm). Desligado mantém a predefinição do jogo.
+Dispositivo com POPS/POPSTARTER.ELF para arranques VCD PS1. Predefinição = dispositivo de arranque (cwd) e depois o próprio dispositivo do VCD. Personalizado mostra um caminho livre.
+Caminho personalizado para POPSTARTER.ELF; usa silenciosamente a pasta POPS do dispositivo se vazio/ausente. Teclado limitado a 31 caracteres; caminhos mais longos via settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Vibração curta ao mover o cursor, confirmar ou voltar -- requer um DualShock em modo analógico
+Mostra apenas o Disco 1 de um jogo PS1 de múltiplos discos nas listas de dispositivos (estilo POPSLoader). Oculta arquivos nomeados (Disc 2), (CD 2), etc. Todos os discos permanecem no cartão para troca dentro do jogo; os Favoritos não são filtrados.
+Apenas cosmético -- oculta um prefixo de ID de jogo inicial (por exemplo, SLUS_005.51.) dos nomes das listas PS1/VCD. Nomes sem um ID são mostrados como estão. Não altera a inicialização, a capa nem os favoritos.
+Inicia sem o VMC deste slot, mantendo seu cartão configurado. Apenas inicializações do Neutrino; o jogo então usa o cartão real naquele slot.
+Interface
+Network
+MMCE
+Slot(s) de Bootcard IGR
+Modo de Arranque MMCE
+Caminho de Prefixo MMCE
+Slot MMCE
+Usar alarmes de tempo limite
+Ciclos de espera após /ACK baixo
+Modo 7
+Imagem ATA0 (-ata0)
+ID ATA0 (-ata0id)
+Imagem ATA1 (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Config (-cfg)
+Diretório de Trabalho (-cwd)
+Cores de Depuração (-dbc)
+ELF de Arranque (-elf)
+Args Extra
+Logo PS2 (-logo)
+Arranque Rápido (-qb)
+Protocolo de rede
+Args de Lançamento Neutrino
+Sistema de Arquivos do Neutrino
+Neutrino Defaults
+Dispositivo Neutrino
+Compatibilidade GSM do Neutrino
+Vídeo Neutrino
+OSD Defaults
+Path Prefixes
+Path Settings
+Cor de Mistura do Plasma
+POPStarter
+Dispositivo POPSTARTER.ELF
+Caminho de POPSTARTER.ELF
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Vibração do comando nos menus
+Security
+Storage and Cache
+Tools
+Apenas o primeiro disco (PS1 multidisco)
+Ocultar ID de Jogo PS1 (lista VCD)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+Desativar VMC 1 (manter cartão)
+Desativar VMC 2 (manter cartão)
+Nenhum
+Pequeno
+Grande
+Normal
+Controller
+Audio
+Neutrino não pode iniciar deste dispositivo -- inicialização cancelada.
+Configuração de rede do Neutrino (bsd toml) ausente ou não gravável -- inicialização abortada, verifique a pasta neutrino.
+Arquivo VMC por jogo não encontrado -- inicializando sem ele (o jogo usa seu cartão real).
+Dispositivo do Jogo
+Neutrino não suporta este formato de ficheiro, a lançar com núcleo <OPL>
+ELF Neutrino não encontrado, a lançar com núcleo <OPL>
+Fragmentado demais para o Neutrino (%d fragmentos, limite %d incl. VMCs) -- tentando o núcleo OPL em vez disso.
+Ficheiros de módulo BDMA não encontrados no dispositivo de origem.
+Espaço insuficiente no cartão de memória para os módulos BDMA.
+Erro ao gravar os módulos BDMA no cartão de memória.
+UDPBD requer um IP PS2 estático. Defina um nas Definições de Rede (DHCP está ativo).
+Reinicie o OPL para aplicar a alteração do protocolo de arranque de rede.
+UDPFS ativado -- abra a nova aba UDPFS e pressione Confirmar para conectar. O lado do PC executa udpfsd -fsroot <games folder>.
+Dispositivo de bloco de rede ativado -- sua aba aparece assim que o servidor do PC responder (udpfsd -bdpath para Imagem UDPFS, udpbd-server para UDPBD).
+Fragmentado demais para o Neutrino (%d fragmentos, limite %d incl. VMCs) -- desfragmente no PC; inicialização abortada.
+Jogos UDPFS
+Os jogos de rede (UDP) só podem arrancar através do núcleo Neutrino. Verifique se o neutrino.elf está presente e se o formato é suportado.
+Os jogos PS1 (.VCD) não podem ser iniciados através do dispositivo de rede.
+O MX4SIO e a emulação de comando partilham o barramento SIO2 e o jogo pode não arrancar.
+MMCE card switch not confirmed -- launching anyway
+Jogos UDPFSBD
+UDPBD Games
+Carregando drivers de armazenamento...
+Carregando driver de armazenamento USB...
+POPSTARTER.ELF em falta
+Requisitos SMB do POPSTARTER em falta
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+A mostrar jogos VCD
+A mostrar jogos de disco
+A analisar unidades USB / cartão / rede...
+A iniciar a rede...
+A analisar HDD...
+USB
+MX4SIO
+MMCE
+HDD interno
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Não foi possível gravar a configuração de rede do POPSTARTER no cartão de memória.
+Esta definição não é usada com o núcleo Neutrino.
+Desativar tudo
+Carregando sons do tema...
+Construindo menu...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Nenhum cartão de memória encontrado -- não é possível guardar as definições. O OPL arrancou de um dispositivo de rede, cujas definições têm de ficar num cartão local.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Definições Gerais
+Definições de Dispositivo
+MMCE Games
+Avançado
+Definições MMCE
+Método de Fila de Sema de Bloqueio
+THFIFO pode ajudar na compatibilidade mas piorar o desempenho
+Gravar Config de Rede do POPSTARTER
+Guarda também estes valores de IP + partilha SMB nos ficheiros IPCONFIG.DAT / SMBCONFIG.DAT do POPSTARTER no cartão de memória (para VCD via SMB).
+Caminho do ELF Neutrino
+Caminho completo para neutrino.elf (ex. mc0:NEUTRINO/neutrino.elf). Vazio = deteção automática em mc0/mc1.
+Verificando cartões de memória...
+Ativando ID de jogo MMCE...
+Acesso UDPFS
+GameID MMCE não aplicado -- o neutrino.elf está neste cartão (mudar iria descarregar o Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+Configurações VCD

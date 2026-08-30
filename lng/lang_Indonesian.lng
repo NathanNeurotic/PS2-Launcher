@@ -1,0 +1,527 @@
+# Indonesian translation by verislasher completed by jbliz
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Indonesian
+Simpan Perubahan
+Kembali
+Konfigurasi jaringan
+Pilihan lanjutan
+<tak ada nilai>
+Pengaturan disimpan pada %s
+Kesalahan penulisan setingan!
+Keluar
+Setingan
+Menu
+BDM Games
+HDD Games
+ETH Games
+Aplikasi
+Tema
+Bahasa
+Sistem akan dimatikan.
+Keluar ke Browser?
+Batal perbarui?
+%d: Harddisk tak terdeteksi
+%d: Harddisk belum diformat
+%d: Kesalahan memulai jaringan
+%d: Adaptor jaringan tak terdeteksi
+%d: Tak dapat terhubung ke server SMB
+%d: Tak bisa login ke server SMB
+%d: Tak dapat membuka SMB bersama
+%d: Tak ada daftar SMB bersama
+%d: Tak ada daftar game
+%d: Server DHCP tidak tersedia
+%d: Tak ada koneksi jaringan
+Hidup
+Mati
+OK
+Pilih
+Batal
+Bulat
+Kali
+Daftar Game
+Setingan
+Hapus setingan
+Gulir
+Lambat
+Sedang
+Cepat
+Menu standar
+Muat dari disk
+Mohon tunggu
+Kesalahan saat memuat ID Permainan
+Penyortiran otomatis
+Kesalahan memuat file bahasa
+Warna Debug
+Tak ada kontroler terdeteksi, menunggu …
+Gambar Sampul
+Layar lebar
+Matikan
+Memuat konfigurasi
+Menyimpan konfigurasi
+Memulai perangkat
+Segarkan
+BDM Start Mode
+Memulai mode perangkat HDD
+Memulai mode perangkat ETH
+Memulai mode Aplikasi
+Otomatis
+Manual
+Mulai Server NBD
+Memulai Server NBD …
+Menjalankan Server NBD…
+Gagal memulai Server NBD.
+Mengembalikan Server NBD…
+Pintasan IGR
+Warna latar belakang
+Warna teks
+- SMB Server -
+Jenis alamat IP
+Statis
+DHCP
+Alamat IP
+Alamat
+Mask
+Gateway
+Server DNS
+Port
+Bersama
+Pengguna
+Sandi
+<tidak diatur>
+Tipe alamat
+IP
+NetBIOS
+Terima
+Item akan dihapus secara permanen, lanjut?
+Ubah nama
+Hapus
+Jalankan
+Setingan tampilan
+Operasi Tulis
+Ingat pertandingan terakhir dimainkan
+Pilih tombol
+Kesalahan, game terfragmentasi
+Kesalahan, tidak bisa menjalankan item
+Uji Perubahan
+Tinggalkan kosong untuk Otent TAMU.
+Membaca akurat
+Mode Sinkronisasi
+Melepas kaitan syscalls
+Lewati video
+Emulasi DVD-DL
+Nonaktifkan IGR
+Mengubah ukuran akan memformat ulang VMC
+Membuat
+Mulai
+Modifikasi
+Batal
+Reset
+Gunakan generik
+Konfigurasi VMC
+Nama
+Ukuran
+Status
+Kemajuan
+Berkas VMC ada
+Berkas VMC cacat, ukuran salah
+Berkas VMC harus dibuat
+Kesalahan dengan VMC %s, lanjutkan dengan MC fisik (Slot %d)?
+Segarkan otomatis
+Tentang
+Pengkode
+Kualitas jaminan
+Awalan pintas BDM
+Jalankan ELF Kustom setelah IGR
+Nilai dalam menit (s), 0 untuk menonaktifkan berhenti
+HDD Otomatis berhenti
+Modus video
+Warna dialog
+Warna  dipilih
+Atur Ulang Warna
+Info
+Kustom ELF
+Pemilihan warna
+Hubungkan kembali
+Kosongkan untuk daftar bersama
+Awal pintasan ETH
+Hapus
+Spasi
+OK
+Mode
+VMC Slot 1
+VMC Slot 2
+ID Game
+Mode DMA
+V-Sync
+Mode 1
+Mode 2
+Mode 3
+Mode 4
+Mode 5
+Mode 6
+Konfigurasi GSM
+Mode tautan ethernet
+100Mbit rangkap penuh
+100Mbit setengah rangkap
+10Mbit rangkap penuh
+10Mbit setengah rangkap
+Setingan GSM
+Pemilih GSM
+Alih GSM ON atau OFF
+Paksa Mode Tampilan Kustom
+H-POS
+Penyesuaian horisontal
+V-POS
+Penyesuaian Vertikal
+Tampilan berlebih
+Penyesuaian Tampilan berlebih
+Lewati FMV
+Lompati Video Gerakan Penuh
+Setingan Cheat
+Mesin Cheat PS2RD
+Biarkan PS2RD Cheat Engine menambal permainan Anda
+Modus PS2RD Cheat Engine
+Pilih otomatis atau Pilih game cheats
+Pilih otomatis game cheats
+Pilih game cheats
+Kesalahan: gagal untuk memuat Berkas cheat
+Tak ada cheat ditemukan
+Unduhan default
+Pembaruan jaringan
+Timpa Rekaman Yang Ada
+Pembaruan gagal
+Gagal menyambungkan ke server pembaruan
+Perbarui selesai
+Perbarui dibatalkan
+Unduh pengaturan dari jaringan?
+Setingan disesuaikan
+Unduhan default
+Mulai otomatis dalam %i s…
+Mulai otomatis
+Nilai dalam detik, 0 mencegah mulai otomatis
+Logo PS2
+Hanya ditampilkan untuk logo disc yang valid yang cocok dengan region konsol
+Konfigurasi PADEMU
+Pengaturan Stik Emulator
+Emulator Pad
+Hidup/matikan StikEmulator game dipilih.
+mode Stik Emulator
+Pilih mode Stik Emulator
+DualShock3/4 USB
+DualShock3/4 BT
+Setingan untuk port:
+Pilih port Stik Emulator untuk setingan
+Emulasi
+Hidup/matikan Stik Emulator port dipilih
+Getaran
+Hidup/matikan getar Stik Emulator port dipilih
+Alamat mac adaptor bluetooth Usb
+Pengontrol DS dipasangkan ke Alamat MAC:
+Pasangan
+Pasangan Pengontrol DS
+Pasangan Pengontrol DS dengan adaptor Alamat MAC Bluetooth.
+Tak tersambung
+informasi adaptor Bluetooth
+Tampilkan informasi lain dan fitur didukung
+Versi HCI:
+Versi LMP:
+ID Pabrikan:
+Dukungan fitur:
+Ya
+Tidak
+adapter Bluetooth harus sepenuhnya cocok dengan Pengontrol DS3/DS4.
+adapter Bluetooth mungkin tidak bekerja dengan benar dengan Pengontrol DS3/DS4.
+Multitap Emulation
+Aktifkan/NonAktifkan emulasi Multitap untuk game dipilih.
+emulator Multitap pada port
+Pilih port untuk emulasi Multitap.
+Solusi Palsu DS3
+Some fake DS3s need a workaround, this option will enable it.
+Emulasikan FIELD flipping
+Perbaiki Game yang bermasalah di mode video progresif.
+Seting kunci Parental
+Kata sandi kunci parental
+Kosongkan untuk non aktif kunci Parental.
+Masukkan kata sandi kuci Parental
+Kesalahan kata sandi kunci Parental.
+Kunci Parental tidak aktif.
+Opsi Bentukan:
+Kesalahan - kata sandi tak bisa dipakai.
+Berkas VMC %s terfragmentasi. Gunakan kartu memori di slot %d?
+Pengaturan Audio
+Efek Suara
+Suara Boot
+Volume efek suara
+Volume suara Boot
+Konfirmasi perubahan mode video?
+Daftar Tembolok Game(HDD)
+Notifikasi
+Config loaded from %s
+Theme loaded from %s
+Language loaded from %s
+%s partition mounted.
+Opsi
+Pengaturan Game disimpan.
+%s setingan dihapus.
+Timpa pengaturan kompatibilitas game yang ada ketika diaktifkan.
+Mode Setingan
+Global
+Per Game
+Seluruh
+Pilih setingan untuk dihapus.
+Forum Dukungan:
+Judul
+Aliran
+Rilis
+Pengembang
+Deskripsi
+Perangkat Blok
+Pengaturan Kontroler
+Aktif/nonaktifkan Block Device Manager.
+Aktif/nonaktifkan Perangkat Blok (mis. USB).
+Game USB
+Game iLink
+Game MX4SIO
+Konfigurasi PADMACRO
+Pengaturan Makro Pad
+Makro pad
+Perlambatan analog:
+Kurangi jangkauan stik analog saat tombol ditekan
+Stik kiri
+Stik kanan
+Balik sumbu analog:
+Balik sumbu stik analog
+Kecepatan tombol turbo
+Seberapa cepat menekan tombol saat turbo aktif
+Saat tombol ditekan
+Diaktifkan oleh tombol
+JEPANG
+INGGRIS
+PRANCIS
+SPANYOL
+JERMAN
+ITALIA
+BELANDA
+PORTUGIS
+RUSIA
+KOREA
+TIONGHOA TRADISIONAL
+TIONGHOA SEDERHANA
+Pengaturan OSD
+Bahasa OSD
+Paksa konfigurasi bahasa kustom
+Ubah bahasa
+Ukuran Layar
+Layar Penuh
+Mode Video
+Bawaan Sistem
+Musik Latar
+Volume Musik Latar
+Musik Tema Bawaan
+Tetapkan jalur untuk memutar musik tema internal.
+Tinggi
+Rendah
+Sensitivitas Sumbu-X Analog
+Sensitivitas Sumbu-Y Analog
+File ditemukan: %i
+Pilihan Cheat
+Hanya satu HDD yang diizinkan, mengaktifkan akan mengunci APA atau GPT.
+Gagal menulis pengaturan ke %s (kesalahan %d)
+Jalankan Disc PS2
+Tidak ada disc PS2 di drive.
+Dukungan Finansial
+Default
+Memuat pengaturan...
+Siap.
+Favorit
+Mode Mulai Favorit
+Favorit
+%s tidak diizinkan melalui Menu Favorit.
+%s tidak diizinkan selama item ditandai sebagai favorit.
+Advanced Arguments
+Advanced
+Artwork Settings
+Terapkan VCD BDMA saat Peluncuran
+Mode BDMA
+BDMA Settings
+Sumber BDMA
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Loader Core
+Kecepatan Animasi
+Jumlah Cover
+Redupkan Cover Samping
+Skala Tengah
+Pengaturan Coverflow
+Loader Core Bawaan
+Display
+PS2RD Cheat Image
+Arsip .tar sampul
+Jelajahi Folder di Daftar Game
+Game Launching
+Game List Settings
+Game Sources
+Aktif: otomatis pasang driver exFAT yang cocok dengan VCD yang diluncurkan ke kartu memori sebelum boot (disarankan). Nonaktif: kelola sendiri dengan pemilih Sumber/Mode BDMA di bawah.
+Driver blok-perangkat exFAT yang dimuat POPSTARTER. Mengubahnya menyalin modul ke kartu; FAT32 = tidak ada (driver bawaan).
+Perangkat yang folder POPS-nya menyimpan file driver BDMAssault (usbd.irx.* / usbhdfsd.irx.*).
+Core default global untuk game yang Loader Core per-game-nya diatur ke Default. <OPL> adalah core native; Neutrino merantai neutrino.elf eksternal. Pilihan per-game selalu menimpa pengaturan ini.
+Terapkan patch PS2RD .img yang sudah dibuat ke game Anda.
+Tampilkan subfolder CD/DVD sebagai entri yang dapat dijelajahi; pilih untuk membuka, batal untuk kembali
+Perintah beralih ke bootcard akan dikirim ke slot yang dipilih saat IGR
+OFF dapat membantu performa tetapi dapat menyebabkan timeout MMCE berujung freeze
+Nilai lebih rendah dapat meningkatkan performa tetapi menyebabkan ketidakstabilan
+Hanya Neutrino -- perbaiki game yang melampaui buffer IOP (-gc=7)
+Flag Neutrino tambahan, dipisah spasi (misal -mt=dvd). Global berlaku untuk semua game; per-game ditambahkan di atasnya. Awali flag dengan $ untuk menonaktifkan tanpa menghapus.
+Paksa filesystem block-device milik Neutrino (-bsdfs). Auto = default per perangkat. hdl/bd adalah opsi lanjutan; pasangkan dengan -dvd= yang cocok di argumen peluncuran jika bentuk jalur auto tidak sesuai.
+Perangkat yang menyimpan neutrino.elf (di folder NEUTRINO/ atau neutrino/). Auto memindai mc0 lalu mc1.
+Perbaikan field-flipping untuk game yang bergetar atau robek di bawah mode Neutrino Video yang dipaksakan. Membutuhkan mode Neutrino Video yang diatur.
+Paksa mode video output GS Neutrino (-gsm). Off mempertahankan default game.
+Perangkat yang menyimpan POPS/POPSTARTER.ELF untuk peluncuran VCD PS1. Default = perangkat boot (cwd) lalu perangkat VCD itu sendiri. Kustom menampilkan jalur teks bebas.
+Path POPSTARTER.ELF kustom; otomatis kembali ke folder POPS perangkat jika kosong/tidak ada. Keyboard maks 31 karakter; path lebih panjang via settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Getaran singkat saat menggerakkan kursor, mengonfirmasi, atau kembali - perlu DualShock dalam mode analog
+Tampilkan hanya Disc 1 dari game PS1 multi-disc di daftar perangkat (gaya POPSLoader). Menyembunyikan file bernama (Disc 2), (CD 2), dll. Semua disc tetap ada di kartu untuk pergantian dalam game; Favourites tidak difilter.
+Kosmetik saja -- sembunyikan prefiks game-ID di depan (mis. SLUS_005.51.) dari nama daftar PS1/VCD. Nama tanpa ID ditampilkan apa adanya. Tidak mengubah peluncuran, cover art, atau favourites.
+Luncurkan tanpa VMC slot ini sambil tetap mempertahankan konfigurasi kartunya. Hanya untuk peluncuran Neutrino; game kemudian menggunakan kartu asli di slot itu.
+Interface
+Network
+MMCE
+Slot Bootcard IGR
+Mode Mulai MMCE
+Path Prefix MMCE
+Slot MMCE
+Gunakan alarm timeout
+Siklus tunggu setelah /ACK rendah
+Mode 7
+Image ATA0 (-ata0)
+ATA0 ID (-ata0id)
+Image ATA1 (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Config (-cfg)
+Direktori Kerja (-cwd)
+Warna Debug (-dbc)
+Boot ELF (-elf)
+Argumen Tambahan
+Logo PS2 (-logo)
+Quick Boot (-qb)
+Protokol Jaringan
+Argumen Launch Neutrino
+Sistem File Neutrino
+Neutrino Defaults
+Perangkat Neutrino
+Kompatibilitas GSM Neutrino
+Video Neutrino
+OSD Defaults
+Path Prefixes
+Path Settings
+Warna Campuran Plasma
+POPStarter
+Perangkat POPSTARTER.ELF
+Path POPSTARTER.ELF
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Getaran Kontroler di Menu
+Security
+Storage and Cache
+Tools
+Hanya disc pertama (PS1 multi-disc)
+Sembunyikan Game ID PS1 (daftar VCD)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+Nonaktifkan VMC 1 (simpan kartu)
+Nonaktifkan VMC 2 (simpan kartu)
+Tidak Ada
+Kecil
+Besar
+Normal
+Controller
+Audio
+Neutrino tidak dapat meluncur dari perangkat ini -- peluncuran dibatalkan.
+Konfigurasi jaringan Neutrino (bsd toml) hilang atau tidak dapat ditulis -- peluncuran dibatalkan, periksa folder neutrino.
+File VMC per-game tidak ditemukan -- meluncurkan tanpanya (game menggunakan kartu aslinya).
+Perangkat Game
+Neutrino tidak mendukung format file ini, menjalankan dengan core <OPL>
+ELF Neutrino tidak ditemukan, menjalankan dengan core <OPL>
+Terlalu terfragmentasi untuk Neutrino (%d fragmen, batas %d termasuk VMC) -- mencoba core OPL sebagai gantinya.
+File modul BDMA tidak ditemukan di perangkat sumber.
+Ruang kartu memori tidak cukup untuk modul BDMA.
+Kesalahan saat menulis modul BDMA ke kartu memori.
+UDPBD membutuhkan IP PS2 statis. Atur di Konfigurasi Jaringan (DHCP sedang aktif).
+Mulai ulang OPL untuk menerapkan perubahan protokol boot jaringan.
+UDPFS aktif -- buka tab UDPFS baru dan tekan Confirm untuk terhubung. Sisi PC menjalankan udpfsd -fsroot <games folder>.
+Network block device aktif -- tab-nya muncul begitu server PC merespons (udpfsd -bdpath untuk UDPFS Image, udpbd-server untuk UDPBD).
+Terlalu terfragmentasi untuk Neutrino (%d fragmen, batas %d termasuk VMC) -- defragmentasi di PC; peluncuran dibatalkan.
+Game UDPFS
+Game jaringan (UDP) hanya bisa di-boot lewat core Neutrino. Pastikan neutrino.elf tersedia dan formatnya didukung.
+Game PS1 (.VCD) tidak bisa dijalankan lewat perangkat jaringan.
+MX4SIO dan emulasi pad berbagi bus SIO2 dan game mungkin gagal di-boot.
+MMCE card switch not confirmed -- launching anyway
+Game UDPFSBD
+UDPBD Games
+Memuat driver penyimpanan...
+Memuat driver penyimpanan USB...
+POPSTARTER.ELF tidak ditemukan
+Persyaratan SMB POPSTARTER tidak terpenuhi
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+Menampilkan game VCD
+Menampilkan game disc
+Memindai drive USB / kartu / jaringan...
+Memulai jaringan...
+Memindai HDD...
+USB
+MX4SIO
+MMCE
+HDD Internal
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Gagal menulis konfigurasi jaringan POPSTARTER ke kartu memori.
+Pengaturan ini tidak digunakan dengan core Neutrino.
+Nonaktifkan Semua
+Memuat suara tema...
+Membangun menu...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Kartu memori tidak ditemukan - pengaturan tidak dapat disimpan. OPL di-boot dari perangkat jaringan, yang pengaturannya harus tersimpan di kartu lokal.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Pengaturan Umum
+Pengaturan Perangkat
+MMCE Games
+Lanjutan
+Pengaturan MMCE
+Metode Antrian Kunci Sema
+THFIFO dapat membantu kompatibilitas tetapi menurunkan performa
+Tulis Konfigurasi Jaringan POPSTARTER
+Simpan juga nilai IP + SMB share ini ke IPCONFIG.DAT / SMBCONFIG.DAT milik POPSTARTER di kartu memori (untuk VCD lewat SMB).
+Path ELF Neutrino
+Path lengkap ke neutrino.elf (misal mc0:NEUTRINO/neutrino.elf). Kosong = deteksi otomatis di mc0/mc1.
+Memindai memory card...
+Menyiapkan game-ID MMCE...
+Akses UDPFS
+MMCE GameID tidak diterapkan -- neutrino.elf ada di kartu ini (menggantinya akan membongkar Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+Pengaturan VCD

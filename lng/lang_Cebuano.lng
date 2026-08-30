@@ -1,0 +1,527 @@
+# Cebuano by Colton Silva
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Cebuano
+Tipigi ang mga pagbag-o
+Likod
+Mga setting sa Network
+Mga advanced nga kapilian
+<walay kantidad>
+Ang setting gitipig sa %s
+Sayup nga mga setting sa pagsulat!
+Paggawas
+Setting
+Menu
+Dula sa BDM
+Dula sa HDD
+Dula sa ETH
+Mga App
+Tema
+Sinultian
+Gipawong ang sistema?
+Paggawas sa Browser?
+Kanselahon ang pag-update?
+%d: Dili nakit-an ang HardDisk Drive
+%d: Dili ma-format ang HardDisk Drive
+%d: Sayup sa pagsugod sa network.
+%d: Wala’y nakita nga adapter sa network
+%d: Dili makakonek sa SMB server
+%d: Dili maka-log in sa SMB server
+%d: Dili maablihan ang SMB shares
+%d: Dili malista ang SMB Shares
+%d: Dili malista ang mga dula
+%d: Dili available ang DHCP server
+%d: Wala'y koneksyon sa network
+Gibuksan
+Gipalong
+Ayos
+Pilia
+Kansel
+Lingin
+Ekis
+Lista
+Settings sa dula
+Tangtanga ang setting
+I-scroll
+Hinay
+Medium
+Paspas
+Default na menu
+Pag-load gikan sa disc
+Pahilog hulat
+Sayup samtang gikarga ang Game ID.
+Awtomatik nga paghan-ay
+Sayup sa pagkarga sa file sa sinultian
+Mga Kolor sa Debug
+Wala’y nakita nga tigpugong, naghulat…
+Cover Art
+Malapad nga screen
+Power-off
+Nilo-load ang config
+Sine-save ang config
+Pagsugod sa Device
+Pagpalagsik
+BDM Start Mode
+HDD aparato simula mode
+ETH aparato simula mode
+Mga application simula mode
+Awto
+Manwal
+Pagsugod sa HDL Server
+HDL Server Starting…
+HDL Server Running…
+Napakyas sa pagsugod sa HDL Server.
+Pagdiskarga sa HDL Server.
+IGR path
+kolor sa background
+kolor sa teksto
+- SMB Server -
+Klase sa IP address
+Static
+DHCP
+Adres sa IP
+Adres
+Mask
+Gateway
+DNS Server
+Port
+Share
+Gumagamit
+Password
+<Hindi nai-set>
+Address type
+IP
+NetBIOS
+Dawata
+Ang butang permanente nga mapapas, magpadayon?
+Igngalan usab
+tangtangon
+Pagdagan
+Ipakita ang mga setting
+Mga Operasyon sa Pagsulat
+Hinumdomi ang Katapusan nga Dula
+Select nga buton
+Sayup, ang dula ay mabahinbahin
+Sayop, dili mapadagan ang aytem
+Sulayi kini
+Biyai nga wala’y sulod alang sa GUEST auth.
+Accurate Reads
+Synchronous na Mode
+Alisin sa pagkakakawit ng Syscalls
+0 PSS mode
+I-emulate nga DVD-DL
+I-disable mga IGR
+Ang pagbag-o sa gidak-on mag-usab sa VMC.
+Paghimo
+Pagsugod
+Pagbag-o
+I-abort
+I-reset
+Paggamit Generic
+I-configure ang VMC
+Ngalan
+Tawo
+Kahimtang
+Pag-uswang
+Adunay VMC file
+Dili balido nga file sa VMC, dili husto ang gidak-on
+Ang file sa VMC kinahanglan buhaton.
+Sayup sa pag-access sa VMC% s. Padayon sa Memory Card sa slot% d?
+Awtomatikong i-refresh
+Mahitungod sa
+Mga coder
+Kalidad nga Pasalig
+USB prefix path
+Ang botas nga gipasadya nga ELF pagkahuman sa usa ka IGR.
+Balor sa (mga) minuto, 0 aron dili paganahon
+Ang HDD hinay nga mohinay
+Mode sa bidyo
+Dialog sa kulay
+Pinil nga kolor
+Reset Colors
+Impo
+Custom ELF
+kolor nga seleksyon
+Sumpaysumpaya usab
+Iwanang walang laman upang ilista ang pagbabahagi
+ETH prefix na path
+Backspace
+Luna
+Pagsulud
+Moda
+VMC Slot 1
+VMC Slot 2
+ID ng Laro
+DMA Mode
+V-Sync
+Mode 1
+Mode 2
+Mode 3
+Mode 4
+Mode 5
+Mode 6
+I-configure ang GSM
+Ethernet speed at duplex setting
+100Mbit full-duplex
+100Mbit half-duplex
+10Mbit full-duplex
+10Mbit half-duplex
+Settings sa GSM
+GSM Selector
+Toggles GSM ON or OFF
+Gipugos nga custom display mode.
+H-POS
+Horizontal Adjustment
+V-POS
+Vertical Adjustment
+Overscan
+Overscan Adjustment
+FMV Skip
+Laktaw ang Mga Video sa Tibuok nga Paglihok
+Settings sa cheat
+PS2RD Cheat Engine
+Gihangyo nga i-patch sa PS2RD Cheat Engine ang imong dula.
+PS2RD Cheat Engine Mode
+Awto. pagpili or pagpili sa mga cheat sa dula
+Awto. pagpili sa cheats
+Pagpili mga cheat sa dula
+Sayup: napakyas sa pag-load cheat file.
+Wala nakit-an nga mga cheat
+Download defaults
+Pagbag-o sa network
+Pag-overwrite mga Adunay nga Rekord
+Napakyas sa pag-update
+Napakyas sa pagkonektar aron ma-update ang server.
+Hingpit nga na-update.
+Nakansela ang pag-update.
+Pag-download sa settings gikan sa network?
+Gipahiangay nga setting
+Na-download nga default
+Awtomatik nga pagsugod sa% i …
+Auto start
+Bililhon sa segundo, 0 aron dili paganahon ang pagsugod sa awto
+PS2 Logo
+Gipakita alang sa usa ka balido nga logo sa disc nga nahiangay sa rehiyon sa console.
+I-configure ang PADEMU
+Settings sa Pad Emulator
+Pad Emulator
+Gipasiga / gipatay ang Pad Emulator alang sa pinili nga dula.
+Mode ng Pad Emulator
+Pilia ang mode nga Pad Emulator.
+DualShock3/4 USB
+DualShock3/4 BT
+Settings alang sa port:
+Pilia ang Pad Emulator port alang sa mga setting.
+Emulasyon
+Gipasiga / gipalong ang Pad Emulator alang sa pinili nga port.
+Pagkurog
+Nag-on / off nga pagkurog alang sa napili sa Pad Emulator port.
+Usb bluetooth adapter mac address:
+DS Controller paired to mac address:
+Pares
+Pares nga DS Controller
+Igpares ang DS controller nga adunay adapter sa MAC adapter sa Bluetooth.
+Dili konektado
+Ang kasayuran sa Bluetooth Adapter
+Ipakita ang kasayuran ug gisuportahan nga mga dagway
+Bersyon sa HCI:
+Bersyon sa LMP:
+Manufacturer ID:
+Gisuportahan nga bahin:
+Opo
+Dili
+Ang Bluetooth adapter kinahanglan nga hingpit nga katugma sa mga kontrol sa DS3 / DS4.
+Ang Bluetooth adapter mahimong dili molihok sa mga tigdumala sa DS3 / DS4.
+Multitap Emulation
+Gipasiga / gipalayo ang pagsundog sa Multitap alang sa pinili nga dula.
+Multitap emulator sa port
+Pagpili usa ka port alang sa pagsundog sa Multitap.
+Fake DS3 Workaround
+Ang pipila nga peke nga DS3 nagkinahanglan us aka solusyon, kini nga kapilian makapagana niini.
+Sundoga ang FIELD Flipping
+Pag-ayo alang sa mga dula nga ning-glitch ubos sa mga progresibo nga mga mode sa video.
+Setting sa Parental Lock
+Parental Lock Password
+Biyai nga blangko aron dili paganahon ang lock sa ginikanan
+Pagsulud sa Parental Lock Password
+Ang Parental lock password ay dili husto.
+Wala’y kaputli ang lock sa ginikanan.
+Opsyon sa build:
+Sayop - dili magamit ang kini nga password.
+Ang VMC% s file nabahinbahin. Padayon sa Memory Card sa slot% d?
+Setting sa Audio
+Epekto sa Tingog
+Tunog sa Boot
+Volume ng Epekto sa Tingog
+Volume ng Tunog sa Boot
+Gikumpirma nga "video mode change"?
+Cache Game List (HDD)
+Mga Pahibalo
+Gikarga ang config gikan sa %s
+Gikarga ang theme gikan sa %s
+Gikarga ang sinultian gikan sa %s
+Mingkayab sa partisyon %s.
+Mga Opsyon
+Nai-save ang "Game settings".
+%s settings ay nai-alis.
+Nag-overwrite sa kasamtangan nga mga setting sa pagkaangay sa dula kung gipaandar.
+Settings Mode
+Global
+Per Game
+Tanan
+Pilia ang mga setting aron makuha.
+Support Forums:
+Titulo
+Genre
+Buhian
+Debeloper
+Paghulagway
+Mga Block Device
+Mga Setting sa Controller
+I-on / off ang Block Device Manager.
+Itu-turn on/off ang Block Devices (e.g. USB).
+Dula sa USB
+Dula sa iLink
+Dula sa MX4SIO
+I-configure ang PADMACRO
+Mga Setting sa Pad macro
+Mga Pad macro
+Analog slow-down:
+Pakunhora ang range sa analog stick kung gipislit ang button
+Wala nga stick
+Tuo nga stick
+Analog axis invert:
+I-invert ang axis sa analog stick
+Katulin sa turbo button
+Unsa ka paspas ipislit ang button kung aktibo ang turbo
+Samtang gipislit ang button
+Gi-toggle sa button
+HINAPON
+ININGLES
+PRINSES
+INESPANYOL
+ALEMAN
+ITALYANO
+OLANDES
+PORTUGES
+RUSO
+KOREANO
+TRADISYUNAL NGA INSIK
+GIPASAYON NGA INSIK
+Mga setting sa OSD
+Pinulongan sa OSD
+Pugsa ang custom nga configuration sa pinulongan
+Usba ang pinulongan
+Gidak-on sa Screen
+Tibuok Screen
+Video Mode
+Default sa Sistema
+Musika sa Background
+Volume sa Musika sa Background
+Default nga Musika sa Tema
+Itakda ang path aron mag-stream og musika para sa internal nga tema.
+Taas
+Ubos
+Sensitivity sa Analog X-Axis
+Sensitivity sa Analog Y-Axis
+Nakita nga mga file: %i
+Pagpili sa Cheat
+Usa ra ka HDD ang gitugotan, kung ma-enable ma-lock ang APA o GPT.
+Dili masulat ang mga setting ngadto sa %s (sayop %d)
+I-launch ang PS2 Disc
+Walay PS2 disc sa drive.
+Suporta sa Panalapi
+Default
+Gikarga ang mga setting...
+Andam na.
+Mga Paborito
+Favourites Start Mode
+Paborito
+%s dili pwede sa Favourites Menu.
+%s dili pwede samtang ang item gimarkahan nga paborito.
+Advanced Arguments
+Advanced
+Artwork Settings
+Ipatuman ang VCD BDMA sa Paglunsad
+BDMA Mode
+BDMA Settings
+BDMA Source
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Loader Core
+Tulin sa Animation
+Ihap sa Cover
+I-dim ang mga Palibot nga Cover
+Sentro nga Scale
+Coverflow Settings
+Default nga Loader Core
+Display
+PS2RD Cheat Image
+.tar nga arkibo sa hapin
+Pagbrowse sa mga folder sa lista sa dula
+Game Launching
+Game List Settings
+Game Sources
+Naka-on: awtomatikong ibutang ang katugbang nga exFAT driver sa gilunsad nga VCD sa memory card sa dili pa mag-boot (girekomenda). Naka-off: dumalaha kini sa imong kaugalingon gamit ang mga pili nga Source/Mode sa BDMA sa ubos.
+exFAT block-device driver nga i-load sa POPSTARTER. Ang pagbag-o nag-kopya sa mga module sa card; FAT32 = wala (built-in driver).
+Device nga ang POPS folder nagdala sa imong BDMAssault driver files (usbd.irx.* / usbhdfsd.irx.*).
+Global nga default nga core para sa mga dula kansang per-game Loader Core gi-set sa Default. Ang <OPL> mao ang lumad nga core; ang Neutrino nag-chain sa gawas nga neutrino.elf. Ang per-game nga pagpili kanunay mo-override niini.
+Mag-apply og prebuilt nga PS2RD .img patch sa imong laro.
+Ipakita ang mga subfolder sa CD/DVD isip mabrowse nga entry; pilia aron ablihan, kanselaha aron mobalik
+Ang switch to bootcard cmd ipadala sa piniling slot(s) sa IGR
+Ang OFF mahimong makatulong sa performance apan ang MMCE timeouts mahimong mag-freeze
+Ang mas ubos nga kantidad mahimong makapabilis apan makaingon og kawalay-lig-on
+Neutrino ra -- ayohon ang mga laro nga misobra sa IOP buffer (-gc=7)
+Dugang Neutrino flags, gibulag og espasyo (hal. -mt=dvd). Global alang sa tanan nga laro; per-game dugang pa. Ibutang ang $ sa unahan sa flag aron ma-disable nga dili pa ma-delete.
+Pugsa ang block-device filesystem sa Neutrino (-bsdfs). Ang Auto = default kada-device. Ang hdl/bd mga expert nga opsyon; ipares kini sa usa ka nahaom nga -dvd= sa launch args kung ang porma sa auto nga dalan dili mohaom.
+Device nga nagdala sa neutrino.elf (sa NEUTRINO/ o neutrino/ folder). Ang Auto mag-scan sa mc0 dayon mc1.
+Field-flipping nga ayo para sa mga dula nga nag-uyog o nag-gisi ubos sa usa ka pinugos nga Neutrino Video mode. Nagkinahanglan og gi-set nga Neutrino Video mode.
+Puwersahon ang GS output video mode sa Neutrino (-gsm). Ang Off magpadayon sa default sa laro.
+Device nga naghupot sa POPS/POPSTARTER.ELF para sa mga paglunsad sa PS1 VCD. Default = boot device (cwd) unya ang kaugalingong device sa VCD. Ang Custom magpakita og free-text nga path.
+Custom nga POPSTARTER.ELF path; mobalik sa POPS folder sa device kung blangko/wala. Ang keyboard limitado sa 31 chars; mas taas nga paths pinaagi sa settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Mubo nga pag-uyog kon molihok ang cursor, mokumpirma o mobalik -- kinahanglan og DualShock sa analog mode
+Ipakita lamang ang Disc 1 sa usa ka daghang-disc nga PS1 nga dula sa mga listahan sa device (POPSLoader style). Itago ang mga file nga ginganlan og (Disc 2), (CD 2), ug uban pa. Ang tanang disc magpabilin sa card para sa pag-ilis samtang nagdula; ang mga Favourites dili sala-on.
+Cosmetic lamang -- itago ang nag-una nga game-ID prefix (pananglitan SLUS_005.51.) gikan sa mga ngalan sa listahan sa PS1/VCD. Ang mga ngalan nga walay ID ipakita nga sama sa naa. Wala kini mag-usab sa launch, cover art, o favourites.
+Ilunsad nga walay VMC niini nga slot samtang gipabilin ang pagka-configure sa card niini. Neutrino nga mga launch lamang; ang dula unya mogamit sa tinuod nga card niana nga slot.
+Interface
+Network
+MMCE
+IGR Bootcard Slot(s)
+MMCE Start Mode
+MMCE Prefix Path
+MMCE Slot
+Gamiton ang timeout alarms
+Wait cycles human sa /ACK low
+Mode 7
+ATA0 Image (-ata0)
+ATA0 ID (-ata0id)
+ATA1 Image (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Config (-cfg)
+Working Dir (-cwd)
+Mga Kolor sa Debug (-dbc)
+Boot ELF (-elf)
+Extra Args
+PS2 Logo (-logo)
+Quick Boot (-qb)
+Protocol sa Network
+Neutrino Launch Args
+Neutrino Filesystem
+Neutrino Defaults
+Neutrino Device
+Neutrino GSM Compatibility
+Neutrino Video
+OSD Defaults
+Path Prefixes
+Path Settings
+Plasma Blend Color
+POPStarter
+Device sa POPSTARTER.ELF
+POPSTARTER.ELF Path
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Pag-uyog sa controller sa mga menu
+Security
+Storage and Cache
+Tools
+Unang disc lang (multi-disc PS1)
+Itago ang PS1 Game ID (VCD list)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+I-disable ang VMC 1 (ibilin ang card)
+I-disable ang VMC 2 (ibilin ang card)
+Wala
+Gamay
+Dako
+Normal
+Controller
+Audio
+Dili makalunsad ang Neutrino gikan niini nga device -- gi-abort ang paglunsad.
+Nawala o dili masulatan ang Neutrino network config (bsd toml) -- giabort ang launch, susiha ang neutrino folder.
+Wala makit-i ang per-game nga VMC file -- gilunsad nga wala kini (ang dula mogamit sa tinuod niini nga card).
+Device sa Dula
+Dili suportahan sa Neutrino kining file format, i-launch gamit ang <OPL> core
+Wala makita ang Neutrino ELF, i-launch gamit ang <OPL> core
+Sobra ka fragmented para sa Neutrino (%d fragments, limit %d apil ang VMCs) -- gisulayan hinuon ang OPL core.
+Wala makita ang BDMA module files sa source device.
+Dili igo ang espasyo sa memory card para sa BDMA modules.
+Error sa pagsulat sa BDMA modules sa memory card.
+Kinahanglan og static nga PS2 IP ang UDPBD. I-set sa Network Config (naka-on ang DHCP karon).
+I-restart ang OPL aron ipatuman ang kausaban sa network boot protocol.
+Naka-on ang UDPFS -- ablihi ang bag-ong UDPFS tab ug pindota ang Confirm aron makonektar. Sa PC nga bahin nagdagan ang udpfsd -fsroot <games folder>.
+Naka-on ang network block device -- motungha ang tab niini kung motubag na ang PC server (udpfsd -bdpath para sa UDPFS Image, udpbd-server para sa UDPBD).
+Sobra ka fragmented para sa Neutrino (%d fragments, limit %d apil ang VMCs) -- i-defragment sa PC; giabort ang launch.
+Mga Dula sa UDPFS
+Ang mga dula sa network (UDP) mahimo lang mag-boot pinaagi sa Neutrino core. Siguroha nga anaa ang neutrino.elf ug suportado ang format.
+Ang mga dula sa PS1 (.VCD) dili malunsad pinaagi sa network device.
+Ang MX4SIO ug pad emulation nagbahin sa SIO2 bus ug mahimong mapakyas ang dula sa pag-boot.
+MMCE card switch not confirmed -- launching anyway
+Mga Dula sa UDPFSBD
+UDPBD Games
+Nagkarga sa mga storage driver...
+Nagkarga sa USB storage driver...
+Nawala ang POPSTARTER.ELF
+Kulang ang mga POPSTARTER SMB nga kinahanglanon
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+Gipakita ang VCD games
+Gipakita ang disc games
+Nag-scan sa USB / card / network drives...
+Gisugdan ang network...
+Nag-scan sa HDD...
+USB
+MX4SIO
+MMCE
+Internal HDD
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Dili ma-sulat ang POPSTARTER network config sa memory card.
+Kining setting dili gigamit sa Neutrino core.
+I-disable Tanan
+Nagkarga sa mga tingog sa tema...
+Gitukod ang menu...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Walay nakit-ang memory card -- dili matipigan ang mga setting. Gi-boot ang OPL gikan sa network device, kansang mga setting kinahanglang anaa sa lokal nga card.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Kinatibuk-ang mga Setting
+mga Setting sa Device
+MMCE Games
+Advanced
+MMCE Settings
+Lock Sema Enqueuing Method
+Ang THFIFO mahimong makatulong sa compatibility apan makahubad sa performance
+I-sulat ang POPSTARTER Network Config
+I-save usab kining IP + SMB share nga mga kantidad sa kaugalingon nga IPCONFIG.DAT / SMBCONFIG.DAT sa POPSTARTER sa memory card (para sa VCD-over-SMB).
+Neutrino ELF Path
+Buong path ngadto sa neutrino.elf (hal. mc0:NEUTRINO/neutrino.elf). Blangko = auto-detect sa mc0/mc1.
+Nag-scan sa mga memory card...
+Gi-arma ang MMCE game-ID...
+Pag-access sa UDPFS
+Wala gigamit ang MMCE GameID -- ang neutrino.elf anaa niini nga card (kung usbon kini, ma-unload ang Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+Mga Setting sa VCD

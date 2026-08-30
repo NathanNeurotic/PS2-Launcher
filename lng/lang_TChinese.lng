@@ -1,0 +1,527 @@
+# Traditional Chinese translation by kane159 - kane159<kane12369@gmail.com
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Traditional Chinese
+保存設置
+返回
+網絡設置
+進階設置
+<無數值>
+設置保存到 %s
+寫入設置錯誤!
+離開
+設置
+選單
+BDM 遊戲
+HDD 遊戲
+ETH 遊戲
+應用程式
+主題
+語言
+系統電源將會關閉.
+退出到瀏覽界面?
+取消更新?
+%d: 偵測不到硬碟
+%d: 硬碟沒有格式化
+%d: 啟動網絡錯誤
+%d: 偵測不到網卡
+%d: 無法連接 SMB 伺服器
+%d: 無法登入 SMB 伺服器
+%d: 無法開啟 SMB 共享
+%d: 無法羅列 SMB 共享清單
+%d: 無法列出遊戲清單
+%d: DHCP 伺服器不存在
+%d: 無網絡連接
+開啟
+關閉
+確定
+選擇
+取消
+圓圈
+叉叉
+遊戲清單
+遊戲設置
+刪除設置
+滾動
+較慢
+中等
+較快
+預設選單
+從光碟中讀取
+請稍後
+讀取 Game ID 時出錯
+自動滾動
+讀取語言文件時出錯
+除錯顏色
+"無偵測到搖桿, 等待中…"
+封面圖
+寬螢幕
+關機
+設置讀取中
+設置儲存中
+啟動裝置
+重新整理
+BDM Start Mode
+HDD 裝置啟動模式
+ETH 裝置啟動模式
+應用程式啟動模式
+自動
+手動
+啟動 NBD 服務
+NBD 服務啟動中…
+NBD 服務正在運行…
+啟動 NBD 服務時出錯.
+NBD 服務未能讀取…
+IGR 位置
+背景顏色
+文字顏色
+- SMB 伺服器 -
+IP 位置模式
+靜態
+DHCP
+IP 位置
+位置
+子網路遮罩
+閘道
+DNS 伺服器
+端口
+共享
+使用者
+密碼
+<無設置>
+位置格式
+IP
+NetBIOS
+允許
+"項目將被永久刪除, 繼續嗎?"
+重新命名
+刪除
+運行
+顯示設置
+寫入操作
+記住最後一個玩的遊戲
+選定鍵
+"錯誤, 遊戲有碎片"
+"錯誤, 無法運行該項目"
+測試修改
+GUEST驗證留空.
+精確讀取
+同步模式
+脫開系統調用
+跳過 videos
+模擬 DVD-DL
+禁用 IGR
+改變大小將會重新格式化 VMC
+生成
+開始
+變更
+放棄
+重置
+使用通用
+設置 VMC
+名稱
+大小
+狀態
+進度
+VMC 檔案已存在
+"無效的 VMC 檔案, 大小有誤"
+需要建立VMC 檔案
+訪問VMC %s 出錯。繼續使用插槽%d中的記憶卡 %d?
+自動重新整理
+關於
+程序
+測試
+BDM 前墜路徑
+自定義IGR啟動文件
+"數值以分鐘計,設為 0 禁用降速"
+自動 HDD 降速
+影片模式
+對話框顏色
+被選定顏色
+Reset Colors
+資訊
+自定義 ELF
+顏色選項
+重新連線
+留空列出共享清單
+ETH 前墜位置
+退格
+空格
+回車
+模式
+VMC 插槽 1
+VMC 插槽 2
+遊戲 ID
+DMA 模式
+垂直同步
+模式 1
+模式 2
+模式 3
+模式 4
+模式 5
+模式 6
+配置 GSM
+以太網鏈接模式
+100Mbit 全雙工
+100Mbit 半雙工
+10Mbit 全雙工
+10Mbit 半雙工
+GSM 設置
+GSM 選擇器
+切換 GSM 開或關
+強制自定義顯示模式
+水平調整
+調整水平方向的顯示位置
+垂直調整
+調整垂直方向的顯示位置
+過掃
+過掃調節
+跳過 FMV
+跳過全動態視頻
+金手指設置
+PS2RD 金手指引擎
+允許 PS2RD 金手指引擎對你的遊戲進行補丁
+PS2RD 金手指引擎模式
+自動選擇或選擇遊戲金手指
+自動選擇金手指
+選擇遊戲金手指
+錯誤: 讀取金手指文件出錯
+無發現金手指文件
+下載預設值
+網絡更新
+覆蓋現有記錄
+更新失敗.
+連結更新伺服器失敗.
+更新已完成.
+更新已取消.
+從網絡上下載設置?
+自定義設置
+已下載預設值
+將自動於 %i 秒後啟動…
+自動啟動
+"以秒為單位,設為 0 來禁用自動啟動"
+PS2 標誌
+Only displayed for a valid disc logo which matches the console's region
+配置PADEMU
+PADEMU設置
+手把模擬器
+為選定遊戲開啟/關閉PADEMU調節.
+連接模式
+選擇PADEMU連接模式.
+有線連接
+藍牙連接
+設置埠:
+選擇應用PADEMU埠
+模擬
+打開/關閉選定埠的模擬
+震動
+打開/關閉選定埠的振動.
+藍牙適配器MAC地址:
+D   S  手 柄MAC地址:
+配對
+配對DS手柄
+藍牙適配器和DS手柄進行MAC地址配對.
+沒有連接
+藍牙適配器信息
+顯示更多的信息和支持的特性
+HCI版本:
+LMP版本:
+製造商ID:
+支持的功能:
+是
+否
+藍牙適配器完全兼容DS3/DS4手柄
+藍牙適配器與DS3/DS4手柄不匹配
+Multitap Emulation
+打開/關閉分插模擬.
+模擬分插埠
+選擇模擬的分插埠
+偽 DS3 相容處理
+Some fake DS3s need a workaround, this option will enable it.
+模擬播片掃描方式切換
+修正逐行模式下視頻播放有問題的遊戲.
+家長鎖設置
+家長鎖密碼
+留空將不啟用家長鎖.
+輸入家長鎖密碼
+家長鎖密碼不正確.
+已禁用家長鎖.
+創建選項:
+錯誤-無法使用此密碼.
+vmc %s 文件碎片化.是否繼續使用插槽 %d 中的記憶卡？
+音頻設置
+音效
+開機音效
+音效音量
+啟動音量
+確認視頻模式更改？
+緩存遊戲列表 (硬碟)
+通知
+Config loaded from %s
+Theme loaded from %s
+Language loaded from %s
+%s partition mounted.
+選項
+遊戲設置已保存。
+%s 設置已刪除。
+啟用時覆蓋現有的遊戲兼容性設置。
+設置模式
+全局
+當前遊戲
+全部
+選擇要刪除的設置。
+Support Forums:
+Title
+類型
+發行
+Developer
+說明
+區塊裝置
+控制器設定
+開啟／關閉區塊裝置管理員。
+開啟／關閉區塊裝置（例如 USB）。
+USB 遊戲
+iLink 遊戲
+MX4SIO 遊戲
+設定 PADMACRO
+手把巨集設定
+手把巨集
+類比減速：
+按下按鈕時降低類比搖桿的範圍
+左搖桿
+右搖桿
+類比軸反轉：
+反轉類比搖桿軸向
+連發按鈕速度
+連發啟用時按下按鈕的速度
+按住按鈕時
+以按鈕切換
+日文
+英文
+法文
+西班牙文
+德文
+義大利文
+荷蘭文
+葡萄牙文
+俄文
+韓文
+繁體中文
+簡體中文
+OSD 設定
+OSD 語言
+強制使用自訂語言設定
+變更語言
+螢幕尺寸
+全螢幕
+視訊模式
+系統預設
+背景音樂
+背景音樂音量
+預設主題音樂
+設定內建主題串流音樂的路徑。
+高
+低
+類比搖桿 X 軸靈敏度
+類比搖桿 Y 軸靈敏度
+找到檔案：%i
+金手指選擇
+僅允許一個 HDD，啟用後將鎖定為 APA 或 GPT。
+無法將設定寫入 %s（錯誤 %d）
+啟動 PS2 光碟
+光碟機中沒有 PS2 光碟。
+財務支持
+預設
+正在載入設定...
+就緒。
+最愛
+最愛啟動模式
+最愛
+%s 不允許透過最愛選單操作。
+%s 在項目標記為最愛時不可使用。
+Advanced Arguments
+Advanced
+Artwork Settings
+啟動時套用 VCD BDMA
+BDMA 模式
+BDMA Settings
+BDMA 來源
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+核心載入器
+動畫速度
+封面數量
+暗化側邊封面
+中央縮放
+Coverflow 設定
+預設載入核心
+Display
+PS2RD 金手指映像
+封面圖 .tar 封存檔
+在遊戲清單中瀏覽資料夾
+Game Launching
+Game List Settings
+Game Sources
+開啟：啟動前自動將所啟動 VCD 對應的 exFAT 驅動裝載到記憶卡（建議）。關閉：使用下方的 BDMA 來源/模式選擇器自行管理。
+POPSTARTER 載入的 exFAT 區塊裝置驅動程式。變更時會將模組複製至記憶卡；FAT32 = 無（使用內建驅動程式）。
+存放 BDMAssault 驅動程式檔案 (usbd.irx.* / usbhdfsd.irx.*) 之 POPS 資料夾所在裝置。
+當各遊戲的 Loader Core 設為 Default 時，套用的全域預設核心。<OPL> 為原生核心；Neutrino 會串接外部的 neutrino.elf。各遊戲的個別選擇一律優先於此設定。
+為遊戲套用預建的 PS2RD .img 補丁。
+將 CD/DVD 的子資料夾顯示為可瀏覽項目，選取開啟，取消返回
+IGR 時，切換開機卡指令將發送至所選插槽
+關閉可能提升效能，但 MMCE 逾時時可能造成當機
+較低的值可能提升效能，但可能造成不穩定
+僅限 Neutrino — 修正導致 IOP 緩衝區溢位的遊戲 (-gc=7)
+額外的 Neutrino 旗標，以空格分隔（例如 -mt=dvd）。全域設定套用至所有遊戲；個別遊戲設定疊加於其上。在旗標前加 $ 可停用而不刪除。
+強制指定 Neutrino 的區塊裝置檔案系統（-bsdfs）。Auto = 各裝置預設值。hdl/bd 為進階選項；若自動路徑形式不符，請在啟動參數中搭配對應的 -dvd= 使用。
+存放 neutrino.elf 的裝置（位於 NEUTRINO/ 或 neutrino/ 資料夾）。Auto 模式依序掃描 mc0 再掃描 mc1。
+針對在強制 Neutrino Video 模式下抖動或撕裂的遊戲，提供欄位翻轉（field-flipping）修正。需先設定 Neutrino Video 模式。
+強制指定 Neutrino 的 GS 輸出影像模式 (-gsm)。關閉則保留遊戲預設值。
+用於 PS1 VCD 啟動、存放 POPS/POPSTARTER.ELF 的裝置。預設 = 啟動裝置（cwd），其次為 VCD 自身裝置。自訂會顯示自由輸入路徑。
+自訂 POPSTARTER.ELF 路徑；留空或找不到時自動改用裝置 POPS 資料夾。鍵盤輸入上限 31 字元；較長路徑請透過 settings_riptopl.cfg 設定。
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+移動游標、確認或返回時短暫震動 -- 需要類比模式的 DualShock
+在裝置清單中只顯示多光碟 PS1 遊戲的第 1 片光碟（POPSLoader 風格）。隱藏名稱含 (Disc 2)、(CD 2) 等的檔案。所有光碟仍保留在卡片上以供遊戲中切換；我的最愛不受篩選影響。
+僅為外觀效果——在 PS1/VCD 清單名稱中隱藏開頭的遊戲 ID 前綴（例如 SLUS_005.51.）。沒有 ID 的名稱會照原樣顯示。不會變更啟動、封面圖或我的最愛。
+在保留此插槽卡片設定的情況下，不使用此插槽的 VMC 啟動。僅限 Neutrino 啟動；遊戲隨後會使用該插槽中的實體卡片。
+Interface
+Network
+MMCE
+IGR 開機卡插槽
+MMCE 啟動模式
+MMCE 前置路徑
+MMCE 插槽
+使用逾時警報
+/ACK 低電位後等待週期數
+Mode 7
+ATA0 映像 (-ata0)
+ATA0 ID (-ata0id)
+ATA1 映像 (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+設定檔 (-cfg)
+工作目錄 (-cwd)
+除錯顏色 (-dbc)
+開機 ELF (-elf)
+額外參數
+PS2 標誌 (-logo)
+快速開機 (-qb)
+網路協定
+Neutrino 啟動參數
+Neutrino 檔案系統
+Neutrino Defaults
+Neutrino 裝置
+Neutrino GSM 相容性
+Neutrino 影像
+OSD Defaults
+Path Prefixes
+Path Settings
+電漿混合顏色
+POPStarter
+POPSTARTER.ELF 裝置
+POPSTARTER.ELF 路徑
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+選單中控制器震動
+Security
+Storage and Cache
+Tools
+僅第一片光碟（多片 PS1）
+隱藏 PS1 遊戲 ID（VCD 清單）
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+停用 VMC 1（保留卡片）
+停用 VMC 2（保留卡片）
+無
+小
+大
+正常
+Controller
+Audio
+Neutrino 無法從此裝置啟動 -- 已中止啟動。
+Neutrino 網路設定（bsd toml）遺失或無法寫入——已中止啟動，請檢查 neutrino 資料夾。
+找不到各遊戲的 VMC 檔案——將不使用它啟動（遊戲會使用其實體卡片）。
+遊戲裝置
+Neutrino 不支援此檔案格式，改以 <OPL> 核心啟動
+找不到 Neutrino ELF，改以 <OPL> 核心啟動
+對 Neutrino 而言過於分散（%d 個片段，上限 %d 含 VMC）——改為嘗試 OPL 核心。
+在來源裝置上找不到 BDMA 模組檔案。
+記憶卡空間不足，無法存放 BDMA 模組。
+將 BDMA 模組寫入記憶卡時發生錯誤。
+UDPBD 需要靜態 PS2 IP。請在網路設定中指定（目前已啟用 DHCP）。
+重新啟動 OPL 以套用網路啟動協定的變更。
+UDPFS 已開啟——開啟新的 UDPFS 分頁並按下確認以連線。PC 端執行 udpfsd -fsroot <games folder>。
+網路區塊裝置已開啟——當 PC 伺服器回應後，其分頁便會出現（UDPFS 映像用 udpfsd -bdpath，UDPBD 用 udpbd-server）。
+對 Neutrino 而言過於分散（%d 個片段，上限 %d 含 VMC）——請在 PC 上進行重組；已中止啟動。
+UDPFS 遊戲
+網路（UDP）遊戲只能透過 Neutrino 核心啟動。請檢查 neutrino.elf 是否存在且格式受支援。
+PS1（.VCD）遊戲無法透過網路裝置啟動。
+MX4SIO 與手把模擬共用 SIO2 匯流排，遊戲可能無法啟動。
+MMCE card switch not confirmed -- launching anyway
+UDPFSBD 遊戲
+UDPBD Games
+正在載入儲存裝置驅動程式…
+正在載入 USB 儲存裝置驅動程式…
+找不到 POPSTARTER.ELF
+POPSTARTER SMB 相依檔案不存在
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+顯示 VCD 遊戲
+顯示光碟遊戲
+正在掃描 USB / 記憶卡 / 網路磁碟...
+正在啟動網路...
+正在掃描 HDD...
+USB
+MX4SIO
+MMCE
+內置硬碟
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+無法將 POPSTARTER 網路設定寫入記憶卡。
+此設定不適用於 Neutrino 核心。
+全部停用
+正在載入主題音效…
+正在建立選單…
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+找不到記憶卡 -- 無法儲存設定。OPL 從網路裝置啟動，設定必須存放在本機記憶卡上。
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+一般設定
+裝置設定
+MMCE Games
+進階
+MMCE 設定
+鎖定 Sema 排隊方式
+THFIFO 可能提升相容性，但會降低效能
+寫入 POPSTARTER 網路設定
+同時將 IP 及 SMB 共享值儲存至記憶卡上 POPSTARTER 自身的 IPCONFIG.DAT / SMBCONFIG.DAT（用於 VCD over SMB）。
+Neutrino ELF 路徑
+neutrino.elf 的完整路徑（例如 mc0:NEUTRINO/neutrino.elf）。留空則自動在 mc0/mc1 偵測。
+正在掃描記憶卡…
+正在啟用 MMCE game-ID…
+UDPFS 存取
+未套用 MMCE GameID -- 此卡上存在 neutrino.elf（切換會卸載 Neutrino）。
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+VCD 設定

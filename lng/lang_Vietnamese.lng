@@ -1,0 +1,527 @@
+# Vietnamese translation by zidane89
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Vietnamese
+Lưu thay đổi
+Quay lại
+Network Settings
+Tùy chọn nâng cao
+<không giá trị>
+Settings saved to %s
+Không lưu được cài đặt!
+Thoát
+Cài đặt
+Menu
+Trò chơi trên BDM
+Trò chơi trên HDD
+Trò chơi qua ETH
+Ứng dụng
+Chủ đề
+Ngôn ngữ
+Tắt nguồn hệ thống.
+Thoát khỏi trình duyệt?
+Hủy bỏ các cập nhật?
+%d: Không phát hiện ổ cứng
+%d: Ổ cứng chưa định dạng
+%d: Lỗi khởi chạy mạng
+%d: Không có adaptor mạng
+%d: Không thể kết nối đến SMB server
+%d: Không thể đăng nhập vào SMB server
+%d: Không mở được SMB share
+%d: Không lấy được danh sách SMB shares
+%d: Không lấy được danh sách trò chơi
+%d: Máy chủ DHCP không có sẵn
+%d: Không có kết nối mạng
+Bật
+Tắt
+OK
+Chọn
+Hủy
+Nút O
+Nút X
+Danh sách trò chơi
+Cài đặt Game
+Remove Settings
+Cuộn
+Chậm
+Thường
+Nhanh
+Menu mặc định
+Nạp từ đĩa
+Vui lòng chờ
+Lỗi khi nạp Game ID
+Tự động phân loại
+Lỗi nạp tập tin ngôn ngữ
+Màu Gỡ lỗi
+Không có cần điều khiển, đợi chút…
+Ảnh bìa
+Màn hình rộng
+Tắt máy
+Nạp cấu hình
+Lưu cấu hình
+Chọn thiết bị lưu trò chơi
+Làm mới
+BDM Start Mode
+Chọn HDD
+Chọn ETH
+Hiển thị menu ứng dụng
+Tự động
+Thủ công
+Khởi chạy máy chủ NBD
+Máy chủ NBD khởi chạy…
+Máy chủ NBD đang chạy…
+khởi chạy máy chủ NBD thất bại.
+Không nạp được máy chủ NBD…
+Vá IGR
+Màu nền
+Màu chữ
+- SMB Server -
+Gõ địa chỉ IP
+Tĩnh
+Động
+Địa chỉ IP
+Địa chỉ
+Mask
+Gateway
+DNS Server
+Cổng
+Share
+Tên
+Mật khẩu
+<chưa cài>
+Gõ địa chỉ
+IP
+NetBIOS
+Truy cập
+Mục này sẽ bị xóa vĩnh viễn, tiếp tục?
+Đổi tên
+Xóa
+Chạy
+Cài đặt hiển thị
+Thao tác ghi
+Nhớ các cài đặt cuối cùng
+Chọn nút
+Lỗi, trò chơi bị phân mảnh
+Error, không thể chạy mục này
+Test Changes
+Để trống với quyền truy cập Khách.
+Đọc chính xác
+Chế độ đồng bộ
+Unhook Syscalls
+Bỏ qua các Video
+Giả lập DVD-DL
+Ngắt IGR
+Thay đổi dung lượng sẽ định dạng lại VMC
+Tạo
+Bắt đầu
+Sửa đổi
+Hủy
+Cài lại
+Sử dụng chung
+Cấu hình VMC
+Tên
+Dung lượng
+Trạng thái
+Tiến hành
+File VMC không tồn tại
+File VMC không hợp lệ, Dung lượng không đúng
+File VMC cần được tạo
+Error accessing VMC %s. Continue with the Memory Card in slot %d?
+Tự động làm tươi
+Thông tin
+Coders
+Đảm bảo chất lượng
+BDM prefix path
+Boots Custom ELF after an IGR
+Giá trị tính bằng phút(s), 0 tắt chế độ chờ HDD
+HDD tự động chờ
+Chế độ Video
+Màu hộp thoại
+Chọn màu
+Reset Colors
+Thông tin
+Tùy chỉnh ELF
+Màu sắc lựa chọn
+Kết nối lại
+Leave empty to list shares
+ETH prefix path
+Xóa
+Cách
+Enter
+Chế độ
+VMC ở Khe 1
+VMC ở Khe 2
+Game ID
+Chế độ DMA
+V-Sync
+Chế độ 1
+Chế độ 2
+Chế độ 3
+Chế độ 4
+Chế độ 5
+Chế độ 6
+Cấu hình GSM
+Ethernet Link Mode
+100Mbit Full-duplex
+100Mbit Half-duplex
+10Mbit Full-duplex
+10Mbit Half-duplex
+Cài đặt GSM
+Bộ chọn GSM
+Bật hoặc tắt GSM
+Chế độ hiển thị tùy chỉnh bắt buộc
+H-POS
+Điều chỉnh theo chiều ngang
+V-POS
+Điều chỉnh theo chiều dọc
+Overscan
+Overscan Adjustment
+Bỏ qua FMV
+Bỏ qua Full Motion Videos
+Cài đặt Cheat
+Bộ máy Cheat PS2RD
+Hãy để PS2RD Cheat Engine vá vào trò chơi
+Chế độ PS2RD Cheat Engine
+Tự động chọn hoặc chọn trò chơi ăn gian
+Tự động chọn cheats
+Chọn cheats trò chơi
+Lỗi: nạp tệp ăn gian thất bại
+Không thấy cheat
+Tải về mặc định
+Network Update
+Overwrite Existing Records
+Cập nhật thất bại.
+Không thể kết nối đến máy chủ để cập nhật.
+Cập nhật hoàn thành.
+Hủy cập nhật.
+Tải về cài đặt qua mạng?
+Cài đặt tùy chỉnh
+Tải về mặc định
+Tự khởi động trong %i s…
+Tự khởi động
+đơn vị bằng giây(s), 0 để ngắt tự khởi động
+Logo PS2
+Displayed for a valid disc logo matching the console's region.
+Cấu hình PADEMU
+Cài đặt giả lập tay cầm
+Giả lập Tay cầm
+Bật/tắt PadEmulator cho trò chơi đã chọn.
+Chế độ Pad Emulator
+Chọn chế độ Pad Emulator.
+DualShock3/4 USB
+DualShock3/4 BT
+Cài đặt cổng:
+Chọn cổng cài đặt Pad Emulator.
+Giả lập
+Bật/tắt Pad Emulator cổng đã chọn.
+Rung
+Bật/tắt rung Pad Emulator cho cổng đã chọn.
+Địa chỉ MAC của USB Bluetooth:
+Địa chỉ MAC của tay DS:
+Ghép
+Ghép tay DS
+Ghép tay DS với Bluetooth adapter MAC address.
+Không kết nối
+Thông tin Bluetooth adapter
+Hiện thông tin và tính năng hỗ trợ
+Phiên bản HCI:
+Phiên bản LMP:
+Manufacturer ID:
+Tính năng hỗ trợ:
+Yes
+No
+Bluetooth adapter phải tương thích với tay cầm DS3/DS4.
+Bluetooth adapter có thể không hoạt động chính xác với tay cầm DS3/DS4.
+Multitap Emulation
+Bật/tắt giả lập Multitap cho trò chơi đã chọn.
+Giả lập Multitap tại cổng
+Chọn cổng giả lập Multitap.
+Cách khắc phục Giả DS3
+Some fake DS3s need a workaround, this option will enable it.
+Emulate FIELD flipping
+Khắc phục các game bị trục trặc trong chế độ progressive modes.
+Cài đặt khóa phụ huynh
+Mật khẩu khóa
+Để trống để vô hiệu hóa khóa phụ huynh.
+Nhập mật khẩu
+Mật khẩu khóa không chính xác.
+Khóa phụ huynh bị vô hiệu hóa.
+Tùy chọn Build:
+Lỗi - mật khẩu này không thể sử dụng.
+Tệp VMC %s bị phân mảnh. Tiếp tục với MC ở khe %d?
+Cài đặt âm thanh
+Hiệu ứng âm thanh
+Âm thanh khởi động
+Mức hiệu ứng âm thanh
+Tăng mức âm lượng
+Thay đổi chế độ video?
+Cache danh sách trò chơi (HDD)
+Thông báo
+Config loaded from %s
+Theme loaded from %s
+Language loaded from %s
+%s partition mounted.
+Tùy chọn
+Game settings saved.
+%s settings removed.
+Overwrites existing game compatibility settings when enabled.
+Settings Mode
+Toàn cục
+Per Game
+All
+Select settings to remove.
+Support Forums:
+Title
+Thể loại
+Phát hành
+Developer
+Mô tả
+Thiết bị khối
+Cài đặt Tay cầm
+Bật/tắt Trình quản lý Thiết bị khối (BDM).
+Bật/tắt Thiết bị khối (ví dụ: USB).
+Game USB
+Game iLink
+Game MX4SIO
+Cấu hình PADMACRO
+Cài đặt Macro Tay cầm
+Macro Tay cầm
+Giảm tốc analog:
+Giảm phạm vi của cần analog khi nhấn nút
+Cần trái
+Cần phải
+Đảo trục analog:
+Đảo ngược trục cần analog
+Tốc độ nút turbo
+Tốc độ nhấn nút khi turbo đang bật
+Khi giữ nút
+Bật/tắt bằng nút
+TIẾNG NHẬT
+TIẾNG ANH
+TIẾNG PHÁP
+TIẾNG TÂY BAN NHA
+TIẾNG ĐỨC
+TIẾNG Ý
+TIẾNG HÀ LAN
+TIẾNG BỒ ĐÀO NHA
+TIẾNG NGA
+TIẾNG HÀN
+TIẾNG TRUNG PHỒN THỂ
+TIẾNG TRUNG GIẢN THỂ
+Cài đặt OSD
+Ngôn ngữ OSD
+Buộc dùng cấu hình ngôn ngữ tùy chỉnh
+Đổi ngôn ngữ
+Kích thước màn hình
+Toàn màn hình
+Chế độ hình ảnh
+Mặc định hệ thống
+Nhạc nền
+Âm lượng nhạc nền
+Nhạc chủ đề mặc định
+Đặt đường dẫn phát nhạc cho chủ đề nội bộ.
+Cao
+Thấp
+Độ nhạy trục X analog
+Độ nhạy trục Y analog
+Tệp tìm thấy: %i
+Chọn cheat
+Chỉ cho phép một HDD, khi bật sẽ khóa APA hoặc GPT.
+Không thể ghi cài đặt vào %s (lỗi %d)
+Khởi động đĩa PS2
+Không có đĩa PS2 trong ổ đĩa.
+Hỗ trợ tài chính
+Mặc định
+Đang tải cài đặt...
+Sẵn sàng.
+Yêu thích
+Chế độ khởi động Yêu thích
+Yêu thích
+%s không được phép trong Menu Yêu thích.
+%s không được phép khi mục đang được đánh dấu yêu thích.
+Advanced Arguments
+Advanced
+Artwork Settings
+Áp dụng VCD BDMA khi khởi chạy
+Chế độ BDMA
+BDMA Settings
+Nguồn BDMA
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Loader Core
+Tốc độ hoạt ảnh
+Số lượng bìa
+Làm tối bìa bên
+Tỉ lệ trung tâm
+Cài đặt Coverflow
+Lõi tải mặc định
+Display
+Hình ảnh cheat PS2RD
+Kho .tar ảnh bìa
+Duyệt thư mục trong danh sách trò chơi
+Game Launching
+Game List Settings
+Game Sources
+Bật: tự động nạp driver exFAT phù hợp của VCD được khởi chạy vào thẻ nhớ trước khi khởi động (khuyến nghị). Tắt: tự quản lý bằng bộ chọn Nguồn/Chế độ BDMA bên dưới.
+Driver thiết bị khối exFAT mà POPSTARTER tải. Thay đổi sẽ sao chép module vào thẻ; FAT32 = không cần (driver tích hợp sẵn).
+Thiết bị có thư mục POPS chứa các tệp driver BDMAssault (usbd.irx.* / usbhdfsd.irx.*).
+Lõi mặc định toàn cục cho các game có Loader Core theo từng game được đặt thành Default. <OPL> là lõi gốc; Neutrino nối chuỗi tới neutrino.elf bên ngoài. Lựa chọn theo từng game luôn ghi đè giá trị này.
+Áp dụng bản vá PS2RD .img dựng sẵn cho game của bạn.
+Hiển thị thư mục con của CD/DVD dưới dạng mục duyệt được; chọn để mở, hủy để quay lại
+Lệnh chuyển sang bootcard sẽ được gửi đến khe đã chọn khi IGR
+TẮT có thể cải thiện hiệu năng nhưng khi MMCE hết giờ có thể bị đóng băng
+Giá trị thấp hơn có thể cải thiện hiệu năng nhưng gây mất ổn định
+Chỉ dành cho Neutrino -- sửa lỗi game tràn bộ nhớ IOP (-gc=7)
+Cờ Neutrino bổ sung, cách nhau bằng dấu cách (vd. -mt=dvd). Toàn cục áp dụng cho tất cả game; riêng game cộng thêm. Thêm $ trước cờ để tắt mà không xóa.
+Buộc hệ thống tệp thiết bị khối của Neutrino (-bsdfs). Auto = mặc định theo từng thiết bị. hdl/bd là các tùy chọn dành cho chuyên gia; hãy ghép chúng với một -dvd= tương ứng trong đối số khởi chạy nếu dạng đường dẫn tự động không phù hợp.
+Thiết bị chứa neutrino.elf (trong thư mục NEUTRINO/ hoặc neutrino/). Tự động quét mc0 rồi mc1.
+Bản sửa lỗi đảo trường (field-flipping) cho các game bị rung hoặc xé hình dưới chế độ Neutrino Video được ép buộc. Cần đặt một chế độ Neutrino Video.
+Buộc chế độ video GS của Neutrino (-gsm). Tắt giữ mặc định của game.
+Thiết bị chứa POPS/POPSTARTER.ELF để khởi chạy PS1 VCD. Mặc định = thiết bị khởi động (cwd) rồi đến thiết bị của chính VCD. Tùy chỉnh sẽ hiện ô nhập đường dẫn tự do.
+Đường dẫn tùy chỉnh POPSTARTER.ELF; tự dùng thư mục POPS trên thiết bị nếu để trống/thiếu. Bàn phím giới hạn 31 ký tự; đường dài hơn qua settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Rung ngắn khi di chuyển con trỏ, xác nhận hoặc quay lại -- cần DualShock ở chế độ analog
+Chỉ hiển thị Đĩa 1 của một game PS1 nhiều đĩa trong danh sách thiết bị (kiểu POPSLoader). Ẩn các tệp có tên (Disc 2), (CD 2), v.v. Tất cả các đĩa vẫn nằm trên thẻ để hoán đổi trong game; Mục yêu thích không bị lọc.
+Chỉ mang tính thẩm mỹ -- ẩn tiền tố game-ID ở đầu (ví dụ SLUS_005.51.) khỏi tên trong danh sách PS1/VCD. Các tên không có ID sẽ hiển thị nguyên trạng. Không thay đổi việc khởi chạy, ảnh bìa hay mục yêu thích.
+Khởi chạy mà không dùng VMC của khe này trong khi vẫn giữ thẻ của nó được cấu hình. Chỉ áp dụng khi khởi chạy bằng Neutrino; game sau đó sẽ dùng thẻ thật trong khe đó.
+Interface
+Network
+MMCE
+Khe cắm bootcard IGR
+Chế độ khởi động MMCE
+Đường dẫn tiền tố MMCE
+Khe cắm MMCE
+Dùng cảnh báo hết giờ
+Chu kỳ chờ sau /ACK thấp
+Mode 7
+Ảnh ATA0 (-ata0)
+ID ATA0 (-ata0id)
+Ảnh ATA1 (-ata1)
+Tự động: -bsd -dvd -gc -gsm -mc -dbc -logo
+Cấu hình (-cfg)
+Thư mục làm việc (-cwd)
+Màu Gỡ lỗi (-dbc)
+ELF khởi động (-elf)
+Tham số bổ sung
+Logo PS2 (-logo)
+Khởi động nhanh (-qb)
+Giao thức mạng
+Tham số khởi động Neutrino
+Hệ thống tệp Neutrino
+Neutrino Defaults
+Thiết bị Neutrino
+Tương thích GSM Neutrino
+Video Neutrino
+OSD Defaults
+Path Prefixes
+Path Settings
+Màu hòa trộn Plasma
+POPStarter
+Thiết bị POPSTARTER.ELF
+Đường dẫn POPSTARTER.ELF
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Rung tay cầm trong menu
+Security
+Storage and Cache
+Tools
+Chỉ đĩa đầu tiên (PS1 nhiều đĩa)
+Ẩn Game ID PS1 (danh sách VCD)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+Tắt VMC 1 (giữ thẻ)
+Tắt VMC 2 (giữ thẻ)
+Không có
+Nhỏ
+Lớn
+Bình thường
+Controller
+Audio
+Neutrino không thể khởi chạy từ thiết bị này -- đã hủy khởi chạy.
+Cấu hình mạng của Neutrino (bsd toml) bị thiếu hoặc không ghi được -- đã hủy khởi chạy, hãy kiểm tra thư mục neutrino.
+Không tìm thấy tệp VMC theo từng game -- đang khởi chạy mà không có nó (game dùng thẻ thật của nó).
+Thiết bị của Game
+Neutrino không hỗ trợ định dạng này, khởi động bằng lõi <OPL>
+Không tìm thấy Neutrino ELF, khởi động bằng lõi <OPL>
+Quá phân mảnh đối với Neutrino (%d mảnh, giới hạn %d bao gồm cả VMC) -- đang thử dùng lõi OPL thay thế.
+Không tìm thấy tệp module BDMA trên thiết bị nguồn.
+Thẻ nhớ không đủ dung lượng cho module BDMA.
+Lỗi khi ghi module BDMA vào thẻ nhớ.
+UDPBD cần IP tĩnh cho PS2. Đặt trong Cấu hình mạng (DHCP đang bật).
+Khởi động lại OPL để áp dụng thay đổi giao thức khởi động mạng.
+UDPFS đang bật -- mở tab UDPFS mới và nhấn Confirm để kết nối. Phía PC chạy udpfsd -fsroot <games folder>.
+Thiết bị khối qua mạng đang bật -- tab của nó xuất hiện khi máy chủ PC phản hồi (udpfsd -bdpath cho UDPFS Image, udpbd-server cho UDPBD).
+Quá phân mảnh đối với Neutrino (%d mảnh, giới hạn %d bao gồm cả VMC) -- hãy chống phân mảnh trên PC; đã hủy khởi chạy.
+Trò chơi UDPFS
+Trò chơi mạng (UDP) chỉ có thể khởi động qua lõi Neutrino. Hãy kiểm tra neutrino.elf có tồn tại và định dạng được hỗ trợ.
+Trò chơi PS1 (.VCD) không thể khởi chạy qua thiết bị mạng.
+MX4SIO và giả lập tay cầm dùng chung bus SIO2 nên trò chơi có thể không khởi động được.
+MMCE card switch not confirmed -- launching anyway
+Trò chơi UDPFSBD
+UDPBD Games
+Đang tải trình điều khiển lưu trữ...
+Đang tải trình điều khiển lưu trữ USB...
+Thiếu POPSTARTER.ELF
+Thiếu yêu cầu SMB cho POPSTARTER
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+Đang hiển thị game VCD
+Đang hiển thị game đĩa
+Đang quét ổ USB / thẻ / mạng...
+Đang khởi động mạng...
+Đang quét HDD...
+USB
+MX4SIO
+MMCE
+Ổ cứng trong
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Không thể ghi cấu hình mạng POPSTARTER vào thẻ nhớ.
+Cài đặt này không dùng với lõi Neutrino.
+Tắt tất cả
+Đang tải âm thanh chủ đề...
+Đang dựng menu...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Không tìm thấy thẻ nhớ -- không thể lưu cài đặt. OPL đã khởi động từ thiết bị mạng, cài đặt phải nằm trên thẻ nhớ cục bộ.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Cài đặt chung
+Cài đặt thiết bị
+MMCE Games
+Nâng cao
+Cài đặt MMCE
+Phương thức xếp hàng Lock Sema
+THFIFO có thể cải thiện tương thích nhưng giảm hiệu năng
+Ghi cấu hình mạng POPSTARTER
+Cũng lưu các giá trị IP + SMB vào IPCONFIG.DAT / SMBCONFIG.DAT của POPSTARTER trên thẻ nhớ (dành cho VCD qua SMB).
+Đường dẫn Neutrino ELF
+Đường dẫn đầy đủ tới neutrino.elf (vd. mc0:NEUTRINO/neutrino.elf). Để trống = tự tìm trên mc0/mc1.
+Đang quét thẻ nhớ...
+Đang kích hoạt game-ID MMCE...
+Truy cập UDPFS
+Không áp dụng MMCE GameID -- neutrino.elf nằm trên thẻ này (chuyển đổi sẽ gỡ Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+Cài đặt VCD

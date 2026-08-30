@@ -1,0 +1,527 @@
+# Japanese translation by yamamotonew
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Japanese
+設定を保存する
+戻る
+ネットワーク設定
+詳細オプション
+<未設定>
+設定を %s に保存しました
+設定保存中にエラーが発生しました
+終了
+設定
+メニュー
+BDMゲーム
+HDDゲーム
+ETHゲーム
+アプリ
+テーマ
+言語
+システムを終了し電源を切ります
+ブラウザに戻りますか？
+変更をキャンセルしますか？
+%d: HDDが接続されていません
+%d: HDDがフォーマットされていません
+%d: ネットワーク開始エラー
+%d: ネットワークアダプタが接続されていません
+%d: SMBサーバーに接続できません
+%d: SMBサーバーにログインできません
+%d: SMBフォルダを開けません
+%d: SMBゲームが見つかりません
+%d: ゲームが見つかりません
+%d: DHCPサーバが見つかりません
+%d: ネットワーク接続が見つかりません
+オン
+オフ
+分かった
+選択
+キャンセル
+O
+X
+ゲームリスト
+ゲーム設定
+設定を削除
+画面スクロール
+遅い
+普通
+速い
+初期メニュー
+ディスクからロード
+お待ちください
+ゲームIDをロード中にエラーが発生しました
+自動的に並べ替え
+言語設定をロード中にエラーが発生しました
+デバッグの色
+コントローラーが見つかりません。お待ちください…
+カバーアート
+ワイドスクリーン
+電源を切る
+設定をロード中
+設定を保存中
+デバイスを開始
+リフレッシュ
+BDM開始モード
+HDDデバイス開始モード
+ETHデバイス開始モード
+アプリメニュー表示モード
+自動
+手動
+NBDサーバーを開始
+NBDサーバーを開始します…
+NBDサーバーは開始しました
+NBDサーバーの開始に失敗しました
+NBDサーバーを取消中…
+IGRパス
+背景色
+文字色
+- SMBサーバー -
+IPアドレスタイプ
+Static
+DHCP
+IPアドレス
+アドレス
+マスク
+ゲートウェイ
+DNSサーバー
+ポート
+共有名
+ユーザー名
+パスワード
+<未設定>
+アドレスタイプ
+IP
+NetBIOS
+分かった
+削除すると二度と元に戻せません。よろしいですか？
+名前を変更
+削除
+実行
+表示設定
+書き込み操作
+最後にプレイしたゲームを記憶する
+セレクトボタン
+ゲームがデフラグされていません
+ゲーム（アプリ）を開始出来ませんでした
+テストの変更
+GUESTでログインする場合は空欄
+読み込み速度の補正
+データ読み込みをシンクロ化
+Syscallの解除
+一部のムービーをスキップ
+二層ディスク(DVD9)用設定
+IGRを無効化
+サイズを変更するとVMCはフォーマットされます
+VMCファイルを作成
+開始
+変更
+中止
+リセット
+簡易VMCの作成
+VMC設定
+ファイル名
+サイズ
+状態
+進行
+VMCファイル作成済
+VMCファイルのサイズが正しくありません
+VMCファイル未作成
+VMC %s でエラー。スロット %d のメモリカードを使いますか？
+自動リフレッシュ
+OPLについて
+コーディング
+QAテスター
+BDMプリフィクスパス
+IGR後に指定されたカスタムELFを実行します
+秒数指定。0で無効化
+自動HDDスピンダウン
+画面モード
+ダイアログの色
+選択時の色
+色をリセット
+インフォ
+カスタムELF
+表示色設定
+再接続
+全ての共有を表示する場合は空欄
+ETHプリフィクスパス
+一文字消去
+スペース
+決定
+モード
+VMCスロット1
+VMCスロット2
+ゲームID
+DMAモード
+垂直同期
+モード 1
+モード 2
+モード 3
+モード 4
+モード 5
+モード 6
+GSM設定
+ETHリンクモード
+100Mbit 全二重
+100Mbit 半二重
+10Mbit 全二重
+10Mbit 半二重
+GSM設定
+GSMセレクター
+GSM設定をオン/オフ
+指定されたモードを常に有効化
+水平調整
+水平方向の表示位置を微調整
+垂直調整
+垂直方向の表示位置を微調整
+オーバースキャン
+オーバースキャンの調整
+FMVスキップ
+フルモーションムービーをスキップ
+チート設定
+PS2RDチートエンジン
+PS2RDチートをゲーム毎に指定
+PS2RDチートモード
+自動/手動チート選択
+自動チート選択
+手動チート選択
+チートファイルを適用できませんでした
+チートファイルが見つかりません
+デフォルト設定をダウンロード
+ネットワークアップデート
+既存のレコードを上書き
+アップデートが失敗しました
+アップデートサーバに接続できませんでした
+アップデート完了
+アップデートは中止されました
+ネットワークから設定をダウンロードしますか？
+カスタム設定
+デフォルト設定をダウンロード
+あと %i 秒で自動的にスタートします
+自動スタート
+開始までの秒数を指定。0で無効化
+PS2ロゴ
+本体リージョンとディスクが一致した場合のみ表示されます
+PADEMUの設定
+PADEMUの設定
+パッドエミュレーター
+ゲーム毎にPADEMUの有効/無効を指定
+PADEMUモード
+モードを選択
+デュアルショック3/4 USB
+デュアルショック3/4 BT
+ポート番号:
+PADEMUを適用するポートを指定
+エミュレーション
+ポート毎にPADEMUを適用
+振動
+ポート毎に振動の有効/無効を指定
+BluetoothアダプタのMACアドレス:
+DSのペア設定MACアドレス　　　　:
+ペア設定
+DSコントローラーをペア設定
+BluetoothのMACアドレスを指定してDSコントローラーをペア設定
+接続されていません
+Bluetooth アダプタ情報
+さらにサポートされている機能を表示
+HCIバージョン：
+LMPバージョン：
+メーカーID：
+サポート機能：
+はい
+いいえ
+BluetoothアダプタはDS3 / DS4コントローラをサポートしています
+BluetoothアダプタはDS3 / DS4コントローラをサポートしていません
+マルチタップエミュレーション
+選択したゲームのマルチタップエミュレーションをオン/オフにします
+マルチタップエミュレータのポート
+マルチタップエミュレーション用のポートを選択
+偽のDS3の回避策
+一部の偽のDS3には回避策が必要です。このオプションを使用すると、回避策が有効になります。
+FIELD反転をエミュレートする
+プログレッシブビデオモードでグリッチするゲームを修正しました
+パレンタルロック設定
+パレンタルロックパスワード
+パレンタルロックを無効にするには空白のままにします
+パレンタルロックパスワードを入力してください
+パレンタルロックのパスワードが正しくありません
+パレンタルロックは無効です
+ビルドオプション：
+エラー - このパスワードは使用できません
+VMC ％s ファイルは破損しています。 スロット ％d のメモリカードに保存しますか？
+オーディオ設定
+効果音
+起動音
+効果音の音量
+起動音の音量
+ビデオモードの変更を確認しますか？
+ゲームリストをキャッシュ（HDD）
+通知
+構成が %s からロードされました。
+テーマが %s からロードされました。
+言語が %s からロードされました。
+パーティション%sがマウントされました。
+オプション
+ゲーム設定が保存されました。
+設定%sが削除されました。
+有効にすると、既存のゲーム互換性設定が上書きされます。
+設定モード
+グローバル
+ゲームごと
+全て
+削除する設定を選択します。
+サポートフォーラム：
+タイトル
+ジャンル
+リリース
+開発者
+説明
+ブロックデバイス
+コントローラーの設定
+ブロックデバイスマネージャーのオン/オフを切り替えます。
+ブロックデバイス(USBなど)のオン/オフを切り替えます。
+USBゲーム
+iLinkゲーム
+MX4SIOゲーム
+パッドマクロの設定
+パッドマクロの設定
+パッドマクロ
+アナログスローダウン：
+ボタンを押したときのアナログスティックの範囲を狭くする
+左スティック
+右スティック
+アナログ軸反転：
+アナログスティックの軸を反転
+ターボボタンの速度
+ターボがアクティブな時にボタンを押す速さ
+ボタンを押している間
+ボタンで切り替え
+日本語
+英語
+フランス語
+スペイン語
+ドイツ語
+イタリア語
+オランダ語
+ポルトガル語
+ロシア語
+韓国語
+繁体字中国語
+簡体字中国語
+OSD設定
+OSD言語
+言語設定を強制的に変更します
+言語を変更
+画面サイズ
+フルスクリーン
+ビデオモード
+システム標準
+BGM
+BGM 音量
+デフォルトテーマ曲
+内部テーマ用にストリーミングする音楽のパスを設定します。
+高
+低
+アナログX軸感度
+アナログY軸感度
+検出ファイル数: %i
+チート選択
+HDD は1台のみ有効。有効化すると APA か GPT に固定されます。
+%s に設定を書き込めませんでした (エラー %d)
+PS2 ディスクを起動
+ドライブに PS2 ディスクがありません。
+資金援助
+デフォルト
+設定を読み込み中...
+準備完了。
+お気に入り
+お気に入り起動モード
+お気に入り
+%s はお気に入りメニューから使用できません。
+%s はお気に入りに登録されているアイテムでは使用できません。
+Advanced Arguments
+Advanced
+Artwork Settings
+起動時に VCD BDMA を適用
+BDMA モード
+BDMA Settings
+BDMA ソース
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+ローダーコア
+アニメーション速度
+カバー表示数
+サイドカバーを暗くする
+中央スケール
+Coverflow 設定
+デフォルトローダーコア
+Display
+PS2RD チートイメージ
+カバーアートの.tarアーカイブ
+ゲームリストでフォルダを閲覧
+Game Launching
+Game List Settings
+Game Sources
+オン: 起動する VCD に対応する exFAT ドライバを起動前にメモリーカードへ自動装備します（推奨）。オフ: 下の BDMA ソース/モード選択で手動管理します。
+POPSTARTER が読み込む exFAT ブロックデバイスドライバー。変更するとモジュールがカードにコピーされます。FAT32 = なし（内蔵ドライバー）。
+BDMAssault ドライバーファイル（usbd.irx.* / usbhdfsd.irx.*）の POPS フォルダを持つデバイス。
+ゲームごとのLoader CoreがDefaultに設定されているゲームに使う、グローバルの既定コアです。<OPL> はネイティブコアで、Neutrinoは外部の neutrino.elf をチェーンします。ゲームごとの選択が常にこれを上書きします。
+ビルド済み PS2RD .img パッチをゲームに適用します。
+CD/DVDのサブフォルダを閲覧可能な項目として表示。決定で開き、キャンセルで戻る
+IGR 時、選択したスロットにブートカードコマンドが送信されます
+OFF にするとパフォーマンスが向上しますが、MMCE タイムアウト時にフリーズする場合があります
+値を低くするとパフォーマンスが向上しますが、不安定になる場合があります
+Neutrino 専用 -- IOP バッファをオーバーランするゲームを修正 (-gc=7)
+追加の Neutrino フラグをスペース区切りで指定（例 -mt=dvd）。グローバルは全ゲームに適用、ゲーム個別はその上に追加。フラグの先頭に $ を付けると削除せずに無効化できます。
+Neutrinoのブロックデバイスファイルシステムを強制します（-bsdfs）。Auto = デバイスごとの既定値。hdl/bd は上級者向けのオプションです。自動のパス形状が合わない場合は、起動引数の -dvd= を一致させて組み合わせてください。
+neutrino.elf を保持するデバイス（NEUTRINO/ または neutrino/ フォルダ内）。自動スキャンは mc0 → mc1 の順で検索。
+強制されたNeutrino Videoモードでちらつきやティアリングが起きるゲーム向けの、フィールド反転による修正です。Neutrino Videoモードの設定が必要です。
+Neutrino の GS 出力ビデオモードを強制します（-gsm）。オフでゲームのデフォルトを使用。
+PS1 VCD 起動用の POPS/POPSTARTER.ELF を保持するデバイス。標準 = 起動デバイス（cwd）、次に VCD 自身のデバイス。カスタムで自由入力パスを表示します。
+カスタム POPSTARTER.ELF パス。空白または未検出時はデバイスの POPS フォルダにフォールバック。キーボード入力は 31 文字まで。より長いパスは settings_riptopl.cfg で設定。
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+カーソル移動、決定、戻る操作時の短い振動 - アナログモードのDualShockが必要
+デバイス一覧にマルチディスクのPS1ゲームのDisc 1だけを表示します（POPSLoaderスタイル）。(Disc 2)、(CD 2)などの名前のファイルを非表示にします。すべてのディスクはゲーム中のディスク交換のためにカードに残ります。お気に入りはフィルターされません。
+見た目だけの設定です -- PS1/VCD一覧の名前から先頭のゲームIDプレフィックス（例: SLUS_005.51.）を非表示にします。IDのない名前はそのまま表示されます。起動、カバーアート、お気に入りには影響しません。
+このスロットのカードを設定したまま、そのVMCなしで起動します。Neutrino起動のみ対応。ゲームはそのスロットの実際のカードを使用します。
+Interface
+Network
+MMCE
+IGR ブートカードスロット
+MMCE 起動モード
+MMCE プレフィックスパス
+MMCE スロット
+タイムアウトアラームを使用
+/ACK ロー後の待機サイクル
+Mode 7
+ATA0 イメージ (-ata0)
+ATA0 ID (-ata0id)
+ATA1 イメージ (-ata1)
+自動: -bsd -dvd -gc -gsm -mc -dbc -logo
+設定ファイル (-cfg)
+作業ディレクトリ (-cwd)
+デバッグカラー (-dbc)
+起動 ELF (-elf)
+追加引数
+PS2 ロゴ (-logo)
+クイック起動 (-qb)
+ネットワークプロトコル
+Neutrino 起動引数
+Neutrino ファイルシステム
+Neutrino Defaults
+Neutrino デバイス
+Neutrino GSM 互換性
+Neutrino ビデオ
+OSD Defaults
+Path Prefixes
+Path Settings
+プラズマブレンドカラー
+POPStarter
+POPSTARTER.ELF デバイス
+POPSTARTER.ELF パス
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+メニューでのコントローラー振動
+Security
+Storage and Cache
+Tools
+最初のディスクのみ（マルチディスク PS1）
+PS1 ゲーム ID を隠す（VCD リスト）
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+VMC 1 を無効化（カードは保持）
+VMC 2 を無効化（カードは保持）
+なし
+小
+大
+標準
+Controller
+Audio
+Neutrino はこのデバイスから起動できません -- 起動を中止しました。
+Neutrinoのネットワーク設定（bsd toml）が見つからないか書き込めません -- 起動を中止しました。neutrinoフォルダを確認してください。
+ゲームごとのVMCファイルが見つかりません -- なしで起動します（ゲームは実際のカードを使用します）。
+ゲームのデバイス
+Neutrino はこのファイル形式をサポートしていません。<OPL> コアで起動します
+Neutrino ELF が見つかりません。<OPL> コアで起動します
+Neutrinoには断片化しすぎています（%d 個の断片、上限 %d 個、VMC含む）-- 代わりにOPLコアを試します。
+ソースデバイスに BDMA モジュールファイルが見つかりません。
+BDMA モジュールを保存するメモリーカードの空き容量が不足しています。
+メモリーカードへの BDMA モジュールの書き込みに失敗しました。
+UDPBD には PS2 の固定 IP が必要です。ネットワーク設定で設定してください（現在 DHCP が有効です）。
+ネットワーク起動プロトコルの変更を適用するには OPL を再起動してください。
+UDPFSがオンです -- 新しいUDPFSタブを開き、Confirmを押して接続します。PC側では udpfsd -fsroot <games folder> を実行します。
+ネットワークブロックデバイスがオンです -- PCサーバーが応答すると、そのタブが表示されます（UDPFSイメージ用は udpfsd -bdpath、UDPBD用は udpbd-server）。
+Neutrinoには断片化しすぎています（%d 個の断片、上限 %d 個、VMC含む）-- PCでデフラグしてください。起動を中止しました。
+UDPFS ゲーム
+ネットワーク（UDP）ゲームは Neutrino コアでのみ起動できます。neutrino.elf があり、形式が対応しているか確認してください。
+PS1（.VCD）ゲームはネットワークデバイスから起動できません。
+MX4SIO とパッドエミュレーションは SIO2 バスを共有するため、ゲームが起動しない場合があります。
+MMCE card switch not confirmed -- launching anyway
+UDPFSBD ゲーム
+UDPBD Games
+ストレージドライバーを読み込み中...
+USB ストレージドライバーを読み込み中...
+POPSTARTER.ELF が見つかりません
+POPSTARTER の SMB 要件が不足しています
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+VCD ゲームを表示中
+ディスクゲームを表示中
+USB / カード / ネットワークドライブをスキャン中...
+ネットワークを開始中...
+HDD をスキャン中...
+USB
+MX4SIO
+MMCE
+内蔵HDD
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+メモリーカードへの POPSTARTER ネットワーク設定の書き込みに失敗しました。
+この設定は Neutrino コアでは使用されません。
+すべて無効化
+テーマサウンドを読み込み中...
+メニューを構築中...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+メモリーカードが見つかりません - 設定を保存できません。OPLはネットワーク機器から起動したため、設定はローカルカードに保存する必要があります。
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+全般設定
+デバイス設定
+MMCE ゲーム
+詳細
+MMCE 設定
+ロックセマフォのエンキューメソッド
+THFIFO は互換性向上に役立つ場合がありますが、パフォーマンスが低下することがあります
+POPSTARTER ネットワーク設定を書き込む
+IP と SMB 共有の値をメモリーカード上の POPSTARTER 専用 IPCONFIG.DAT / SMBCONFIG.DAT にも保存します（SMB 経由の VCD 用）。
+Neutrino ELF パス
+neutrino.elf へのフルパス（例 mc0:NEUTRINO/neutrino.elf）。空白時は mc0/mc1 を自動検索。
+メモリーカードをスキャン中...
+MMCE ゲーム ID を準備中...
+UDPFS アクセス
+MMCE GameID は未適用 -- このカードに neutrino.elf があります（切り替えると Neutrino がアンロードされます）。
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+VCD 設定

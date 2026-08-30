@@ -1,0 +1,527 @@
+# Croatian translation by Blacky5678
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Croatian
+Spremi Promjene
+Natrag
+Network Settings
+Napredne Postavke
+<nema vrijednosti>
+Postavke spremljene u %s
+Greska zapisivanja postavki!
+Izlaz
+Postavke
+Izbornik
+BDM Igre
+HDD Igre
+ETH Igre
+Aplikacije
+Teme
+Jezik
+Sistem ce se ugasiti.
+Izaci u Preglednik?
+Otkazati azuriranje?
+%d: Hard Disk nije primijecen.
+%d: Hard Disk nije formatiran.
+%d: Greska pokretanja mreze.
+%d: Mrezni adapter nije primijecen.
+%d: Nemoguce se spojiti na SMB server.
+%d: Nemoguce se ulogirati na SMB server.
+%d: Nemoguce otvoriti SMB dijeljenje.
+%d: Nemoguce izlistati SMB dijeljenja.
+%d: Nemoguce izlistati igre.
+%d: DHCP server nije dostupan.
+%d: Nema mrezne konekcije.
+Uklj.
+Isklj.
+U redu
+Odaberi
+Otkazi
+Krug
+Kriz
+Lista Igara
+Postavke Igre
+Ukloni Postavke
+Izlistati
+Sporo
+Srednje
+Brzo
+Uobicajeni Izbornik
+Ucitaj sa diska
+Molimo, sacekajte.
+Greska tijekom ucitavanja ID-a igre.
+Automatsko Sortiranje
+Greska ucitavanja jezicne datoteke.
+Boje za otklanjanje pogrešaka
+Kontroler nije primijecen, cekanje…
+Naslovnica
+Siroki Zaslon
+Ugasi
+Ucitavanje konfiguracije…
+Spremanje konfiguracije…
+Zapocni Uredaj
+Osvjezi
+BDM Start Mode
+Pocetni Nacin HDD Uredaja
+Pocetni Nacin ETH Uredaja
+Nacin Prikaza Aplikacijskog Izbornika
+Automatski
+Rucno
+Zapocni NBD Server
+Zapocinjanje NBD Servera…
+Pokretanje NBD Servera…
+Neuspjesno zapocinjanje NBD Servera.
+Gasenje NBD Server…
+IGR Putanja
+Boja Pozadine
+Boja Teksta
+- SMB Server -
+Vrsta IP Adrese
+Staticna
+DHCP
+IP Adresa
+Adresa
+Maska
+Propusnica
+DNS Server
+Port
+Dijeli
+Korisnik
+Lozinka
+<nije postavljeno>
+Vrsta Adrese
+IP
+NetBIOS
+Prihvati
+Stavka ce biti trajno obrisana, nastaviti?
+Preimenuj
+Obrisi
+Pokreni
+Postavke Zaslona
+Operacije pisanja
+Zapamti Zadnju Upaljenu Igru
+Tipka za Odabir
+Greska, igra je fragmentirana.
+Greska, nije moguce pokrenuti ovu stavku.
+Testiraj Promjene
+Ostavi prazno za autent. GOSTA
+Tocna Citanja
+Sinkronizacijski Nacin
+Otkaci Syscalls
+Preskoci Videe
+Emuliraj DVD-DL
+Onemoguci IGR
+Mijenjanje velice ce preurediti VMC.
+Stvori
+Zapocni
+Izmjeni
+Prekini
+Resetiraj
+Koristi Genericki
+Konfiguriraj VMC
+Ime
+Velicina
+Status
+Napredak
+VMC datoteka vec postoji.
+Nevazeca VMC datoteka, velicina nije tocna.
+VMC datoteka treba biti stvorena.
+Greska pristupanja VMC %s. Nastaviti sa Memory Cardom u slotu %d?
+Automatsko Osvjezavanje
+O
+Koderi
+Osiguranje Kvalitete
+Putanja BDM Prefiksa
+Pokrece prilagodeni ELF nakon IGR-a.
+Vrijednost u minutama, 0 za onemogucivanje zavrtanja.
+Automatsko Zavrtanje HDD-a
+Video Nacin
+Boja Dijaloga
+Odabrana Boja
+Reset Colors
+Info
+Prilagodeni ELF
+Odabir Boje
+Ponovno spoji
+Ostavi prazno za listu dijeljenja.
+Putanja ETH Prefiksa
+Brisanje
+Razmak
+Unesi
+Nacin
+VMC Slot 1
+VMC Slot 2
+ID Igre
+DMA Nacin
+V-Sync
+Nacin 1
+Nacin 2
+Nacin 3
+Nacin 4
+Nacin 5
+Nacin 6
+Konfiguriraj GSM
+Nacin Povezivanja Etherneta
+100Mbit Puni-dupleks
+100Mbit Pola-dupleksa
+10Mbit Puni-dupleks
+10Mbit Pola-dupleksa
+GSM Postavke
+GSM birač
+Uklj./Isklj. GSM
+Forsirani prilagodeni nacin ekrana.
+H-POZ
+Horizontalno nastimavanje.
+V-POZ
+Vertikalno nastimavanje.
+Skaliranje
+Nastimavanje skaliranja.
+Preskoci FMV
+Preskakanje FMV-a
+Postavke Varanja
+PS2RD engine za varanje
+Dopusti PS2RD Cheat Engine da zakrpa tvoju igru.
+Nacin PS2RD Cheat Engine
+Automatski odabir ili odaberi varanja za igru.
+Automatski Odaberi Varanja
+Odaberi Varanja Igre
+Greska: neuspjelo ucitavanje datoteke varanja.
+Varnaje nije pronadeno.
+Preuzmi Uobicajeno
+Mrezno Azuriranje
+Prepisi Postojece Zapise
+Azuriranje nije uspjelo.
+Neuspjesno spajanje na server azuriranja.
+Azuriranje zavrseno.
+Azuriranje otkazano.
+Preuzmi postavke sa mreze?
+Prilagodene Postavke
+Preuzeto Uobicajeno
+Automatski zapocni za %i s…
+Automatski zapocni
+Vrijednost u sekundama, 0 za onemogucavanje automatskog pocetka.
+PS2 Logo
+Displayed for a valid disc logo matching the console's region.
+Konfiguriraj PADEMU
+Postavke Pad Emulatora
+Emulator kontrolera
+Uklj./Isklj. Pad Emulator za odabranu igru.
+Nacin Pad Emulatora
+Odabire nacin Pad Emulatora.
+DualShock3/4 USB
+DualShock3/4 BT
+Postavke Za Port:
+Odaberi port za postavke Pad Emulatora.
+Emulacija
+Uklj./Isklj. Pad Emulator za odabrani port.
+Vibracija
+Uklj./Isklj. vibraciju za odabrani port Pad Emulatora.
+MAC Adresa USB Bluetooth Adaptera:
+DS Kontroler uparen na MAC Adresu:
+Upari
+Upari DS Kontroler
+Upari DS kontroler sa MAC adresom Bluetooth adaptera.
+Nije Spojeno
+Informacije Bluetooth Adaptera
+Prikazuje vise informacija i podrzana svojstva.
+HCI Verzija:
+LMP Verzija:
+ID Proizvodaca:
+Podrzana Svojstva:
+Da
+Ne
+Bluetooth adapter bi trebao biti potpuno kompatibilan sa DS3/DS4 kontrolerom.
+Bluetooth adapter mozda nece raditi ispravno sa DS3/DS4 kontrolerom.
+Multitap Emulation
+Uklj./Isklj. emulaciju Multitapa za odabranu igru.
+Emulator Multitapa na Portu:
+Odaberi port za emulaciju Multitapa.
+Lažni DS3 zaobilazni način
+Some fake DS3s need a workaround, this option will enable it.
+Emuliraj preklapanje FIELD-a
+Zakrpe za igre koje se kvare pod progresivnim video nacinom.
+Postavke Roditeljskog Zakljucavanja
+Lozinka Roditeljskog Zakljucavanja
+Ostavi prazno za onemogucavanje roditeljskog zakljucavanja.
+Unesi Lozinku Roditeljskog Zakljucavanja
+Lozinka roditeljskog zakljucavanja nije tocna.
+Roditeljsko zakljucavanje je onemoguceno.
+Izgradi Postavke:
+Greska - ova lozinka se ne moze koristiti.
+VMC %s datoteka je fragmentirana. Nastaviti sa Memory Cardom u slotu %d?
+Postavke Zvuka
+Zvučni efekti
+Zvuk pri pokretanju
+Glasnoca Zvucnih Efekata
+Glasnoca Zvuka Pokretanja
+Potvrdi promjenu video nacina?
+Predmemorija Liste Igara (HDD)
+Obavijesti
+Config loaded from %s
+Theme loaded from %s
+Language loaded from %s
+%s partition mounted.
+Opcije
+Postavke igre su spremljene.
+%s postavke su uklonjene.
+Prepisivanje postojecih postavki kompatibilnosti igre kada je omoguceno.
+Nacin Postavki
+Globalno
+Po Igri
+Sve
+Odaberi postavke za ukloniti.
+Support Forums:
+Title
+Žanr
+Izdanje
+Developer
+Opis
+Blok uređaji
+Postavke kontrolera
+Uključi/isključi upravitelj blok uređaja.
+Uključi/isključi blok uređaje (npr. USB).
+USB igre
+iLink igre
+MX4SIO igre
+Konfiguriraj PADMACRO
+Postavke makronaredbi kontrolera
+Makronaredbe kontrolera
+Usporavanje analoga:
+Smanji domet analogne palice kad je tipka pritisnuta
+Lijeva palica
+Desna palica
+Obrni os analoga:
+Obrni os analogne palice
+Brzina turbo tipke
+Koliko brzo pritiskati tipku dok je turbo aktivan
+Dok je tipka pritisnuta
+Uključi/isključi tipkom
+JAPANSKI
+ENGLESKI
+FRANCUSKI
+ŠPANJOLSKI
+NJEMAČKI
+TALIJANSKI
+NIZOZEMSKI
+PORTUGALSKI
+RUSKI
+KOREJSKI
+TRADICIONALNI KINESKI
+POJEDNOSTAVLJENI KINESKI
+OSD postavke
+OSD jezik
+Nametni prilagođeni jezik
+Promijeni jezik
+Veličina slike
+Cijeli zaslon
+Videonačin
+Zadano sustava
+Pozadinska glazba
+Glasnoća pozadinske glazbe
+Zadana glazba teme
+Postavi putanju za reprodukciju glazbe interne teme.
+Visoka
+Niska
+Osjetljivost analoga po osi X
+Osjetljivost analoga po osi Y
+Pronađeno datoteka: %i
+Odabir cheatova
+Dopušten je samo jedan HDD; uključivanje zaključava APA ili GPT.
+Nije moguće zapisati postavke na %s (pogreška %d)
+Pokretanje PS2 diska
+Nema PS2 diska u pogonu.
+Financijska podrška
+Zadano
+Učitavanje postavki...
+Spremno.
+Favoriti
+Favoriti Način pokretanja
+Favorit
+%s nije dopušteno kroz izbornik Favorita.
+%s nije dopušteno dok je stavka označena kao favorit.
+Advanced Arguments
+Advanced
+Artwork Settings
+Primijeni VCD BDMA pri pokretanju
+BDMA Način
+BDMA Settings
+BDMA Izvor
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Loader Core
+Brzina animacije
+Broj naslovnica
+Zatamni bočne naslovnice
+Razmjer središta
+Coverflow Postavke
+Zadana jezgra učitavača
+Display
+PS2RD Cheat Image
+.tar arhiva omota
+Pregledavaj mape u popisu igara
+Game Launching
+Game List Settings
+Game Sources
+Uklj.: prije pokretanja automatski postavlja na memorijsku karticu odgovarajući exFAT upravljački program pokrenutog VCD-a (preporučeno). Isklj.: upravljajte ručno pomoću izbornika BDMA Source/Mode ispod.
+exFAT upravljački program blok-uređaja koji POPSTARTER učitava. Promjenom se moduli kopiraju na karticu; FAT32 = nije potrebno (ugrađeni upravljački program).
+Uređaj čija POPS mapa sadrži vaše BDMAssault upravljačke datoteke (usbd.irx.* / usbhdfsd.irx.*).
+Globalno zadano jezgro za igre čije je pojedinačno Loader Core postavljeno na Default. <OPL> je izvorno jezgro; Neutrino povezuje vanjski neutrino.elf. Odabir po igri uvijek nadjačava ovo.
+Primijeni gotovu PS2RD .img zakrpu na svoju igru.
+Prikaži podmape CD/DVD-a kao stavke za pregled -- odaberi za otvaranje, odustani za povratak
+Naredba za prelaz na bootcard šalje se odabranom utoru/utorima pri IGR
+ISKLJ. može pomoći performansama ali može uzrokovati zamrzavanje pri MMCE timeoutu
+Niže vrijednosti mogu poboljšati performanse ali uzrokovati nestabilnosti
+Samo Neutrino -- popravak igara koje prekoračuju IOP međuspremnik (-gc=7)
+Dodatne Neutrino zastavice, odvojene razmacima (npr. -mt=dvd). Globalno vrijedi za sve igre; po igri dodaje na vrh. Prefiks zastavice s $ onemogućuje je bez brisanja.
+Prisili Neutrinov datotečni sustav blok-uređaja (-bsdfs). Auto = zadano po uređaju. hdl/bd su stručne opcije; upari ih s odgovarajućim -dvd= u argumentima pokretanja ako oblik automatske putanje ne odgovara.
+Uređaj koji sadrži neutrino.elf (u mapi NEUTRINO/ ili neutrino/). Auto pretražuje mc0 pa mc1.
+Ispravak zamjene polja za igre koje se tresu ili trgaju pod prisilnim Neutrino Video načinom. Potreban je postavljen Neutrino Video način.
+Prisili Neutrino GS izlazni video način (-gsm). Isklj. zadržava zadano igre.
+Uređaj s POPS/POPSTARTER.ELF za pokretanje PS1 VCD-a. Zadano = uređaj za pokretanje (cwd), zatim vlastiti uređaj VCD-a. Custom otkriva polje za slobodan unos putanje.
+Prilagođena POPSTARTER.ELF putanja; tiho se vraća na POPS mapu uređaja ako je prazna/nedostaje. Tipkovnica ograničena na 31 znak; dulje putanje putem settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Kratka vibracija pri pomicanju pokazivača, potvrdi ili povratku -- treba DualShock u analognom načinu
+Prikaži samo disk 1 PS1 igre s više diskova u popisima uređaja (POPSLoader stil). Skriva datoteke nazvane (Disc 2), (CD 2) itd. Svi diskovi ostaju na kartici za zamjenu tijekom igre; Favoriti se ne filtriraju.
+Samo kozmetički -- sakrij vodeći prefiks ID-a igre (npr. SLUS_005.51.) iz naziva u PS1/VCD popisima. Nazivi bez ID-a prikazuju se kakvi jesu. Ne mijenja pokretanje, naslovnicu ni favorite.
+Pokreni bez VMC-a ovog utora, a da mu kartica ostane konfigurirana. Samo Neutrino pokretanja; igra tada koristi stvarnu karticu u tom utoru.
+Interface
+Network
+MMCE
+IGR Utor kartice za pokretanje
+MMCE Način pokretanja
+MMCE Predputanja
+MMCE Utor
+Koristi alarme vremenskog ograničenja
+Ciklusi čekanja nakon /ACK low
+Mode 7
+ATA0 Slika (-ata0)
+ATA0 ID (-ata0id)
+ATA1 Slika (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Konfiguracija (-cfg)
+Radni direktorij (-cwd)
+Boje za otklanjanje pogrešaka (-dbc)
+Pokretački ELF (-elf)
+Dodatni argumenti
+PS2 logo (-logo)
+Brzo pokretanje (-qb)
+Mrežni protokol
+Neutrino Argumenti pokretanja
+Neutrino datotečni sustav
+Neutrino Defaults
+Neutrino Uređaj
+Neutrino GSM kompatibilnost
+Neutrino Video
+OSD Defaults
+Path Prefixes
+Path Settings
+Boja miješanja plazme
+POPStarter
+Uređaj za POPSTARTER.ELF
+POPSTARTER.ELF Putanja
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Vibracija kontrolera u izbornicima
+Security
+Storage and Cache
+Tools
+Samo prvi disk (višediskovni PS1)
+Sakrij PS1 ID igre (VCD popis)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+Onemogući VMC 1 (zadrži karticu)
+Onemogući VMC 2 (zadrži karticu)
+Nijedno
+Malo
+Veliko
+Normalno
+Controller
+Audio
+Neutrino ne može pokrenuti s ovog uređaja -- pokretanje prekinuto.
+Neutrino mrežna konfiguracija (bsd toml) nedostaje ili se ne može zapisati -- pokretanje prekinuto, provjeri neutrino mapu.
+VMC datoteka za igru nije pronađena -- pokrećem bez nje (igra koristi svoju stvarnu karticu).
+Uređaj igre
+Neutrino ne podržava ovaj format datoteke, pokretanje s jezgrom <OPL>
+Neutrino ELF nije pronađen, pokretanje s jezgrom <OPL>
+Previše fragmentirano za Neutrino (%d fragmenata, ograničenje %d uklj. VMC-e) -- umjesto toga pokušavam s OPL jezgrom.
+BDMA datoteke modula nisu pronađene na izvornom uređaju.
+Nema dovoljno prostora na memorijskoj kartici za BDMA module.
+Greška pri zapisivanju BDMA modula na memorijsku karticu.
+UDPBD zahtijeva statičku PS2 IP adresu. Postavite je u mrežnoj konfiguraciji (DHCP je trenutno uključen).
+Ponovno pokrenite OPL da biste primijenili promjenu protokola mrežnog pokretanja.
+UDPFS uključen -- otvori novu UDPFS karticu i pritisni Potvrdi za spajanje. PC strana pokreće udpfsd -fsroot <games folder>.
+Mrežni blok-uređaj uključen -- njegova kartica pojavljuje se kad PC poslužitelj odgovori (udpfsd -bdpath za UDPFS Image, udpbd-server za UDPBD).
+Previše fragmentirano za Neutrino (%d fragmenata, ograničenje %d uklj. VMC-e) -- defragmentiraj na PC-u; pokretanje prekinuto.
+UDPFS igre
+Mrežne (UDP) igre mogu se pokrenuti samo putem jezgre Neutrino. Provjerite je li neutrino.elf prisutan i podržava li se format.
+PS1 (.VCD) igre ne mogu se pokrenuti s mrežnog uređaja.
+MX4SIO i emulacija kontrolera dijele sabirnicu SIO2 pa se igra možda neće pokrenuti.
+MMCE card switch not confirmed -- launching anyway
+UDPFSBD igre
+UDPBD Games
+Učitavanje upravljačkih programa pohrane...
+Učitavanje USB upravljačkog programa pohrane...
+Nedostaje POPSTARTER.ELF
+Nedostaju POPSTARTER SMB preduvjeti
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+Prikazuju se VCD igre
+Prikazuju se disk igre
+Pretraživanje USB / kartice / mrežnih pogona...
+Pokretanje mreže...
+Pretraživanje HDD-a...
+USB
+MX4SIO
+MMCE
+Interni HDD
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Nije moguće zapisati POPSTARTER mrežnu konfiguraciju na memorijsku karticu.
+Ova postavka se ne koristi s Neutrino jezgrom.
+Onemogući sve
+Učitavanje zvukova teme...
+Izrada izbornika...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Memorijska kartica nije pronađena -- postavke se ne mogu spremiti. OPL je pokrenut s mrežnog uređaja, čije postavke moraju biti na lokalnoj kartici.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Opće postavke
+Postavke uređaja
+MMCE Games
+Napredno
+MMCE Postavke
+Metoda zaključavanja Sema reda
+THFIFO može poboljšati kompatibilnost ali narušiti performanse
+Spremi POPSTARTER mrežnu konfiguraciju
+Spremi ove IP + SMB vrijednosti i u POPSTARTER-ove IPCONFIG.DAT / SMBCONFIG.DAT na memorijskoj kartici (za VCD-over-SMB).
+Neutrino ELF Putanja
+Puna putanja do neutrino.elf (npr. mc0:NEUTRINO/neutrino.elf). Prazno = automatsko otkrivanje na mc0/mc1.
+Pretraživanje memorijskih kartica...
+Priprema MMCE ID-a igre...
+UDPFS pristup
+MMCE GameID nije primijenjen -- neutrino.elf je na ovoj kartici (promjena bi izbacila Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+VCD postavke

@@ -1,0 +1,527 @@
+# Danish translation by BongKris, updated by Mufhin
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Danish
+Gem indstillinger
+Tilbage
+Netværksindstillinger
+Avancerede indstillinger
+<ingen værdi>
+Indstillinger gemt til %s
+Fejl ved lagering af indstillinger!
+Afslut
+Indstillinger
+Menu
+BDM-spil
+HDD-spil
+ETH-spil
+Programmer
+Tema
+Sprog
+Systemet slukkes.
+Vend tilbage til Browser?
+Annuller opdatering?
+%d: Inget harddisk drev fundet
+%d: Harddisk drevet er ikke formateret
+%d: Netværksopstart fejl
+%d: Ingen netværksadapter fundet
+%d: Kan ikke oprette forbindelse til SMB-serveren
+%d: Kan ikke logge på SMB-server
+%d: Kan ikke åbne SMB-mappe
+%d: Kan ikke liste SMB-mapper
+%d: Kan ikke liste spil
+%d: DHCP-serveren er ikke tilgængelig
+%d: Ingen netværksforbindelse
+Til
+Fra
+OK
+Vælg
+Annuller
+Cirkel
+Kryds
+Spilliste
+Spilindst.
+Fjern indstillinger
+Scrolling
+Langsom
+Medium
+Hurtig
+Standardmenu
+Indlæs fra disk
+Vent venligst
+Fejl ved indlæsning af spil-ID
+Automatisk sortering
+Fejl ved indlæsning af sprogfil
+Fejlfindingsfarver
+Ingen controller registreret, venter…
+Coveromslag
+Widescreen-format
+Sluk
+Indlæser indstillinger
+Gemmer indstillinger
+Start enhed
+Genindlæs
+BDM Start Mode
+HDD-enhed starttilstand
+ETH-enhed starttilstand
+Programmenu starttilstand
+Automatisk
+Manuel
+Start NBD-server
+NBD-server starter…
+NBD-server aktiv…
+Kunne ikke starte NBD-server.
+NBD-server lukker ned…
+IGR-sti
+Baggrundsfarve
+Tekstfarve
+- SMB-server -
+IP-metode
+Statisk
+DHCP
+IP-adresse
+Adresse
+Undernetmaske
+Gateway
+DNS-server
+Port
+Mappe
+Brugernavn
+Adgangskode
+<ikke specificeret>
+Adressetype
+IP
+NetBIOS
+Acceptér
+Elementet vil slettets permanent, fortsæt?
+Omdøb
+Slet
+Kør
+Skærmindstillinger
+Skrivehandlinger
+Husk sidst spillede spil
+Select-knap
+Fejl: spillet er fragmenteret
+Fejl: kunne ikke køre elementet
+Test ændringer
+Efterlad tom for gæstekonto
+Korrekt læsning
+Synkroniseringstilstand
+Frigiv syscalls
+Skip videoer
+Emuler DVD-DL
+Deaktiver IGR
+Ændring af størrelsen vil omformatere VMC
+Opret
+Start
+Modificer
+Afbryd
+Nulstil
+Brug generisk
+Konfigurér VMC
+Navn
+Størrelse
+Status
+Fremskridt
+VMC-fil eksisterer allerede
+Ugyldig VMC-fil, størrelse er ukorrekt
+VMC-fil skal oprettes
+Fejl med VMC %s, fortsæt med fysisk MC (port %d)?
+Automatisk opdatering
+Om
+Kodere
+Kvalitetstestere
+BDM-præfiks sti
+Starter brugerdefineret ELF efter en IGR
+Værdi i minuttet(r), 0 for at deaktivere spindown
+Automatisk harddisk-spindown
+Videotilstand
+Dialogfarve
+Markeringsfarve
+Gendan farver
+Info
+Brugerdefineret ELF
+Farvevalg
+Genopret forbindelse
+Efterlad tom for at liste mapper
+ETH-præfikssti
+Tilbage
+Mellemrum
+Indtast
+Tilstand
+VMC-port 1
+VMC-port 2
+Spil-ID
+DMA-tilstand
+V-Sync
+Tilstand 1
+Tilstand 2
+Tilstand 3
+Tilstand 4
+Tilstand 5
+Tilstand 6
+Konfigurér GSM
+Ethernet-hastighed og duplex
+100Mbit full-duplex
+100Mbit half-duplex
+10Mbit full-duplex
+10Mbit half-duplex
+GSM-indstillinger
+GSM-vælger
+Slå GSM til eller fra
+Tvungen brugerdefineret skærmtilstand
+Horisontal position
+Horisontal justering
+Vertikal position
+Vertikal justering
+Overscan
+Overscan-justering
+Vis ikke FMV
+Springer over Full Motion-videoer
+Snydeindstillinger
+PS2RD-snydemotor
+Tillad PS2RD Cheat Engine at patche dine spil
+PS2RD Cheat Engine-tilstand
+Auto-vælg eller Vælg spilsnydekoder
+Auto-vælg spilsnydekoder
+Vælg spilsnydekoder
+Fejl: Kunne ikke indlæses fil med snydekoder
+Ingen snydekoder fundet
+Hent standardindstillinger
+Netværksopdatering
+Overskriv eksisterende data
+Opdatering mislykkedes.
+Kan ikke oprette forbindelse til server.
+Opdatering fuldendt.
+Opdatering annulleret.
+Hent indstillinger fra netværket?
+Brugerdefinerede indstillinger
+Hent standardindstillinger
+Auto-start om %i s…
+Auto-start
+Værdi i sekunder(s), 0 for at deaktivere auto-start
+PS2-logo
+Vises kun med et gyldigt disklogo, som matcher konsollens region
+Konfigurér PADEMU
+Pad Emulator-indstillinger
+Controlleremulator
+Slå Pad Emulator Til/Fra for valgte spil.
+Pad Emulator-tilstand
+Vælg Pad Emulator-tilstand.
+DualShock3/4 USB
+DualShock3/4 BT
+indstillinger for port:
+Vælg Pad Emulator-port for indstillinger.
+Emulering
+Slå Pad Emulator Til/Fra for valgte port.
+Vibration
+Slå vibration Til/Fra for valgte Pad Emulator-port.
+USB-bluetooth adapter MAC-adresse:
+DS controller parret med MAC-adresse:
+Parring
+Pardan DS controller
+Pardan DS controller med bluetooth-adapters MAC-adresse.
+Ikke tilsluttet
+Bluetooth-adapteroplysninger
+Viser mere information og understøttede funktioner
+HCI Version:
+LMP Version:
+Fabrikant ID:
+Understøttede funktioner:
+Ja
+Nej
+Bluetooth-adapter skal være fuldt kompatibel med DS3/DS4 controllere.
+Bluetooth-adapter fungerer muligvis ikke korrekt med DS3/DS4 controllere.
+Multitap Emulation
+Slå Multitap-emulering Til/Fra for valgte spil.
+Multitap Emulator på port
+Vælg port til Multitap-emulering.
+Falsk DS3-løsning
+Some fake DS3s need a workaround, this option will enable it.
+Emuler FIELD flipping
+Fikser spil der har fejl ved progressive video-tilstand.
+Forældrelås-indstillinger
+Forældrelås-adgangskode
+Efterlad blankt for at deaktivere forældrelås.
+Indtast forældrelås-adgangskode
+Forældrelås-adgangskode ikke korrekt.
+Forældrelås-adgangskode deaktiveret.
+Build-muligheder:
+Fejl - adgangskoden kan ikke anvendes.
+VMC %s fil er fragmenteret. Fortsæt med Memory Card i indgang %d?
+Lydindstillinger
+Lydeffekter
+Opstartslyd
+Lydeffekter-volumen
+Opstartslyd-volumen
+Bekræft skift af videotilstand?
+Cache spillisten (HDD)
+Notifikationer
+Config loaded from %s
+Theme loaded from %s
+Language loaded from %s
+%s partition mounted.
+Indstillinger
+Spilindstillinger gemt.
+%s indstillinger fjernet.
+Overskriv eksisterende indstillinger for spilkompatibilitet når aktiveret.
+Indstillingstilstand
+Globalt
+Per spil
+Alle
+Vælg indstiller der skal fjernes.
+Supportfora:
+Titel
+Genre
+Udgivelse
+Udvikler
+Beskrivelse
+Blokenheder
+Controller-indstillinger
+Slå Block Device Manager til/fra.
+Slå blokenheder til/fra (f.eks. USB).
+USB-spil
+iLink-spil
+MX4SIO-spil
+Konfigurer PADMACRO
+Pad-makroindstillinger
+Pad-makroer
+Analog nedbremsning:
+Reducer det analoge stiks rækkevidde, når knappen trykkes ned
+Venstre stik
+Højre stik
+Analog akse-invertering:
+Inverter det analoge stiks akse
+Turboknaphastighed
+Hvor hurtigt knappen trykkes, når turbo er aktiv
+Mens knappen holdes nede
+Skiftes med knappen
+JAPANSK
+ENGELSK
+FRANSK
+SPANSK
+TYSK
+ITALIENSK
+HOLLANDSK
+PORTUGISISK
+RUSSISK
+KOREANSK
+TRADITIONELT KINESISK
+FORENKLET KINESISK
+OSD-indstillinger
+OSD-sprog
+Gennemtving en tilpasset sprogindstilling
+Skift sprog
+Skærmstørrelse
+Fuld skærm
+Videotilstand
+Systemstandard
+Baggrundsmusik
+Baggrundsmusikkens lydstyrke
+Standard temamusik
+Angiv sti til streaming af musik til internt tema.
+Høj
+Lav
+Følsomhed analog X-akse
+Følsomhed analog Y-akse
+Filer fundet: %i
+Snydevalg
+Kun én HDD tilladt; aktivering låser APA eller GPT.
+Kunne ikke skrive indstillinger til %s (fejl %d)
+Start PS2-disk
+Ingen PS2-disk i drevet.
+Økonomisk støtte
+Standard
+Indlæser indstillinger...
+Klar.
+Favoritter
+Favorit-starttilstand
+Favorit
+%s er ikke tilladt via Favoritmenuen.
+%s er ikke tilladt, mens elementet er markeret som favorit.
+Advanced Arguments
+Advanced
+Artwork Settings
+Anvend VCD BDMA ved start
+BDMA-tilstand
+BDMA Settings
+BDMA-kilde
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Loader-kerne
+Animationshastighed
+Coverantal
+Dæmp sidecovers
+Centersskala
+Coverflow-indstillinger
+Standard Loader Core
+Display
+PS2RD Cheat-billede
+.tar-arkiv med omslag
+Gennemse mapper i spillisten
+Game Launching
+Game List Settings
+Game Sources
+Til: udstyrer automatisk den startede VCD's matchende exFAT-driver på hukommelseskortet før start (anbefales). Fra: håndtér det selv med BDMA-kilde/tilstand-vælgerne nedenfor.
+exFAT-blokenhedsdriveren POPSTARTER indlæser. Ændring kopierer modulerne til kortet; FAT32 = ingen (indbygget driver).
+Enhed hvis POPS-mappe indeholder dine BDMAssault-driverfiler (usbd.irx.* / usbhdfsd.irx.*).
+Global standardkerne for spil, hvis Loader Core pr. spil er sat til Default. <OPL> er den native kerne; Neutrino kæder den eksterne neutrino.elf. Et valg pr. spil tilsidesætter altid dette.
+Anvend et færdigbygget PS2RD .img-patch på dit spil.
+Vis undermapper på CD/DVD som mapper til gennemsyn -- vælg for at åbne, annuller for at gå tilbage
+Skift til bootcard-kommando sendes til det/de valgte slot(s) ved IGR
+FRA kan hjælpe ydeevne, men MMCE-timeouts kan medføre frysninger
+Lavere værdier kan forbedre ydeevne, men medføre ustabilitet
+Kun Neutrino -- ret spil der overskrider en IOP-buffer (-gc=7)
+Ekstra Neutrino-flag, mellemrumsadskilt (f.eks. -mt=dvd). Global gælder alle spil; per spil tilføjes ovenpå. Præfiks et flag med $ for at deaktivere det uden at slette det.
+Fremtving Neutrinos blokenheds-filsystem (-bsdfs). Auto = standard pr. enhed. hdl/bd er ekspertindstillinger; kombinér dem med et matchende -dvd= i startargumenterne, hvis den automatiske stiform ikke passer.
+Enhed med neutrino.elf (i en NEUTRINO/ eller neutrino/ mappe). Auto søger mc0 og derefter mc1.
+Field-flipping-rettelse for spil, der ryster eller flænser under en fremtvunget Neutrino Video-tilstand. Kræver en Neutrino Video-tilstand indstillet.
+Tving Neutrinos GS-outputvideotilstand (-gsm). Fra bevarer spillets standard.
+Enhed med POPS/POPSTARTER.ELF til start af PS1-VCD'er. Standard = startenhed (cwd) derefter VCD'ens egen enhed. Tilpasset viser et frit stifelt.
+Brugerdefineret POPSTARTER.ELF-sti; falder stille tilbage til enhedens POPS-mappe hvis tom/manglende. Tastatur begrænset til 31 tegn; længere stier via settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Kort vibration ved flytning af markøren, bekræftelse eller tilbage -- kræver en DualShock i analog tilstand
+Vis kun disk 1 af et PS1-spil med flere diske i enhedslisterne (POPSLoader-stil). Skjuler filer med navne som (Disc 2), (CD 2) osv. Alle diske forbliver på kortet til skift under spil; Favoritter filtreres ikke.
+Kun kosmetisk -- skjul et indledende spil-ID-præfiks (f.eks. SLUS_005.51.) fra navne i PS1/VCD-listen. Navne uden et ID vises som de er. Ændrer ikke start, cover-art eller favoritter.
+Start uden denne plads' VMC, mens dens kort forbliver konfigureret. Kun Neutrino-start; spillet bruger derefter det rigtige kort i den plads.
+Interface
+Network
+MMCE
+IGR-opstartskortstik(s)
+MMCE-starttilstand
+MMCE-præfiksti
+MMCE-slot
+Brug timeout-alarmer
+Ventetakter efter /ACK lav
+Mode 7
+ATA0-billede (-ata0)
+ATA0-id (-ata0id)
+ATA1-billede (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Konfig (-cfg)
+Arbejdsmappe (-cwd)
+Fejlfindingsfarver (-dbc)
+Start-ELF (-elf)
+Ekstra argumenter
+PS2-logo (-logo)
+Hurtig start (-qb)
+Netværksprotokol
+Neutrino-startargumenter
+Neutrino-filsystem
+Neutrino Defaults
+Neutrino-enhed
+Neutrino GSM-kompatibilitet
+Neutrino-video
+OSD Defaults
+Path Prefixes
+Path Settings
+Plasma-blandingsfarve
+POPStarter
+POPSTARTER.ELF-enhed
+POPSTARTER.ELF-sti
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Controllervibration i menuer
+Security
+Storage and Cache
+Tools
+Kun første disk (fler-disk PS1)
+Skjul PS1-spil-ID (VCD-liste)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+Deaktiver VMC 1 (behold kort)
+Deaktiver VMC 2 (behold kort)
+Ingen
+Lille
+Stor
+Normal
+Controller
+Audio
+Neutrino kan ikke starte fra denne enhed -- start afbrudt.
+Neutrino-netværkskonfiguration (bsd toml) mangler eller kan ikke skrives -- start afbrudt, tjek neutrino-mappen.
+VMC-fil pr. spil blev ikke fundet -- starter uden den (spillet bruger sit rigtige kort).
+Spillets enhed
+Neutrino understøtter ikke dette filformat, starter med <OPL>-kernen
+Neutrino ELF ikke fundet, starter med <OPL>-kernen
+For fragmenteret til Neutrino (%d fragmenter, grænse %d inkl. VMC'er) -- prøver OPL-kernen i stedet.
+BDMA-modulfiler ikke fundet på kildeenheden.
+Ikke nok hukommelseskortplads til BDMA-modulerne.
+Fejl ved skrivning af BDMA-moduler til hukommelseskortet.
+UDPBD kræver en statisk PS2 IP. Indstil én i Netværkskonfiguration (DHCP er aktivt).
+Genstart OPL for at anvende ændringen af netværksstartprotokollen.
+UDPFS til -- åbn den nye UDPFS-fane og tryk på Bekræft for at forbinde. På PC-siden køres udpfsd -fsroot <games folder>.
+Netværksblokenhed til -- dens fane vises, når PC-serveren svarer (udpfsd -bdpath for UDPFS Image, udpbd-server for UDPBD).
+For fragmenteret til Neutrino (%d fragmenter, grænse %d inkl. VMC'er) -- defragmentér på pc'en; start afbrudt.
+UDPFS-spil
+Netværksspil (UDP) kan kun starte via Neutrino-kernen. Kontrollér, at neutrino.elf findes, og at formatet understøttes.
+PS1-spil (.VCD) kan ikke startes via netværksenheden.
+MX4SIO og controller-emulering deler SIO2-bussen, og spillet starter måske ikke.
+MMCE card switch not confirmed -- launching anyway
+UDPFSBD-spil
+UDPBD Games
+Indlæser lagerdrivere...
+Indlæser USB-lagerdriver...
+Mangler POPSTARTER.ELF
+Mangler POPSTARTER SMB-forudsætninger
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+Viser VCD-spil
+Viser diskspil
+Scanner USB / kort / netværksdrev...
+Starter netværk...
+Scanner HDD...
+USB
+MX4SIO
+MMCE
+Intern HDD
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Kunne ikke skrive POPSTARTER-netværkskonfig til hukommelseskortet.
+Denne indstilling bruges ikke med Neutrino-kernen.
+Deaktiver alle
+Indlæser temalyde...
+Bygger menu...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Intet hukommelseskort fundet -- indstillinger kan ikke gemmes. OPL blev startet fra en netværksenhed, hvis indstillinger skal ligge på et lokalt kort.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Generelle indstillinger
+Enhedsindstillinger
+MMCE-spil
+Avanceret
+MMCE-indstillinger
+Lås sema-kømetode
+THFIFO kan hjælpe kompatibilitet, men forringe ydeevne
+Skriv POPSTARTER-netværkskonfig
+Gem også disse IP + SMB-delingsværdier til POPSTARTERs egne IPCONFIG.DAT / SMBCONFIG.DAT på hukommelseskortet (til VCD over SMB).
+Neutrino ELF-sti
+Fuld sti til neutrino.elf (f.eks. mc0:NEUTRINO/neutrino.elf). Tom = auto-søg på mc0/mc1.
+Scanner hukommelseskort...
+Aktiverer MMCE-spil-ID...
+UDPFS-adgang
+MMCE GameID ikke anvendt -- neutrino.elf er på dette kort (skift ville udlæse Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+VCD-indstillinger

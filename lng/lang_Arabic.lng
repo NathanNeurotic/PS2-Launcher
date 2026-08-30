@@ -1,0 +1,527 @@
+# Arabic Translation by LightWave - @http://psx-scene.com/forums/members/lightwave/
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Arabic
+تثبيت التغييرات
+العودة
+تثبيت و اعداد الشبكة
+اعدادات متقدمة
+<لا يوجد قيم>
+Settings saved to %s
+هناك مشكلة في حفظ التغييرات
+الخروج
+الاعدادات
+القائمة الرئيسية
+العاب BDM
+العاب HDD
+لعاب ETH
+برامج
+تيمات
+لغات
+سيتم ايقاف تشغيل النظام
+Exit to Browser?
+الغاء التحديث ?
+%d: لم يتم العثور على القرص الصلب
+%d: القرص المضغوط غير منسق
+%d: هناك مشكل في اعداد الشبكة
+%d: لم يتم العثور على محول الشبكة
+%d: لا يمكن التواصل مع خدمة SMB
+%d: لا يمجن التسجيل في خدمة SMB
+%d: لا يمكن فتح حصة SMB
+%d: لا يمكن فتح قائمة حصص SMB
+%d: لا يمكن فتح قائمة الالعاب
+%d: السيرفر DHCP غير موجود
+%d: لا يوجد اتصال في الشبكة
+اشغال
+ايقاف
+تم
+اختيار
+الغاء
+دائرة
+ضرب
+قائمة الالعاب
+اعدادات اللعبة
+Remove Settings
+التمرير
+ثقيل
+متوسط
+سريع
+القائمة الافتراضية
+شحن من القرص
+يرجى الانتظار
+هناك مشكل في شحن هوية اللعبة
+الفرز الاوتوماتيكي
+هناك مشكل  في شحن ملف اللغات
+ألوان التصحيح
+لم يتم وجود على وحدة التحكم
+صورة الغلاف
+شاشة واسعة
+ايقاف
+شحن الاعدادات
+حفظ الاعدادات
+تشغيل الجهاز
+اعادة تنشيط
+BDM Start Mode
+طريقة تشغيل الجهاز HDD
+طريقة تشغيل الجهاز ETH
+طريقة تشغيل الجهاز البرامج
+تلقائي
+يدوي
+تشغيل الخادم NBD
+بداية تشغسل الخادم NBD …
+الخادم NBD في حالة تشغيل …
+لم يتم تشغسل الخادم NBD
+تفريغ الخادم NBD …
+مكان IGR
+لون الخلفية
+لون الكتابة
+- السيرفر SMB -
+نوع عنوان الي بي
+ساكن
+DHCP
+عنوان الاي بي
+العنوان
+القناع
+البوابة
+السيرفرDNS
+المحطة
+الحصص
+المستخدم
+كلمة السر
+<غير مضبوط>
+نوع العنوان
+اي بي
+NetBIOS
+قبول
+سيتم حذفه نهائيا ةهل ستكمل?
+تغيير الاسم
+حذف
+تشغيل
+اعدادات العرض
+عمليات الكتابة
+التذكير باخر لعبة
+زر الاختيار
+اللعبة مجزئة
+غير ممكن تشغيل العنوان
+Test Changes
+ترك الفراغ لGUEST
+قراءة دقيقة
+الطريقة المتزامنة
+حل Syscalls
+Skip videos
+تقليد DVD-DL
+الغاء IGR
+تغيير الحجم يؤدي الى حذف ال VMC
+صنع
+بدء
+تغيير
+الغاء
+إعادة تعيين
+استخدام عام
+اعداد VMC
+الاسم
+الحجم
+الحالة
+التقدم
+ملف VMC موجود
+ملف فاسد , حجمه غير صحيح
+يجب صنع ملف VMC
+Error accessing VMC %s. Continue with the Memory Card in slot %d?
+تحديث اوتوماتيكي
+معلومات حول …
+المبرمجون
+ضمان الجودة
+مكان بادئة BDM
+Boots Custom ELF after an IGR
+النسبة في الدقيقة, 0 للالغاء التدوير باستمرار
+الدوران المستمر الاوتوماتيكي لل HDD
+طريقة الفيديو
+لون الكتابة
+اللون المختار
+Reset Colors
+المعلومات
+تخصيص ELF
+اختيار الالوان
+اعادة الاتصال
+ترك الفراغ لادراج الملفات المقسمة
+مكان بادئة ETH
+الرجوع
+فراغ
+دخول
+طريقة
+فتحة VMC 1
+فتحة VMC 2
+هوية اللعبة
+DMA طريقة
+مزامنة اوتوماتيكية
+طريقة 1
+طريقة 2
+طريقة 3
+طريقة 4
+طريقة 5
+طريقة 6
+اعداداتGSM
+طريقة صلة الايثرنيت
+100Mbit full-duplex
+100Mbit half-duplex
+10Mbit full-duplex
+10Mbit half-duplex
+اعداداتGSM
+محدد GSM
+تبديل GSM ON او OFF
+اجبار طريقة الشاشة المستبدلة
+موضع افقي
+تعديل افقي
+موضع عمودي
+تعديل عمودي
+تجاوز المسح
+Overscan Adjustment
+تخطي FMV
+بتخطى FMV
+اعدادات قائمة الغش
+محرك الغش PS2RD
+تدع PS2RD لتصحيح الالعاب
+PS2RD
+اختيار اوتوماتيكي او اختيار قائمة الغش
+اختيار اوتوماتيكي لقائمة الغش للالعاب
+اختيار قائمة الغش للالعاب
+هنك مشكلة في شحن ملف الغش
+لا يوجد قائمة الغش لهذه اللعبة
+تحميل الافتراضيات
+التحديث عن طريق الشبكة
+Overwrite Existing Records
+فشل التحديث
+فشل في الاتصال بسيرفر التحديث
+انتهى التحديث
+الغي التحديث
+تحميل الاعدادات من الانترنيت ?
+اعدادات مغيرة
+تحميل الافتراضيات
+البدء%i الاوتوماتيكي في  ثانية…
+البدء الاوتوماتيكي
+النسبة في الدقيقة, 0 للالغاء التدوير باستمرار
+PS2 Logo
+(Only displayed for a valid disc logo which matches the console's region)
+Controller Emulation
+Pad Emulator Settings
+محاكي وحدة التحكم
+Turns on/off PadEmulator for selected game.
+Pad Emulator mode
+Select Pad Emulator mode.
+DualShock3/4 USB
+DualShock3/4 BT
+Settings for port:
+Select Pad Emulator port for settings.
+المحاكاة
+Turns on/off Pad Emulator for selected port.
+الاهتزاز
+Turns on/off vibration for Pad Emulator selected port.
+Usb bluetooth adapter mac address:
+DS Controller paired to mac address:
+Pair
+Pair DS Controller
+Pair DS Controller with bluetooth adapter mac address.
+Not connected
+Bluetooth adapter information
+Shows more information and supported features
+HCI Version:
+LMP Version:
+Manufacturer ID:
+Support features:
+Yes
+No
+Bluetooth adapter should be fully compatible with DS3/DS4 controllers.
+Bluetooth adapter may not work correctly with DS3/DS4 controllers.
+Multitap emulation
+Turns on/off Multitap emulation for selected game.
+Multitap emulator on port
+Select port for Multitap emulation.
+حل بديل لـ DS3 المزيف
+Some fake DS3s need a workaround, this option will enable it.
+Emulate FIELD flipping
+Fix for games that glitch under progressive video modes.
+Parental Lock Settings
+Parental Lock Password
+Leave blank to disable the parental lock.
+Enter Parental Lock Password
+Parental lock password incorrect.
+Parental lock disabled.
+Build Options:
+Error - this password cannot be used.
+VMC %s file is fragmented. Continue with Memory Card in slot %d?
+Audio Settings
+المؤثرات الصوتية
+صوت الإقلاع
+Sound Effects Volume
+Boot Sound Volume
+Confirm video mode change?
+Cache Game List (HDD)
+الإشعارات
+Config loaded from %s
+Theme loaded from %s
+Language loaded from %s
+%s partition mounted.
+الخيارات
+Game settings saved.
+%s settings removed.
+Overwrites existing game compatibility settings when enabled.
+Settings Mode
+عام
+Per Game
+All
+Select settings to remove.
+Support Forums:
+Title
+النوع
+الإصدار
+Developer
+الوصف
+أجهزة التخزين الكتلية
+إعدادات وحدة التحكم
+تشغيل/إيقاف مدير الأجهزة الكتلية (BDM).
+تشغيل/إيقاف الأجهزة الكتلية (مثل USB).
+ألعاب USB
+ألعاب iLink
+ألعاب MX4SIO
+إعداد PADMACRO
+إعدادات ماكرو وحدة التحكم
+ماكرو وحدة التحكم
+إبطاء الأنالوج:
+تقليل مدى العصا الأنالوج عند الضغط على الزر
+العصا اليسرى
+العصا اليمنى
+عكس محور الأنالوج:
+عكس محور العصا الأنالوج
+سرعة زر التيربو
+مدى سرعة الضغط على الزر عند تفعيل التيربو
+أثناء الضغط على الزر
+يُبدَّل بالزر
+اليابانية
+الإنجليزية
+الفرنسية
+الإسبانية
+الألمانية
+الإيطالية
+الهولندية
+البرتغالية
+الروسية
+الكورية
+الصينية التقليدية
+الصينية المبسطة
+إعدادات OSD
+لغة OSD
+فرض إعداد لغة مخصص
+تغيير اللغة
+حجم الشاشة
+ملء الشاشة
+وضع الفيديو
+الإعداد الافتراضي للنظام
+موسيقى الخلفية
+مستوى موسيقى الخلفية
+موسيقى السمة الافتراضية
+تحديد مسار بث الموسيقى للسمة الداخلية.
+مرتفع
+منخفض
+حساسية المحور X التناظري
+حساسية المحور Y التناظري
+الملفات الموجودة: %i
+اختيار الغش
+يُسمح بقرص صلب HDD واحد فقط، وتفعيله يقفل APA أو GPT.
+تعذّر كتابة الإعدادات إلى %s (خطأ %d)
+تشغيل قرص PS2
+لا يوجد قرص PS2 في المحرك.
+الدعم المالي
+افتراضي
+جارٍ تحميل الإعدادات...
+جاهز.
+المفضلة
+وضع بدء المفضلة
+مفضلة
+%s غير مسموح به عبر قائمة المفضلة.
+%s غير مسموح به بينما العنصر محدد كمفضلة.
+Advanced Arguments
+Advanced
+Artwork Settings
+تطبيق VCD BDMA عند التشغيل
+وضع BDMA
+BDMA Settings
+مصدر BDMA
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+نواة المُشغِّل
+سرعة الحركة
+عدد الأغلفة
+تعتيم الأغلفة الجانبية
+مقياس المركز
+إعدادات Coverflow
+نواة التحميل الافتراضية
+Display
+صورة غش PS2RD
+أرشيف أغلفة .tar
+تصفح المجلدات في قائمة الألعاب
+Game Launching
+Game List Settings
+Game Sources
+تشغيل: تجهيز مشغّل exFAT المطابق لـ VCD المُشغَّل تلقائيًا على بطاقة الذاكرة قبل الإقلاع (مُوصى به). إيقاف: أدِرها بنفسك عبر محدِّدَي المصدر/الوضع لـ BDMA أدناه.
+مشغّل كتلة exFAT الذي يُحمِّله POPSTARTER. تغييره ينسخ الوحدات إلى البطاقة؛ FAT32 = لا شيء (مشغّل مدمج).
+الجهاز الذي يحتوي مجلد POPS على ملفات مشغّل BDMAssault (usbd.irx.* / usbhdfsd.irx.*).
+النواة الافتراضية العامة للألعاب التي تكون فيها نواة المُحمِّل (Loader Core) لكل لعبة مضبوطة على الافتراضي. <OPL> هي النواة الأصلية؛ وتقوم Neutrino بتسلسل neutrino.elf الخارجي. يتجاوز اختيار كل لعبة هذا الخيار دائماً.
+تطبيق تصحيح PS2RD .img مسبق البناء على لعبتك.
+عرض المجلدات الفرعية لأقراص CD/DVD كعناصر قابلة للتصفح؛ اختر للفتح، وألغِ للرجوع
+سيتم إرسال أمر التبديل إلى بطاقة البدء للفتحة (الفتحات) المحددة عند IGR
+قد يساعد الإيقاف على الأداء لكنه قد يتسبب في تجميد MMCE عند انتهاء المهلة
+القيم المنخفضة قد تحسن الأداء لكنها قد تسبب عدم الاستقرار
+Neutrino فقط -- إصلاح الألعاب التي تتجاوز مخزن IOP (-gc=7)
+أعلام Neutrino إضافية مفصولة بمسافة (مثال -mt=dvd). العامة تُطبَّق على جميع الألعاب؛ الخاصة بالعبة تُضاف فوقها. ضع $ قبل العلم لتعطيله دون حذفه.
+فرض نظام ملفات جهاز الكتل الخاص بـ Neutrino (-bsdfs). تلقائي = الافتراضي لكل جهاز. الخياران hdl/bd خياران للخبراء؛ اقرنهما بخيار -dvd= مطابق في وسائط التشغيل إذا كان شكل المسار التلقائي غير مناسب.
+الجهاز الذي يحتوي على neutrino.elf (في مجلد NEUTRINO/ أو neutrino/). الاكتشاف التلقائي يفحص mc0 ثم mc1.
+إصلاح بقلب الحقول للألعاب التي تهتز أو تتمزق تحت وضع فيديو Neutrino مفروض. يتطلب ضبط وضع فيديو Neutrino.
+فرض وضع فيديو GS لـ Neutrino (-gsm). إيقاف يبقي الإعداد الافتراضي للعبة.
+الجهاز الذي يحتوي على POPS/POPSTARTER.ELF لتشغيل PS1 VCD. الافتراضي = جهاز الإقلاع (cwd) ثم جهاز VCD نفسه. المخصص يُظهر مسارًا نصيًا حرًا.
+مسار POPSTARTER.ELF مخصص؛ يعود تلقائياً إلى مجلد POPS في الجهاز إذا كان فارغاً أو مفقوداً. لوحة المفاتيح محدودة بـ 31 حرفاً؛ المسارات الأطول عبر settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+اهتزاز قصير عند تحريك المؤشر أو التأكيد أو الرجوع -- يتطلب ذراع DualShock في الوضع التناظري
+إظهار القرص 1 فقط من لعبة PS1 متعددة الأقراص في قوائم الأجهزة (بأسلوب POPSLoader). يخفي الملفات المسماة (Disc 2) و(CD 2) وما إلى ذلك. تبقى كل الأقراص على البطاقة للتبديل أثناء اللعب؛ ولا تتم تصفية المفضلة.
+تجميلي فقط -- إخفاء بادئة مُعرِّف اللعبة (مثل SLUS_005.51.) من أسماء قوائم PS1/VCD. تُعرض الأسماء التي لا تحتوي على مُعرِّف كما هي. لا يُغيِّر التشغيل أو صورة الغلاف أو المفضلة.
+التشغيل دون VMC الخاص بهذه الفتحة مع الإبقاء على بطاقتها مُهيَّأة. يخص تشغيل Neutrino فقط؛ عندها تستخدم اللعبة البطاقة الحقيقية في تلك الفتحة.
+Interface
+Network
+MMCE
+فتحة (فتحات) بطاقة بدء IGR
+وضع بدء MMCE
+مسار بادئة MMCE
+فتحة MMCE
+استخدام منبهات المهلة
+دورات الانتظار بعد /ACK منخفض
+Mode 7
+صورة ATA0 (-ata0)
+معرّف ATA0 (-ata0id)
+صورة ATA1 (-ata1)
+تلقائي: -bsd -dvd -gc -gsm -mc -dbc -logo
+ملف الإعداد (-cfg)
+المجلد الحالي (-cwd)
+ألوان التصحيح (-dbc)
+ELF التشغيل (-elf)
+وسيطات إضافية
+شعار PS2 (-logo)
+بدء سريع (-qb)
+بروتوكول الشبكة
+وسيطات تشغيل Neutrino
+نظام ملفات Neutrino
+Neutrino Defaults
+جهاز Neutrino
+توافق GSM مع Neutrino
+فيديو Neutrino
+OSD Defaults
+Path Prefixes
+Path Settings
+لون مزج البلازما
+POPStarter
+جهاز POPSTARTER.ELF
+مسار POPSTARTER.ELF
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+اهتزاز وحدة التحكم في القوائم
+Security
+Storage and Cache
+Tools
+القرص الأول فقط (PS1 متعدد الأقراص)
+إخفاء معرّف لعبة PS1 (قائمة VCD)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+تعطيل VMC 1 (مع الإبقاء على البطاقة)
+تعطيل VMC 2 (مع الإبقاء على البطاقة)
+لا شيء
+صغير
+كبير
+عادي
+Controller
+Audio
+لا يمكن لـ Neutrino الإطلاق من هذا الجهاز -- تم إلغاء الإطلاق.
+إعداد شبكة Neutrino (bsd toml) مفقود أو غير قابل للكتابة -- أُلغي التشغيل، تحقق من مجلد neutrino.
+لم يُعثر على ملف VMC الخاص باللعبة -- يتم التشغيل بدونه (تستخدم اللعبة بطاقتها الحقيقية).
+جهاز اللعبة
+Neutrino لا يدعم هذا التنسيق، يتم التشغيل بنواة <OPL>
+لم يُعثر على Neutrino ELF، يتم التشغيل بنواة <OPL>
+مُجزَّأ أكثر من اللازم لـ Neutrino (%d من الأجزاء، الحد %d بما في ذلك VMCs) -- تتم تجربة نواة OPL بدلاً من ذلك.
+لم تُوجد ملفات وحدة BDMA على الجهاز المصدر.
+مساحة بطاقة الذاكرة غير كافية لوحدات BDMA.
+خطأ في كتابة وحدات BDMA على بطاقة الذاكرة.
+يتطلب UDPBD عنوان IP ثابتاً لـ PS2. عيّنه في إعدادات الشبكة (DHCP مفعّل حالياً).
+أعد تشغيل OPL لتطبيق تغيير بروتوكول الإقلاع عبر الشبكة.
+UDPFS مُفعَّل -- افتح علامة تبويب UDPFS الجديدة واضغط تأكيد للاتصال. يقوم جانب الكمبيوتر بتشغيل udpfsd -fsroot <games folder>.
+جهاز الكتل الشبكي مُفعَّل -- تظهر علامة تبويبه بمجرد أن يستجيب خادم الكمبيوتر (udpfsd -bdpath لصورة UDPFS، وudpbd-server لـ UDPBD).
+مُجزَّأ أكثر من اللازم لـ Neutrino (%d من الأجزاء، الحد %d بما في ذلك VMCs) -- قم بإلغاء التجزئة على الكمبيوتر؛ أُلغي التشغيل.
+ألعاب UDPFS
+ألعاب الشبكة (UDP) لا تعمل إلا عبر نواة Neutrino. تأكد من وجود neutrino.elf ومن دعم الصيغة.
+لا يمكن تشغيل ألعاب PS1 (.VCD) عبر جهاز الشبكة.
+يشترك MX4SIO ومحاكاة اليد في ناقل SIO2 وقد تفشل اللعبة في الإقلاع.
+MMCE card switch not confirmed -- launching anyway
+ألعاب UDPFSBD
+UDPBD Games
+جارٍ تحميل مشغلات التخزين...
+جارٍ تحميل مشغل تخزين USB...
+POPSTARTER.ELF مفقود
+متطلبات POPSTARTER SMB مفقودة
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+عرض ألعاب VCD
+عرض ألعاب الأقراص
+جارٍ فحص أقراص USB / البطاقة / الشبكة...
+جارٍ بدء الشبكة...
+جارٍ فحص HDD...
+USB
+MX4SIO
+MMCE
+قرص صلب داخلي
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+تعذّرت كتابة إعدادات شبكة POPSTARTER على بطاقة الذاكرة.
+هذا الإعداد غير مستخدم مع نواة Neutrino.
+تعطيل الكل
+جارٍ تحميل أصوات السمة...
+جارٍ بناء القائمة...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+لم يُعثر على بطاقة ذاكرة -- تعذّر حفظ الإعدادات. تم تشغيل OPL من جهاز شبكي، ويجب أن تُحفظ إعداداته على بطاقة محلية.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+الإعدادات العامة
+إعدادات الجهاز
+MMCE Games
+متقدم
+إعدادات MMCE
+طريقة قائمة انتظار Lock Sema
+قد يساعد THFIFO في التوافق لكنه قد يضعف الأداء
+كتابة إعدادات شبكة POPSTARTER
+احفظ قيم IP + SMB أيضاً في IPCONFIG.DAT / SMBCONFIG.DAT الخاصة بـ POPSTARTER على بطاقة الذاكرة (لـ VCD عبر SMB).
+مسار Neutrino ELF
+المسار الكامل لـ neutrino.elf (مثال mc0:NEUTRINO/neutrino.elf). فارغ = اكتشاف تلقائي على mc0/mc1.
+جارٍ فحص بطاقات الذاكرة...
+جارٍ تجهيز معرّف لعبة MMCE...
+وصول UDPFS
+لم يُطبَّق MMCE GameID -- ملف neutrino.elf موجود على هذه البطاقة (تبديلها سيُلغي تحميل Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+إعدادات VCD

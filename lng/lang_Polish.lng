@@ -1,0 +1,527 @@
+# Wersja 0.26. W większości przetłumaczone przez dragolice. Ponownie tłumaczyć "próbowali" Jolek & KaiQ. Podziękowania dla Haker120, misiozola i innych z Forum CDRinfo.pl ("https://forum.cdrinfo.pl/f30/") za pomoc i sugestie.
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Polski
+Zapisz Zmiany
+Wróć
+Ustawienia Sieci
+Opcje Zaawansowane
+<nie ustawiono>
+Ustawienia zapisane na %s
+Błąd zapisu ustawień!
+Wyjdź
+Ustawienia
+Menu
+Gry BDM
+Gry HDD
+Gry ETH
+Aplikacje
+Motyw
+Język
+System zostanie wyłączony.
+Czy chcesz wyjść z programu?
+Przerwać aktualizację?
+%d: Nie wykryto dysku twardego.
+%d: Dysk twardy nie jest sformatowany.
+%d: Wystąpił błąd podczas uruchamiania sieci.
+%d: Nie wykryto Network Adaptora.
+%d: Nie można połączyć się z serwerem SMB.
+%d: Nie można zalogować się do serwera SMB.
+%d: Nie można otworzyć udziału SMB.
+%d: Nie można wyświetlić udziałów SMB.
+%d: Nie można wyświetlić gier.
+%d: Niedostępny Serwer DHCP.
+%d: Brak połączenia sieciowego.
+Włącz
+Wyłącz
+OK
+Wybierz
+Anuluj
+O
+X
+Lista Gier
+Ustawienia Gry
+Usuń Ustawienia
+Szybkość Przewijania
+Wolno
+Średnio
+Szybko
+Domyślne Menu
+Załaduj Z Dysku
+Proszę czekać.
+Błąd podczas ładowania identyfikatora gry.
+Automatyczne Sortowanie
+Błąd ładowania pliku językowego.
+Wyświetl Kolory Debugowania
+Nie wykryto kontrolera, oczekiwanie…
+Okładki
+Szeroki Ekran
+Wyłącz
+Wczytywanie ustawień…
+Zapisywanie ustawień…
+Uruchom Urządzenie
+Odśwież
+Uruchom BDM
+Uruchom HDD
+Uruchom ETH
+Wyświetl Menu Aplikacji
+Automatyczny
+Ręcznie
+Uruchom Serwer NBD
+Uruchamianie Serwera NBD…
+Serwer NBD uruchomiony…
+Nieudane uruchomienie serwera NBD.
+Serwer NBD zostanie zamknięty…
+Ścieżka Dla IGR
+Kolor Tła
+Kolor Tekstu
+- Serwer SMB -
+Typ Adresu IP
+Statyczny
+DHCP
+Adres IP
+Adres
+Maska
+Brama
+Serwer DNS
+Port
+Udostępniany Folder
+Użytkownik
+Hasło
+<nie ustawiono>
+Typ Adresu
+IP
+NetBIOS
+Akceptuj
+Element zostanie trwale usunięty, kontynuować?
+Zmień Nazwę
+Usuń
+Uruchom
+Ustawienia Obrazu
+Operacja Zapisu
+Zapamiętaj Ostatnio Uruchomioną Grę
+Przycisk Wyboru
+Błąd, gra jest pofragmentowana.
+Błąd, nie można uruchomić pozycji.
+Testuj Zmiany
+Pozostaw puste dla "GOŚCIA".
+Dokładny Odczyt
+Tryb Synchroniczny
+Odepnij wywołania systemowe
+Pomiń Wstawki Filmowe
+Emuluj DVD-DL
+Wyłącz IGR
+Zmiana rozmiaru spowoduje przeformatowanie VMC.
+Utwórz
+Start
+Modyfikuj
+Przerwij
+Reset
+Użyj Ogólnie
+Konfiguruj VMC
+Nazwa
+Rozmiar
+Status
+Postęp
+Plik VMC istnieje.
+Błędny plik VMC, nieprawidłowy rozmiar.
+Plik VMC musi zostać utworzony.
+Błąd dostępu do VMC %s, kontynuuj z kartą pamięci w gnieździe %d?
+Automatyczne Odświeżanie
+O Programie
+Programiści
+Kontrola Jakości
+Prefix Ścieżki BDM
+Uruchom wybrany ELF po IGR.
+Wartość w minutach, 0 dla dezaktywacji.
+Automatyczne Zwalnianie Obrotów HDD
+Tryb Wideo
+Kolor Ustawień
+Kolor Zaznaczenia
+Zresetuj Kolory
+Informacje
+Alternatywny ELF
+Wybór Koloru
+Połącz Ponownie
+Pozostaw puste aby wyświetlić listę udziałów.
+Prefix Ścieżki ETH
+Cofnij
+Odstęp
+Enter
+Tryb
+Gniazdo VMC 1
+Gniazdo VMC 2
+Identyfikator Gry
+Tryb DMA
+V-Sync
+Tryb 1
+Tryb 2
+Tryb 3
+Tryb 4
+Tryb 5
+Tryb 6
+Konfiguruj GSM
+Szybkość I Tryb Sieci
+100Mbit Pełny-dupleks
+100Mbit Pół-dupleks
+10Mbit Pełny-dupleks
+10Mbit Pół-dupleks
+Ustawienia GSM
+Selektor GSM
+Włącz lub wyłącz GSM.
+Wymuś określony tryb wyświetlania.
+Położenie Poziome
+Regulacja w poziomie.
+Położenie Pionowe
+Regulacja w pionie.
+Overscan
+Regulacja overscanu.
+Pomiń FMV
+Pomija wstawki filmowe.
+Ustawienia Kodów
+Silnik Kodów PS2RD
+Pozwól silnikowi kodów PS2RD patchować grę.
+Tryb Silnika Kodów PS2RD
+Auto-wybieranie lub wybieranie kodów dla gry.
+Auto-wybieranie Kodów
+Wybierz Kody Dla Gry
+Błąd: Nie udało się załadować pliku z kodami.
+Nie znaleziono kodów.
+Pobierz Domyślne
+Aktualizacja Sieciowa
+Nadpisz Istniejące Zapisy
+Aktualizacja nie powiodła się.
+Nie udało się połączyć z serwerem aktualizacji.
+Aktualizacja zakończona.
+Aktualizacja przerwana.
+Pobrać ustawienia z sieci?
+Dodatkowe Ustawienia
+Pobrano domyślne.
+Auto start w %i s…
+Auto Start
+Wartość w sekundach, 0 wyłącza auto start.
+Logo PS2
+Logo zostanie wyświetlone wyłącznie jeśli region gry i konsoli będzie taki sam.
+Konfiguracja Emulacji Pada
+Ustawienia Emulacji Pada
+Emulacja Pada
+Włącza/wyłącza emulację Pada dla wybranej gry.
+Tryb Emulacji Pada
+Wybierz tryb emulacji Pada.
+DualShock3/4 USB
+DualShock3/4 BT
+Ustawienia Portu:
+Wybierz Port emulacji Pada dla ustawień.
+Emulacja
+Włącz/wyłącz emulację Pada dla wybranego portu.
+Wibracje
+Włącz/wyłącz wibracje dla wybranego portu emulacji Pada.
+Adres MAC adaptera Bluetooth USB:
+Kontroler DS sparowany z adresem MAC:
+Paruj
+Paruj Kontroler DS
+Paruj kontroler DS z adresem mac adaptera bluetooth.
+Nie Podłączony
+Informacje O Adapterze Bluetooth
+Wyświetla więcej informacji i obsługiwane funkcje.
+Wersja HCI:
+Wersja LMP:
+Identyfikator Producenta:
+Wspierane Funkcje:
+Tak
+Nie
+Adapter Bluetooth powinien być w pełni kompatybilny z kontrolerami DS3/DS4.
+Adapter Bluetooth może nie współpracować poprawnie z kontrolerami DS3/DS4.
+Emulacja Multitapa
+Włącza/wyłącza emulację Multitapa dla wybranej gry.
+Emulacja Multitapa Dla Portu:
+Wybierz port dla emulacji Multitapa.
+Poprawka Dla Klonów DS3
+Niektóre klony DS3 wymagają programowej poprawki, ta opcja ją włączy\wyłączy.
+Emuluj FIELD Flipping
+Poprawka dla gier w których występują usterki w trybie progresywnego obrazu.
+Ustawienia Blokady Rodzicielskiej
+Hasło Blokady Rodzicielskiej
+Pozostaw puste aby wyłączyć blokadę rodzicielską.
+Wprowadź Hasło Blokady Rodzicielskiej
+Nieprawidłowe hasło blokady rodzicielskiej.
+Blokada rodzicielska wyłączona.
+Opcje Kompilacji:
+Błąd - to hasło nie może być użyte.
+Plik VMC %s jest pofragmentowany. Kontynuuj z kartą pamięci w gnieździe %d?
+Ustawienia Dźwiękowe
+Efekty Dźwiękowe
+Dźwięk Startowy
+Głośność Efektów Dźwiękowych
+Głośność Dźwięku Startowego
+Potwierdasz zmianę rozdzielczości?
+Buforowanie Listy Gier (HDD)
+Powiadomienia
+Ustawienia załadowane z %s
+Motyw załadowany z %s
+Język załadowany z %s
+Zamontowano partycję %s.
+Opcje
+Ustawienia gry zostały zapisane.
+%s ustawienia zostały usunięte.
+Po włączeniu nadpisuje istniejące ustawienia kompatybilności z grami.
+Tryb Ustawień
+Globalne
+Dla Danej Gry
+Wszystkie
+Wybierz ustawienia do usunięcia.
+Wsparcie:
+Tytuł
+Gatunek
+Data wydania
+Deweloper
+Opis
+Urządzenia Blokowe
+Ustawienia Kontrolera
+Włącz/wyłącz menedżera urządzeń blokowych.
+Włącz/wyłącz urządzenia blokowe (np. USB).
+Gry USB
+Gry iLink
+Gry MX4SIO
+Konfiguracja makr pada
+Ustawienia makr pada
+Makra pada
+Spowolnienie analoga:
+Zmniejsz zakres drążka kiedy przycisk jest wciśnięty
+Lewy analog
+Prawy analog
+Odwróć oś analoga:
+Odwróć oś drążka analogowego
+Szybkość turbo
+Jak szybko naciskać przycisk kiedy turbo jest aktywne
+Kiedy wciśnięty
+Wciśnięcie przełącza
+JAPOŃSKI
+ANGIELSKI
+FRANCUSKI
+HISZPAŃSKI
+NIEMIECKI
+WŁOSKI
+HOLENDERSKI
+PORTUGALSKI
+ROSYJSKI
+KOREAŃSKI
+CHIŃSKI TRADYCYJNY
+CHIŃSKI UPROSZCZONY
+Ustawienia OSD
+Język OSD
+Wymuś niestandardową konfigurację języka
+Zmień język
+Rozmiar ekranu
+Pełny ekran
+Tryb wideo
+Domyślne systemu
+Muzyka w tle
+Głośność muzyki w tle
+Domyślna muzyka motywu
+Ustaw ścieżkę strumieniowania muzyki dla wbudowanego motywu.
+Wysoka
+Niska
+Czułość osi X analoga
+Czułość osi Y analoga
+Znaleziono plików: %i
+Wybór kodów
+Dozwolony tylko jeden HDD; włączenie blokuje APA lub GPT.
+Nie można zapisać ustawień do %s (błąd %d)
+Uruchom dysk PS2
+Brak dysku PS2 w napędzie.
+Wsparcie finansowe
+Domyślny
+Wczytywanie ustawień...
+Gotowe.
+Ulubione
+Tryb startowy ulubionych
+Ulubiona
+%s nie jest dozwolone w Menu ulubionych.
+%s nie jest dozwolone, gdy element jest oznaczony jako ulubiony.
+Advanced Arguments
+Advanced
+Artwork Settings
+Zastosuj VCD BDMA przy starcie
+Tryb BDMA
+BDMA Settings
+Źródło BDMA
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Rdzeń programu ładującego
+Prędkość animacji
+Liczba okładek
+Przyciemnij boczne okładki
+Skala środkowa
+Ustawienia Coverflow
+Domyślny rdzeń ładowania
+Display
+Obraz cheatów PS2RD
+Archiwum .tar okładek
+Przeglądaj foldery na liście gier
+Game Launching
+Game List Settings
+Game Sources
+Wł.: automatycznie instaluje pasujący sterownik exFAT uruchamianego VCD na karcie pamięci przed startem (zalecane). Wył.: zarządzaj tym samodzielnie za pomocą selektorów Źródło/Tryb BDMA poniżej.
+Sterownik urządzenia blokowego exFAT ładowany przez POPSTARTER. Zmiana kopiuje moduły na kartę; FAT32 = brak (wbudowany sterownik).
+Urządzenie, w którego folderze POPS znajdują się pliki sterownika BDMAssault (usbd.irx.* / usbhdfsd.irx.*).
+Globalny domyślny rdzeń dla gier, których rdzeń ładujący na grę ustawiono na Domyślny. <OPL> to rdzeń natywny; Neutrino łączy zewnętrzny neutrino.elf. Wybór na grę zawsze to nadpisuje.
+Zastosuj gotową łatkę PS2RD .img do swojej gry.
+Pokazuj podfoldery CD/DVD jako pozycje do przeglądania, wybierz aby otworzyć, anuluj aby cofnąć
+Polecenie przełączenia na kartę startową zostanie wysłane do wybranych gniazd przy IGR
+WYŁ może poprawić wydajność, ale może powodować zamrożenie przy timeoutach MMCE
+Niższe wartości mogą poprawić wydajność, ale powodować niestabilność
+Tylko Neutrino -- naprawia gry powodujące przepełnienie bufora IOP (-gc=7)
+Dodatkowe flagi Neutrino, oddzielone spacjami (np. -mt=dvd). Globalne dotyczą wszystkich gier; dla gry dodawane na wierzch. Poprzedź flagę $ aby ją wyłączyć bez usuwania.
+Wymuś system plików urządzenia blokowego Neutrino (-bsdfs). Auto = domyślnie zależnie od urządzenia. hdl/bd to opcje eksperckie; sparuj je z pasującym -dvd= w argumentach uruchamiania, jeśli automatyczny kształt ścieżki nie pasuje.
+Urządzenie zawierające neutrino.elf (w folderze NEUTRINO/ lub neutrino/). Auto skanuje mc0, potem mc1.
+Poprawka przełączania pól dla gier, które drżą lub rwą się przy wymuszonym trybie wideo Neutrino. Wymaga ustawionego trybu wideo Neutrino.
+Wymuś tryb wyjścia wideo GS Neutrino (-gsm). Wył. zachowuje domyślny tryb gry.
+Urządzenie z POPS/POPSTARTER.ELF do uruchamiania VCD z PS1. Domyślnie = urządzenie startowe (cwd), następnie własne urządzenie VCD. Niestandardowe odsłania pole ścieżki.
+Niestandardowa ścieżka POPSTARTER.ELF; przy pustej/brakującej cofa się do folderu POPS urządzenia. Klawiatura ograniczona do 31 znaków; dłuższe ścieżki przez settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Krótka wibracja przy przesuwaniu kursora, zatwierdzaniu lub cofaniu -- wymaga DualShocka w trybie analogowym
+Pokazuj tylko Dysk 1 wielopłytowej gry PS1 na listach urządzeń (styl POPSLoader). Ukrywa pliki o nazwach (Disc 2), (CD 2) itd. Wszystkie płyty pozostają na karcie do zmiany w trakcie gry; Ulubione nie są filtrowane.
+Tylko kosmetyczne -- ukryj wiodący prefiks ID gry (np. SLUS_005.51.) w nazwach list PS1/VCD. Nazwy bez ID są pokazywane bez zmian. Nie zmienia uruchamiania, okładek ani ulubionych.
+Uruchom bez VMC tego gniazda, zachowując skonfigurowaną kartę. Tylko uruchomienia Neutrino; gra używa wtedy prawdziwej karty w tym gnieździe.
+Interface
+Network
+MMCE
+Gniazdo(a) karty startowej IGR
+Tryb startowy MMCE
+Ścieżka prefiksu MMCE
+Gniazdo MMCE
+Używaj alarmów timeout
+Cykle oczekiwania po /ACK niskim
+Tryb 7
+Obraz ATA0 (-ata0)
+ID ATA0 (-ata0id)
+Obraz ATA1 (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Konfiguracja (-cfg)
+Katalog roboczy (-cwd)
+Kolory debugowania (-dbc)
+ELF rozruchowy (-elf)
+Dodatkowe argumenty
+Logo PS2 (-logo)
+Szybki rozruch (-qb)
+Protokół sieciowy
+Argumenty uruchamiania Neutrino
+System plików Neutrino
+Neutrino Defaults
+Urządzenie Neutrino
+Zgodność Neutrino GSM
+Wideo Neutrino
+OSD Defaults
+Path Prefixes
+Path Settings
+Kolor mieszania plazmy
+POPStarter
+Urządzenie POPSTARTER.ELF
+Ścieżka POPSTARTER.ELF
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Wibracje kontrolera w menu
+Security
+Storage and Cache
+Tools
+Tylko pierwszy dysk (wielopłytowe PS1)
+Ukryj ID gry PS1 (lista VCD)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+Wyłącz VMC 1 (zachowaj kartę)
+Wyłącz VMC 2 (zachowaj kartę)
+Brak
+Małe
+Duże
+Normalne
+Controller
+Audio
+Neutrino nie może uruchomić z tego urządzenia -- uruchamianie przerwane.
+Konfiguracja sieciowa Neutrino (bsd toml) brakuje lub jest niezapisywalna -- uruchamianie przerwane, sprawdź folder neutrino.
+Nie znaleziono pliku VMC dla gry -- uruchamianie bez niego (gra używa prawdziwej karty).
+Urządzenie gry
+Neutrino nie obsługuje tego formatu pliku, uruchamianie przez rdzeń <OPL>
+Nie znaleziono ELF Neutrino, uruchamianie przez rdzeń <OPL>
+Zbyt pofragmentowane dla Neutrino (%d fragmentów, limit %d wraz z VMC) -- próba użycia rdzenia OPL zamiast tego.
+Nie znaleziono plików modułu BDMA na urządzeniu źródłowym.
+Za mało miejsca na karcie pamięci dla modułów BDMA.
+Błąd zapisu modułów BDMA na kartę pamięci.
+UDPBD wymaga statycznego IP dla PS2. Ustaw je w Konfiguracji sieci (DHCP jest aktualnie włączone).
+Uruchom ponownie OPL, aby zastosować zmianę protokołu uruchamiania sieciowego.
+UDPFS włączone -- otwórz nową zakładkę UDPFS i naciśnij Potwierdź, aby połączyć. Po stronie PC uruchamiane jest udpfsd -fsroot <games folder>.
+Sieciowe urządzenie blokowe włączone -- jego zakładka pojawia się, gdy serwer PC odpowie (udpfsd -bdpath dla obrazu UDPFS, udpbd-server dla UDPBD).
+Zbyt pofragmentowane dla Neutrino (%d fragmentów, limit %d wraz z VMC) -- zdefragmentuj na PC; uruchamianie przerwane.
+Gry UDPFS
+Gry sieciowe (UDP) uruchamiają się tylko przez rdzeń Neutrino. Sprawdź, czy plik neutrino.elf istnieje i czy format jest obsługiwany.
+Gry PS1 (.VCD) nie mogą być uruchamiane przez urządzenie sieciowe.
+MX4SIO i emulacja pada współdzielą magistralę SIO2 i gra może się nie uruchomić.
+MMCE card switch not confirmed -- launching anyway
+Gry UDPFSBD
+Gry UDPBD
+Ładowanie sterowników pamięci...
+Ładowanie sterownika pamięci USB...
+Brak POPSTARTER.ELF
+Brak wymagań SMB dla POPSTARTER
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+Wyświetlanie gier VCD
+Wyświetlanie gier z dysku
+Skanowanie dysków USB / karty / sieci...
+Uruchamianie sieci...
+Skanowanie HDD...
+USB
+MX4SIO
+MMCE
+Wewnętrzny HDD
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Nie można zapisać konfiguracji sieciowej POPSTARTER na kartę pamięci.
+To ustawienie nie jest używane z rdzeniem Neutrino.
+Wyłącz wszystko
+Ładowanie dźwięków motywu...
+Budowanie menu...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Nie znaleziono karty pamięci -- nie można zapisać ustawień. OPL uruchomiono z urządzenia sieciowego, którego ustawienia muszą być na lokalnej karcie.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Ustawienia ogólne
+Ustawienia urządzenia
+Gry MMCE
+Zaawansowane
+Ustawienia MMCE
+Metoda kolejkowania blokady semaforów
+THFIFO może poprawić zgodność, ale pogorszyć wydajność
+Zapisz konfigurację sieciową POPSTARTER
+Zapisz również wartości IP + udziału SMB do własnych plików IPCONFIG.DAT / SMBCONFIG.DAT POPSTARTERa na karcie pamięci (dla VCD przez SMB).
+Ścieżka ELF Neutrino
+Pełna ścieżka do neutrino.elf (np. mc0:NEUTRINO/neutrino.elf). Puste = automatyczne wykrycie na mc0/mc1.
+Skanowanie kart pamięci...
+Uzbrajanie identyfikatora gry MMCE...
+Dostęp UDPFS
+MMCE GameID nie zastosowano -- neutrino.elf jest na tej karcie (zmiana wyładowałaby Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+Ustawienia VCD

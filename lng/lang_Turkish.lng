@@ -1,0 +1,528 @@
+# Turkish translation by Gürkan DEMİR <vampire_bs@hotmail.com> aka: dante
+# Turkish translation by Serdar Sağlam 2021-2023 <teknomobil@msn.com> All translations have been revised and corrected.
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Turkish
+Değişiklikleri Kaydet
+Geri
+Ağ Ayarları
+Gelişmiş Seçenekler
+<değer yok>
+Ayarlar şuraya kaydedildi %s
+Ayarlar yazılırken hata!
+Çıkış
+Ayarlar
+Menü
+BDM Oyunlar
+HDD Oyunlar
+ETH Oyunlar
+Uygulamalar
+Tema
+Dil
+Sistem kapatılsın mı?
+Tarayıcıya dönülsün mü?
+Güncelleme iptal edilsin mi?
+%d: Sabit Disk algılanmadı.
+%d: Sabit Disk biçimlendirilmemiş.
+%d: Ağ başlatma hatası.
+%d: Ağ bağdaştırıcısı algılanmadı.
+%d: SMB sunucusuna bağlanılamıyor.
+%d: SMB sunucusunda oturum açılamıyor.
+%d: SMB paylaşımı açılamıyor.
+%d: SMB paylaşımları listelenemiyor.
+%d: Oyunlar listelenemiyor.
+%d: DHCP sunucusu kullanılamıyor.
+%d: Ağ bağlantısı yok.
+Açık
+Kapalı
+Tamam
+Seç
+İptal
+Daire
+Çarpı
+Oyun Listesi
+Oyun Ayarları
+Ayarları Kaldır
+Kaydırma Hızı
+Yavaş
+Orta
+Hızlı
+Varsayılan Menü
+Diskten Yükle
+Lütfen bekleyin.
+Oyun kimliği yüklenirken hata oluştu.
+Otomatik Sırala
+Dil dosyası yüklenirken hata oluştu.
+Hata Ayıklama Renkleri
+Denetleyici algılanmadı, bekliyor…
+Kapak Resmi
+Geniş Ekran
+Kapat
+Yapılandırma yükleniyor…
+Yapılandırma kaydediliyor…
+Cihazı Başlat
+Yenile
+BDM Başlangıç Kipi
+HDD Başlangıç Kipi
+ETH Başlangıç Kipi
+Uygulama Başlangıç ​​Kipi
+Otomatik
+El ile
+NBD Sunucusunu Başlat
+NBD Sunucusu başlatılıyor…
+NBD Sunucusu çalışıyor…
+NBD Sunucusu başlatılamadı.
+NBD Sunucusu durduruluyor…
+IGR Yolu
+Arkaplan Rengi
+Yazı Rengi
+- SMB Sunucu -
+IP Adresi Türü
+Statik
+DHCP
+IP Adresi
+Adres
+Maske
+Ağ Geçidi
+DNS Sunucu
+Port
+Paylaşım
+Kullanıcı
+Parola
+<ayarlanmadı>
+Adres Türü
+IP
+NetBIOS
+Onayla
+Öge kalıcı olarak silinecek, devam edilsin mi?
+Adlandır
+Sil
+Çalıştır
+Görüntü Ayarları
+İşlemleri Yaz
+Son Oynanan Oyunu Hatırla
+Seç Düğmesi
+Hata, oyun çöktü.
+Hata, öge çalıştırılamadı.
+Değişiklikleri Dene
+Misafir yetkilendirmesi için boş bırakın.
+Doğru Okuma
+Eş Zamanlı Kip
+Sistem Çağrılarını Kaldır
+Videoları Atla
+DVD-DL Etkinleştir
+IGR Devre Dışı
+Boyut değişimi VMC dosyasını yeniden biçimlendirir.
+Oluştur
+Başlat
+Düzenle
+İptal
+Sıfırla
+Genel Kullan
+VMC Yapılandırması
+İsim
+Boyut
+Durum
+İlerleyiş
+VMC dosyası var.
+Geçersiz VMC dosyası, boyut yanlış.
+VMC dosyasının oluşturulması gerekiyor.
+VMC erişim hatası %s. Yuvadaki bellek kartı ile devam edilsin mi %d?
+Otomatik Yenile
+Hakkında
+Kodlayıcılar
+Kalite Güvencesi
+BDM Önek Yolu
+Bir IGR sonrası özel ELF başlatır.
+Dakika olarak değer, iptal etmek için 0 girin.
+Sabit Diski Otomatik Durdur
+Video Kipi
+İletişim Rengi
+Seçim Rengi
+Renkleri Sıfırla
+Bilgi
+Özel ELF
+Renk Seçimi
+Yeniden Bağlan
+Paylaşımları listelemek için boş bırakın.
+ETH Önek Yolu
+Geri Tuşu
+Boşluk Tuşu
+Enter Tuşu
+Kip
+VMC Yuva 1
+VMC Yuva 2
+Oyun ID
+DMA Kipi
+Dikey Eşitleme
+Kip 1
+Kip 2
+Kip 3
+Kip 4
+Kip 5
+Kip 6
+GSM Yapılandırması
+Ethernet Link Kipi
+100Mbit Full-duplex
+100Mbit Half-duplex
+10Mbit Full-duplex
+10Mbit Half-duplex
+GSM Ayarları
+GSM Seçici
+GSM aç/kapat.
+Zorunlu özel görüntüleme kipi.
+Y-POZ
+Yatay pozisyon ayarı.
+D-POZ
+Dikey pozisyon ayarı.
+Aşırı Tarama
+Aşırı tarama ayarı.
+FMV Atla
+Tam hareketli videoları atla.
+Hile Ayarları
+PS2RD Hile Motoru
+PS2RD Hile Motorunun oyun yamalamasına izin verin.
+PS2RD Hile Motoru Kipi
+Oyun hilelerini otomatik olarak girin veya seçin.
+Otomatik Hile Seçimi
+Oyun Hile Seçimi
+Hata: hile dosyası yüklenemedi.
+Hile bulunamadı.
+Varsayılanları İndir
+Ağ Güncellemesi
+Mevcut Kayıtların Üzerine Yaz
+Güncelleme başarısız.
+Güncelleme sunucusuna bağlanılamadı.
+Güncelleme tamamlandı.
+Güncelleme iptal edildi.
+Ayarlar ağdan indirilsin mi?
+Özelleştirilmiş Ayarlar
+İndirilen Varsayılanlar
+%i içinde otomatik başlat…
+Otomatik Başlat
+Otomatik başlatmayı kapatmak için saniye cinsinden değer, 0.
+PS2 Logo
+Konsol bölgesiyle eşleşen mevcut disk logosu görüntülenir.
+Denetleyici Emülatörü Yapılandırması
+Denetleyici Emülatör Ayarları
+Denetleyici Emülatörü
+Seçili oyun için Denetleyici Emülatörü aç/kapat.
+Denetleyici Emülatör Kipi
+Denetleyici Emülatör kipini seçin.
+DualShock3/4 USB
+DualShock3/4 BT
+Port Ayarları:
+Ayarlar için Denetleyici Emülatör portunu seçin.
+Emülatör
+Seçilen port için Denetleyici Emülatörü aç/kapat.
+Titreşim
+Denetleyici Emülatör seçili port için titreşimi aç/kapat.
+USB Bluetooth Adaptörü MAC Adresi:
+MAC İle Eşleştirilmiş DS Denetleyicisi:
+Eşleştir
+DS Denetleyicisini Eşleştir
+DS denetleyicisini Bluetooth adaptörü MAC adresiyle eşleştirin.
+Bağlı Değil
+Bluetooth Adaptör Bilgileri
+Daha fazla bilgi ve desteklenen özellikleri gösterir.
+HCI Sürümü:
+LMP Sürümü:
+Üretici Firma ID:
+Desteklenen Özellikler:
+Evet
+Hayır
+Bluetooth adaptörü, DS3/DS4 denetleyiciler ile tam uyumlu olmalıdır.
+Bluetooth adaptörü, DS3/DS4 denetleyiciler ile düzgün çalışmayabilir.
+Multitap Emülatörü
+Seçili oyun için Multitap Emülatörü aç/kapat.
+Multitap Emülatör Portu:
+Multitap emülatörü için port seçin.
+Sahte DS3 Geçici Çözümü
+Bazı sahte DS3'ler için geçici çözüme ihtiyacı vardır, bu seçenek etkinleştirecektir.
+Alan Çevirme Emülatörü
+Aşamalı video kiplerinde hata veren oyunlar için düzeltme.
+Yetişkin Kilidi Ayarları
+Yetişkin Kilidi Parolası
+Yetişkin kilidini devre dışı bırakmak için boş bırakın.
+Yetişkin Kilidi Parolasını Girin
+Yetişkin kilidi parolası yanlış.
+Yetişkin kilidi devre dışı.
+Yapı Seçenekleri:
+Hata - bu parola kullanılamaz.
+VMC %s dosyası bozulmuş. %d yuvasındaki Bellek Kartı ile devam edilsin mi?
+Ses Ayarları
+Menü Sesi
+Açılış Sesi
+Menü Ses Seviyesi
+Açılış Ses Seviyesi
+Video kipi değişikliği onaylansın mı?
+Oyun Listesi Önbellek (HDD)
+Bildirimler
+Yapılandırma şuradan yüklendi %s
+Tema şuradan yüklendi %s
+Dil şuradan yüklendi %s
+%s bölümü takıldı.
+Seçenekler
+Oyun ayarları kaydedildi.
+%s ayarları kaldırıldı.
+Etkinleştirildiğinde mevcut oyun uyumluluğu ayarlarının üzerine yazar.
+Ayarlar Kipi
+Genel
+Oyuna Özel
+Tümü
+Kaldırılacak ayarları seçin.
+Destek Forumları:
+Başlık
+Tür
+Tarih
+Geliştirici
+Açıklama
+Cihazları Engelle
+Denetleyici Ayarları
+Cihaz Engelleme Yöneticisi aç/kapat.
+Engellenen Cihazları (örn. USB) aç/kapat.
+USB Oyunlar
+iLink Oyunlar
+MX4SIO Oyunlar
+Denetleyici Makro Yapılandırması
+Denetleyici makro ayarları
+Denetleyici makroları
+Analog yavaşlatması:
+Seçilen düğmeye basıldığında analog çubuğun aralığını azaltın
+Sol çubuk
+Sağ çubuk
+Analog eksenini çevir:
+Analog çubuk eksenini ters çevir
+Turbo düğme hızı
+Turbo etkin olduğunda düğmeye ne kadar hızlı basılacağı
+Düğmeye basıldığında
+Düğmeye göre değiştirilir
+JAPONCA
+İNGİLİZCE
+FRANSIZCA
+İSPANYOLCA
+ALMANCA
+İTALYANCA
+FLEMENKÇE
+PORTEKİZCE
+RUSÇA
+KORECE
+GELENEKSEL ÇİNCE
+BASİT ÇİNCE
+OSD AYARLARI
+OSD Dili
+Özel bir dil yapılandırması zorla
+Dili değiştir
+Ekran Boyutu
+Tam Ekran
+Video Modu
+Sistem Varsayılanı
+Fon Müziği
+Fon Müziği Seviyesi
+Varsayılan Tema Müziği
+Dahili tema için müzik akışı yolunu ayarlayın.
+Yüksek
+Düşük
+Analog X Ekseni Hassasiyeti
+Analog Y Ekseni Hassasiyeti
+Bulunan dosyalar: %i
+Hile Seçimi
+Yalnızca bir HDD'ye izin verilir; etkinleştirmek APA veya GPT'yi kilitler.
+Ayarlar %s konumuna yazılamadı (hata %d)
+PS2 Diski Başlat
+Sürücüde PS2 diski yok.
+Mali Destek
+Varsayılan
+Ayarlar yükleniyor...
+Hazır.
+Favoriler
+Favoriler Başlangıç Modu
+Favori
+%s Favoriler Menüsünden erişilemiyor.
+%s, öğe favori olarak işaretliyken kullanılamaz.
+Advanced Arguments
+Advanced
+Artwork Settings
+Başlatmada VCD BDMA Uygula
+BDMA Modu
+BDMA Settings
+BDMA Kaynağı
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Yükleyici Çekirdeği
+Animasyon Hızı
+Kapak Sayısı
+Yan Kapakları Karart
+Merkez Ölçeği
+Coverflow Ayarları
+Varsayılan Yükleyici Çekirdeği
+Display
+PS2RD Hile Görüntüsü
+Kapak resmi .tar arşivi
+Oyun Listesinde Klasörlere Göz At
+Game Launching
+Game List Settings
+Game Sources
+Açık: başlatılan VCD'ye uygun exFAT sürücüsünü önyüklemeden önce hafıza kartına otomatik yerleştir (önerilir). Kapalı: aşağıdaki BDMA Kaynak/Mod seçicileriyle kendiniz yönetin.
+POPSTARTER'ın yüklediği exFAT blok aygıtı sürücüsü. Değiştirmek modülleri karta kopyalar; FAT32 = yok (yerleşik sürücü).
+BDMAssault sürücü dosyalarını (usbd.irx.* / usbhdfsd.irx.*) barındıran POPS klasörünün bulunduğu cihaz.
+Oyuna özel Yükleyici Çekirdeği Default olarak ayarlanmış oyunlar için genel varsayılan çekirdek. <OPL> yerel çekirdektir; Neutrino harici neutrino.elf'i zincirler. Oyuna özel bir seçim bunu her zaman geçersiz kılar.
+Oyununuza önceden derlenmiş bir PS2RD .img yaması uygulayın.
+CD/DVD alt klasörlerini gezilebilir öğeler olarak göster; açmak için seç, geri dönmek için iptal et
+IGR'de seçili yuvalara önyükleme kartı komutu gönderilir
+KAPALI performansı artırabilir ancak MMCE zaman aşımları donmalara neden olabilir
+Düşük değerler performansı artırabilir ancak kararsızlığa yol açabilir
+Yalnızca Neutrino -- IOP arabelleğini aşan oyunları düzeltir (-gc=7)
+Ekstra Neutrino bayrakları, boşlukla ayrılmış (ör. -mt=dvd). Global tüm oyunlara uygulanır; oyun başına üstüne eklenir. Bir bayrağı silmeden devre dışı bırakmak için $ öneki ekleyin.
+Neutrino'nun blok aygıt dosya sistemini zorla (-bsdfs). Auto = aygıta özgü varsayılan. hdl/bd uzman seçenekleridir; otomatik yol yapısı uymuyorsa bunları başlatma argümanlarındaki eşleşen bir -dvd= ile birlikte kullanın.
+neutrino.elf dosyasını barındıran cihaz (NEUTRINO/ veya neutrino/ klasöründe). Otomatik olarak önce mc0, sonra mc1 taranır.
+Zorlanmış bir Neutrino Video modu altında titreyen veya yırtılan oyunlar için alan çevirme düzeltmesi. Ayarlanmış bir Neutrino Video modu gerektirir.
+Neutrino'nun GS çıkış video modunu zorla (-gsm). Kapalı = oyunun varsayılanını kullan.
+PS1 VCD başlatmaları için POPS/POPSTARTER.ELF içeren aygıt. Varsayılan = önyükleme aygıtı (cwd), ardından VCD'nin kendi aygıtı. Özel, serbest metin yolu gösterir.
+Özel POPSTARTER.ELF yolu; boş/eksikse cihazın POPS klasörüne geri döner. Klavye 31 karakterle sınırlıdır; daha uzun yollar için settings_riptopl.cfg kullanın.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+İmleci taşırken, onaylarken veya geri dönerken kısa titreşim -- analog moddaki bir DualShock gerekir
+Cihaz listelerinde çok diskli bir PS1 oyununun yalnızca Disk 1'ini göster (POPSLoader tarzı). (Disc 2), (CD 2) vb. adlı dosyaları gizler. Oyun içi disk değiştirme için tüm diskler kartta kalır; Favoriler filtrelenmez.
+Yalnızca görsel -- PS1/VCD liste adlarından baştaki oyun kimliği önekini (örn. SLUS_005.51.) gizle. Kimliği olmayan adlar olduğu gibi gösterilir. Başlatmayı, kapak resmini veya favorileri değiştirmez.
+Bu yuvanın kartı yapılandırılmış kalırken bu yuvanın VMC'si olmadan başlat. Yalnızca Neutrino başlatmaları; oyun daha sonra o yuvadaki gerçek kartı kullanır.
+Interface
+Network
+MMCE
+IGR Önyükleme Kartı Yuvası
+MMCE Başlangıç Modu
+MMCE Önek Yolu
+MMCE Yuvası
+Zaman aşımı alarmlarını kullan
+/ACK düşüşünden sonra bekleme döngüleri
+Mode 7
+ATA0 Görüntüsü (-ata0)
+ATA0 ID (-ata0id)
+ATA1 Görüntüsü (-ata1)
+Otomatik: -bsd -dvd -gc -gsm -mc -dbc -logo
+Yapılandırma (-cfg)
+Çalışma Dizini (-cwd)
+Hata Ayıklama Renkleri (-dbc)
+Önyükleme ELF (-elf)
+Ekstra Parametreler
+PS2 Logosu (-logo)
+Hızlı Başlatma (-qb)
+Ağ Protokolü
+Neutrino Başlatma Parametreleri
+Neutrino Dosya Sistemi
+Neutrino Defaults
+Neutrino Cihazı
+Neutrino GSM Uyumluluğu
+Neutrino Video
+OSD Defaults
+Path Prefixes
+Path Settings
+Plazma Karışım Rengi
+POPStarter
+POPSTARTER.ELF Aygıtı
+POPSTARTER.ELF Yolu
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Menülerde Kumanda Titreşimi
+Security
+Storage and Cache
+Tools
+Yalnızca ilk disk (çok diskli PS1)
+PS1 Oyun Kimliğini Gizle (VCD listesi)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+VMC 1'i devre dışı bırak (kartı koru)
+VMC 2'yi devre dışı bırak (kartı koru)
+Yok
+Küçük
+Büyük
+Normal
+Controller
+Audio
+Neutrino bu aygıttan başlatılamıyor -- başlatma iptal edildi.
+Neutrino ağ yapılandırması (bsd toml) eksik veya yazılamıyor -- başlatma iptal edildi, neutrino klasörünü kontrol edin.
+Oyuna özel VMC dosyası bulunamadı -- onsuz başlatılıyor (oyun gerçek kartını kullanır).
+Oyunun Aygıtı
+Neutrino bu dosya biçimini desteklemiyor, <OPL> çekirdeğiyle başlatılıyor
+Neutrino ELF bulunamadı, <OPL> çekirdeğiyle başlatılıyor
+Neutrino için fazla parçalanmış (%d parça, sınır %d VMC'ler dahil) -- bunun yerine OPL çekirdeği deneniyor.
+BDMA modül dosyaları kaynak cihazda bulunamadı.
+Hafıza kartında BDMA modülleri için yeterli alan yok.
+BDMA modülleri hafıza kartına yazılırken hata oluştu.
+UDPBD sabit bir PS2 IP adresi gerektirir. Ağ Ayarlarından belirleyin (DHCP şu an açık).
+Ağ önyükleme protokolü değişikliğini uygulamak için OPL'yi yeniden başlatın.
+UDPFS açık -- yeni UDPFS sekmesini aç ve bağlanmak için Onayla'ya bas. PC tarafında udpfsd -fsroot <games folder> çalışır.
+Ağ blok aygıtı açık -- PC sunucusu yanıt verdiğinde sekmesi görünür (UDPFS Image için udpfsd -bdpath, UDPBD için udpbd-server).
+Neutrino için fazla parçalanmış (%d parça, sınır %d VMC'ler dahil) -- PC'de birleştirin; başlatma iptal edildi.
+UDPFS Oyunları
+Ağ (UDP) oyunları yalnızca Neutrino çekirdeğiyle başlatılabilir. neutrino.elf'in mevcut olduğunu ve biçimin desteklendiğini doğrulayın.
+PS1 (.VCD) oyunları ağ aygıtı üzerinden başlatılamaz.
+MX4SIO ile kol emülasyonu SIO2 veri yolunu paylaşır ve oyun başlatılamayabilir.
+MMCE card switch not confirmed -- launching anyway
+UDPFSBD Oyunları
+UDPBD Oyunları
+Depolama sürücüleri yükleniyor...
+USB depolama sürücüsü yükleniyor...
+POPSTARTER.ELF eksik
+POPSTARTER SMB gereksinimleri eksik
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+VCD oyunları gösteriliyor
+Disk oyunları gösteriliyor
+USB / kart / ağ sürücüleri taranıyor...
+Ağ başlatılıyor...
+HDD taranıyor...
+USB
+MX4SIO
+MMCE
+Dahili HDD
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+POPSTARTER ağ yapılandırması hafıza kartına yazılamadı.
+Bu ayar Neutrino çekirdeğiyle kullanılmaz.
+Tümünü Devre Dışı Bırak
+Tema sesleri yükleniyor...
+Menü oluşturuluyor...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Hafıza kartı bulunamadı -- ayarlar kaydedilemez. OPL bir ağ aygıtından başlatıldı, ayarları yerel bir kartta durmalı.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Genel Ayarlar
+Cihaz Ayarları
+MMCE Oyunları
+Gelişmiş
+MMCE Ayarları
+Kilit Sema Sıralama Yöntemi
+THFIFO uyumluluğu artırabilir ancak performansı düşürebilir
+POPSTARTER Ağ Yapılandırmasını Yaz
+Bu IP + SMB paylaşım değerlerini hafıza kartındaki POPSTARTER'ın IPCONFIG.DAT / SMBCONFIG.DAT dosyalarına da kaydet (SMB üzerinden VCD için).
+Neutrino ELF Yolu
+neutrino.elf için tam yol (ör. mc0:NEUTRINO/neutrino.elf). Boş = mc0/mc1 üzerinde otomatik algıla.
+Hafıza kartları taranıyor...
+MMCE oyun kimliği hazırlanıyor...
+UDPFS Erişimi
+MMCE GameID uygulanmadı -- neutrino.elf bu kartta (değiştirmek Neutrino'yu bellekten kaldırır).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+VCD Ayarları

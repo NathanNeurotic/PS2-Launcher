@@ -30,18 +30,33 @@ jobs:
           make clean || true
           make -j$(nproc)
 
-      - name: Prepare Artifacts
+      - name: Package Full Release Bundle
         run: |
-          mkdir -p release
-          cp *.ELF release/ 2>/dev/null || true
-          cp *.elf release/ 2>/dev/null || true
-          if [ -f "release/PS2L.ELF" ]; then
-            cp release/PS2L.ELF release/PS2-Launcher-4.0.0.ELF
+          mkdir -p release/PS2-Launcher
+          
+          # 1. ELFs
+          cp *.ELF release/PS2-Launcher/ 2>/dev/null || true
+          cp *.elf release/PS2-Launcher/ 2>/dev/null || true
+          if [ -f "release/PS2-Launcher/PS2L.ELF" ]; then
+            cp release/PS2-Launcher/PS2L.ELF release/PS2-Launcher/PS2-Launcher-4.0.0.ELF
           fi
-          cd release && zip -r PS2-Launcher-Build.zip .
+
+          # 2. Languages
+          mkdir -p release/PS2-Launcher/lng
+          cp lng/*.lng release/PS2-Launcher/lng/ 2>/dev/null || true
+
+          # 3. Fonts & Assets
+          mkdir -p release/PS2-Launcher/fonts
+          cp thirdparty/*.ttf release/PS2-Launcher/fonts/ 2>/dev/null || true
+
+          # 4. Docs & License
+          cp README.md CREDITS.md LICENSE release/PS2-Launcher/ 2>/dev/null || true
+
+          # 5. Build Final Distribution Zip
+          cd release && zip -r PS2-Launcher-v4.0.0-Release.zip PS2-Launcher
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: PS2-Launcher-ELF
+          name: PS2-Launcher-v4.0.0-Release
           path: release/

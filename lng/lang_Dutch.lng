@@ -1,0 +1,527 @@
+# Dutch translation by PS2Gaming
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Dutch
+Wijzigingen opslaan
+Terug
+Netwerkconfiguratie
+Geavanceerde opties
+<geen waarde>
+Settings saved to %s
+Fout bij schrijven van instellingen!
+Sluiten
+Instellingen
+Menu
+BDM Spellen
+HDD Spellen
+ETH Spellen
+Apps
+Thema's
+Taal
+Het systeem zal worden uitgeschakeld.
+OPL afsluiten?
+Updaten annuleren?
+%d: Harde schijf niet gedetecteerd
+%d: Harde schijf niet geformateerd
+%d: Netwerk startfout
+%d: Geen netwerkadapter gedetecteerd
+%d: Kan niet verbinden met SMB server
+%d: Kan niet inloggen bij SMB server
+%d: Kan SMB-share niet openen
+%d: Kan SMB-shares niet inlijsten
+%d: Kan spellen niet inlijsten
+%d: DHCP server niet beschikbaar
+%d: Geen netwerkconnectie
+Aan
+Uit
+OK
+Select.
+Annuleer
+Cirkel
+Kruis
+Spellenlijst
+Spelinstellingen
+Remove Settings
+Scrollen
+Langzaam
+Normaal
+Snel
+Standaard menu
+Laad vanuit schijf
+Even geduld a.u.b.
+Fout tijdens laden van Spel ID
+Automatisch sorteren
+Fout bij laden van taalbestand
+Debugkleuren
+Geen controller gedetecteerd, wachtend…
+Omslagafbeelding
+Breedbeeld
+Uitschakelen
+Configuratie laden
+Configuratie opslaan
+Start apparaat
+Vernieuwen
+BDM Start Mode
+HDD-apparaat startmodus
+ETH-apparaat startmodus
+Applicaties startmodus
+Auto
+Handmatig
+Start NBD Server
+NBD Server starten…
+NBD Server uitgevoerd…
+Mislukt om NBD Server te starten.
+NBD Server lossen…
+IGR pad
+Achtergrondkleur
+Tekstkleur
+- SMB Server -
+IP-adres type
+Statisch
+DHCP
+IP-adres
+Adres
+Mask
+Gateway
+DNS Server
+Poort
+Deel
+Gebruiker
+Wachtwoord
+<niet ingesteld>
+Adrestype
+IP
+NetBIOS
+Accepteer
+Item zal permanent verwijdert worden, doorgaan?
+Wijzig naam
+Verwijder
+Uitvoeren
+Beeldinstellingen
+Schrijfbewerkingen
+Herinner laatst gespeelde spel
+Selecteerknop
+Foutmelding, het spel is gefragmenteerd
+Foutmelding, kan het item niet uitvoeren
+Test Changes
+Laat leeg voor GUEST auth.
+Accurate reads
+Synchrone modus
+Syscalls loshaken
+Videos overslaan
+Emuleer DVD-DL
+IGR uitschakelen
+Het wijzigen van de grootte zal VMC formatteren
+Creëer
+Start
+Aanpassen
+Afbreken
+Reset
+Gebruik generieke
+Configureer VMC
+Naam
+Groote
+Status
+Voortgang
+VMC-bestand bestaat
+Ongeldige VMC-bestand, grootte is incorrect
+VMC-bestand moet gecreëerd worden
+Fout met VMC %s, voorzetten met fysieke MC (slot %d)?
+Automatisch vernieuwen
+Over
+Coders
+Kwaliteitsgarantie
+BDM-prefix pad
+Start aangepaste ELF na een IGR
+Waarde in minuten, 0 om spin down uit te schakelen
+Automatische HDD spin down
+Videomodus
+Dialoogvensterkleur
+Geselecteerde kleur
+Reset Colors
+Info
+Aangepaste ELF
+Kleurselectie
+Opnieuw verbinden
+Laat leeg om het gedeelde in te lijsten
+ETH-prefix pad
+Backspace
+Space
+Enter
+Modus
+VMC Slot 1
+VMC Slot 2
+Spel ID
+DMA Modus
+V-Sync
+Modus 1
+Modus 2
+Modus 3
+Modus 4
+Modus 5
+Modus 6
+Configureer GSM
+Ethernet link modus
+100Mbit full-duplex
+100Mbit half-duplex
+10Mbit full-duplex
+10Mbit half-duplex
+GSM instellingen
+GSM-selector
+Schakelt GSM AAN of UIT
+Geforceerde aangepast beeldschermmodus
+H-POS
+Horizontale aanpassing
+V-POS
+Verticale aanpassing
+Overscan
+Overscan aanpassing
+FMV overslaan
+Slaat Full Motion Videos over
+Cheat instellingen
+PS2RD-cheatengine
+Laat PS2RD Cheat Engine uw spellen patchen
+PS2RD Cheat Engine Modus
+Auto-selecteer of selecteer spelcheats
+Auto-selecteer cheats
+Selecteer spelcheats
+Foutmelding: mislukt om cheatbestand te laden
+Geen cheats gevonden
+Download standaardwaarden
+Netwerkupdate
+Overwrite Existing Records
+Update mislukt.
+Mislukt om te verbinden met update server.
+Update voltooid.
+Update geannuleerd.
+Download instellingen van het netwerk?
+Aangepaste instellingen
+Gedownloade standaardwaarden
+Auto-start over %i s…
+Auto-start
+Waarde in seconde(n), 0 om auto-start uit te schakelen
+PS2 logo
+Alleen getoond voor geldige schijflogo die bij de console-regio past
+Configureer PADEMU
+Pad-emulator instellingen
+Pad-emulator
+Schakelt Pad-emulator in/uit voor geselecteerde spel
+Pad-emulator modus
+Selecteer Pad-emulator modus.
+DualShock3/4 USB
+DualShock3/4 BT
+Instellingen voor poort:
+Selecteer Pad-emulator poort voor instellingen.
+Emulatie
+Schakelt Pad-emulator in/uit voor geselecteerde poort.
+Trilling
+Schakelt vibratie in/uit voor Pad-emulator geselecteerde poort.
+USB-bluetoothadapter mac-adres:
+DS-controller gepaard met mac-adres:
+Paar
+Paar DS-controller
+Paar DS-controller met bluetoothadapter mac-adres
+Niet verbonden
+Bluetooth adapter information
+Shows more information and supported features
+HCI Version:
+LMP Version:
+Manufacturer ID:
+Support features:
+Yes
+No
+Bluetooth adapter should be fully compatible with DS3/DS4 controllers.
+Bluetooth adapter may not work correctly with DS3/DS4 controllers.
+Multitap Emulation
+Turns on/off Multitap emulation for selected game.
+Multitap emulator on port
+Select port for Multitap emulation.
+Nep-DS3-oplossing
+Some fake DS3s need a workaround, this option will enable it.
+Emulate FIELD flipping
+Fix for games that glitch under progressive video modes.
+Parental Lock Settings
+Parental Lock Password
+Leave blank to disable the parental lock.
+Enter Parental Lock Password
+Parental lock password incorrect.
+Parental lock disabled.
+Build Options:
+Error - this password cannot be used.
+VMC %s file is fragmented. Continue with Memory Card in slot %d?
+Audio Settings
+Geluidseffecten
+Opstartgeluid
+Sound Effects Volume
+Boot Sound Volume
+Confirm video mode change?
+Cache Game List (HDD)
+Meldingen
+Config loaded from %s
+Theme loaded from %s
+Language loaded from %s
+%s partition mounted.
+Opties
+Game settings saved.
+%s settings removed.
+Overwrites existing game compatibility settings when enabled.
+Settings Mode
+Globaal
+Per Game
+All
+Select settings to remove.
+Support Forums:
+Title
+Genre
+Uitgave
+Developer
+Beschrijving
+Blokapparaten
+Controllerinstellingen
+Block Device Manager in-/uitschakelen.
+Blokapparaten in-/uitschakelen (bijv. USB).
+USB-games
+iLink-games
+MX4SIO-games
+PADMACRO configureren
+Padmacro-instellingen
+Padmacro's
+Analoge vertraging:
+Bereik van de analoge stick verkleinen wanneer een knop wordt ingedrukt
+Linkerstick
+Rechterstick
+Analoge as omkeren:
+As van de analoge stick omkeren
+Turboknopsnelheid
+Hoe snel de knop wordt ingedrukt wanneer turbo actief is
+Terwijl knop ingedrukt
+In-/uitgeschakeld met knop
+JAPANS
+ENGELS
+FRANS
+SPAANS
+DUITS
+ITALIAANS
+NEDERLANDS
+PORTUGEES
+RUSSISCH
+KOREAANS
+TRADITIONEEL CHINEES
+VEREENVOUDIGD CHINEES
+OSD-instellingen
+OSD-taal
+Een aangepaste taalinstelling afdwingen
+Taal wijzigen
+Schermgrootte
+Volledig scherm
+Videomodus
+Systeemstandaard
+Achtergrondmuziek
+Volume achtergrondmuziek
+Standaard themamuziek
+Stel het pad in voor het streamen van muziek voor het interne thema.
+Hoog
+Laag
+Gevoeligheid analoge X-as
+Gevoeligheid analoge Y-as
+Bestanden gevonden: %i
+Cheatselectie
+Slechts één HDD toegestaan; inschakelen vergrendelt APA of GPT.
+Kan instellingen niet naar %s schrijven (fout %d)
+PS2-schijf starten
+Geen PS2-schijf in het station.
+Financiële steun
+Standaard
+Instellingen laden...
+Klaar.
+Favorieten
+Favorieten startmodus
+Favoriet
+%s is niet toegestaan via het favorietenmenu.
+%s is niet toegestaan terwijl het item als favoriet is gemarkeerd.
+Advanced Arguments
+Advanced
+Artwork Settings
+VCD BDMA toepassen bij starten
+BDMA-modus
+BDMA Settings
+BDMA-bron
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Loader Core
+Animatiesnelheid
+Aantal hoezen
+Zijhoezen dimmen
+Middenschaal
+Coverflow-instellingen
+Standaard Loader Core
+Display
+PS2RD Cheat-image
+.tar-archief met hoezen
+Mappen doorbladeren in gamelijst
+Game Launching
+Game List Settings
+Game Sources
+Aan: rust automatisch de bijpassende exFAT-driver van de gestarte VCD uit op de geheugenkaart vóór het booten (aanbevolen). Uit: beheer dit zelf met de BDMA-bron/modus-kiezers hieronder.
+exFAT-blokapparaatstuurprogramma dat POPSTARTER laadt. Wijzigen kopieert de modules naar de kaart; FAT32 = geen (ingebouwd stuurprogramma).
+Apparaat waarvan de POPS-map de BDMAssault-stuurprogrammabestanden bevat (usbd.irx.* / usbhdfsd.irx.*).
+Globale standaardcore voor spellen waarvan de Loader Core per spel op Default is ingesteld. <OPL> is de native core; Neutrino koppelt de externe neutrino.elf. Een keuze per spel overschrijft dit altijd.
+Pas een voorgebouwde PS2RD .img-patch toe op je spel.
+Toon submappen van cd/dvd als doorbladerbare items -- selecteer om te openen, annuleer om terug te gaan
+Bij IGR wordt de schakelaarcommand naar het/de geselecteerde slot(s) gestuurd
+UIT kan prestaties verbeteren maar MMCE-time-outs kunnen bevriezingen veroorzaken
+Lagere waarden kunnen de prestaties verbeteren maar instabiliteit veroorzaken
+Alleen Neutrino -- herstel spellen die een IOP-buffer overschrijden (-gc=7)
+Extra Neutrino-vlaggen, spatie-gescheiden (bijv. -mt=dvd). Globaal geldt voor alle spellen; per spel wordt bovenop toegevoegd. Prefix een vlag met $ om hem te deactiveren zonder te verwijderen.
+Forceer Neutrino's block-device-bestandssysteem (-bsdfs). Auto = standaard per apparaat. hdl/bd zijn opties voor experts; combineer ze met een bijpassende -dvd= in de opstartargumenten als de vorm van het auto-pad niet past.
+Apparaat met neutrino.elf (in een NEUTRINO/- of neutrino/-map). Auto scant eerst mc0, dan mc1.
+Field-flipping-oplossing voor spellen die schudden of scheuren onder een geforceerde Neutrino-videomodus. Vereist een ingestelde Neutrino-videomodus.
+Forceer Neutrino's GS-uitvoervideomodus (-gsm). Uit behoudt de standaard van het spel.
+Apparaat met POPS/POPSTARTER.ELF voor het starten van PS1-VCD's. Standaard = bootapparaat (cwd) daarna het eigen apparaat van de VCD. Aangepast toont een vrij pad-veld.
+Aangepast POPSTARTER.ELF-pad; valt stil terug op de POPS-map van het apparaat indien leeg/ontbrekend. Toetsenbord beperkt tot 31 tekens; langere paden via settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Korte trilling bij verplaatsen van de cursor, bevestigen of teruggaan -- vereist een DualShock in analoge modus
+Toon alleen Disc 1 van een PS1-spel met meerdere discs in de apparaatlijsten (POPSLoader-stijl). Verbergt bestanden met de naam (Disc 2), (CD 2), enz. Alle discs blijven op de kaart staan om tijdens het spel te wisselen; Favorieten worden niet gefilterd.
+Alleen cosmetisch -- verberg een voorloopprefix met spel-ID (bijv. SLUS_005.51.) in de namen van de PS1/VCD-lijst. Namen zonder ID worden ongewijzigd getoond. Verandert niets aan opstarten, hoesillustratie of favorieten.
+Start zonder de VMC van dit slot terwijl de kaart geconfigureerd blijft. Alleen bij het starten van Neutrino; het spel gebruikt dan de echte kaart in dat slot.
+Interface
+Network
+MMCE
+IGR-opstartkaartslot(s)
+MMCE startmodus
+MMCE voorvoegselpad
+MMCE-slot
+Gebruik time-outalarms
+Wachtcycli na /ACK laag
+Mode 7
+ATA0-image (-ata0)
+ATA0-ID (-ata0id)
+ATA1-image (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Configuratie (-cfg)
+Werkmap (-cwd)
+Debugkleuren (-dbc)
+Opstart-ELF (-elf)
+Extra argumenten
+PS2-logo (-logo)
+Snel opstarten (-qb)
+Netwerkprotocol
+Neutrino opstartargumenten
+Neutrino-bestandssysteem
+Neutrino Defaults
+Neutrino-apparaat
+Neutrino GSM-compatibiliteit
+Neutrino Video
+OSD Defaults
+Path Prefixes
+Path Settings
+Plasma-mengkleur
+POPStarter
+POPSTARTER.ELF-apparaat
+POPSTARTER.ELF-pad
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Controllertrilling in menu's
+Security
+Storage and Cache
+Tools
+Alleen eerste disc (multi-disc PS1)
+PS1 game-ID verbergen (VCD-lijst)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+VMC 1 uitschakelen (kaart behouden)
+VMC 2 uitschakelen (kaart behouden)
+Geen
+Klein
+Groot
+Normaal
+Controller
+Audio
+Neutrino kan niet vanaf dit apparaat starten -- starten afgebroken.
+Neutrino-netwerkconfiguratie (bsd toml) ontbreekt of is niet schrijfbaar -- starten afgebroken, controleer de neutrino-map.
+VMC-bestand per spel niet gevonden -- start zonder dit (het spel gebruikt zijn echte kaart).
+Apparaat van game
+Neutrino ondersteunt dit bestandsformaat niet; gestart met <OPL>-kern
+Neutrino ELF niet gevonden; gestart met <OPL>-kern
+Te gefragmenteerd voor Neutrino (%d fragmenten, limiet %d incl. VMC's) -- de OPL-core wordt in plaats daarvan geprobeerd.
+BDMA-modulebestanden niet gevonden op het bronapparaat.
+Onvoldoende geheugenkaartruimte voor de BDMA-modules.
+Fout bij schrijven van de BDMA-modules naar de geheugenkaart.
+UDPBD vereist een statisch PS2-IP. Stel dit in bij Netwerkconfiguratie (DHCP is momenteel ingeschakeld).
+Herstart OPL om de wijziging van het netwerk-bootprotocol toe te passen.
+UDPFS aan -- open het nieuwe UDPFS-tabblad en druk op Bevestigen om te verbinden. Aan de pc-kant draait udpfsd -fsroot <games folder>.
+Netwerk-block-device aan -- het tabblad verschijnt zodra de pc-server antwoordt (udpfsd -bdpath voor UDPFS Image, udpbd-server voor UDPBD).
+Te gefragmenteerd voor Neutrino (%d fragmenten, limiet %d incl. VMC's) -- defragmenteer op de pc; starten afgebroken.
+UDPFS-spellen
+Netwerkspellen (UDP) kunnen alleen starten via de Neutrino-core. Controleer of neutrino.elf aanwezig is en het formaat wordt ondersteund.
+PS1-spellen (.VCD) kunnen niet via het netwerkapparaat worden gestart.
+MX4SIO en pad-emulatie delen de SIO2-bus en het spel start mogelijk niet.
+MMCE card switch not confirmed -- launching anyway
+UDPFSBD-spellen
+UDPBD Games
+Opslagstuurprogramma's laden...
+USB-opslagstuurprogramma laden...
+POPSTARTER.ELF ontbreekt
+POPSTARTER SMB-vereisten ontbreken
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+VCD-spellen worden getoond
+Schijfspellen worden getoond
+USB / kaart / netwerkschijven scannen...
+Netwerk starten...
+HDD scannen...
+USB
+MX4SIO
+MMCE
+Interne HDD
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Kan POPSTARTER-netwerkconfiguratie niet naar de geheugenkaart schrijven.
+Deze instelling wordt niet gebruikt met de Neutrino-kern.
+Alles uitschakelen
+Themageluiden laden...
+Menu opbouwen...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Geen geheugenkaart gevonden -- instellingen kunnen niet worden opgeslagen. OPL is opgestart vanaf een netwerkapparaat, waarvan de instellingen op een lokale kaart moeten staan.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Algemene instellingen
+Apparaatinstellingen
+MMCE Games
+Geavanceerd
+MMCE-instellingen
+Vergrendeling Sema-wachtrijmethode
+THFIFO kan de compatibiliteit verbeteren maar de prestaties verslechteren
+POPSTARTER-netwerkconfiguratie schrijven
+Sla ook deze IP- en SMB-sharewaarden op in POPSTARTER's eigen IPCONFIG.DAT / SMBCONFIG.DAT op de geheugenkaart (voor VCD via SMB).
+Neutrino ELF-pad
+Volledig pad naar neutrino.elf (bijv. mc0:NEUTRINO/neutrino.elf). Leeg = automatisch zoeken op mc0/mc1.
+Geheugenkaarten scannen...
+MMCE game-ID activeren...
+UDPFS-toegang
+MMCE GameID niet toegepast -- neutrino.elf staat op deze kaart (wisselen zou Neutrino ontladen).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+VCD-instellingen

@@ -1,0 +1,527 @@
+# Hungarian translation by co5oos & sAGA
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Hungarian
+Változtatások mentése
+Vissza
+Hálózat konfigurálása
+Haladó beállítások
+<Nincs érték>
+Beállítások elmentve ide %s
+Hiba a beállítások írásában!
+Kilépés
+Beállítások
+Menü
+BDM játékok
+HDD játékok
+ETH játékok
+Alkalmazások
+Téma
+Nyelv
+A rendszer le fog állni.
+Kilépés a Browser-be?
+Frissítés visszavonása?
+%d: Merevlemez nem található
+%d: Merevlemez nincs leformázva
+%d: Hálózat indítási hiba
+%d: Nem található hálózati adapter
+%d: Nem sikerült csatlakozni az SMB szerverhez
+%d: Nem sikerült bejelentkezni az SMB szerverbe
+%d: Nem sikerült megnyitni az SMB megosztást
+%d: Nem sikerült listázni az SMB megosztásokat
+%d: Nem sikerült listázni a játékokat
+%d: DHCP szerver nem elérhető
+%d: Nincs hálózati kapcsolat
+Be
+Ki
+OK
+Kiválaszt
+Vissza
+Kör
+Kereszt
+Játék lista
+Játékbeállítások
+Beállítások eltávolítása
+Görgetés
+Lassú
+Közepes
+Gyors
+Alapértelmezett menü
+Lemezről való beolvasás
+Kérem várjon
+Hiba a Játék ID betöltése közben
+Automatikus rendezés
+Hiba a nyelv fájl betöltésnél
+Debug színek
+Nem található kontroller, várakozás…
+Borítókép
+Szélesvásznú mód
+Kikapcsolás
+Konfiguráció betöltése
+Konfiguráció mentése
+Eszköz indítása
+Frissítés
+BDM start mód
+HDD eszköz indítási mód
+ETH eszköz indítási mód
+Alkalmazások menü megjelenítési mód
+Automatikus
+Manuális
+NBD szerver indítása
+NBD szerver elindul…
+NBD szerver fut…
+Az NBD szerver elindítása sikertelen.
+Az NBD szerver kirakodása…
+IGR útvonal
+Háttérszín
+Szövegszín
+- SMB szerver -
+IP cím típus
+Statikus
+DHCP
+IP cím
+Cím
+Maszk
+Alapértelmezett átjáró
+DNS szerver
+Port
+Megosztás
+Felhasználónév
+Jelszó
+<nincs megadva>
+Cím típus
+IP
+NetBIOS
+Elfogad
+Az elem véglegesen törlésre kerül, folytatja?
+Átnevezés
+Törlés
+Futtatás
+Képernyőbeállítások
+Írásműveletek
+Emlékezzen a legutóbbi játékra
+SELECT gomb
+Hiba, a játék töredezett
+Hiba, az elem futtatása sikertelen
+Változások tesztelése
+Hagyja üresen VENDÉG hitelesítéshez
+Pontos olvasás
+Egyidejű mód
+Syscalls kiakasztás
+Videók átugrása
+DVD-DL emulálása
+IGR letiltása
+A méretváltoztatás leformázza a VMC-t
+Létrehoz
+Indít
+Módosít
+Megszakít
+Visszaállítás
+Generikus használata
+VMC konfiguráció
+Név
+Méret
+Állapot
+Folyamat
+A VMC fájl már létezik
+Érvénytelen VMC fájl, helytelen méret
+VMC fájl létrehozása szükséges
+Hiba a VMC-vel %s, folytatás a fizikai MC-vel (foglalat %d) ?
+Automatikus frissítés
+Névjegy
+Kódolók
+Minőségbiztosítás
+BDM előtag elérési út
+Testreszabott ELF bootolása egy IGR után
+Érték percben, 0 a kikapcsolás letiltása
+Automatikus merevlemez kikapcsolás
+Videó mód
+Párbeszédablak színe
+Kiválasztott elem színe
+Színek visszaállítása
+Infó
+Testreszabott ELF
+Szín szelekció
+Újracsatlakozás
+Hagyja üresen a megosztások listázásához
+ETH előtag elérési út
+Backspace
+Szóköz
+Enter
+Mód
+VMC foglalat 1
+VMC foglalat 2
+Játék ID
+DMA mód
+V-Sync
+Mód 1
+Mód 2
+Mód 3
+Mód 4
+Mód 5
+Mód 6
+GSM konfiguráció
+Ethernet kapcsolat módja
+100Mbit full-duplex
+100Mbit half-duplex
+10Mbit full-duplex
+10Mbit half-duplex
+GSM beállítások
+GSM választó
+KI vagy BE kapcsolja a GSM-et
+Kényszerített testreszabott megjelenítési mód
+Vízszintes-pozíció
+Vízszintes szabályozás
+Függőleges-pozíció
+Függőleges szabályozás
+Overscan
+Overscan beállítása
+FMV átugrása
+Átugorja a Full Motion videókat
+Csalás beállítások
+PS2RD csalómotor
+Engedi a PS2RD csalásmotornak, hogy patch-elje a játékokat.
+PS2RD csalásmotor mód
+Auto-kiválaszt vagy játékcsalások kiválasztása
+Csalások Auto-kiválasztása
+Játékcsalások kiválasztása
+Hiba: A Csalásfájl betöltése sikertelen
+Nem találhatóak csalások
+Alapértelmezések letöltése
+Hálózati frissítés
+Létező rekordok felülírása
+Frissítés sikertelen.
+Nem sikerült csatlakozni a frissítő szerverhez.
+Frissítés befejezve.
+Frissítés visszavonva.
+Beállítások letöltése a hálózatról?
+Testreszabott beállítások
+Letöltött alapértelmezések
+Automatikus indítás %i mp-en belül…
+Automatikus indítás
+Érték másodpercben, 0 az Automatikus indítás letiltásához
+PS2 logó
+Csak egy érvényes lemez logónál jelenik meg, amely egyezik a konzol régiójával
+PADEMU konfigurálása
+Pad Emulator beállítások
+Kontroller emulátor
+Be/ki kapcsolja a PadEmulátor-t a kiválaszott játékhoz.
+Pad Emulátor mód
+Válassza ki a PadEmulátor módját.
+DualShock3/4 USB
+DualShock3/4 BT
+Port beállítások:
+Válassza ki a PadEmulátor portot a beállításokhoz.
+Emuláció
+Be/ki kapcsolja a PadEmulátor-t a kiválasztott porthoz.
+Rezgés
+Be/ki kapcsolja a rezgést a PadEmulátor kiválasztott portjához.
+USB bluetooth adapter mac címe:
+DS kontroller a következő MAC címhez párosítva:
+Párosítás
+DS kontroller párosítása
+DS kontroller párosítása Bluetooth adapter MAC címmel.
+Nincs csatlakoztatva
+Bluetooth adapter információ
+Több információ és támogatott funkciók mutatása
+HCI verzió:
+LMP verzió:
+Gyártó ID:
+Támogatott funkciók:
+Igen
+Nem
+A Bluetooth adapternek teljes mértékben kompatibilisnek kell lennie a DS3/DS4 kontrollerekkel.
+A Bluetooth adapter nem biztos, hogy megfelelően fog működni DS3/DS4 kontrollerekkel.
+Multitap Emulation
+Ki/be kapcsolja a Multitap emulációt a kiválasztott játékhoz.
+Multitap emuláció ezen a porton
+Válassza ki a portot a Multitap emulációhoz.
+Hamis DS3 megoldás
+Some fake DS3s need a workaround, this option will enable it.
+FIELD flipping emulálása
+Fix azon játékokhoz, melyek hibát produkálnak progresszív videó mód alatt.
+Gyerekzár beállítások
+Gyerekzár jelszó
+Hagyja üresen a gyerekzár kikapcsolásához.
+Írja be a gyerekzár jelszót
+Gyerekzár jelszó helytelen.
+Gyerekzár kikapcsolva.
+Build opciók:
+Hiba - ez a jelszó nem használható.
+VMC %s fájl töredezett. Folytatás a %d foglalatban lévő memóriakártyával?
+Hangbeállítások
+Hangeffektek
+Boot effekt
+Hanghatások hangereje
+Boot effekt hangereje
+jóváhagyja a Videó mód változtatását?
+Játéklista cachelés (HDD)
+Értesítések
+Config loaded from %s
+Theme loaded from %s
+Language loaded from %s
+%s partition mounted.
+Opciók
+Játékbeállítások elmentve.
+%s beállítások eltávolítva
+Engedélyezéskor felülírja a létező játék kompatibilitási beállításokat.
+Beállítások mód
+Globális
+Játékonként
+Összes
+Válassza ki az eltávolítani kívánt beállításokat.
+Támogatási fórumok:
+Cím
+Műfaj
+Kiadás
+Fejlesztő
+Leírás
+Blokkeszközök
+Kontrollerbeállítások
+A Block Device Manager ki/bekapcsolása.
+Ki/bekapcsolja a Block eszközöket (pl. USB).
+USB játékok
+iLink játékok
+MX4SIO játékok
+PADMACRO beállítása
+Padmakró beállítások
+Padmakrók
+Analóg lassítás:
+Az analóg kar tartományának csökkentése gombnyomásra
+Bal kar
+Jobb kar
+Analóg tengely fordítása:
+Analóg kar tengelyének fordítása
+Turbo gomb sebessége
+Milyen gyorsan nyomkodja a gombot, ha a turbó aktív
+Amíg a gomb lenyomva van
+A gombbal átkapcsolható
+JAPÁN
+ANGOL
+FRANCIA
+SPANYOL
+NÉMET
+OLASZ
+HOLLAND
+PORTUGÁL
+OROSZ
+KOREAI
+HAGYOMÁNYOS KÍNAI
+EGYSZERŰSÍTETT KÍNAI
+OSD beállítások
+OSD nyelv
+Egyéni nyelv kényszerítése
+Nyelv módosítása
+Képméret
+Teljes képernyő
+Videómód
+Rendszer alapértelmezés
+Háttérzene
+Háttérzene hangerő
+Téma alapértelmezett zenéje
+Adja meg a belső témához streamelt zene elérési útját.
+Magas
+Alacsony
+Analóg X-tengely érzékenysége
+Analóg Y-tengely érzékenysége
+Talált fájlok: %i
+Csalások kiválasztása
+Csak egy HDD engedélyezett; a bekapcsolás rögzíti az APA-t vagy a GPT-t.
+A beállítások mentése a(z) %s helyre sikertelen (hiba %d)
+PS2 lemez indítása
+Nincs PS2 lemez a meghajtóban.
+Anyagi támogatás
+Alapértelmezett
+Beállítások betöltése...
+Kész.
+Kedvencek
+Kedvencek indítási mód
+Kedvenc
+%s nem érhető el a Kedvencek menün keresztül.
+%s nem engedélyezett, amíg az elem kedvencként van jelölve.
+Advanced Arguments
+Advanced
+Artwork Settings
+VCD BDMA alkalmazása indításkor
+BDMA mód
+BDMA Settings
+BDMA forrás
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Betöltő mag
+Animáció sebessége
+Borítók száma
+Oldalsó borítók halványítása
+Középső méretezés
+Coverflow beállítások
+Alapértelmezett betöltő mag
+Display
+PS2RD Cheat Image
+Borító .tar archívum
+Mappák böngészése a játéklistában
+Game Launching
+Game List Settings
+Game Sources
+Be: indítás előtt automatikusan felteszi a memóriakártyára az elindított VCD megfelelő exFAT illesztőprogramját (ajánlott). Ki: kezelje kézzel az alábbi BDMA Source/Mode választókkal.
+exFAT blokkeszköz-illesztőprogram, amelyet a POPSTARTER betölt. A módosítás a modulokat a kártyára másolja; FAT32 = nincs (beépített illesztőprogram).
+Az az eszköz, amelynek POPS mappájában találhatók a BDMAssault illesztőprogram fájlok (usbd.irx.* / usbhdfsd.irx.*).
+Globális alapértelmezett mag azokhoz a játékokhoz, amelyeknél a játékonkénti Betöltő Mag Alapértelmezettre van állítva. Az <OPL> a natív mag; a Neutrino a külső neutrino.elf fájlt láncolja. A játékonkénti választás mindig felülírja ezt.
+Előre elkészített PS2RD .img javítás alkalmazása a játékra.
+A CD/DVD almappáit böngészhető elemekként mutatja; kiválasztás megnyit, mégse visszalép
+A rendszerkártya-váltás parancs a kiválasztott foglalat(ok)ra kerül elküldésre IGR-kor
+A KI beállítás javíthatja a teljesítményt, de MMCE időtúllépés esetén lefagyást okozhat
+Az alacsonyabb értékek javíthatják a teljesítményt, de instabilitást okozhatnak
+Csak Neutrino -- javítja az IOP puffertúlcsordulást okozó játékokat (-gc=7)
+Extra Neutrino jelzők, szóközzel elválasztva (pl. -mt=dvd). A globális minden játékra vonatkozik; a játékonkénti hozzáadódik. Egy jelző elé írj $ jelet a letiltásához törlés nélkül.
+A Neutrino blokkeszköz-fájlrendszerének kényszerítése (-bsdfs). Auto = eszközönkénti alapértelmezés. A hdl/bd szakértői beállítások; párosítsd őket egy megfelelő -dvd= értékkel az indítási argumentumokban, ha az automatikus útvonal alakja nem illik.
+A neutrino.elf fájlt tartalmazó eszköz (NEUTRINO/ vagy neutrino/ mappában). Az Auto először mc0-t, majd mc1-et keres.
+Mezőváltó javítás azokhoz a játékokhoz, amelyek remegnek vagy szakadoznak egy kényszerített Neutrino Videó mód alatt. Beállított Neutrino Videó módot igényel.
+A Neutrino GS kimeneti videómódjának kényszerítése (-gsm). Ki = a játék alapértelmezettje marad.
+A POPS/POPSTARTER.ELF fájlt tároló eszköz PS1 VCD indításához. Alapértelmezett = indító eszköz (cwd), majd a VCD saját eszköze. A Custom szabad szövegű útvonalmezőt jelenít meg.
+Egyéni POPSTARTER.ELF elérési út; üresen/hiányzóan az eszköz POPS mappájára vált vissza. A billentyűzet 31 karakterre korlátoz; hosszabb elérési utak a settings_riptopl.cfg-n keresztül adhatók meg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Rövid rezgés a kurzor mozgatásakor, megerősítéskor vagy visszalépéskor - DualShock szükséges analóg módban
+Az eszközlistákban csak egy több lemezes PS1 játék 1. lemezét mutatja (POPSLoader stílus). Elrejti a (Disc 2), (CD 2) stb. nevű fájlokat. Minden lemez a kártyán marad a játékon belüli cseréhez; a Kedvencek nincsenek szűrve.
+Csak kozmetikai -- elrejti a bevezető játék-azonosító előtagot (pl. SLUS_005.51.) a PS1/VCD listanevekből. Az azonosító nélküli nevek változatlanul jelennek meg. Nem változtatja meg az indítást, a borítót vagy a kedvenceket.
+Indítás e nyílás VMC-je nélkül, miközben a kártyája konfigurálva marad. Csak Neutrino indításnál; a játék ekkor az adott nyílásban lévő valódi kártyát használja.
+Interface
+Network
+MMCE
+IGR rendszerkártya foglalat(ok)
+MMCE indítási mód
+MMCE előtag elérési út
+MMCE foglalat
+Időtúllépési riasztások használata
+Várakozási ciklusok /ACK alacsony után
+7. mód
+ATA0 kép (-ata0)
+ATA0 azonosító (-ata0id)
+ATA1 kép (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Konfiguráció (-cfg)
+Munkakönyvtár (-cwd)
+Hibakereső színek (-dbc)
+Rendszertöltő ELF (-elf)
+Extra argumentumok
+PS2 logó (-logo)
+Gyors indítás (-qb)
+Hálózati protokoll
+Neutrino indítási argumentumok
+Neutrino fájlrendszer
+Neutrino Defaults
+Neutrino eszköz
+Neutrino GSM kompatibilitás
+Neutrino videó
+OSD Defaults
+Path Prefixes
+Path Settings
+Plazma keverési szín
+POPStarter
+POPSTARTER.ELF eszköz
+POPSTARTER.ELF elérési út
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Kontroller rezgése a menükben
+Security
+Storage and Cache
+Tools
+Csak első lemez (több lemezes PS1)
+PS1 játék-azonosító elrejtése (VCD lista)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+VMC 1 letiltása (kártya megtartása)
+VMC 2 letiltása (kártya megtartása)
+Egyik sem
+Kicsi
+Nagy
+Normál
+Controller
+Audio
+A Neutrino nem tud indulni erről az eszközről -- indítás megszakítva.
+A Neutrino hálózati konfigurációja (bsd toml) hiányzik vagy nem írható -- az indítás megszakítva, ellenőrizd a neutrino mappát.
+A játékonkénti VMC fájl nem található -- indítás nélküle (a játék a valódi kártyáját használja).
+Játék eszköze
+A Neutrino nem támogatja ezt a fájlformátumot, indítás <OPL> maggal
+A Neutrino ELF nem található, indítás <OPL> maggal
+Túl töredezett a Neutrinóhoz (%d töredék, korlát %d a VMC-kkel együtt) -- helyette az OPL mag megpróbálása.
+A BDMA modulfájlok nem találhatók a forráseszközön.
+Nincs elegendő hely a memóriakártyán a BDMA modulokhoz.
+Hiba a BDMA modulok memóriakártyára írása közben.
+Az UDPBD statikus PS2 IP-t igényel. Állítsd be a Hálózati konfigurációban (a DHCP jelenleg be van kapcsolva).
+Indítsa újra az OPL-t a hálózati indítási protokoll módosításának alkalmazásához.
+UDPFS bekapcsolva -- nyisd meg az új UDPFS fület, és nyomd meg a Megerősítést a csatlakozáshoz. A PC oldalon az udpfsd -fsroot <games folder> fut.
+A hálózati blokkeszköz bekapcsolva -- a füle megjelenik, amint a PC-szerver válaszol (udpfsd -bdpath az UDPFS Image-hez, udpbd-server az UDPBD-hez).
+Túl töredezett a Neutrinóhoz (%d töredék, korlát %d a VMC-kkel együtt) -- töredezettségmentesítsd a PC-n; az indítás megszakítva.
+UDPFS játékok
+A hálózati (UDP) játékok csak a Neutrino magon keresztül indíthatók. Ellenőrizze, hogy a neutrino.elf megvan-e és a formátum támogatott-e.
+A PS1 (.VCD) játékok nem indíthatók hálózati eszközről.
+Az MX4SIO és a kontroller-emuláció közös SIO2 buszt használ, így a játék nem biztos, hogy elindul.
+MMCE card switch not confirmed -- launching anyway
+UDPFSBD játékok
+UDPBD Games
+Tárolóillesztők betöltése...
+USB tárolóillesztő betöltése...
+Hiányzó POPSTARTER.ELF
+Hiányzó POPSTARTER SMB követelmények
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+VCD játékok megjelenítése
+Lemezes játékok megjelenítése
+USB / kártya / hálózati meghajtók keresése...
+Hálózat indítása...
+HDD keresése...
+USB
+MX4SIO
+MMCE
+Belső HDD
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Nem sikerült a POPSTARTER hálózati konfigurációt a memóriakártyára írni.
+Ez a beállítás nem használható a Neutrino maggal.
+Összes letiltása
+Témahangok betöltése...
+Menü felépítése...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Nincs memóriakártya - a beállítások nem menthetők. Az OPL hálózati eszközről indult, amelynek beállításait helyi kártyán kell tárolni.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Általános beállítások
+Eszközbeállítások
+MMCE Games
+Speciális
+MMCE beállítások
+Szemafor sorba állítási módszer zárolása
+A THFIFO javíthatja a kompatibilitást, de ronthatja a teljesítményt
+POPSTARTER hálózati konfiguráció írása
+Az IP + SMB megosztási értékek mentése a POPSTARTER saját IPCONFIG.DAT / SMBCONFIG.DAT fájljaiba a memóriakártyán (SMB-n keresztüli VCD-hez).
+Neutrino ELF elérési út
+Teljes elérési út a neutrino.elf fájlhoz (pl. mc0:NEUTRINO/neutrino.elf). Üresen = automatikus keresés mc0/mc1-en.
+Memóriakártyák vizsgálata...
+MMCE játék-azonosító élesítése...
+UDPFS-hozzáférés
+MMCE GameID nem alkalmazva -- a neutrino.elf ezen a kártyán van (a váltás kikapcsolná a Neutrinót).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+VCD beállítások

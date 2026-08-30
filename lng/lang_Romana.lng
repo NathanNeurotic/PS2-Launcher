@@ -1,0 +1,527 @@
+# Romana translation by MRAdyy
+# For Open PS2 Loader v1.0.0 + betas - Official OPL Beta thread @https://www.psx-place.com/threads/open-ps2-loader-language-pack.20547/
+Romana
+Salvare Setari
+Inapoi
+Config. retea
+Optiuni avansate
+<nici-o valoare>
+Settings saved to %s
+Eroare in scrierea setarilor!
+Iesire
+Setari
+Meniu
+Jocuri pe BDM
+Jocuri pe HDD
+Jocuri cu cablu LAN
+Aplicatii
+Teme
+Limba
+Sistemul va fi oprit.
+Iesire OPL?
+Anulezi actualizarea?
+%d: HDD-ul nu a fost gasit
+%d: HDD-ul nu este formatat
+%d: Eroare pornire retea
+%d: Nici-un adaptor de retea gasit
+%d: Nu se poate conecta la serverul SMB
+%d: Nu se poate loga la serverul SMB
+%d: Nu se poate deschide serverul SMB
+%d: Nu se poate lista fisierele din serverul SMB
+%d: Nu s-au gasit jocuri!
+%d: Server DHCP mort
+%d: Nu s-a gasit o conexiune la retea
+Pornit
+Oprit
+Bine
+Selectare
+Anulare
+Cerc
+Cruce
+Lista jocuri
+Setari joc
+Remove Settings
+Miscare
+Incet
+Medium
+Rapid
+Meniu implicit
+Incarcati de pe disc
+Va rugam asteptati
+Eroare in incarcarea Id-ului al jocului
+Sortare automata
+Eroare in incarcarea fisierlui limba
+Culori depanare
+Nici-o maneta gasita, se asteapta…
+Coperți
+Ecran Lat
+Oprire
+Se incarca configurare
+Se salveaza configurarea
+Pornire dispozitiv
+Reimprospatare
+BDM Start Mode
+Modul de pornire al dispozitivului HDD
+Modul de pornire al dispozitivului Retea
+Modul de pornire aplicatii
+Automat
+Manual
+Pornire server NBD
+Se porneste serverul NBD…
+Serverul NBD ruleaza…
+Failed to start NBD Server.
+Serverul NBD se descarca…
+cale IGR
+Culoare fundal
+Culoare text
+- Server SMB -
+Tip adresa IP
+Statica
+DHCP
+adresa IP
+Addresa
+Masca
+Portal
+Server DNS
+Port
+Impartasire
+Utilizator
+Parola
+<nesetat>
+Tip de adresa
+IP
+NetBIOS
+Accepta
+Elemetul va fi sters definitiv, continuati?
+Redenumire
+Stergere
+Ruleaza
+Setari Imagine
+Operații de scriere
+Aminteste ultimul joc jucat
+Butonul Select
+"Eroare, jocul este fragmentat"
+"Eroare, nu a putut rula elementul"
+Test Changes
+Lasati goala pentru autentificarea GUEST.
+Citeste exact
+Modul sincron
+Dezactivați apelurile sistemului
+0 PSS mod
+Simulare DVD-DL
+Dezactivare IGR
+Schimbarea dimensiunii va reformata VMC
+Creeaza
+Start
+Modificare
+Anuleaza
+Resetare
+UUtilizeaza generic
+Configurare VMC
+Nume
+Dimensiune
+Stare
+Progres
+Fisierul VMC exista
+Fisier VMC invalid, dimensiunea este incorecta
+Fisier VMC trebuie creat
+Eroare la VMC %s, continuati cu cardul memorie fizic (slot %d)?
+Reimprospatare Automata
+Despre
+Ingineri
+Asigurarea calitatii
+Calea prefixului BDM
+Lasa gol pentru a iesi in Browser
+Valoare in minute, 0 pentru a dezactiva rotirea
+Oprire automata HDD
+Mod video
+Culoare Dialog
+Culoare selectata
+Reset Colors
+Informatii
+ELF personalizat
+Selectie culoare
+Reconectare
+Lasa gol pentru a afișa impartasirile
+Cale prefix ETH
+Sterge
+Spatiu
+Intrare
+Mod
+Slot VMC 1
+Slot VMC 2
+ID Joc
+Mod DMA
+V-Sync
+Mod 1
+Mod 2
+Mod 3
+Mod 4
+Mod 5
+Mod 6
+Configurare GSM
+Mod conectare Retea
+100Mbit ful-dublu
+100Mbit jumatate-dublu
+10Mbit ful-dublu
+10Mbit jumatate-dublu
+Setari GSM
+Selector GSM
+Comuta GSM Pornit sau Oprit
+Modul de afișare personalizat fortat
+Pozitie-H
+Pozitie Orizontala
+Pozitie-V
+Pozitie Verticala
+Overscan
+Overscan Adjustment
+Salta FMV
+Omite Cutscenes
+Setari coduri
+Motor de coduri PS2RD
+Lasa PS2RD Cheat Engine sa-ti patchuiasca jocurile
+Mod PS2RD Cheat Engine
+Selectati automat sau Selectati Codurile
+Selectati Automat Codurile
+Selectati Codurile
+Eroare: nu s-a putut incarca fisierul Cheat
+Nici un cod gasit
+Descarca implicit
+Actualizare Retea
+Overwrite Existing Records
+Actualizare esuata.
+Nu sa putut conecta serverul de actualizare.
+Actualizare finalizata.
+Actualizare anulata.
+Descarca setarile din retea?
+Setari personalizate
+Descarca implicite
+Pornire autpmata in %i secunde…
+Pornire automata
+Valoare in secunde, 0 pentru a opri pornirea automata
+PS2 Logo
+Only displayed for a valid disc logo which matches the console's region
+Controller Emulation
+Pad Emulator Settings
+Emulator controler
+Turns on/off PadEmulator for selected game.
+Pad Emulator mode
+Select Pad Emulator mode.
+DualShock3 USB
+DualShock3 BT
+Settings for port:
+Select Pad Emulator port for settings.
+Emulare
+Turns on/off Pad Emulator for selected port.
+Vibrație
+Turns on/off vibration for Pad Emulator selected port.
+Usb bluetooth adapter mac address:
+DS3 Controller paired to mac address:
+Pair
+Pair DS3 Controller
+Pair DS3 Controller with bluetooth adapter mac address.
+Not connected
+Bluetooth adapter information
+Shows more information and supported features
+HCI Version:
+LMP Version:
+Manufacturer ID:
+Support features:
+Yes
+No
+Bluetooth adapter should be fully compatible with DS3/DS4 controllers.
+Bluetooth adapter may not work correctly with DS3/DS4 controllers.
+Multitap emulation
+Turns on/off Multitap emulation for selected game.
+Multitap emulator on port
+Select port for Multitap emulation.
+Soluție DS3 fals
+Some fake DS3s need a workaround, this option will enable it.
+Emulate FIELD flipping
+Fix for games that glitch under progressive video modes.
+Parental Lock Settings
+Parental Lock Password
+Leave blank to disable the parental lock.
+Enter Parental Lock Password
+Parental lock password incorrect.
+Parental lock disabled.
+Build Options:
+Error - this password cannot be used.
+VMC %s file is fragmented. Continue with Memory Card in slot %d?
+Audio Settings
+Efecte sonore
+Sunet la pornire
+Sound Effects Volume
+Boot Sound Volume
+Confirm video mode change?
+Cache Game List (HDD)
+Notificări
+Config loaded from %s
+Theme loaded from %s
+Language loaded from %s
+%s partition mounted.
+Opțiuni
+Game settings saved.
+%s settings removed.
+Overwrites existing game compatibility settings when enabled.
+Settings Mode
+Global
+Per Game
+All
+Select settings to remove.
+Support Forums:
+Title
+Gen
+Lansare
+Developer
+Descriere
+Dispozitive bloc
+Setări controler
+Activează/dezactivează Managerul de dispozitive bloc.
+Activează/dezactivează dispozitivele bloc (ex. USB).
+Jocuri USB
+Jocuri iLink
+Jocuri MX4SIO
+Configurează PADMACRO
+Setări macro controler
+Macrouri controler
+Încetinire analogică:
+Reduce raza manetei analogice când butonul este apăsat
+Maneta stângă
+Maneta dreaptă
+Inversare axă analogică:
+Inversează axa manetei analogice
+Viteză buton turbo
+Cât de rapid se apasă butonul când turbo este activ
+Cât timp butonul este apăsat
+Comutat prin buton
+JAPONEZĂ
+ENGLEZĂ
+FRANCEZĂ
+SPANIOLĂ
+GERMANĂ
+ITALIANĂ
+OLANDEZĂ
+PORTUGHEZĂ
+RUSĂ
+COREEANĂ
+CHINEZĂ TRADIȚIONALĂ
+CHINEZĂ SIMPLIFICATĂ
+Setări OSD
+Limbă OSD
+Impune o limbă personalizată
+Schimbă limba
+Dimensiune ecran
+Ecran complet
+Mod video
+Implicit sistem
+Muzică de fundal
+Volum muzică de fundal
+Muzică temă implicită
+Setează calea pentru redarea muzicii temei interne.
+Ridicată
+Scăzută
+Sensibilitate analogică axa X
+Sensibilitate analogică axa Y
+Fișiere găsite: %i
+Selectare cheat-uri
+Este permis un singur HDD; activarea blochează APA sau GPT.
+Setările nu au putut fi scrise în %s (eroare %d)
+Lansează Disc PS2
+Niciun disc PS2 în unitate.
+Sprijin financiar
+Implicit
+Se încarcă setările...
+Gata.
+Favorite
+Mod Pornire Favorite
+Favorit
+%s nu este permis prin Meniul de Favorite.
+%s nu este permis cât timp elementul este marcat ca favorit.
+Advanced Arguments
+Advanced
+Artwork Settings
+Aplică VCD BDMA la pornire
+Mod BDMA
+BDMA Settings
+Sursă BDMA
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Nucleu Loader
+Viteză Animație
+Număr Coperte
+Estompează Coperte Laterale
+Scară Centru
+Setări Coverflow
+Nucleu de încărcare implicit
+Display
+Imagine Cheat PS2RD
+Arhivă .tar cu coperte
+Răsfoiește foldere în lista de jocuri
+Game Launching
+Game List Settings
+Game Sources
+Pornit: înainte de pornire pune automat pe cardul de memorie driverul exFAT potrivit al VCD-ului lansat (recomandat). Oprit: gestionați manual cu selectoarele BDMA Source/Mode de mai jos.
+Driver dispozitiv bloc exFAT pe care POPSTARTER îl încarcă. Schimbarea lui copiază modulele pe card; FAT32 = niciunul (driver încorporat).
+Dispozitivul al cărui dosar POPS conține fișierele driver BDMAssault (usbd.irx.* / usbhdfsd.irx.*).
+Nucleul implicit global pentru jocurile al caror Nucleu de incarcare per joc este setat la Implicit. <OPL> este nucleul nativ; Neutrino inlantuie neutrino.elf extern. O alegere per joc suprascrie intotdeauna aceasta setare.
+Aplică un patch PS2RD .img pregătit pentru jocul tău.
+Afișează subfolderele de pe CD/DVD ca intrări navigabile; selectează pentru a deschide, anulează pentru a reveni
+Comanda de comutare la bootcard va fi trimisă la slotul(urile) selectat(e) la IGR
+OFF poate ajuta performanța dar poate cauza blocări la timeout MMCE
+Valorile mai mici pot îmbunătăți performanța dar pot cauza instabilități
+Doar Neutrino -- corectează jocuri care depășesc un buffer IOP (-gc=7)
+Indicatori Neutrino suplimentari, separați prin spațiu (ex. -mt=dvd). Global se aplică tuturor jocurilor; per-joc se adaugă în plus. Prefixați un indicator cu $ pentru a-l dezactiva fără a-l șterge.
+Forteaza sistemul de fisiere al dispozitivului bloc al Neutrino (-bsdfs). Auto = implicit pentru fiecare dispozitiv. hdl/bd sunt optiuni pentru experti; asociaza-le cu un -dvd= potrivit in argumentele de lansare daca forma caii automate nu se potriveste.
+Dispozitivul care conține neutrino.elf (într-un dosar NEUTRINO/ sau neutrino/). Auto scanează mai întâi mc0, apoi mc1.
+Corectie de inversare a campurilor pentru jocurile care tremura sau se rup sub un mod Video Neutrino fortat. Necesita un mod Video Neutrino setat.
+Forțează modul video de ieșire GS al Neutrino (-gsm). Off păstrează implicit-ul jocului.
+Dispozitivul care conține POPS/POPSTARTER.ELF pentru pornirea PS1 VCD. Implicit = dispozitivul de pornire (cwd), apoi dispozitivul propriu al VCD-ului. Custom afișează un câmp liber pentru cale.
+Cale personalizată POPSTARTER.ELF; revine automat la dosarul POPS al dispozitivului dacă e gol/lipsă. Tastatura e limitată la 31 de caractere; căi mai lungi prin settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Vibrație scurtă la mutarea cursorului, confirmare sau revenire -- necesită un DualShock în mod analog
+Afiseaza doar Discul 1 al unui joc PS1 pe mai multe discuri in listele de dispozitive (stil POPSLoader). Ascunde fisierele denumite (Disc 2), (CD 2) etc. Toate discurile raman pe card pentru schimbarea in timpul jocului; Favoritele nu sunt filtrate.
+Doar cosmetic -- ascunde un prefix de ID de joc de la inceput (de ex. SLUS_005.51.) din numele listelor PS1/VCD. Numele fara ID sunt afisate ca atare. Nu modifica lansarea, coperta sau favoritele.
+Lanseaza fara VMC-ul acestui slot, pastrand cardul configurat. Doar lansarile Neutrino; jocul foloseste apoi cardul real din acel slot.
+Interface
+Network
+MMCE
+Slot(uri) Bootcard IGR
+Mod Pornire MMCE
+Cale Prefix MMCE
+Slot MMCE
+Folosește alarme timeout
+Cicluri de așteptare după /ACK jos
+Mode 7
+Imagine ATA0 (-ata0)
+ID ATA0 (-ata0id)
+Imagine ATA1 (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Configurare (-cfg)
+Dosar de Lucru (-cwd)
+Culori depanare (-dbc)
+ELF de Pornire (-elf)
+Argumente Suplimentare
+Logo PS2 (-logo)
+Pornire Rapidă (-qb)
+Protocol de rețea
+Argumente Lansare Neutrino
+Sistem de fișiere Neutrino
+Neutrino Defaults
+Dispozitiv Neutrino
+Compatibilitate GSM Neutrino
+Video Neutrino
+OSD Defaults
+Path Prefixes
+Path Settings
+Culoare amestec plasmă
+POPStarter
+Dispozitiv POPSTARTER.ELF
+Cale POPSTARTER.ELF
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Vibrația controllerului în meniuri
+Security
+Storage and Cache
+Tools
+Doar primul disc (PS1 multi-disc)
+Ascunde ID joc PS1 (listă VCD)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+Dezactivează VMC 1 (păstrează cardul)
+Dezactivează VMC 2 (păstrează cardul)
+Niciunul
+Mic
+Mare
+Normal
+Controller
+Audio
+Neutrino nu poate lansa de pe acest dispozitiv -- lansare anulată.
+Configuratia de retea Neutrino (bsd toml) lipseste sau nu poate fi scrisa -- lansare anulata, verifica folderul neutrino.
+Fisierul VMC per joc nu a fost gasit -- se lanseaza fara el (jocul foloseste cardul real).
+Dispozitivul jocului
+Neutrino nu suportă acest format de fișier, lansare cu nucleul <OPL>
+ELF Neutrino negăsit, lansare cu nucleul <OPL>
+Prea fragmentat pentru Neutrino (%d fragmente, limita %d incl. VMC-uri) -- se incearca in schimb nucleul OPL.
+Fișierele modul BDMA nu au fost găsite pe dispozitivul sursă.
+Spațiu insuficient pe cardul de memorie pentru modulele BDMA.
+Eroare la scrierea modulelor BDMA pe cardul de memorie.
+UDPBD necesită un IP static pentru PS2. Setați unul în Config Rețea (DHCP este activ).
+Reporniți OPL pentru a aplica modificarea protocolului de pornire din rețea.
+UDPFS activat -- deschide noua fila UDPFS si apasa Confirmare pentru a conecta. Partea PC ruleaza udpfsd -fsroot <games folder>.
+Dispozitiv bloc de retea activat -- fila sa apare dupa ce serverul PC raspunde (udpfsd -bdpath pentru UDPFS Image, udpbd-server pentru UDPBD).
+Prea fragmentat pentru Neutrino (%d fragmente, limita %d incl. VMC-uri) -- defragmenteaza pe PC; lansare anulata.
+Jocuri UDPFS
+Jocurile de rețea (UDP) pot fi pornite doar prin nucleul Neutrino. Verificați dacă neutrino.elf este prezent și dacă formatul este acceptat.
+Jocurile PS1 (.VCD) nu pot fi pornite de pe dispozitivul de rețea.
+MX4SIO și emularea controlerului folosesc aceeași magistrală SIO2, iar jocul s-ar putea să nu pornească.
+MMCE card switch not confirmed -- launching anyway
+Jocuri UDPFSBD
+UDPBD Games
+Se încarcă driverele de stocare...
+Se încarcă driverul de stocare USB...
+Lipsește POPSTARTER.ELF
+Lipsesc cerințele SMB pentru POPSTARTER
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+Se afișează jocuri VCD
+Se afișează jocuri disc
+Se scanează unitățile USB / card / rețea...
+Se pornește rețeaua...
+Se scanează HDD...
+USB
+MX4SIO
+MMCE
+HDD intern
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Nu s-a putut scrie configurația de rețea POPSTARTER pe cardul de memorie.
+Această setare nu este folosită cu nucleul Neutrino.
+Dezactivează tot
+Se încarcă sunetele temei...
+Se construiește meniul...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Niciun card de memorie găsit -- setările nu pot fi salvate. OPL a pornit de pe un dispozitiv de rețea, ale cărui setări trebuie să fie pe un card local.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Setări Generale
+Setări Dispozitiv
+MMCE Games
+Avansat
+Setări MMCE
+Metodă Blocare Coadă Sema
+THFIFO poate ajuta compatibilitatea dar poate reduce performanța
+Scrie Config Rețea POPSTARTER
+Salvează și valorile IP + SMB în IPCONFIG.DAT / SMBCONFIG.DAT proprii ale POPSTARTER pe cardul de memorie (pentru VCD prin SMB).
+Cale ELF Neutrino
+Calea completă spre neutrino.elf (ex. mc0:NEUTRINO/neutrino.elf). Gol = detectare automată pe mc0/mc1.
+Se scanează cardurile de memorie...
+Se pregătește game-ID MMCE...
+Acces UDPFS
+MMCE GameID neaplicat -- neutrino.elf este pe acest card (schimbarea ar descărca Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+Setări VCD

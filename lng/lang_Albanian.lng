@@ -1,0 +1,525 @@
+Albanian
+Ruaj Ndryshimet
+Prapa
+Cilësimet e Rrjetit
+Cilësimet e Avancuara
+<asnjë vlerë>
+Cilësimet u ruajtën në %s
+Gabim në shkruarjen e cilësimeve!
+Dil
+Cilësimet
+Menyja
+Lojërat BDM
+Lojërat HDD
+Lojërat ETH
+Aplikacionet
+Temë
+Gjuha
+Sistemi do të fiket.
+Dil tek Shfletuesi?
+Anulo përditësimin?
+%d: HardDisk nuk u gjet.
+%d: HardDisk Drive not është i formatuar.
+%d: Gabim në nisjen e Rrjetit.
+%d: Nuk u gjet asnjë Adapter Rrjeti.
+%d: Nuk mund të lidhem me serverin SMB.
+%d: Nuk mund të identifikohem me serverin SMB.
+%d: Nuk mund të hap dot SMB share.
+%d: Nuk mund të listoj SMB shares.
+%d: Nuk mund të listoj lojërat.
+%d: Serveri DHCP është i paarritshëm.
+%d: Nuk ka lidhje me Rrjetin.
+Ndezur
+Fikur
+OK
+Zgjidhe
+Anulo
+Rreth
+Kryq
+Lista e Lojërave
+Cilësimet e Lojës
+Fshi Cilësimet
+Shpejtesia e Rrotullimit
+Ngadalë
+Normal
+Shpejt
+Menuja Normale
+Ngarko nga Disku
+Ju Lutem Prisni.
+Gabim në ngarkimin e Game ID.
+Renditje Automatike
+Gabim në ngarkimin e skedarit të gjuhës.
+Rregullo ngjyrat
+Nuk u gjet asnje levë, duke pritur…
+Arti i Kopertinës
+Ekran i Gjerë
+Fik
+Duke ngarkuar konfigurimin…
+Duke ruajtur konfigurimin…
+Nise Paisjen
+Rifresko
+Nisja BDM
+Nisja e paisjes HDD
+Nisja e paisjes ETH
+Nisja e Aplikacioneve
+Automatike
+Manuale
+Nis Serverin NBD
+Serveri NBD duke u nisur…
+Serveri NBD duke punuar…
+Dështoi të nisi Serverin NBD.
+Serveri NBD po shkarkohet…
+IGR Path
+Ngjyra e Sfondit
+Ngjyra e Tekstit
+- Serveri SMB -
+Lloji i Adresës IP
+Statike
+DHCP
+Adresa IP
+Adresa
+Mask
+Gateway
+Serveri DNS
+Port
+Share
+User
+Password
+<nuk është vënë>
+Lloji i Adresës
+IP
+NetBIOS
+Prano
+Artikulli do të fshihet përfundimisht, vazhdo?
+Riemërto
+Fshi
+Vazhdo
+Cilësimet e Ekranit
+Operacionet e Shkrimit
+Kujto lojën e luajtur së fundmi
+Zgjidh Butonin
+Gabim, loja është e fragmentuar.
+Gabim, nuk mund të hap këtë artikull.
+Testo Ndryshimet
+Lëre bosh per vërtetimin e MYSAFIRIT.
+Lexime të Sakta
+Mënyrë e Sinkronizuar
+Hiq Thirrjet e Sistemit
+Anashkalo Videot
+Imito DVD-DL
+Çaktivizo IGR
+Ndryshimi i madhësise ka për të formatuar Kartën e Memories Virtuale.
+Krijo
+Fillo
+Modifiko
+Aborto
+Rivendos
+Përdor të përgjithshmen
+Konfiguro Kartën e Memories Virtuale
+Emri
+Hapësira
+Statusi
+Progresi
+Karta e Memories Virtuale ekziston.
+Dosje e gabuar e KMV, madhësia është e pasaktë.
+Dosja KMV duhet të krijohet.
+Gabim në aksesimin e KMV %s. Vazhdo me Kartën e Memories ne vendin %d?
+Rifreskim Automatik
+Rreth
+Koduesit
+Kontroll Cilësie
+BDM Prefix Path
+Nis një ELF te modifikuar pas një IGR.
+Vlera ne minuta, 0 për të çaktivizuar fikjen e rrotullimit.
+Fikja Automatike e Rrotullimit të HDD
+Mënyra e Videos
+Ngjyra e Dialogut
+Ngjyra e Zgjedhur
+Rivendos Ngjyrat
+Info
+ELF i modifikuar
+Përzgjedhja e Ngjyrave
+Rilidhu
+Lëre bosh për te listuar te gjitha shpërndarjet.
+ETH Prefix Path
+Backspace
+Hapësira
+Hy
+Metoda
+VMC Slot 1
+VMC Slot 2
+ID e Lojës
+Mënyra DMA
+V-Sync
+Menyra 1
+Menyra 2
+Menyra 3
+Menyra 4
+Menyra 5
+Menyra 6
+Konfiguro GSM
+Menyra e lidhjes me Ethernet
+100Mbit Full-duplex
+100Mbit Half-duplex
+10Mbit Full-duplex
+10Mbit Half-duplex
+Cilësimet GSM
+Zgjedhësi GSM
+Ndërron GSM fikur/ndezur.
+Përforco Mënyrën e Paraqitjes së modifikuar.
+H-POS
+Përshtatje Horizontale
+V-POS
+Përshtatje Vertikale
+Skanim i gjerë
+Përshtatje e skanimit të gjerë
+Anashkalo FMV
+Anashkalon videot me lëvizje të plotë.
+Cilësimet e Hileve
+Motori i Kodeve PS2RD
+Lë PS2RD Cheat Engine të te ndryshoje lojën.
+Menyra e PS2RD Cheat Engine
+Zgjedhje Automatike apo zgjidh hilet e lojes.
+Zgjidh Hilet Automatikisht
+Zgjidh Hilet e Lojes
+Gabim: dështoi të ngarkojë dosjen e hiles.
+Nuk u gjet asnjë hile.
+Shkarko të parazgjedhurat
+Përditëso Rrjetin
+Rishkruaj Shënimet Ekzistuese
+Përditësimi dështoi.
+Dështoi të lidhet për të përditësuar serverin.
+Përditësimi u kompletua.
+Përditësimi u anullua.
+Shkarko cilësimet nga rrjeti?
+Cilësimet e modifikuara
+Shkarkimet e Parazgjedhura
+Skanimi automatik në %i s…
+Fillimi Automatik
+Vlera ne sekonda(s), 0 për të fikur Fillimin Automatik.
+Logoja PS2
+Paraqitet për një logo të vlefshme të bashkangjitur me rajonin e konsolit.
+Konfiguro PADEMU
+Cilësimet e Pad Emulator
+Emulator Kontrolluesi
+Ndërron fikur/ndezur Pad Emulator për lojën e zgjedhur.
+Mënyra e Pad Emulator
+Mënyra e zgjedhjes së Pad Emulator.
+DualShock3/4 USB
+DualShock3/4 BT
+Cilësimet Për Portën:
+Zgjidh porten e Pad Emulator për cilësimet.
+Imitimi
+Ndërron fikur/ndezur Pad Emulator për portën e zgjedhur.
+Vibrimi
+Nderron fikur/ndezur vibrimin për Pad Emulator në portën e zgjedhur.
+Adresa Mac e USB Bluetooth Adapter:
+DS Controller i çiftuar me Adresën MAC:
+Çifto
+Çifto DS Controller
+Çifto DS controller me adresën MAC të adapterit Bluetooth.
+Nuk është lidhur
+Bluetooth Adapter Informacion
+Tregon më shumë informacion dhe veçoritë e mbështetura.
+HCI Version:
+LMP Version:
+Manufacturer ID:
+Veçoritë e Mbështetura:
+Po
+Jo
+Adapteri Bluetooth duhet te jete plotesisht i pershtatshem me levat DS3/DS4.
+Adapteri Bluetooth mund te mos punoje sakte me levat DS3/DS4.
+Imitimi Multitap
+Nderron fikur/ndezur imitimin Multitap per lojen e zgjedhur.
+Imituesi Multitap ne Porten:
+Zgjidh porten per imitimin Multitap.
+Zgjidhje per DS3 Fallco.
+Disa DS3 fallco duan nje zgjidhje, ky opsion do ta aktivizoje ate.
+Imitio Rrokullisjen e FIELD
+Rregullimi per lojerat qe kan difekt ne Metoden e videos progresive.
+Cilesimet e Kycit Prinderor
+Password i Kycit Prinderor
+Lere bosh nese do ta fikesh kycin prinderor
+Vendos Passwordin per Kycin Prinderor
+Passwordi i Kycit Prinderor eshte i gabuar.
+Kyci Prinderor u fik.
+Opsionet e Ndertimit:
+Gabim - ky password nuk mund te perdoret.
+Dosja e VMC %s eshte e fragmentuar. Vazhdo me Karten e Memories ne slot %d?
+Cilesimet Audio
+Efektet e Zerit
+Zeri i Ndezjes
+Volum i Efektit te Zerit
+Volum i Zerit te Ndezjes
+Konfirmo ndryshimin e menyres se videos?
+Ruaj Listen e Lojerave (HDD)
+Njoftimet
+Konfigurimi u ngarkua nga %s
+Tema u ngarkua nga %s
+Gjuha u ngarkua nga %s
+Pjesa %s u montua.
+Opsionet
+Cilesimet e lojes u ruajten.
+Cilesimet %s u hoqen.
+Mbishkruan cilesimet e pajtueshmerise se lojes kur aktivizohet.
+Menyra e Cilesimeve
+Globale
+Per Loje
+Te gjitha
+Zgjidh cilesime per te hequr.
+Forumet e Suportuara:
+Titulli
+Zhaner
+Leshimi
+Zhvilluesi
+Pershkrimi
+Blloko Paisje
+Cilesimet e Leves
+Nderron fikur/ndezur Menaxherin e Bllokuesit te Paisjes.
+Nderron fikur/ndezur Pasijet e Bllokuara (p.sh. USB).
+Lojërat USB
+Lojërat iLink
+Lojërat MX4SIO
+Konfiguro PADMACRO
+Cilësimet e Pad macro
+Pad macros
+Ngadalësim analog:
+Zvogëlon rrezen e levës analoge kur shtypet butoni
+Leva majtas
+Leva djathtas
+Përmbys boshtin analog:
+Përmbys boshtin e levës analoge
+Shpejtësia e butonit turbo
+Sa shpejt të shtypet butoni kur turbo është aktiv
+Ndërsa butoni është shtypur
+Ndërruar nga butoni
+JAPONISHT
+ANGLISHT
+FRËNGJISHT
+SPANJISHT
+GJERMANISHT
+ITALISHT
+HOLANDISHT
+PORTUGALISHT
+RUSISHT
+KOREANISHT
+KINEZISHT TRADICIONALE
+KINEZISHT E THJESHTUAR
+Cilësimet OSD
+Gjuha OSD
+Detyro një konfigurim gjuhe të personalizuar
+Ndrysho gjuhën
+Madhësia e ekranit
+Ekran i plotë
+Modaliteti i videos
+Parazgjedhja e sistemit
+Muzikë Sfondi
+Volumi i Muzikës së Sfondit
+Muzika e Parazgjedhur e Temës
+Cakto shtegun për të transmetuar muzikë për temën e brendshme.
+E lartë
+E ulët
+Ndjeshmëria e boshtit X analog
+Ndjeshmëria e boshtit Y analog
+Skedarë të gjetur: %i
+Zgjedhja e mashtrimeve
+Lejohet vetëm një HDD; aktivizimi kyç APA ose GPT.
+Cilësimet nuk u shkruan dot te %s (gabimi %d)
+Nisja e Diskut PS2
+Nuk ka disk PS2 në lexues.
+Mbështetje Financiare
+Parazgjedhje
+Po ngarkohen cilësimet...
+Gati.
+Të Preferuarat
+Modaliteti i Nisjes së Të Preferuarave
+E preferuar
+%s nuk lejohet nëpërmjet Menysë së Të Preferuarave.
+%s nuk lejohet ndërkohë që elementi është shënuar si i preferuar.
+Advanced Arguments
+Advanced
+Artwork Settings
+Zbato VCD BDMA gjatë nisjes
+Modaliteti BDMA
+BDMA Settings
+Burimi BDMA
+Colors
+Communication Settings
+Controller Emulation
+Controller Macros
+Bërthama e Ngarkuesit
+Shpejtësia e Animacionit
+Numri i Kopertinave
+Errëso Kopertinат Anësore
+Shkalla Qendrore
+Cilësimet Coverflow
+Bërthama e Parazgjedhur e Ngarkuesit
+Display
+Imazhi i Mashtrimit PS2RD
+Arkiv .tar i kopertinave
+Shfleto dosjet në listën e lojrave
+Game Launching
+Game List Settings
+Game Sources
+Aktiv: pajis automatikisht kartën e memories me drejtuesin përkatës exFAT të VCD-së së nisur para nisjes (rekomandohet). Joaktiv: menaxhoje vetë me zgjedhësit Source/Mode të BDMA më poshtë.
+Drejtuesi i pajisjes bllok exFAT që ngarkon POPSTARTER. Ndryshimi i tij kopjon modulet në kartë; FAT32 = asnjë (drejtues i integruar).
+Pajisja dosja POPS e së cilës mban skedarët e drejtuesit BDMAssault (usbd.irx.* / usbhdfsd.irx.*).
+Bërthama globale e paracaktuar për lojërat, bërthama e ngarkuesit e të cilave për çdo lojë është vendosur në Default. <OPL> është bërthama vendase; Neutrino zinxhiron neutrino.elf të jashtëm. Një zgjedhje për çdo lojë e mbivendos gjithmonë këtë.
+Zbato një patch të parandërtuar PS2RD .img në lojën tënde.
+Shfaq nëndosjet e CD/DVD si hyrje të shfletueshme; zgjidh për të hapur, anulo për t'u kthyer
+Komanda e kalimit në kartë do t'i dërgohet folejeve të zgjedhura gjatë IGR
+OFF mund të ndihmojë performancën por mund të shkaktojë ngecje nga afatet kohore MMCE
+Vlerat më të ulëta mund të përmirësojnë performancën por shkaktojnë paqëndrueshmëri
+Vetëm Neutrino -- rregullon lojërat që tejkalojnë një bufer IOP (-gc=7)
+Flamurë shtesë Neutrino, të ndarë me hapësira (p.sh. -mt=dvd). Globale zbatohet për të gjitha lojërat; për-lojë shtohet sipër. Parashtro një flamur me $ për ta çaktivizuar pa fshirë.
+Detyro sistemin e skedarëve të pajisjes bllok të Neutrino (-bsdfs). Auto = paracaktimi për çdo pajisje. hdl/bd janë opsione për ekspertë; çiftojini me një -dvd= përkatës në argumentet e nisjes nëse forma e rrugës automatike nuk përshtatet.
+Pajisja që mban neutrino.elf (në një dosje NEUTRINO/ ose neutrino/). Zbulimi automatik skanon mc0 dhe pastaj mc1.
+Rregullim me ndërrim fushash për lojërat që dridhen ose grisen nën një mënyrë Video të detyruar të Neutrino. Kërkon një mënyrë Video të Neutrino të vendosur.
+Detyro modalitetin e videos GS të Neutrino (-gsm). Joaktive mban parazgjedhjen e lojës.
+Pajisja që mban POPS/POPSTARTER.ELF për nisjet PS1 VCD. Parazgjedhja = pajisja e nisjes (cwd) pastaj vetë pajisja e VCD-së. E personalizuara shfaq një shteg teksti të lirë.
+Shtegu i personalizuar POPSTARTER.ELF; kthehet pa zhurmë te dosja POPS e pajisjes nëse është bosh/mungon. Tastiera kufizohet në 31 karaktere; shtegje më të gjata nëpërmjet settings_riptopl.cfg.
+Render optical barcode for Pixel FX / RetroGEM / PS2Digital on PS1 VCD launch
+Copy OPL's own Network Settings values (above) into these POPStarter fields. Nothing is written until you confirm with OK.
+SMB port on the server -- 445 is the default. Leave at 0 (or 445) for a normal share; use 139 for older SMB1 servers.
+Dridhje e shkurtër kur lëviz kursorin, konfirmon ose kthehesh -- kërkon një DualShock në modalitet analog
+Shfaq vetëm Diskun 1 të një loje PS1 me disqe të shumtë në listat e pajisjeve (stili POPSLoader). Fsheh skedarët e emërtuar (Disc 2), (CD 2), etj. Të gjithë disqet mbeten në kartë për ndërrim gjatë lojës; Të preferuarat nuk filtrohen.
+Vetëm kozmetike -- fsheh një prefiks ID-je loje në krye (p.sh. SLUS_005.51.) nga emrat e listës PS1/VCD. Emrat pa ID shfaqen ashtu siç janë. Nuk ndryshon nisjen, artin e kopertinës apo të preferuarat.
+Nis pa VMC-në e kësaj foleje ndërsa mban kartën e saj të konfiguruar. Vetëm nisjet me Neutrino; loja më pas përdor kartën reale në atë fole.
+Interface
+Network
+MMCE
+Foleja/et e Kartës IGR
+Modaliteti i Nisjes MMCE
+Shtegu i Prefiksit MMCE
+Foleja MMCE
+Përdor alarme me afat kohor
+Ciklet e pritjes pas /ACK të ulët
+Mode 7
+Imazhi ATA0 (-ata0)
+ID ATA0 (-ata0id)
+Imazhi ATA1 (-ata1)
+Auto: -bsd -dvd -gc -gsm -mc -dbc -logo
+Konfigurimi (-cfg)
+Drejtoria e Punës (-cwd)
+Ngjyra Debug (-dbc)
+ELF i Nisjes (-elf)
+Argumente Shtesë
+Logoja PS2 (-logo)
+Nisje e Shpejtë (-qb)
+Protokolli i rrjetit
+Argumente të Nisjes Neutrino
+Sistemi i Skedarëve Neutrino
+Neutrino Defaults
+Pajisja Neutrino
+Përputhshmëria GSM e Neutrino
+Video Neutrino
+OSD Defaults
+Path Prefixes
+Path Settings
+Ngjyra e Përzierjes Plasma
+POPStarter
+Pajisja POPSTARTER.ELF
+Shtegu POPSTARTER.ELF
+RetroGEM Game ID
+Import POPSLoader Settings
+No existing POPStarter SMB configuration was detected. Enter the correct network settings before creating one.
+POPStarter SMB Network
+Dridhje e komandës në menu
+Security
+Storage and Cache
+Tools
+Vetëm disku i parë (PS1 me shumë disqe)
+Fshih ID-në e Lojës PS1 (lista VCD)
+exFAT
+fat32
+fat32 is recommended for non exFAT USB users.
+fat32 or exFAT USB Mode?
+USB VCD Mode
+Çaktivizo VMC 1 (mbaj kartën)
+Çaktivizo VMC 2 (mbaj kartën)
+Asnjë
+I vogël
+I madh
+Normal
+Controller
+Audio
+Neutrino nuk mund të nisë nga kjo pajisje -- nisja u ndërpre.
+Konfigurimi i rrjetit të Neutrino (bsd toml) mungon ose nuk mund të shkruhet -- nisja u ndërpre, kontrollo dosjen neutrino.
+Skedari VMC për këtë lojë nuk u gjet -- po niset pa të (loja përdor kartën e saj reale).
+Pajisja e Lojës
+Neutrino nuk e mbështet këtë format skedari, niset me bërthamën <OPL>
+ELF i Neutrino nuk u gjet, niset me bërthamën <OPL>
+Tepër i fragmentuar për Neutrino (%d fragmente, kufiri %d përfshirë VMC-të) -- po provohet bërthama OPL në vend të tij.
+Skedarët e modulit BDMA nuk u gjetën në pajisjen burimore.
+Hapësirë e pamjaftueshme në kartën e memories për modulet BDMA.
+Gabim gjatë shkrimit të moduleve BDMA në kartën e memories.
+UDPBD kërkon një IP statike të PS2. Vendoseni në Konfigurimin e Rrjetit (DHCP është aktiv).
+Rinis OPL-në për të zbatuar ndryshimin e protokollit të nisjes në rrjet.
+UDPFS është aktive -- hap skedën e re UDPFS dhe shtyp Konfirmo për t'u lidhur. Ana e PC-së ekzekuton udpfsd -fsroot <games folder>.
+Pajisja bllok e rrjetit është aktive -- skeda e saj shfaqet sapo serveri i PC-së përgjigjet (udpfsd -bdpath për UDPFS Image, udpbd-server për UDPBD).
+Tepër i fragmentuar për Neutrino (%d fragmente, kufiri %d përfshirë VMC-të) -- defragmento në PC; nisja u ndërpre.
+Lojëra UDPFS
+Lojërat e rrjetit (UDP) nisen vetëm përmes bërthamës Neutrino. Sigurohu që neutrino.elf ekziston dhe formati mbështetet.
+Lojërat PS1 (.VCD) nuk mund të nisen përmes pajisjes së rrjetit.
+MX4SIO dhe emulimi i kontrollerit ndajnë të njëjtën bus SIO2 dhe loja mund të mos niset.
+MMCE card switch not confirmed -- launching anyway
+Lojëra UDPFSBD
+UDPBD Games
+Duke ngarkuar drejtuesit e ruajtjes...
+Duke ngarkuar drejtuesin USB...
+Mungon POPSTARTER.ELF
+Mungojnë kërkesat SMB të POPSTARTER
+SMB games have no Neutrino support -- launching with the OPL core.
+Neutrino cannot use a VMC on APA HDD (no pfs support) -- launching without it.
+VCD
+Po shfaq lojërat VCD
+Po shfaq lojërat e diskut
+Po skanohen disqet USB / kartë / rrjet...
+Po niset rrjeti...
+Po skanohet HDD...
+USB
+MX4SIO
+MMCE
+HDD i brendshëm
+USB (FAT32)
+USB (exFAT)
+MX4SIO (exFAT)
+MMCE (exFAT)
+HDD (exFAT)
+Loaded from %s
+Nuk u shkrua konfigurimi i rrjetit POPSTARTER në kartën e memories.
+Kjo cilësim nuk përdoret me bërthamën Neutrino.
+Çaktivizo të gjitha
+Duke ngarkuar tingujt e temës...
+Duke ndërtuar menynë...
+WARNING -- forcing 1080p is experimental and unverified. It may show no picture or, on some hardware, stress the console. Proceed at your own risk.
+Proceed with forcing 1080p for this game?
+Are you sure? This applies the experimental 1080p mode to this game.
+Custom Settings Path
+Save settings to a folder you choose, e.g. mass0:/OPL. Leave blank to use the folder OPL booted from. The device is loaded on demand, so it need not be mounted when you type it.
+Per Game + Global
+GSM Defaults (All Games)
+Device busy: the settings write never started. Try again once loading finishes.
+Nuk u gjet kartë memorie -- cilësimet nuk mund të ruhen. OPL u nis nga një pajisje rrjeti, cilësimet e së cilës duhet të qëndrojnë në një kartë lokale.
+Preparing PS1 driver on memory card...
+USB BDMA Driver
+PS1 (VCD) launches from a USB stick only. The PS2 cannot detect whether a stick is fat32 or exFAT, so POPSTARTER's driver must be chosen. Ask prompts on every USB VCD launch; exFAT or fat32 pin the answer and skip the prompt.
+Ask
+HDD settings used the safe fallback home: %s
+Cilësimet e Përgjithshme
+Cilësimet e Pajisjes
+MMCE Games
+Të Avancuara
+Cilësimet MMCE
+Metoda e Radhës së Bllokimit Sema
+THFIFO mund të ndihmojë me përputhshmërinë por të përkeqësojë performancën
+Shkruaj Konfigurimin e Rrjetit POPSTARTER
+Ruaj gjithashtu këto vlera IP + SMB në IPCONFIG.DAT / SMBCONFIG.DAT të POPSTARTER në kartën e memories (për VCD mbi SMB).
+Shtegu ELF i Neutrino
+Shtegu i plotë drejt neutrino.elf (p.sh. mc0:NEUTRINO/neutrino.elf). Bosh = zbulim automatik në mc0/mc1.
+Duke skanuar kartat e kujtesës...
+Duke armatosur ID-në e lojës MMCE...
+Qasja UDPFS
+MMCE GameID nuk u zbatua -- neutrino.elf ndodhet në këtë kartë (ndërrimi i saj do ta shkarkonte Neutrino).
+APA and exFAT internal HDD were both enabled -- one was disabled automatically (check Device Settings).
+Cilësimet VCD
