@@ -2947,6 +2947,8 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
             }
         }
 
+        const char *focusedStartup = NULL;
+
         if (item) {
             // Load and render background game logo at bottom-right (smooth fade-in transition)
             static float logoAlpha = 0.0f;
@@ -3203,6 +3205,7 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
                 const char *startup = NULL;
                 if (support && support->itemGetStartup && !isUnplugged) {
                     startup = support->itemGetStartup(support, sourceId);
+                    focusedStartup = startup;
                 }
                 fntRenderString(gPS5RegFont, 50, 354, ALIGN_LEFT, 0, 0, getGameDeveloper(startup, fullTitle), GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x56));
             } else {
@@ -3211,7 +3214,6 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
 
         } else {
             // No games placeholder card/text
-            // No games placeholder card/text
             fntRenderString(gPS5BoldFont, 320, 245, ALIGN_CENTER, 0, 0, "NO GAMES FOUND", GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x2C));
         }
 
@@ -3219,10 +3221,10 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
         int helperY = screenHeight - 20;
         extern int gSelectButton;
         int playIcon = gSelectButton == KEY_CIRCLE ? CIRCLE_ICON : CROSS_ICON;
-        u64 actionColor = ps5FocusedGameAvailable ? GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80) : GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x50);
+        u64 actionColor = ps5FocusedGameAvailable ? GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80) : GS_SETREG_RGBA(0x58, 0x58, 0x50, 0x50);
         int nextX = drawPS5IconAndText(playIcon, "Play", gPS5SemiBoldFont, 50, helperY, actionColor);
         extern int ps5IsGameFavorite(const char *startup);
-        const char *favText = (selectedVisibleItem && startup && ps5IsGameFavorite(startup)) ? "Remove from favourite" : "Add to favourite";
+        const char *favText = (focusedStartup && ps5IsGameFavorite(focusedStartup)) ? "Remove from favourite" : "Add to favourite";
         drawPS5IconAndText(TRIANGLE_ICON, favText, gPS5SemiBoldFont, nextX + 20, helperY, actionColor);
 
         // 5. Draw Vertical Alphabet Carousel at the right end of the screen
