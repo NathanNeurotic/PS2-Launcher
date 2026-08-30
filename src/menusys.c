@@ -63,7 +63,16 @@ enum GAME_MENU_IDs {
     GAME_DELETE_GAME,
     GAME_PS5_MODE_BASE = 100,
     GAME_PS5_GSM_RESOLUTION = 120,
+    GAME_PS5_LANGUAGE = 121,
+    GAME_PS5_VMC_SLOT1 = 122,
+    GAME_PS5_VMC_SLOT2 = 123,
+    GAME_PS5_VMC_SIZE = 124,
+    GAME_PS5_CHEAT_ENABLE = 125,
+    GAME_PS5_CHEAT_CONFIG = 126,
 };
+
+void ps5LoadFavorites(void);
+item_list_t *resolveThemeGameItem(void *userdata, int id, int *sourceId);
 
 #define PS5_SMB_SETTINGS_COUNT 11
 #define PS5_CAROUSEL_REPEAT_DELAY 120
@@ -3710,7 +3719,7 @@ void menuHandleInputMain()
             submenu_list_t *cur = ps5MenuGetActionGame();
             if (cur != NULL) {
                 int sourceId;
-                item_list_t *support = resolveThemeGameItem(menuGetMainMenu()->item->userdata, cur->item.id, &sourceId);
+                item_list_t *support = resolveThemeGameItem(menuGetMainMenu()->item.userdata, cur->item.id, &sourceId);
                 if (support && support->itemGetStartup) {
                     const char *startup = support->itemGetStartup(support, sourceId);
                     if (startup) ps5RecordRecentlyPlayed(startup);
@@ -3729,7 +3738,7 @@ void menuHandleInputMain()
             submenu_list_t *cur = ps5MenuGetActionGame();
             if (cur != NULL) {
                 int sourceId;
-                item_list_t *support = resolveThemeGameItem(menuGetMainMenu()->item->userdata, cur->item.id, &sourceId);
+                item_list_t *support = resolveThemeGameItem(menuGetMainMenu()->item.userdata, cur->item.id, &sourceId);
                 const char *startup = NULL;
                 if (support && support->itemGetStartup) {
                     startup = support->itemGetStartup(support, sourceId);
