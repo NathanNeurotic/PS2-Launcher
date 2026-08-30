@@ -26,20 +26,19 @@ jobs:
           export GSKIT=$PS2DEV/gsKit
           export PATH=$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin:$PATH
           
-          # Clean and compile full release
+          # Compile full release
           make clean || true
           make -j$(nproc)
 
       - name: Prepare Artifacts
         run: |
           mkdir -p release
-          if [ -f "OPNPS2LD.ELF" ]; then
-            cp OPNPS2LD.ELF release/PS2-Launcher-4.0.0.ELF
-            cp OPNPS2LD.ELF release/OPNPS2LD.ELF
-          elif [ -f "PS2-Launcher.ELF" ]; then
-            cp PS2-Launcher.ELF release/PS2-Launcher-4.0.0.ELF
+          cp *.ELF release/ 2>/dev/null || true
+          cp *.elf release/ 2>/dev/null || true
+          if [ -f "release/PS2L.ELF" ]; then
+            cp release/PS2L.ELF release/PS2-Launcher-4.0.0.ELF
           fi
-          cd release && zip -r PS2-Launcher-Build.zip *
+          cd release && zip -r PS2-Launcher-Build.zip .
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
