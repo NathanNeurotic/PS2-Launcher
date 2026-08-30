@@ -72,6 +72,7 @@ enum GAME_MENU_IDs {
 };
 
 void ps5LoadFavorites(void);
+void ps5LoadRecent(void);
 
 #define PS5_SMB_SETTINGS_COUNT 11
 #define PS5_CAROUSEL_REPEAT_DELAY 120
@@ -556,6 +557,7 @@ void menuInit()
         menuListSemaId = sbCreateSemaphore();
     }
     ps5LoadFavorites();
+    ps5LoadRecent();
 }
 
 void menuEnd()
@@ -2503,6 +2505,39 @@ void ps5ToggleGameFavorite(const char *startup)
         strncpy(gPS5Favorites[gPS5FavoritesCount++], startup, 31);
         ps5SaveFavorites();
     }
+}
+
+void ps5LoadRecent(void)
+{
+    int fd = openFile("mc0:/PS2L/RECENT.CFG", O_RDONLY);
+    if (fd < 0) fd = openFile("mass0:/PS2L/RECENT.CFG", O_RDONLY);
+    if (fd >= 0) {
+        char buf[2048];
+        int bytes = read(fd, buf, sizeof(buf) - 1);
+        if (bytes > 0) {
+            char *line;
+            buf[bytes] = '\0';
+            gPS5RecentCount = 0;
+            line = strtok(buf, "\r\n");
+            while (line && gPS5RecentCount < PS5_MAX_RECENT) {
+                if (line[0] != '\0') {
+                    strncpy(gPS5Recent[gPS5RecentCount++], line, 31);
+                }
+                line = strtok(NULL, "\r\n");
+            }
+        }
+        close(fd);
+    }
+}
+
+int ps5IsGameRecent(const char *startup)
+{
+    int i;
+    if (startup == NULL || startup[0] == '\0') return 0;
+    for (i = 0; i < gPS5RecentCount; i++) {
+        if (strcasecmp(gPS5Recent[i], startup) == 0) return 1;
+    }
+    return 0;
 }
 
 void ps5RecordRecentlyPlayed(const char *startup)
