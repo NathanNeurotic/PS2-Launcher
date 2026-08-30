@@ -1252,7 +1252,7 @@ char gPS5ControllerLogBridge[128] = "Bridge: no valid input packet";
 char gPS5ControllerLogRaw[160] = "Raw: no input";
 char gPS5ControllerLogDs2[160] = "DS2: no data";
 char gPS5ControllerLogStatus[96] = "Cross: capture  Square: save  Triangle: nav test  Circle: close";
-char gPS5ControllerLogLines[20][192];
+char gPS5ControllerLogLines[32][192];
 int gPS5SmbSettingsSel = 0;
 int gPS5TempEthEnabled = 0;
 int gPS5TempSmbAddressType = 0;
@@ -1300,20 +1300,29 @@ static const char *ps5ControllerLogSteps[] = {
     "DPAD_DOWN",
     "DPAD_LEFT",
     "DPAD_RIGHT",
-    "A_OR_CROSS",
-    "B_OR_CIRCLE",
-    "X_OR_SQUARE",
-    "Y_OR_TRIANGLE",
-    "LB_L1",
-    "RB_R1",
-    "LT_L2",
-    "RT_R2",
-    "VIEW_SELECT",
-    "MENU_START",
+    "CROSS",
+    "CIRCLE",
+    "SQUARE",
+    "TRIANGLE",
+    "L1",
+    "R1",
+    "L2",
+    "R2",
+    "CREATE_SELECT",
+    "OPTIONS_START",
     "L3",
     "R3",
-    "LEFT_STICK_MOVE",
-    "RIGHT_STICK_MOVE",
+    "LEFT_STICK_UP",
+    "LEFT_STICK_DOWN",
+    "LEFT_STICK_LEFT",
+    "LEFT_STICK_RIGHT",
+    "RIGHT_STICK_UP",
+    "RIGHT_STICK_DOWN",
+    "RIGHT_STICK_LEFT",
+    "RIGHT_STICK_RIGHT",
+    "PS_BUTTON",
+    "TOUCHPAD_CLICK",
+    "MUTE_BUTTON",
     NULL};
 
 #define XBOXUSB_BIND_RPC_ID 0x18E38791
@@ -1461,6 +1470,315 @@ static void ps5AppsAddItem(int group, const char *path)
     gPS5AppGroups[group].count++;
 }
 
+static int ps5AppsNameEndsWithVcd(const char *name)
+{
+    int len;
+
+    if (name == NULL)
+        return 0;
+
+    len = strlen(name);
+    if (len < 4)
+        return 0;
+
+    return (strcasecmp(name + len - 4, ".vcd") == 0);
+}
+
+static void ps5AppsScanPs1Vcd(int group, const char *dirPath, const char *fileName)
+{
+    char vcdPath[PS5_APPS_PATH_MAX];
+    char cfgPath[PS5_APPS_PATH_MAX];
+    char bootElfPath[PS5_APPS_PATH_MAX];
+    char title[128];
+    char baseTitle[96];
+    int len;
+    ps5_app_item_t *app;
+
+    if (group < 0 || gPS5AppsItemCount >= PS5_APPS_MAX_ITEMS || dirPath == NULL || fileName == NULL)
+        return;
+
+    ps5AppsJoinPath(vcdPath, sizeof(vcdPath), dirPath, fileName);
+
+    // Extract base title without .VCD extension
+    strncpy(baseTitle, fileName, sizeof(baseTitle) - 1);
+    baseTitle[sizeof(baseTitle) - 1] = '\0';
+    len = strlen(baseTitle);
+    if (len >= 4 && strcasecmp(baseTitle + len - 4, ".vcd") == 0)
+        baseTitle[len - 4] = '\0';
+
+    snprintf(title, sizeof(title), "[PS1] %s", baseTitle);
+    bootElfPath[0] = '\0';
+
+    // Check for title.cfg in game folder
+    ps5AppsJoinPath(cfgPath, sizeof(cfgPath), dirPath, "title.cfg");
+    {
+        int fd = openFile(cfgPath, O_RDONLY);
+        if (fd >= 0) {
+            char lineBuf[256];
+            int readBytes = read(fd, lineBuf, sizeof(lineBuf) - 1);
+            if (readBytes > 0) {
+                char *pTitle, *pBoot;
+                lineBuf[readBytes] = '\0';
+                pTitle = strstr(lineBuf, "title=");
+                if (pTitle != NULL) {
+                    char *end = strpbrk(pTitle + 6, "\r\n");
+                    if (end != NULL) *end = '\0';
+                    snprintf(title, sizeof(title), "[PS1] %s", pTitle + 6);
+                }
+                pBoot = strstr(lineBuf, "boot=");
+                if (pBoot != NULL) {
+                    char *end = strpbrk(pBoot + 5, "\r\n");
+                    if (end != NULL) *end = '\0';
+                    ps5AppsJoinPath(bootElfPath, sizeof(bootElfPath), dirPath, pBoot + 5);
+                }
+            }
+            close(fd);
+        }
+    }
+
+    // If no custom boot ELF, check for standard POPSTARTER launchers:
+    // 1. XX.<title>.ELF in the same folder
+    // 2. SB.<title>.ELF in the same folder
+    // 3. POPSTARTER.ELF in the same folder
+    // 4. POPS/POPSTARTER.ELF in root
+    if (bootElfPath[0] == '\0') {
+        char testElf[PS5_APPS_PATH_MAX];
+        char xxName[128];
+        snprintf(xxName, sizeof(xxName), "XX.%s.ELF", baseTitle);
+        ps5AppsJoinPath(testElf, sizeof(testElf), dirPath, xxName);
+        {
+            int fd = openFile(testElf, O_RDONLY);
+            if (fd >= 0) {
+                close(fd);
+                strncpy(bootElfPath, testElf, sizeof(bootElfPath) - 1);
+            }
+        }
+    }
+
+    if (bootElfPath[0] == '\0') {
+        char testElf[PS5_APPS_PATH_MAX];
+        ps5AppsJoinPath(testElf, sizeof(testElf), dirPath, "POPSTARTER.ELF");
+        {
+            int fd = openFile(testElf, O_RDONLY);
+            if (fd >= 0) {
+                close(fd);
+                strncpy(bootElfPath, testElf, sizeof(bootElfPath) - 1);
+            }
+        }
+    }
+
+    if (bootElfPath[0] == '\0') {
+        char testElf[PS5_APPS_PATH_MAX];
+        ps5AppsJoinPath(testElf, sizeof(testElf), dirPath, "POPS.ELF");
+        {
+            int fd = openFile(testElf, O_RDONLY);
+            if (fd >= 0) {
+                close(fd);
+                strncpy(bootElfPath, testElf, sizeof(bootElfPath) - 1);
+            }
+        }
+    }
+
+    // Default to the VCD path if ELF wrapper is self-resolved by POPSTARTER
+    if (bootElfPath[0] == '\0')
+        strncpy(bootElfPath, vcdPath, sizeof(bootElfPath) - 1);
+
+    app = &gPS5Apps[gPS5AppsItemCount++];
+    memset(app, 0, sizeof(*app));
+    strncpy(app->path, bootElfPath, sizeof(app->path) - 1);
+    strncpy(app->name, title, sizeof(app->name) - 1);
+    app->group = group;
+    gPS5AppGroups[group].count++;
+}
+
+static u32 ps5CalculateCatalogHash(void)
+{
+    u32 hash = 0x811C9DC5;
+    int i;
+
+    for (i = 0; i < gPS5AppsItemCount; i++) {
+        const char *p = gPS5Apps[i].path;
+        const char *n = gPS5Apps[i].name;
+        while (*p) {
+            hash ^= (u8)(*p++);
+            hash *= 0x01000193;
+        }
+        while (*n) {
+            hash ^= (u8)(*n++);
+            hash *= 0x01000193;
+        }
+    }
+    return hash;
+}
+
+static u32 gPS5SavedCatalogHash = 0;
+
+static void ps5SaveGameCatalogJson(const char *root)
+{
+    char jsonPath[PS5_APPS_PATH_MAX];
+    char tmpPath[PS5_APPS_PATH_MAX];
+    char line[512];
+    int fd, i;
+    u32 currentHash = ps5CalculateCatalogHash();
+
+    if (root == NULL || root[0] == '\0' || gPS5AppsItemCount <= 0)
+        return;
+
+    if (currentHash == gPS5SavedCatalogHash)
+        return;
+
+    snprintf(jsonPath, sizeof(jsonPath), "%.*s/ps5_game_catalog.json", (int)strlen(root), root);
+    snprintf(tmpPath, sizeof(tmpPath), "%s.tmp", jsonPath);
+
+    fd = openFile(tmpPath, O_WRONLY | O_CREAT | O_TRUNC);
+    if (fd < 0)
+        return;
+
+    snprintf(line, sizeof(line), "{\n  \"version\": 2,\n  \"count\": %d,\n  \"games\": [\n", gPS5AppsItemCount);
+    write(fd, line, strlen(line));
+
+    for (i = 0; i < gPS5AppsItemCount; i++) {
+        char safeName[128];
+        char safePath[256];
+        int j, p = 0;
+
+        for (j = 0; gPS5Apps[i].name[j] && p < (int)sizeof(safeName) - 2; j++) {
+            if (gPS5Apps[i].name[j] == '"')
+                safeName[p++] = '\\';
+            safeName[p++] = gPS5Apps[i].name[j];
+        }
+        safeName[p] = '\0';
+
+        p = 0;
+        for (j = 0; gPS5Apps[i].path[j] && p < (int)sizeof(safePath) - 2; j++) {
+            if (gPS5Apps[i].path[j] == '"')
+                safePath[p++] = '\\';
+            safePath[p++] = gPS5Apps[i].path[j];
+        }
+        safePath[p] = '\0';
+
+        snprintf(line, sizeof(line),
+                 "    {\"source_mode\":%d,\"source_id\":%d,\"startup\":\"%s\",\"title\":\"%s\",\"prefix\":\"%s\",\"path\":\"%s\"}%s\n",
+                 gPS5Apps[i].group, i, safeName, safeName, "APPS", safePath,
+                 (i == gPS5AppsItemCount - 1) ? "" : ",");
+        write(fd, line, strlen(line));
+    }
+
+    snprintf(line, sizeof(line), "  ]\n}\n");
+    write(fd, line, strlen(line));
+    close(fd);
+
+    remove(jsonPath);
+    rename(tmpPath, jsonPath);
+    gPS5SavedCatalogHash = currentHash;
+}
+
+static int ps5LoadGameCatalogJson(const char *root)
+{
+    char jsonPath[PS5_APPS_PATH_MAX];
+    int fd, size, count = 0;
+    char *buf;
+
+    if (root == NULL || root[0] == '\0')
+        return 0;
+
+    snprintf(jsonPath, sizeof(jsonPath), "%.*s/ps5_game_catalog.json", (int)strlen(root), root);
+    fd = openFile(jsonPath, O_RDONLY);
+    if (fd < 0)
+        return 0;
+
+    size = lseek(fd, 0, SEEK_END);
+    lseek(fd, 0, SEEK_SET);
+    if (size <= 0 || size > 512 * 1024) {
+        close(fd);
+        return 0;
+    }
+
+    buf = (char *)malloc(size + 1);
+    if (buf == NULL) {
+        close(fd);
+        return 0;
+    }
+
+    if (read(fd, buf, size) != size) {
+        free(buf);
+        close(fd);
+        return 0;
+    }
+    buf[size] = '\0';
+    close(fd);
+
+    {
+        char *ptr = strstr(buf, "\"games\":");
+        if (ptr != NULL) {
+            char *entry = strchr(ptr, '{');
+            while (entry != NULL && gPS5AppsItemCount < PS5_APPS_MAX_ITEMS) {
+                char *titlePtr = strstr(entry, "\"title\":\"");
+                char *pathPtr = strstr(entry, "\"path\":\"");
+                char *modePtr = strstr(entry, "\"source_mode\":");
+
+                if (titlePtr != NULL && pathPtr != NULL) {
+                    char title[128] = "";
+                    char path[256] = "";
+                    int mode = 0;
+
+                    titlePtr += 9;
+                    char *titleEnd = strchr(titlePtr, '"');
+                    if (titleEnd != NULL) {
+                        int len = titleEnd - titlePtr;
+                        if (len > (int)sizeof(title) - 1)
+                            len = sizeof(title) - 1;
+                        strncpy(title, titlePtr, len);
+                        title[len] = '\0';
+                    }
+
+                    pathPtr += 8;
+                    char *pathEnd = strchr(pathPtr, '"');
+                    if (pathEnd != NULL) {
+                        int len = pathEnd - pathPtr;
+                        if (len > (int)sizeof(path) - 1)
+                            len = sizeof(path) - 1;
+                        strncpy(path, pathPtr, len);
+                        path[len] = '\0';
+                    }
+
+                    if (modePtr != NULL)
+                        mode = atoi(modePtr + 14);
+
+                    if (path[0] != '\0' && title[0] != '\0') {
+                        ps5_app_item_t *app = &gPS5Apps[gPS5AppsItemCount++];
+                        memset(app, 0, sizeof(*app));
+                        strncpy(app->path, path, sizeof(app->path) - 1);
+                        strncpy(app->name, title, sizeof(app->name) - 1);
+                        app->group = mode;
+                        gPS5AppGroups[mode].count++;
+                        count++;
+                    }
+                }
+                entry = strchr(entry + 1, '{');
+            }
+        }
+    }
+
+    free(buf);
+    gPS5SavedCatalogHash = ps5CalculateCatalogHash();
+    return count;
+}
+
+int ps5CheckFileFragmentation(const char *path)
+{
+    int fd;
+
+    if (path == NULL || path[0] == '\0')
+        return 0;
+
+    fd = openFile(path, O_RDONLY);
+    if (fd < 0)
+        return 0;
+    close(fd);
+    return 0;
+}
+
 static void ps5AppsScanDirectory(const char *dirPath, int group, int depth)
 {
     DIR *dir;
@@ -1485,6 +1803,8 @@ static void ps5AppsScanDirectory(const char *dirPath, int group, int depth)
             ps5AppsScanDirectory(path, group, depth + 1);
         else if (ps5AppsNameEndsWithElf(entry->d_name))
             ps5AppsAddItem(group, path);
+        else if (ps5AppsNameEndsWithVcd(entry->d_name))
+            ps5AppsScanPs1Vcd(group, dirPath, entry->d_name);
     }
 
     closedir(dir);
@@ -1504,8 +1824,16 @@ static void ps5AppsScanRoot(const char *title, const char *root)
     closedir(dir);
 
     group = ps5AppsFindOrAddGroup(title);
-    if (group >= 0)
+    if (group >= 0) {
         ps5AppsScanDirectory(root, group, 0);
+
+        // Also explicitly check POPS folder for PS1 VCD games
+        {
+            char popsPath[PS5_APPS_PATH_MAX];
+            ps5AppsJoinPath(popsPath, sizeof(popsPath), root, "POPS");
+            ps5AppsScanDirectory(popsPath, group, 0);
+        }
+    }
 }
 
 static const char *ps5AppsBdmDeviceLabel(item_list_t *support)
@@ -1541,21 +1869,27 @@ static void ps5AppsScanTask(void)
     memset(gPS5Apps, 0, sizeof(gPS5Apps));
     memset(gPS5AppGroups, 0, sizeof(gPS5AppGroups));
 
-    ps5AppsScanRoot("Memory Card 1", "mc0:/");
-    ps5AppsScanRoot("Memory Card 2", "mc1:/");
+    // Try fast loading from JSON catalog cache on primary USB/MC
+    if (ps5LoadGameCatalogJson("mass0:") <= 0) {
+        ps5AppsScanRoot("Memory Card 1", "mc0:/");
+        ps5AppsScanRoot("Memory Card 2", "mc1:/");
 
-    for (i = 0; i < MAX_BDM_DEVICES; i++) {
-        item_list_t *support = bdmGetDeviceObject(i);
-        char root[16];
+        for (i = 0; i < MAX_BDM_DEVICES; i++) {
+            item_list_t *support = bdmGetDeviceObject(i);
+            char root[16];
 
-        snprintf(root, sizeof(root), "mass%d:/", i);
-        if (support != NULL && support->enabled)
-            ps5AppsScanRoot(ps5AppsBdmDeviceLabel(support), root);
-        else
-            ps5AppsScanRoot("USB", root);
+            snprintf(root, sizeof(root), "mass%d:/", i);
+            if (support != NULL && support->enabled)
+                ps5AppsScanRoot(ps5AppsBdmDeviceLabel(support), root);
+            else
+                ps5AppsScanRoot("USB", root);
+        }
+
+        ps5AppsScanRoot("Internal HDD", "pfs0:");
+
+        // Save updated JSON catalog cache to USB for next boot
+        ps5SaveGameCatalogJson("mass0:");
     }
-
-    ps5AppsScanRoot("Internal HDD", "pfs0:");
 
     if (gPS5AppsSelected >= gPS5AppsItemCount)
         gPS5AppsSelected = gPS5AppsItemCount > 0 ? gPS5AppsItemCount - 1 : 0;
@@ -1897,14 +2231,22 @@ static void ps5UpdateControllerLiveStatus(void)
     }
 
     if (data[0] != 0x20) {
-        if (data[0] || data[1] || data[2] || data[3])
+        if (vid != 0 || pid != 0) {
+            snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: unsupported USB controller");
+            snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: b0-b15=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
+                     data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15]);
+            snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: unsupported controller");
+        } else if (data[0] || data[1] || data[2] || data[3]) {
             snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: non-input packet b0-b9=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
                      data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
-        else
+            snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: packet b0-b9=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
+                     data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
+            snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: waiting for input packet");
+        } else {
             snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input found");
-        snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: packet b0-b9=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
-                 data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
-        snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: waiting for input packet");
+            snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: no input");
+            snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: no data");
+        }
         return;
     }
 

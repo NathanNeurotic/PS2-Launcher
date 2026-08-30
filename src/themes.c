@@ -3397,7 +3397,7 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
         extern char gPS5ControllerLogRaw[160];
         extern char gPS5ControllerLogDs2[160];
         extern char gPS5ControllerLogStatus[96];
-        extern char gPS5ControllerLogLines[20][192];
+        extern char gPS5ControllerLogLines[32][192];
         extern int gPS5TempEthEnabled;
         extern int gPS5TempSmbAddressType;
         extern int gPS5TempSmbDhcp;
@@ -3425,9 +3425,12 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
         if (gPS5ControllerLogVisible) {
             const char *steps[] = {
                 "IDLE", "DPAD_UP", "DPAD_DOWN", "DPAD_LEFT", "DPAD_RIGHT",
-                "A_OR_CROSS", "B_OR_CIRCLE", "X_OR_SQUARE", "Y_OR_TRIANGLE",
-                "LB_L1", "RB_R1", "LT_L2", "RT_R2", "VIEW_SELECT",
-                "MENU_START", "L3", "R3", "LEFT_STICK_MOVE", "RIGHT_STICK_MOVE", NULL};
+                "CROSS", "CIRCLE", "SQUARE", "TRIANGLE",
+                "L1", "R1", "L2", "R2", "CREATE_SELECT",
+                "OPTIONS_START", "L3", "R3",
+                "LEFT_STICK_UP", "LEFT_STICK_DOWN", "LEFT_STICK_LEFT", "LEFT_STICK_RIGHT",
+                "RIGHT_STICK_UP", "RIGHT_STICK_DOWN", "RIGHT_STICK_LEFT", "RIGHT_STICK_RIGHT",
+                "PS_BUTTON", "TOUCHPAD_CLICK", "MUTE_BUTTON", NULL};
             int panelX = 48;
             int panelY = 70;
             int panelW = screenWidth - 96;
