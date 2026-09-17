@@ -2268,41 +2268,32 @@ static int ps5ReadControllerRaw(u8 *raw)
     if (ps5GetXboxUsbRawReport(raw)) {
         unsigned int vid = raw[0] | (raw[1] << 8);
         unsigned int pid = raw[2] | (raw[3] << 8);
-        unsigned int status = raw[4];
-        unsigned int reportLen = raw[5];
-        unsigned int ep = raw[6];
-        unsigned int packet = raw[7];
+        unsigned int ifClass = raw[4];
+        unsigned int ifSubClass = raw[5];
+        unsigned int ifProto = raw[6];
+        unsigned int ctrlType = raw[7];
         char bytes[170];
         const char *ctrlName = "USB Controller";
 
-        if (vid == 0x054C && (pid == 0x0CE6 || pid == 0x0DF2))
+        if (ctrlType == 2)
             ctrlName = "DualSense";
-        else if (vid == 0x045E)
+        else if (ctrlType == 1)
             ctrlName = "Xbox USB";
-        else if (vid == 0x057E)
-            ctrlName = "Nintendo Switch Pro";
-        else if (vid == 0x2DC8)
-            ctrlName = "8BitDo Controller";
-        else if (vid == 0x046D)
-            ctrlName = "Logitech Gamepad";
-        else if (vid == 0x0F0D || vid == 0x24C6 || vid == 0x0E6F || vid == 0x1532 || vid == 0x0738)
-            ctrlName = "Xbox 3rd Party USB";
-        else if (vid == 0x2563 || vid == 0x0079 || vid == 0x12AB || vid == 0x11C0 || vid == 0x044F || vid == 0x1038)
-            ctrlName = "Generic USB Gamepad";
-        else if (vid == 0x054C && (pid == 0x05C4 || pid == 0x09CC))
-            ctrlName = "DualShock 4";
-        else if (vid == 0x054C && pid == 0x0268)
-            ctrlName = "DualShock 3";
 
-        ps5FormatControllerBytes(bytes, sizeof(bytes), raw + 8, reportLen ? reportLen : 64);
+        if (ctrlType == 1 && raw[8] == 0x00) {
+            snprintf(bytes, sizeof(bytes), "LX=%02X LY=%02X RX=%02X RY=%02X L2=%02X R2=%02X BTN=%02X/%02X SPECIAL=%02X",
+                     raw[9], raw[10], raw[11], raw[12], raw[13], raw[14], raw[16], raw[17], raw[18]);
+        } else {
+            ps5FormatControllerBytes(bytes, sizeof(bytes), raw + 8, 64);
+        }
 
         if (vid || pid)
-            snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "USB: Connected  %s  VID=%04X PID=%04X  STATUS=%02X EP_IN=%02X  PACKET=%u LEN=%u", ctrlName, vid, pid, status, ep, packet, reportLen);
+            snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "USB %d: Connected  %s  VID=%04X PID=%04X  IF=%02X/%02X/%02X  IN=%02X OUT=%02X  PACKET=%u LEN=%u", 1, ctrlName, vid, pid, ifClass, ifSubClass, ifProto, 0x81, 0x02, 1, 64);
         else
             snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "USB DEVICE: Not Connected");
 
         snprintf(gPS5ControllerLogLatest, sizeof(gPS5ControllerLogLatest), "Latest: %s", bytes[0] ? bytes : "no report");
-        return vid || pid || reportLen;
+        return vid || pid;
     }
     memset(raw, 0, 72);
     snprintf(gPS5ControllerLogDevice, sizeof(gPS5ControllerLogDevice), "USB DEVICE: Logger Not Ready");
