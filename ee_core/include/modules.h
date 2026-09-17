@@ -8,6 +8,7 @@ enum OPL_MODULE_ID {
     // USB mode modules
     OPL_MODULE_ID_USBD,
     OPL_MODULE_ID_USBMASSBD,
+    OPL_MODULE_ID_USBHDFSD,
 
     // iLink mode modules
     OPL_MODULE_ID_ILINK,

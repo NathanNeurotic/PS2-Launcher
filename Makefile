@@ -110,7 +110,7 @@ LNG_DIR = lng/
 PNG_ASSETS_DIR = gfx/
 
 MAPFILE = opl.map
-EE_LDFLAGS += -Wl,-Map,$(MAPFILE)
+EE_LDFLAGS += -Wl,-Map,$(MAPFILE) -Wl,-u,usbhdfsd_irx
 
 EE_LIBS = -L$(PS2SDK)/ports/lib -L$(GSKIT)/lib -L./lib -lgskit -ldmakit -lpoweroff -lfileXio -lpatches -lpng -ljpeg -lz -lmc -lfreetype -lvux -lcdvd -lnetman -lps2ips -laudsrv -lvorbisfile -lvorbis -logg -lpadx -lelf-loader-nocolour
 EE_INCS += -I$(PS2SDK)/ports/include -I$(PS2SDK)/ports/include/freetype2 -I$(GSKIT)/include -I$(GSKIT)/ee/dma/include -I$(GSKIT)/ee/gs/include -Imodules/iopcore/common -Imodules/network/common -Imodules/hdd/common -Iinclude

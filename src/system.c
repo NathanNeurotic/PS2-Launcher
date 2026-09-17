@@ -523,6 +523,10 @@ static unsigned int sendIrxKernelRAM(const char *startup, const char *mode_str, 
         irxptr_tab[modcount].info = size_usbmass_bd_irx | SET_OPL_MOD_ID(OPL_MODULE_ID_USBMASSBD);
         irxptr_tab[modcount++].ptr = (void *)&usbmass_bd_irx;
     }
+    if (modules & CORE_IRX_DECI2) {
+        irxptr_tab[modcount].info = size_usbhdfsd_irx | SET_OPL_MOD_ID(OPL_MODULE_ID_USBHDFSD);
+        irxptr_tab[modcount++].ptr = (void *)&usbhdfsd_irx;
+    }
     if (modules & CORE_IRX_ILINK) {
         irxptr_tab[modcount].info = size_iLinkman_irx | SET_OPL_MOD_ID(OPL_MODULE_ID_ILINK);
         irxptr_tab[modcount++].ptr = (void *)&iLinkman_irx;
