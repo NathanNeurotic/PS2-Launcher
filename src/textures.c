@@ -3,6 +3,8 @@
 #include "include/util.h"
 #include "include/ioman.h"
 #include <png.h>
+#include <jpeglib.h>
+#include <setjmp.h>
 
 extern int debugOpenProbe(const char *path);
 
@@ -541,12 +543,175 @@ int texLoadMem(GSTEXTURE *texture, void **textureData)
     return texLoadAll(texture, NULL, -1, textureData);
 }
 
+struct my_error_mgr
+{
+    struct jpeg_error_mgr pub;
+    jmp_buf setjmp_buffer;
+};
+
+static void my_error_exit(j_common_ptr cinfo)
+{
+    struct my_error_mgr *myerr = (struct my_error_mgr *)cinfo->err;
+    longjmp(myerr->setjmp_buffer, 1);
+}
+
+int texLoadJpeg(GSTEXTURE *texture, const char *filePath)
+{
+    int fd;
+    int fileSize;
+    unsigned char *pBuffer;
+    struct jpeg_decompress_struct cinfo;
+    struct my_error_mgr jerr;
+    JSAMPROW row_pointer[1];
+    unsigned char *rowBuffer = NULL;
+    int outWidth, outHeight;
+
+    texPrepare(texture);
+
+    fd = debugOpenProbe(filePath);
+    if (fd < 0)
+        return ERR_BAD_FILE;
+
+    fileSize = lseek(fd, 0, SEEK_END);
+    lseek(fd, 0, SEEK_SET);
+
+    if (fileSize <= 0) {
+        close(fd);
+        return ERR_BAD_FILE;
+    }
+
+    pBuffer = (unsigned char *)malloc(fileSize);
+    if (!pBuffer) {
+        close(fd);
+        return ERR_BAD_FILE;
+    }
+
+    if (read(fd, pBuffer, fileSize) != fileSize) {
+        free(pBuffer);
+        close(fd);
+        return ERR_BAD_FILE;
+    }
+    close(fd);
+
+    cinfo.err = jpeg_std_error(&jerr.pub);
+    jerr.pub.error_exit = my_error_exit;
+
+    if (setjmp(jerr.setjmp_buffer)) {
+        jpeg_destroy_decompress(&cinfo);
+        if (rowBuffer)
+            free(rowBuffer);
+        if (pBuffer)
+            free(pBuffer);
+        texFree(texture);
+        return ERR_BAD_FILE;
+    }
+
+    jpeg_create_decompress(&cinfo);
+    jpeg_mem_src(&cinfo, pBuffer, fileSize);
+
+    if (jpeg_read_header(&cinfo, TRUE) != JPEG_HEADER_OK) {
+        jpeg_destroy_decompress(&cinfo);
+        free(pBuffer);
+        return ERR_BAD_FILE;
+    }
+
+    cinfo.out_color_space = JCS_RGB;
+    jpeg_start_decompress(&cinfo);
+
+    if (cinfo.output_components != 3) {
+        jpeg_destroy_decompress(&cinfo);
+        free(pBuffer);
+        return ERR_BAD_DEPTH;
+    }
+
+    outWidth = cinfo.output_width;
+    outHeight = cinfo.output_height;
+
+    while (outWidth > 1024 || outHeight > 1024 || gsKit_texture_size(outWidth, outHeight, GS_PSM_CT24) > maxSize) {
+        if (outWidth > outHeight) {
+            outWidth >>= 1;
+            outHeight = (outHeight * outWidth) / cinfo.output_width;
+        } else {
+            outHeight >>= 1;
+            outWidth = (outWidth * outHeight) / cinfo.output_height;
+        }
+        if (outWidth < 2 || outHeight < 2)
+            break;
+    }
+
+    if (texSizeValidate(outWidth, outHeight, GS_PSM_CT24) < 0) {
+        jpeg_destroy_decompress(&cinfo);
+        free(pBuffer);
+        return ERR_BAD_DIMENSION;
+    }
+
+    texture->Width = outWidth;
+    texture->Height = outHeight;
+    texture->PSM = GS_PSM_CT24;
+
+    texture->Mem = memalign(128, gsKit_texture_size(outWidth, outHeight, GS_PSM_CT24));
+    if (!texture->Mem) {
+        jpeg_destroy_decompress(&cinfo);
+        free(pBuffer);
+        return ERR_BAD_FILE;
+    }
+    memset(texture->Mem, 0, gsKit_texture_size(outWidth, outHeight, GS_PSM_CT24));
+
+    rowBuffer = (unsigned char *)malloc(cinfo.output_width * 3);
+    if (!rowBuffer) {
+        jpeg_destroy_decompress(&cinfo);
+        free(pBuffer);
+        texFree(texture);
+        return ERR_BAD_FILE;
+    }
+    row_pointer[0] = rowBuffer;
+
+    if (outWidth == (int)cinfo.output_width && outHeight == (int)cinfo.output_height) {
+        unsigned char *dst = (unsigned char *)texture->Mem;
+        while (cinfo.output_scanline < cinfo.output_height) {
+            jpeg_read_scanlines(&cinfo, row_pointer, 1);
+            memcpy(dst, rowBuffer, outWidth * 3);
+            dst += outWidth * 3;
+        }
+    } else {
+        int y;
+        unsigned char *dst = (unsigned char *)texture->Mem;
+        int rowStride = outWidth * 3;
+        for (y = 0; y < outHeight; y++) {
+            int srcY = (y * cinfo.output_height) / outHeight;
+            while ((int)cinfo.output_scanline <= srcY && cinfo.output_scanline < cinfo.output_height) {
+                jpeg_read_scanlines(&cinfo, row_pointer, 1);
+            }
+            int x;
+            for (x = 0; x < outWidth; x++) {
+                int srcX = (x * cinfo.output_width) / outWidth;
+                dst[y * rowStride + x * 3 + 0] = rowBuffer[srcX * 3 + 0];
+                dst[y * rowStride + x * 3 + 1] = rowBuffer[srcX * 3 + 1];
+                dst[y * rowStride + x * 3 + 2] = rowBuffer[srcX * 3 + 2];
+            }
+        }
+        while (cinfo.output_scanline < cinfo.output_height) {
+            jpeg_read_scanlines(&cinfo, row_pointer, 1);
+        }
+    }
+
+    jpeg_finish_decompress(&cinfo);
+    jpeg_destroy_decompress(&cinfo);
+
+    free(rowBuffer);
+    free(pBuffer);
+
+    return 0;
+}
+
 int texDiscoverLoad(GSTEXTURE *texture, const char *path, int texId)
 {
     char filePath[256];
+    int fd;
 
     LOG("texDiscoverLoad(%s)\n", path);
 
+    // 1. Try PNG
     if (texId != -1)
         snprintf(filePath, sizeof(filePath), "%s%s.%s", path, internalDefault[texId].name, "png");
     else
@@ -561,11 +726,31 @@ int texDiscoverLoad(GSTEXTURE *texture, const char *path, int texId)
         }
     }
 
-    int fd = debugOpenProbe(filePath);
+    fd = debugOpenProbe(filePath);
     if (fd >= 0) {
-        // File found, load it
         close(fd);
         return (texLoad(texture, filePath) >= 0) ? 0 : ERR_BAD_FILE;
+    }
+
+    // 2. Try JPG
+    if (texId != -1)
+        snprintf(filePath, sizeof(filePath), "%s%s.%s", path, internalDefault[texId].name, "jpg");
+    else
+        snprintf(filePath, sizeof(filePath), "%s.%s", path, "jpg");
+
+    if (strncasecmp(filePath, "host", 4) == 0) {
+        int slashIdx;
+        for (slashIdx = 0; filePath[slashIdx]; slashIdx++) {
+            if (filePath[slashIdx] == '/') {
+                filePath[slashIdx] = '\\';
+            }
+        }
+    }
+
+    fd = debugOpenProbe(filePath);
+    if (fd >= 0) {
+        close(fd);
+        return (texLoadJpeg(texture, filePath) >= 0) ? 0 : ERR_BAD_FILE;
     }
 
     return ERR_BAD_FILE;

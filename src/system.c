@@ -55,6 +55,11 @@ extern unsigned int size_IOPRP_img;
 extern unsigned char eesync_irx[];
 extern unsigned int size_eesync_irx;
 
+extern unsigned char usbhdfsd_irx[];
+extern unsigned int size_usbhdfsd_irx;
+
+extern int LoadELFFromFile(const char *filename, int argc, char *argv[]);
+
 #define MAX_MODULES 64
 static void *g_sysLoadedModBuffer[MAX_MODULES];
 static s32 sysLoadModuleLock = -1;
@@ -1031,35 +1036,11 @@ void sysLaunchLoaderElf(const char *filename, const char *mode_str, int size_cdv
 
 int sysExecElf(const char *path)
 {
-    char *argv[1];
-    char execPath[256];
-    t_ExecData elf;
-    int i;
-
     if (path == NULL || path[0] == '\0')
         return -1;
 
-    for (i = 0; i < (int)sizeof(execPath) - 1 && path[i] != '\0'; i++)
-        execPath[i] = path[i];
-    execPath[i] = '\0';
-
-    argv[0] = execPath;
-
-    if (SifLoadElf(execPath, &elf) != 0)
-        return -1;
-
     deinit(NO_EXCEPTION, IO_MODE_SELECTED_NONE);
-    sysReset(0);
-
-    FlushCache(0);
-    FlushCache(2);
-
-    SifLoadFileExit();
-    SifExitIopHeap();
-    SifExitRpc();
-
-    ExecPS2((void *)elf.epc, (void *)elf.gp, 1, argv);
-    return 0;
+    return LoadELFFromFile(path, 0, NULL);
 }
 
 int sysCheckMC(void)

@@ -96,6 +96,7 @@ int texLookupInternalTexId(const char *name);
 int texLoadInternal(GSTEXTURE *texture, int texId);
 int texLoadMem(GSTEXTURE *texture, void **textureData);
 int texDiscoverLoad(GSTEXTURE *texture, const char *path, int texId);
+int texLoadJpeg(GSTEXTURE *texture, const char *filePath);
 void texFree(GSTEXTURE *texture);
 
 #endif

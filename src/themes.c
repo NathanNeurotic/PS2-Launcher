@@ -1485,7 +1485,10 @@ static int loadPS5CoverTexture(GSTEXTURE *texture, const char *path)
     if (pDot)
         *pDot = '\0';
 
-    return texDiscoverLoad(texture, pathNoExt, -1);
+    if (texDiscoverLoad(texture, pathNoExt, -1) >= 0)
+        return 0;
+
+    return texLoadJpeg(texture, path);
 }
 
 static void unloadPS5CoverTexture(net_req_t *entry)
