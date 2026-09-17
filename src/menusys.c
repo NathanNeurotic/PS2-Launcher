@@ -25,6 +25,7 @@
 #include "include/bdmsupport.h"
 #include "include/hddsupport.h"
 #include "include/cheatman.h"
+#define NEWLIB_PORT_AWARE
 #include <fileXio_rpc.h>
 #include <assert.h>
 #include <fcntl.h>
@@ -463,7 +464,7 @@ static void ps5CheatLoadConfig(void)
     if (itemConfigSupport && itemConfigSupport->itemGetPrefix) {
         char cheatPath[256];
         const char *prefix = itemConfigSupport->itemGetPrefix(itemConfigSupport);
-        if (prefix && itemConfigStartup && itemConfigStartup[0]) {
+        if (prefix && itemConfigStartup[0]) {
             snprintf(cheatPath, sizeof(cheatPath), "%sCHT/%s.cht", prefix, itemConfigStartup);
             load_cheats(cheatPath);
             if (itemConfig) {
@@ -4484,8 +4485,7 @@ void menuRenderGameMenu()
     extern int gPS5Mode;
 
     if (gPS5Mode) {
-        submenu_list_t *it;
-        int count = 0, selected = 0, index = 0;
+        int selected = 0;
         int ps5Width, ps5Height;
         char value[64];
         int listX, labelX, listY, rowW, footerY;
@@ -4527,7 +4527,7 @@ void menuRenderGameMenu()
         else if (gPS5CheatMenuState == 2)
             selected = ps5CheatSelected;
         else if (gPS5GameMenuTab == 1)
-            selected = gPS5GameMenuCompatRow;
+            selected = gPS5CompatRow;
         else
             selected = gPS5GameMenuRow;
 
