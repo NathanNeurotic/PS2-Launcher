@@ -916,7 +916,7 @@ void sysLaunchLoaderElf(const char *filename, const char *mode_str, int size_cdv
 
     if (GetCheatsEnabled()) {
         set_cheats_list();
-        config->gCheatList = GetCheatsList();
+        config->gCheatList = (u32 *)GetCheatsList();
     } else
         config->gCheatList = NULL;
 

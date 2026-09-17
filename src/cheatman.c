@@ -22,6 +22,7 @@
 
 #include "include/opl.h"
 #include "include/cheatman.h"
+#include "include/guigame.h"
 #include "include/util.h"
 #include <unistd.h>
 #include <fcntl.h>
@@ -73,7 +74,7 @@ const u32 *GetCheatsList(void)
 
 void load_cheats_config(config_set_t *configSet)
 {
-    char *val = NULL;
+    const char *val = NULL;
     int i;
 
     for (i = 0; i < MAX_CODES; i++)
