@@ -1804,6 +1804,32 @@ static int hasKeywordRun(const char *fileNameLower, char keywords[16][32], int k
     return 0;
 }
 
+static void ps5BuildAssetPath(char *dst, const char *prefix, const char *folder, const char *startup, const char *suffix, const char *ext)
+{
+    char cleanPrefix[128];
+    int len;
+
+    if (prefix == NULL || prefix[0] == '\0') {
+        prefix = "mass0:";
+    }
+    strncpy(cleanPrefix, prefix, sizeof(cleanPrefix) - 1);
+    cleanPrefix[sizeof(cleanPrefix) - 1] = '\0';
+    len = strlen(cleanPrefix);
+    while (len > 0 && (cleanPrefix[len - 1] == '/' || cleanPrefix[len - 1] == '\\')) {
+        cleanPrefix[--len] = '\0';
+    }
+
+    if (cleanPrefix[0] == 's' && cleanPrefix[1] == 'm' && cleanPrefix[2] == 'b') {
+        if (len > 0 && cleanPrefix[len - 1] == ':') {
+            snprintf(dst, 256, "%s%s\\%s_%s.%s", cleanPrefix, folder, startup, suffix, ext);
+        } else {
+            snprintf(dst, 256, "%s\\%s\\%s_%s.%s", cleanPrefix, folder, startup, suffix, ext);
+        }
+    } else {
+        snprintf(dst, 256, "%s/%s/%s_%s.%s", cleanPrefix, folder, startup, suffix, ext);
+    }
+}
+
 static void normalizeAlphaNumLower(const char *src, char *dst, int maxLen)
 {
     int i, j = 0;
@@ -1917,17 +1943,11 @@ static void triggerNetFetch(const char *title, const char *startup, const char *
 
     matchedPath[0] = '\0';
     if (allowDeviceProbe && startup && startup[0] != '\0') {
-        char prefix[128];
-        if (devicePrefix && devicePrefix[0] != '\0') {
-            strncpy(prefix, devicePrefix, sizeof(prefix) - 1);
-            prefix[sizeof(prefix) - 1] = '\0';
-            int len = strlen(prefix);
-            if (len > 0 && prefix[len - 1] == '/')
-                prefix[len - 1] = '\0';
-        } else {
-            strcpy(prefix, "mass0:");
+        struct stat st_art;
+        ps5BuildAssetPath(matchedPath, devicePrefix, "ART", startup, "COV", "png");
+        if (stat(matchedPath, &st_art) < 0) {
+            ps5BuildAssetPath(matchedPath, devicePrefix, "ART", startup, "COV", "jpg");
         }
-        snprintf(matchedPath, sizeof(matchedPath), "%s/ART/%s_COV.png", prefix, startup);
     }
     if (matchedPath[0] == '\0') {
         findBuiltInCoverForGame(title, matchedPath, sizeof(matchedPath));
@@ -1935,20 +1955,10 @@ static void triggerNetFetch(const char *title, const char *startup, const char *
 
     char logoPath[256] = {0};
     if (allowDeviceProbe && startup && startup[0] != '\0') {
-        char prefix[128];
-        if (devicePrefix && devicePrefix[0] != '\0') {
-            strncpy(prefix, devicePrefix, sizeof(prefix) - 1);
-            prefix[sizeof(prefix) - 1] = '\0';
-            int len = strlen(prefix);
-            if (len > 0 && prefix[len - 1] == '/')
-                prefix[len - 1] = '\0';
-        } else {
-            strcpy(prefix, "mass0:");
-        }
-        snprintf(logoPath, sizeof(logoPath), "%s/%s/%s_LOGO.png", prefix, "ICONS", startup);
         struct stat st_icon;
+        ps5BuildAssetPath(logoPath, devicePrefix, "ICONS", startup, "LOGO", "png");
         if (stat(logoPath, &st_icon) < 0) {
-            snprintf(logoPath, sizeof(logoPath), "%s/%s/%s_LOGO.png", prefix, "LOGO", startup);
+            ps5BuildAssetPath(logoPath, devicePrefix, "LOGO", startup, "LOGO", "png");
         }
     }
     strncpy(gNetCache[idx].logoPath, logoPath, sizeof(gNetCache[idx].logoPath) - 1);

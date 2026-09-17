@@ -1978,94 +1978,89 @@ static void ps5SaveGameCatalogJson(const char *root)
     gPS5SavedCatalogHash = currentHash;
 }
 
+static int ps5JsonParseString(const char *line, const char *key, char *dst, int maxLen)
+{
+    const char *p = strstr(line, key);
+    int outLen = 0;
+
+    if (!p)
+        return 0;
+
+    p += strlen(key);
+    while (*p && *p != '"')
+        p++;
+
+    if (*p != '"')
+        return 0;
+
+    p++;
+    while (*p && *p != '"') {
+        char ch = *p++;
+        if (ch == '\\' && *p) {
+            char esc = *p++;
+            if (esc == 'n') ch = '\n';
+            else if (esc == 'r') ch = '\r';
+            else if (esc == 't') ch = '\t';
+            else ch = esc;
+        }
+        if (outLen + 1 < maxLen) {
+            dst[outLen++] = ch;
+        }
+    }
+    dst[outLen] = '\0';
+    return (*p == '"') ? 1 : 0;
+}
+
 static int ps5LoadGameCatalogJson(const char *root)
 {
     char jsonPath[PS5_APPS_PATH_MAX];
-    int fd, size, count = 0;
-    char *buf;
+    char line[768];
+    FILE *fp;
+    int count = 0;
 
     if (root == NULL || root[0] == '\0')
         return 0;
 
     snprintf(jsonPath, sizeof(jsonPath), "%.*s/ps5_game_catalog.json", (int)strlen(root), root);
-    fd = openFile(jsonPath, O_RDONLY);
-    if (fd < 0)
+    fp = fopen(jsonPath, "r");
+    if (!fp)
         return 0;
 
-    size = lseek(fd, 0, SEEK_END);
-    lseek(fd, 0, SEEK_SET);
-    if (size <= 0 || size > 512 * 1024) {
-        close(fd);
-        return 0;
-    }
+    while (fgets(line, sizeof(line), fp)) {
+        char *modePtr = strstr(line, "\"source_mode\":");
+        if (!modePtr)
+            continue;
+        int mode = atoi(modePtr + 14);
+        if ((unsigned)mode >= 8)
+            continue;
 
-    buf = (char *)malloc(size + 1);
-    if (buf == NULL) {
-        close(fd);
-        return 0;
-    }
+        if (gPS5AppsItemCount >= PS5_APPS_MAX_ITEMS)
+            break;
 
-    if (read(fd, buf, size) != size) {
-        free(buf);
-        close(fd);
-        return 0;
-    }
-    buf[size] = '\0';
-    close(fd);
+        char title[128] = "";
+        char path[256] = "";
+        char startup[16] = "";
+        char prefix[64] = "";
+        char *idPtr = strstr(line, "\"source_id\":");
+        (void)idPtr;
 
-    {
-        char *ptr = strstr(buf, "\"games\":");
-        if (ptr != NULL) {
-            char *entry = strchr(ptr, '{');
-            while (entry != NULL && gPS5AppsItemCount < PS5_APPS_MAX_ITEMS) {
-                char *titlePtr = strstr(entry, "\"title\":\"");
-                char *pathPtr = strstr(entry, "\"path\":\"");
-                char *modePtr = strstr(entry, "\"source_mode\":");
+        ps5JsonParseString(line, "\"startup\":", startup, sizeof(startup));
+        ps5JsonParseString(line, "\"title\":", title, sizeof(title));
+        ps5JsonParseString(line, "\"prefix\":", prefix, sizeof(prefix));
+        ps5JsonParseString(line, "\"path\":", path, sizeof(path));
 
-                if (titlePtr != NULL && pathPtr != NULL) {
-                    char title[128] = "";
-                    char path[256] = "";
-                    int mode = 0;
-
-                    titlePtr += 9;
-                    char *titleEnd = strchr(titlePtr, '"');
-                    if (titleEnd != NULL) {
-                        int len = titleEnd - titlePtr;
-                        if (len > (int)sizeof(title) - 1)
-                            len = sizeof(title) - 1;
-                        strncpy(title, titlePtr, len);
-                        title[len] = '\0';
-                    }
-
-                    pathPtr += 8;
-                    char *pathEnd = strchr(pathPtr, '"');
-                    if (pathEnd != NULL) {
-                        int len = pathEnd - pathPtr;
-                        if (len > (int)sizeof(path) - 1)
-                            len = sizeof(path) - 1;
-                        strncpy(path, pathPtr, len);
-                        path[len] = '\0';
-                    }
-
-                    if (modePtr != NULL)
-                        mode = atoi(modePtr + 14);
-
-                    if (path[0] != '\0' && title[0] != '\0') {
-                        ps5_app_item_t *app = &gPS5Apps[gPS5AppsItemCount++];
-                        memset(app, 0, sizeof(*app));
-                        strncpy(app->path, path, sizeof(app->path) - 1);
-                        strncpy(app->name, title, sizeof(app->name) - 1);
-                        app->group = mode;
-                        gPS5AppGroups[mode].count++;
-                        count++;
-                    }
-                }
-                entry = strchr(entry + 1, '{');
-            }
+        if (path[0] != '\0' && title[0] != '\0') {
+            ps5_app_item_t *app = &gPS5Apps[gPS5AppsItemCount++];
+            memset(app, 0, sizeof(*app));
+            strncpy(app->path, path, sizeof(app->path) - 1);
+            strncpy(app->name, title, sizeof(app->name) - 1);
+            app->group = mode;
+            gPS5AppGroups[mode].count++;
+            count++;
         }
     }
 
-    free(buf);
+    fclose(fp);
     gPS5SavedCatalogHash = ps5CalculateCatalogHash();
     return count;
 }
@@ -5028,6 +5023,9 @@ void menuHandleInputGameMenu()
                 if (ps5VMCRow == 0) {
                     sfxPlay(SFX_CONFIRM);
                     ps5VMCEnable[slot] = !ps5VMCEnable[slot];
+                } else if (ps5VMCRow == 1) {
+                    sfxPlay(SFX_CONFIRM);
+                    diaShowKeyb(ps5VMCName[slot], 32, 0, slot == 0 ? "Slot 1 VMC Name" : "Slot 2 VMC Name");
                 } else if (ps5VMCRow == 3) {
                     if (!ps5VMCEnable[slot]) {
                         ps5SetGameToast("Enable VMC first");
