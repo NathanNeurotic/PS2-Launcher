@@ -62,7 +62,7 @@ typedef struct
 
 typedef struct
 {
-    char name[CHEAT_NAME_MAX + 1];
+    char name[CHEAT_NAME_MAX + 4];
     code_t codes[MAX_CHEATLIST];
     int enabled;
 } cheat_entry_t;
@@ -71,8 +71,13 @@ extern cheat_entry_t gCheats[MAX_CODES];
 
 void InitCheatsConfig(config_set_t *configSet);
 int GetCheatsEnabled(void);
+int GetCheatMode(void);
+int GetCheatsCount(void);
+int is_master_cheat(int index);
 const u32 *GetCheatsList(void);
 int load_cheats(const char *cheatfile);
 void set_cheats_list(void);
+void save_cheats(config_set_t *configSet);
+void load_cheats_config(config_set_t *configSet);
 
 #endif /* _CHEATMAN_H_ */

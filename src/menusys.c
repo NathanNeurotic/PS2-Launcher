@@ -24,6 +24,8 @@
 #include "include/util.h"
 #include "include/bdmsupport.h"
 #include "include/hddsupport.h"
+#include "include/cheatman.h"
+#include <fileXio_rpc.h>
 #include <assert.h>
 #include <fcntl.h>
 #include <string.h>
@@ -168,17 +170,10 @@ static const int ps5VMCSizesMB[] = {8, 16, 32, 64};
 static const char *ps5VMCLabels[] = {"Enable VMC", "VMC Name", "Size", "VMC File", "Delete VMC"};
 
 // PS5 Native Cheat Engine Subscreen
-#define PS5_MAX_CHEATS 64
-typedef struct {
-    char name[64];
-    int enabled;
-} ps5_cheat_entry_t;
-
 static int gPS5CheatMenuState = 0;
-static int ps5CheatCount = 0;
 static int ps5CheatSelected = 0;
 static int ps5CheatAllEnabled = 0;
-static ps5_cheat_entry_t ps5Cheats[PS5_MAX_CHEATS];
+
 
 extern void rmDrawRoundedRect(int x, int y, int w, int h, int r, u64 color);
 extern void rmDrawRoundedRectWide(int x, int y, int w, int h, int r, u64 color);
@@ -234,12 +229,6 @@ static void ps5GameOptionsLoad(config_set_t *configSet)
     configGetInt(configSet, "$CheatsSource", &cheatSource);
     if (cheatSource == SETTINGS_PERGAME) {
         configGetInt(configSet, "$EnableCheat", &ps5GameEnableCheat);
-    }
-    {
-        int cheatDisabled = 0;
-        configGetInt(configSet, "$CheatDisabled", &cheatDisabled);
-        if (cheatDisabled)
-            ps5GameEnableCheat = 0;
     }
 }
 
@@ -400,12 +389,12 @@ static void ps5GameOptionsSave(config_set_t *configSet)
     configSetInt(configSet, "$CheatsSource", 1);
     if (ps5GameEnableCheat) {
         configSetInt(configSet, "$EnableCheat", 1);
-        configRemoveKey(configSet, "$CheatDisabled");
     } else {
         configRemoveKey(configSet, "$EnableCheat");
-        configSetInt(configSet, "$CheatDisabled", 1);
     }
     configRemoveKey(configSet, "$CheatMode");
+    save_cheats(configSet);
+    set_cheats_list();
 
     configSetInt(configSet, "$ConfigSource", 1);
 }
@@ -467,45 +456,32 @@ static void ps5VMCSaveConfig(void)
 
 static void ps5CheatLoadConfig(void)
 {
-    ps5CheatCount = 0;
+    int count, i;
     ps5CheatSelected = 0;
-    ps5CheatAllEnabled = 0;
+    ps5CheatAllEnabled = 1;
 
     if (itemConfigSupport && itemConfigSupport->itemGetPrefix) {
         char cheatPath[256];
         const char *prefix = itemConfigSupport->itemGetPrefix(itemConfigSupport);
-        if (prefix) {
+        if (prefix && itemConfigStartup && itemConfigStartup[0]) {
             snprintf(cheatPath, sizeof(cheatPath), "%sCHT/%s.cht", prefix, itemConfigStartup);
-            int fd = openFile(cheatPath, O_RDONLY);
-            if (fd >= 0) {
-                char line[128];
-                int pos = 0;
-                char ch;
-                while (read(fd, &ch, 1) == 1 && ps5CheatCount < PS5_MAX_CHEATS) {
-                    if (ch == '\n' || ch == '\r') {
-                        if (pos > 0) {
-                            line[pos] = '\0';
-                            if (line[0] == '[' || (line[0] != '/' && line[0] != '#' && (line[0] < '0' || line[0] > '9') && (line[0] < 'A' || line[0] > 'F'))) {
-                                char *title = line;
-                                if (title[0] == '[') title++;
-                                int len = strlen(title);
-                                if (len > 0 && title[len - 1] == ']') title[len - 1] = '\0';
-                                if (len > 0) {
-                                    strncpy(ps5Cheats[ps5CheatCount].name, title, sizeof(ps5Cheats[ps5CheatCount].name) - 1);
-                                    ps5Cheats[ps5CheatCount].name[sizeof(ps5Cheats[ps5CheatCount].name) - 1] = '\0';
-                                    ps5Cheats[ps5CheatCount].enabled = 1;
-                                    ps5CheatCount++;
-                                }
-                            }
-                            pos = 0;
-                        }
-                    } else if (pos < (int)sizeof(line) - 1) {
-                        line[pos++] = ch;
-                    }
-                }
-                close(fd);
+            load_cheats(cheatPath);
+            if (itemConfig) {
+                load_cheats_config(itemConfig);
             }
         }
+    }
+
+    count = GetCheatsCount();
+    if (count > 0) {
+        for (i = 0; i < count; i++) {
+            if (!is_master_cheat(i) && !gCheats[i].enabled) {
+                ps5CheatAllEnabled = 0;
+                break;
+            }
+        }
+    } else {
+        ps5CheatAllEnabled = 0;
     }
 }
 
@@ -4546,14 +4522,14 @@ void menuRenderGameMenu()
         if (!gameMenu || selected_item->item->current == NULL)
             return;
 
-        if (!gameMenuCurrent)
-            gameMenuCurrent = gameMenu;
-
-        for (it = gameMenu; it; it = it->next, count++) {
-            if (it == gameMenuCurrent)
-                selected = index;
-            index++;
-        }
+        if (gPS5VMCMenuState == 2)
+            selected = ps5VMCRow;
+        else if (gPS5CheatMenuState == 2)
+            selected = ps5CheatSelected;
+        else if (gPS5GameMenuTab == 1)
+            selected = gPS5GameMenuCompatRow;
+        else
+            selected = gPS5GameMenuRow;
 
         focusY = listTop + (selected * rowStep);
         if (focusY > listBottom)
@@ -4561,6 +4537,30 @@ void menuRenderGameMenu()
         else if (focusY < listTop)
             listScrollOffset = focusY - listTop;
         listY -= listScrollOffset;
+
+        if (gPS5VMCMenuState == 2 && ps5VMCOperation) {
+            statusVMCparam_t status;
+            int ret = fileXioDevctl("genvmc:", 0xC0DE0003, NULL, 0, &status, sizeof(status));
+            if (ret == 0) {
+                ps5VMCProgress = status.VMC_progress;
+                if (status.VMC_status == 0x00) {
+                    ps5VMCOperation = 0;
+                    if (status.VMC_error == 0) {
+                        ps5SetGameToast("VMC Operation Successful");
+                        sfxPlay(SFX_CONFIRM);
+                        if (itemConfigSupport && itemConfigSupport->itemCheckVMC) {
+                            int sz = itemConfigSupport->itemCheckVMC(itemConfigSupport, ps5VMCName[ps5VMCSlot], 0);
+                            if (sz > 0) {
+                                ps5VMCStatus[ps5VMCSlot] = 1;
+                            }
+                        }
+                    } else {
+                        ps5SetGameToast("VMC Operation Failed");
+                        sfxPlay(SFX_CANCEL);
+                    }
+                }
+            }
+        }
 
         rmDrawRect(0, 0, ps5Width, headerH, GS_SETREG_RGBA(0, 0, 0, 0x80));
         rmDrawRect(0, footerTop, ps5Width, ps5Height - footerTop, GS_SETREG_RGBA(0, 0, 0, 0x80));
@@ -4635,8 +4635,17 @@ void menuRenderGameMenu()
 
             if (ps5VMCOperation) {
                 char opBuf[64];
+                int barW = 300, barH = 8;
+                int barX = (ps5Width - barW) / 2;
+                int barY = 280;
                 snprintf(opBuf, sizeof(opBuf), "Preparing Slot %d VMC... %d%%", slot + 1, ps5VMCProgress);
-                fntRenderString(semiBoldFont, ps5Width / 2, 280, ALIGN_CENTER, 0, 0, opBuf, focusedColor);
+                fntRenderString(semiBoldFont, ps5Width / 2, barY - 24, ALIGN_CENTER, 0, 0, opBuf, focusedColor);
+                rmDrawRect(barX, barY, barW, barH, GS_SETREG_RGBA(0x40, 0x40, 0x40, 0x80));
+                if (ps5VMCProgress > 0) {
+                    int progW = (barW * ps5VMCProgress) / 100;
+                    if (progW > barW) progW = barW;
+                    rmDrawRect(barX, barY, progW, barH, GS_SETREG_RGBA(0x00, 0x80, 0xFF, 0x80));
+                }
             }
 
             nX = drawPS5GameIconAndText(CROSS_ICON, "Select", semiBoldFont, listX, footerY, footerColor);
@@ -4673,12 +4682,13 @@ void menuRenderGameMenu()
             }
         } else if (gPS5CheatMenuState == 2) {
             int nX;
+            int cheatCount = GetCheatsCount();
             fntRenderString(semiBoldFont, listX, 24, ALIGN_LEFT, 0, 0, "Cheat Engine", focusedColor);
             fntRenderString(gTheme->fonts[1], labelX, 136, ALIGN_LEFT, 0, 0, "Cheat List", rowColor);
 
             // Row 0: Enable Cheat
             {
-                int y = listTop;
+                int y = listTop - listScrollOffset;
                 int focused = (ps5CheatSelected == 0);
                 int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
                 if (focused) drawPS5GameFocusIndicator(labelX, y);
@@ -4688,7 +4698,7 @@ void menuRenderGameMenu()
 
             // Row 1: Select All
             {
-                int y = listTop + rowStep;
+                int y = listTop + rowStep - listScrollOffset;
                 int focused = (ps5CheatSelected == 1);
                 int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
                 if (focused) drawPS5GameFocusIndicator(labelX, y);
@@ -4697,18 +4707,19 @@ void menuRenderGameMenu()
             }
 
             // Cheats
-            if (ps5CheatCount == 0) {
+            if (cheatCount == 0) {
                 fntRenderString(semiBoldFont, ps5Width / 2, 240, ALIGN_CENTER, 0, 0, "NO CHEAT FILES FOUND", GS_SETREG_RGBA(0x88, 0x88, 0x88, 0x68));
             } else {
                 int i;
-                for (i = 0; i < ps5CheatCount && i < 6; i++) {
-                    int y = listTop + (i + 2) * rowStep;
+                for (i = 0; i < cheatCount; i++) {
+                    int y = listTop + (i + 2) * rowStep - listScrollOffset;
                     int focused = (ps5CheatSelected == i + 2);
                     int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
                     if (y < listTop - rowStep || y > listBottom + rowStep) continue;
                     if (focused) drawPS5GameFocusIndicator(labelX, y);
-                    fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, ps5Cheats[i].name, focused ? focusedColor : rowColor);
-                    fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, ps5Cheats[i].enabled ? "< On >" : "< Off >", focused ? focusedColor : rowColor);
+                    fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, gCheats[i].name, focused ? focusedColor : rowColor);
+                    const char *valStr = is_master_cheat(i) ? "< Lock >" : (gCheats[i].enabled ? "< On >" : "< Off >");
+                    fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, valStr, focused ? focusedColor : rowColor);
                 }
             }
 
@@ -4929,6 +4940,15 @@ void menuHandleInputGameMenu()
 
         if (gPS5VMCMenuState == 2) {
             int slot = ps5VMCSlot;
+            if (ps5VMCOperation) {
+                if (getKeyOn(KEY_CIRCLE)) {
+                    fileXioDevctl("genvmc:", 0xC0DE0002, NULL, 0, NULL, 0);
+                    ps5VMCOperation = 0;
+                    sfxPlay(SFX_CANCEL);
+                    ps5SetGameToast("VMC Operation Aborted");
+                }
+                return;
+            }
             if (ps5VMCConfirmDelete) {
                 if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
                     sfxPlay(SFX_CURSOR);
@@ -4962,8 +4982,13 @@ void menuHandleInputGameMenu()
                     ps5DialogButton = !ps5DialogButton;
                 } else if (getKeyOn(KEY_CROSS)) {
                     if (ps5DialogButton == 0) {
-                        ps5SetGameToast("VMC Operation Successful");
-                        sfxPlay(SFX_CONFIRM);
+                        int sizeMB = ps5VMCSizesMB[ps5VMCSizeIndex[slot]];
+                        if (itemConfigSupport && itemConfigSupport->itemCheckVMC) {
+                            itemConfigSupport->itemCheckVMC(itemConfigSupport, ps5VMCName[slot], sizeMB);
+                            ps5VMCOperation = 1;
+                            ps5VMCProgress = 0;
+                            sfxPlay(SFX_CONFIRM);
+                        }
                     } else {
                         sfxPlay(SFX_CANCEL);
                     }
@@ -5031,9 +5056,13 @@ void menuHandleInputGameMenu()
                         ps5SetGameToast("Enable VMC first");
                         sfxPlay(SFX_MESSAGE);
                     } else if (ps5VMCStatus[slot] == 0) {
-                        ps5VMCStatus[slot] = 1;
-                        ps5SetGameToast("VMC Operation Successful");
-                        sfxPlay(SFX_CONFIRM);
+                        int sizeMB = ps5VMCSizesMB[ps5VMCSizeIndex[slot]];
+                        if (itemConfigSupport && itemConfigSupport->itemCheckVMC) {
+                            itemConfigSupport->itemCheckVMC(itemConfigSupport, ps5VMCName[slot], sizeMB);
+                            ps5VMCOperation = 1;
+                            ps5VMCProgress = 0;
+                            sfxPlay(SFX_CONFIRM);
+                        }
                     } else if (ps5VMCStatus[slot] == 1) {
                         ps5VMCConfirmDelete = 1;
                         ps5DialogButton = 1;
@@ -5059,12 +5088,13 @@ void menuHandleInputGameMenu()
         }
 
         if (gPS5CheatMenuState == 2) {
+            int cheatCount = GetCheatsCount();
             if (getKeyOn(KEY_UP)) {
                 sfxPlay(SFX_CURSOR);
                 if (ps5CheatSelected > 0) ps5CheatSelected--;
             } else if (getKeyOn(KEY_DOWN)) {
                 sfxPlay(SFX_CURSOR);
-                if (ps5CheatSelected < ps5CheatCount + 1) ps5CheatSelected++;
+                if (ps5CheatSelected < cheatCount + 1) ps5CheatSelected++;
             } else if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT) || getKeyOn(KEY_CROSS)) {
                 sfxPlay(SFX_CURSOR);
                 if (ps5CheatSelected == 0) {
@@ -5072,13 +5102,21 @@ void menuHandleInputGameMenu()
                 } else if (ps5CheatSelected == 1) {
                     int i;
                     ps5CheatAllEnabled = !ps5CheatAllEnabled;
-                    for (i = 0; i < ps5CheatCount; i++)
-                        ps5Cheats[i].enabled = ps5CheatAllEnabled;
-                } else if (ps5CheatSelected >= 2 && ps5CheatSelected - 2 < ps5CheatCount) {
-                    ps5Cheats[ps5CheatSelected - 2].enabled = !ps5Cheats[ps5CheatSelected - 2].enabled;
+                    for (i = 0; i < cheatCount; i++) {
+                        if (!is_master_cheat(i))
+                            gCheats[i].enabled = ps5CheatAllEnabled;
+                    }
+                } else if (ps5CheatSelected >= 2 && ps5CheatSelected - 2 < cheatCount) {
+                    int idx = ps5CheatSelected - 2;
+                    if (!is_master_cheat(idx)) {
+                        gCheats[idx].enabled = !gCheats[idx].enabled;
+                    }
                 }
             } else if (getKeyOn(KEY_SQUARE)) {
-                if (itemConfigSupport != NULL) {
+                if (itemConfig != NULL) {
+                    save_cheats(itemConfig);
+                    set_cheats_list();
+                    menuSaveConfig();
                     sfxPlay(SFX_CONFIRM);
                     ps5SetGameToast("Cheat Settings Saved");
                 } else {

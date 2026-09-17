@@ -8,6 +8,14 @@ int guiGameAltStartupNameHandler(char *text, int maxLen);
 
 char *gameConfigSource(void);
 
+typedef struct
+{
+    int VMC_status; // 0=available, 1=busy
+    int VMC_error;
+    int VMC_progress;
+    char VMC_msg[64];
+} statusVMCparam_t;
+
 int guiGameVmcNameHandler(char *text, int maxLen);
 void guiGameShowVMCMenu(int id, item_list_t *support);
 void guiGameShowCompatConfig(int id, item_list_t *support, config_set_t *configSet);

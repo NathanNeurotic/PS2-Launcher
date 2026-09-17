@@ -8,7 +8,6 @@
 #include "modules/iopcore/common/cdvd_config.h"
 #include "include/cheatman.h"
 #include "include/pggsm.h"
-#include "include/cheatman.h"
 #include "include/ps2cnf.h"
 #include "include/gui.h"
 #include "include/pad.h"
@@ -904,6 +903,7 @@ int sbLoadCheats(const char *path, const char *file)
             LOG("Cheats found\n");
             if ((gAutoLaunchGame == NULL) && (gAutoLaunchBDMGame == NULL) && (cheatMode == 1))
                 guiManageCheats();
+            set_cheats_list();
         }
     }
 

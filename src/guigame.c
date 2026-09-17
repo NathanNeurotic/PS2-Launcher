@@ -101,13 +101,6 @@ char *gameConfigSource(void)
 }
 
 // VMC
-typedef struct
-{                   // size = 76
-    int VMC_status; // 0=available, 1=busy
-    int VMC_error;
-    int VMC_progress;
-    char VMC_msg[64];
-} statusVMCparam_t;
 
 #define OPERATION_CREATE   0
 #define OPERATION_CREATING 1
