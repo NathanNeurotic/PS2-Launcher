@@ -1327,85 +1327,73 @@ static int checkLoadConfigHDD(int types)
     return 0;
 }
 
-static void applyAutomaticInternalHDDMode(void)
-{
-    int fsType;
-
-    if (!gPS5Mode)
-        return;
-
-    gBDMStartMode = START_MODE_AUTO;
-    gAPPStartMode = START_MODE_AUTO;
-    gEnableMX4SIO = 1;
-
-    hddLoadModules();
-    fsType = hddDetectNonSonyFileSystem();
-    if (fsType == 0) {
-        gEnableBdmHDD = 0;
-        gHDDStartMode = START_MODE_AUTO;
-        gDefaultDevice = HDD_MODE;
-    } else if (fsType == 1) {
-        gEnableBdmHDD = 1;
-        gHDDStartMode = START_MODE_DISABLED;
-        gDefaultDevice = BDM_MODE;
-    } else if (gDefaultDevice >= ETH_MODE) {
-        gDefaultDevice = BDM_MODE;
-    }
-}
-
 // When this function is called, the current device for loading/saving config is the memory card.
 static int tryAlternateDevice(int types)
 {
     char pwd[8];
+    char target[256];
     int value;
-    DIR *dir;
 
     getcwd(pwd, sizeof(pwd));
 
-    // First, try the device that OPL booted from.
     if (!strncmp(pwd, "mass", 4) && (pwd[4] == ':' || pwd[5] == ':')) {
-        if ((value = checkLoadConfigBDM(types)) != 0)
-            return value;
+        if (bdmFindPartition(target, "conf_opl.cfg", 1)) {
+            configEnd();
+            configInit(target);
+            value = configReadMulti(types);
+            if (value > 0) {
+                showCfgPopup = 0;
+                return value;
+            }
+        }
     } else if (!strncmp(pwd, "hdd", 3) && (pwd[3] == ':' || pwd[4] == ':')) {
-        if ((value = checkLoadConfigHDD(types)) != 0)
-            return value;
-    }
-
-    // Config was not found on the boot device. Check all supported devices.
-    //  Check USB device
-    if ((value = checkLoadConfigBDM(types)) != 0)
-        return value;
-    // Check HDD
-    if ((value = checkLoadConfigHDD(types)) != 0)
-        return value;
-
-    // At this point, the user has no loadable config files on any supported device, so try to find a device to save on.
-    // We don't want to get users into alternate mode for their very first launch of OPL (i.e no config file at all, but still want to save on MC)
-    // Check for a memory card inserted.
-    if (sysCheckMC() >= 0) {
-        configPrepareNotifications(gBaseMCDir);
-        showCfgPopup = 0;
-        return 0;
-    }
-    // No memory cards? Try a USB device...
-    dir = opendir("mass0:");
-    if (dir != NULL) {
-        closedir(dir);
-        configEnd();
-        configInit("mass0:");
-    } else {
-        // No? Check if the save location on the HDD is available.
-        dir = opendir(gHDDPrefix);
-        if (dir != NULL) {
-            closedir(dir);
+        hddLoadModules();
+        if (hddCheck() == 0) {
             configEnd();
             configInit(gHDDPrefix);
+            value = configReadMulti(types);
+            if (value > 0) {
+                showCfgPopup = 0;
+                return value;
+            }
         }
     }
-    showCfgPopup = 0;
 
+    if (sysCheckMC() >= 0) {
+        configEnd();
+        configInit(NULL);
+        value = configReadMulti(types);
+        if (value > 0) {
+            showCfgPopup = 0;
+            return value;
+        }
+    }
+
+    if (bdmFindPartition(target, "conf_opl.cfg", 1)) {
+        configEnd();
+        configInit(target);
+        value = configReadMulti(types);
+        if (value > 0) {
+            showCfgPopup = 0;
+            return value;
+        }
+    }
+
+    hddLoadModules();
+    if (hddCheck() == 0) {
+        configEnd();
+        configInit(gHDDPrefix);
+        value = configReadMulti(types);
+        if (value < 0)
+            value = 0;
+        showCfgPopup = 0;
+        return value;
+    }
+
+    showCfgPopup = 0;
     return 0;
 }
+
 
 static void _loadConfig()
 {
@@ -1538,7 +1526,6 @@ static void _loadConfig()
         }
     }
 
-    applyAutomaticInternalHDDMode();
     applyConfig(themeID, langID, 0);
 
     lscret = result;
