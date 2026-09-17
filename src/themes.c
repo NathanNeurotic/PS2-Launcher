@@ -1373,7 +1373,6 @@ static int ps5CarouselSquareWidthForHeight(int height)
 }
 
 int gPS5SettingsPage = 0; // 0 = Main Settings list, 1 = Display Settings sub-menu
-int gPS5SettingsSel = 0;
 
 #define PS5_SMB_SETTINGS_COUNT 11
 
@@ -1430,7 +1429,6 @@ static char gPS5AsyncTexPath[256];
 static GSTEXTURE gPS5AsyncTex;
 static u8 gPS5AsyncTexStack[64 * 1024] ALIGNED(16);
 static s32 gPS5AsyncTexThreadId = -1;
-static char gNetDebugMsg[256] = "Net Status: System ready.";
 
 extern void *_gp;
 extern void *focus_png;
@@ -1732,14 +1730,6 @@ static void getCleanGameName(const char *src, char *dst, int max_len) {
     dst[j] = '\0';
 }
 
-static void joinPath(char *dst, size_t maxLen, const char *dir, const char *file) {
-    char sep = '/';
-    if (strncasecmp(dir, "host", 4) == 0) {
-        sep = '\\';
-    }
-    snprintf(dst, maxLen, "%s%c%s", dir, sep, file);
-}
-
 static void getGameColors(const char *title, u8 *cardR, u8 *cardG, u8 *cardB, u8 *bgR, u8 *bgG, u8 *bgB);
 
 static const char *stopwords[] = {
@@ -1955,7 +1945,11 @@ static void triggerNetFetch(const char *title, const char *startup, const char *
         } else {
             strcpy(prefix, "mass0:");
         }
-        snprintf(logoPath, sizeof(logoPath), "%s/LOGO/%s_LOGO.png", prefix, startup);
+        snprintf(logoPath, sizeof(logoPath), "%s/%s/%s_LOGO.png", prefix, "ICONS", startup);
+        struct stat st_icon;
+        if (stat(logoPath, &st_icon) < 0) {
+            snprintf(logoPath, sizeof(logoPath), "%s/%s/%s_LOGO.png", prefix, "LOGO", startup);
+        }
     }
     strncpy(gNetCache[idx].logoPath, logoPath, sizeof(gNetCache[idx].logoPath) - 1);
     gNetCache[idx].logoPath[sizeof(gNetCache[idx].logoPath) - 1] = '\0';
@@ -2720,13 +2714,65 @@ void ps5RetryMissingCoverCache(void)
     }
 }
 
-int gPS5AlphaIdx = 0; // Global alphabet index (starts at '#')
+int gPS5AlphaIdx = 2; // Global alphabet index (starts at '#', index 2)
+
+static const char *gPS5AlphaFilters[29] = {
+    "Favourites", "Recently played", "#",
+    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+    "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+};
+
+const char *gPS5RegionTags[] = {
+    "USA", "US", "EU", "EUR", "EUROPE", "JAPAN", "JPN", "JP",
+    "ASIA", "AUSTRALIA", "AUS", "OCEANIA", "KOREA", "KOR",
+    "PAL", "NTSC", "NTSCU", "NTSCJ", NULL
+};
+
+static int ps5GameMatchesFilter(void *userdata, submenu_list_t *curr, int filterIdx)
+{
+    if (filterIdx == 2) // '#' - All games
+        return 1;
+
+    if (!curr)
+        return 0;
+
+    const char *title = submenuItemGetText(&curr->item);
+
+    if (filterIdx == 0 || filterIdx == 1) { // 0 = Favourites, 1 = Recently played
+        int sourceId;
+        item_list_t *support = resolveThemeGameItem(userdata, curr->item.id, &sourceId);
+        const char *startup = NULL;
+        if (support && support->itemGetStartup) {
+            startup = support->itemGetStartup(support, sourceId);
+        }
+        if (!startup || startup[0] == '\0')
+            return 0;
+
+        if (filterIdx == 0) {
+            extern int ps5IsGameFavorite(const char *startup);
+            return ps5IsGameFavorite(startup);
+        } else {
+            extern int ps5IsGameRecent(const char *startup);
+            return ps5IsGameRecent(startup);
+        }
+    }
+
+    // filterIdx >= 3: Alphabet letters A..Z
+    if (title == NULL || title[0] == '\0')
+        return 0;
+
+    char firstChar = title[0];
+    if (firstChar >= 'a' && firstChar <= 'z')
+        firstChar -= 32;
+
+    return firstChar >= 'A' && firstChar <= 'Z' && (firstChar - 'A' + 3) == filterIdx;
+}
 
 static int ps5TitleMatchesAlpha(const char *title, int alphaIdx)
 {
     char firstChar;
 
-    if (alphaIdx <= 0)
+    if (alphaIdx <= 2)
         return 1;
     if (title == NULL || title[0] == '\0')
         return 0;
@@ -2735,7 +2781,7 @@ static int ps5TitleMatchesAlpha(const char *title, int alphaIdx)
     if (firstChar >= 'a' && firstChar <= 'z')
         firstChar -= 32;
 
-    return firstChar >= 'A' && firstChar <= 'Z' && (firstChar - 'A' + 1) == alphaIdx;
+    return firstChar >= 'A' && firstChar <= 'Z' && (firstChar - 'A' + 3) == alphaIdx;
 }
 
 void ps5JumpToAlphabetGame(int targetIdx)
@@ -2749,8 +2795,7 @@ void ps5JumpToAlphabetGame(int targetIdx)
     submenu_list_t *match = NULL;
 
     while (curr) {
-        const char *title = submenuItemGetText(&curr->item);
-        if (themeGameItemIsAvailable(selectedItem->item->userdata, curr->item.id) && ps5TitleMatchesAlpha(title, targetIdx)) {
+        if (themeGameItemIsAvailable(selectedItem->item->userdata, curr->item.id) && ps5GameMatchesFilter(selectedItem->item->userdata, curr, targetIdx)) {
             match = curr;
             break;
         }
@@ -2777,18 +2822,18 @@ void ps5MoveAlphabetGame(int direction)
         idx = gPS5AlphaIdx + (direction > 0 ? 1 : -1);
         if (idx < 0)
             idx = 0;
-        else if (idx > 26)
-            idx = 26;
+        else if (idx > 28)
+            idx = 28;
         gPS5AlphaIdx = idx;
         ps5JumpToAlphabetGame(idx);
         return;
     }
 
     if (direction > 0) {
-        for (idx = gPS5AlphaIdx + 1; idx <= 26; idx++) {
+        for (idx = gPS5AlphaIdx + 1; idx <= 28; idx++) {
             submenu_list_t *curr = selectedItem->item->submenu;
             while (curr) {
-                if (themeGameItemIsAvailable(selectedItem->item->userdata, curr->item.id) && ps5TitleMatchesAlpha(submenuItemGetText(&curr->item), idx)) {
+                if (themeGameItemIsAvailable(selectedItem->item->userdata, curr->item.id) && ps5GameMatchesFilter(selectedItem->item->userdata, curr, idx)) {
                     gPS5AlphaIdx = idx;
                     ps5JumpToAlphabetGame(idx);
                     return;
@@ -2797,16 +2842,16 @@ void ps5MoveAlphabetGame(int direction)
             }
         }
     } else if (direction < 0) {
-        if (gPS5AlphaIdx <= 1) {
+        if (gPS5AlphaIdx <= 0) {
             gPS5AlphaIdx = 0;
             ps5JumpToAlphabetGame(0);
             return;
         }
 
-        for (idx = gPS5AlphaIdx - 1; idx >= 1; idx--) {
+        for (idx = gPS5AlphaIdx - 1; idx >= 0; idx--) {
             submenu_list_t *curr = selectedItem->item->submenu;
             while (curr) {
-                if (themeGameItemIsAvailable(selectedItem->item->userdata, curr->item.id) && ps5TitleMatchesAlpha(submenuItemGetText(&curr->item), idx)) {
+                if (themeGameItemIsAvailable(selectedItem->item->userdata, curr->item.id) && ps5GameMatchesFilter(selectedItem->item->userdata, curr, idx)) {
                     gPS5AlphaIdx = idx;
                     ps5JumpToAlphabetGame(idx);
                     return;
@@ -3018,8 +3063,7 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
             submenu_list_t *selectedVisibleItem = NULL;
 
             while (count_curr) {
-                const char *title = submenuItemGetText(&count_curr->item);
-                if (themeGameItemIsAvailable(menu->item->userdata, count_curr->item.id) && ps5TitleMatchesAlpha(title, gPS5AlphaIdx)) {
+                if (themeGameItemIsAvailable(menu->item->userdata, count_curr->item.id) && ps5GameMatchesFilter(menu->item->userdata, count_curr, gPS5AlphaIdx)) {
                     if (count_curr == item) {
                         selected_index = total_count;
                         selectedVisibleItem = count_curr;
@@ -3032,8 +3076,7 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
             if (selectedVisibleItem == NULL && total_count > 0) {
                 count_curr = first_item;
                 while (count_curr) {
-                    const char *title = submenuItemGetText(&count_curr->item);
-                    if (themeGameItemIsAvailable(menu->item->userdata, count_curr->item.id) && ps5TitleMatchesAlpha(title, gPS5AlphaIdx)) {
+                    if (themeGameItemIsAvailable(menu->item->userdata, count_curr->item.id) && ps5GameMatchesFilter(menu->item->userdata, count_curr, gPS5AlphaIdx)) {
                         selectedVisibleItem = count_curr;
                         selected_index = 0;
                         break;
@@ -3074,8 +3117,7 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
 
             count_curr = first_item;
             while (count_curr && total_count > 0) {
-                const char *gameTitleText = submenuItemGetText(&count_curr->item);
-                if (themeGameItemIsAvailable(menu->item->userdata, count_curr->item.id) && ps5TitleMatchesAlpha(gameTitleText, gPS5AlphaIdx)) {
+                if (themeGameItemIsAvailable(menu->item->userdata, count_curr->item.id) && ps5GameMatchesFilter(menu->item->userdata, count_curr, gPS5AlphaIdx)) {
                     if (idx >= renderStart && idx <= renderEnd) {
                         float distSigned = idx - gPS5AnimPos;
                         float dist = distSigned;
@@ -3093,6 +3135,7 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
                         float itemStep = (float)(maxCardWidth - 12);
                         float cx = 120.0f + distSigned * itemStep;
                         submenu_list_t *curr_item = count_curr;
+                        const char *gameTitleText = submenuItemGetText(&curr_item->item);
                         net_req_t *cacheEntry = NULL;
                         if (cx > -220.0f && cx < (float)(screenWidth + 220))
                             cacheEntry = preparePS5CarouselCardMedia(menu, curr_item, gameTitleText, isUnplugged, allowDeviceProbe);
@@ -3223,15 +3266,16 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
         int playIcon = gSelectButton == KEY_CIRCLE ? CIRCLE_ICON : CROSS_ICON;
         u64 actionColor = ps5FocusedGameAvailable ? GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80) : GS_SETREG_RGBA(0x58, 0x58, 0x50, 0x50);
         int nextX = drawPS5IconAndText(playIcon, "Play", gPS5SemiBoldFont, 50, helperY, actionColor);
+        nextX = drawPS5IconAndText(SQUARE_ICON, "Refresh", gPS5SemiBoldFont, nextX + 20, helperY, actionColor);
+        nextX = drawPS5IconAndText(TRIANGLE_ICON, "Options", gPS5SemiBoldFont, nextX + 20, helperY, actionColor);
         extern int ps5IsGameFavorite(const char *startup);
         const char *favText = (focusedStartup && ps5IsGameFavorite(focusedStartup)) ? "Remove from favourite" : "Add to favourite";
-        drawPS5IconAndText(TRIANGLE_ICON, favText, gPS5SemiBoldFont, nextX + 20, helperY, actionColor);
+        drawPS5IconAndText(SELECT_ICON, favText, gPS5SemiBoldFont, nextX + 20, helperY, actionColor);
 
         // 5. Draw Vertical Alphabet Carousel at the right end of the screen
         if (item) {
-            static const char *gPS5AlphaChars = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             extern int gPS5AlphaIdx;
-            static float gPS5AlphaAnimPos = 0.0f;
+            static float gPS5AlphaAnimPos = 2.0f;
             
             // Track if user has pressed any navigation keys to set the gPS5UserHasNavigated flag
             if (!gPS5UserHasNavigated) {
@@ -3247,15 +3291,19 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
             
             int alphabetX = 612;
             if (gPS5AlphaIdx == 0) {
+                fntRenderString(gPS5RegFont, 50, 290, ALIGN_LEFT, 0, 0, "Favourite Games", GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x56));
+            } else if (gPS5AlphaIdx == 1) {
+                fntRenderString(gPS5RegFont, 50, 290, ALIGN_LEFT, 0, 0, "Recently Played", GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x56));
+            } else if (gPS5AlphaIdx == 2) {
                 fntRenderString(gPS5RegFont, 50, 290, ALIGN_LEFT, 0, 0, "Showing all games", GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x56));
             } else {
                 char filterHint[48];
-                snprintf(filterHint, sizeof(filterHint), "Showing games starting with %c", gPS5AlphaChars[gPS5AlphaIdx]);
+                snprintf(filterHint, sizeof(filterHint), "Showing games starting with %c", 'A' + gPS5AlphaIdx - 3);
                 fntRenderString(gPS5RegFont, 50, 290, ALIGN_LEFT, 0, 0, filterHint, GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x56));
             }
 
             int i;
-            for (i = 0; i < 27; i++) {
+            for (i = 0; i < 29; i++) {
                 float diff = (float)i - gPS5AlphaAnimPos;
                 float absDiff = fabsf(diff);
                 
@@ -3265,14 +3313,16 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
                     if (alphaVal < 0) alphaVal = 0;
                     if (alphaVal > 128) alphaVal = 128;
                     
-                    char letterStr[2] = { gPS5AlphaChars[i], '\0' };
+                    const char *filterStr = gPS5AlphaFilters[i];
                     
                     if (i == gPS5AlphaIdx) {
-                        // Active letter: white, larger scale, bold
-                        fntRenderString(gPS5HeaderFont, alphabetX, (int)charY, ALIGN_CENTER | ALIGN_VCENTER, 0.70f, 0.70f, letterStr, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, alphaVal));
+                        // Active filter: white, bold
+                        float scale = (i < 2) ? 0.42f : 0.70f;
+                        fntRenderString(gPS5HeaderFont, alphabetX, (int)charY, ALIGN_CENTER | ALIGN_VCENTER, scale, scale, filterStr, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, alphaVal));
                     } else {
-                        // Unfocused letters: grey, smaller scale
-                        fntRenderString(gPS5RegFont, alphabetX, (int)charY, ALIGN_CENTER | ALIGN_VCENTER, 0.50f, 0.50f, letterStr, GS_SETREG_RGBA(0x58, 0x58, 0x58, alphaVal));
+                        // Unfocused filter: grey
+                        float scale = (i < 2) ? 0.35f : 0.50f;
+                        fntRenderString(gPS5RegFont, alphabetX, (int)charY, ALIGN_CENTER | ALIGN_VCENTER, scale, scale, filterStr, GS_SETREG_RGBA(0x58, 0x58, 0x58, alphaVal));
                     }
                 }
             }
@@ -3394,7 +3444,6 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
         extern int gPS5TempShowGamesLogo;
         extern int gPS5TempSortMode;
         extern int gPS5TempControllerType;
-        extern int gPS5SettingsSel;
         extern int gPS5SettingsPage;
         extern int gPS5SmbSettingsSel;
         extern int gPS5ControllerLogVisible;
@@ -3473,13 +3522,13 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
             fntFitString(gPS5SmallFont, ds2Line, panelW - 48);
 
             rmDrawRect(0, 0, screenWidth, screenHeight, GS_SETREG_RGBA(0, 0, 0, 0x80));
-            fntRenderString(gPS5SemiBoldFont, panelX, 24, ALIGN_LEFT, 0, 0, "Controller Log", GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
+            fntRenderString(gPS5SemiBoldFont, panelX, 24, ALIGN_LEFT, 0, 0, "Map Controller", GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
 
             rmDrawRoundedRect(panelX - 1, panelY - 1, panelW + 2, panelH + 2, 8, GS_SETREG_RGBA(0x30, 0x30, 0x30, 0x80));
             rmDrawRoundedRect(panelX, panelY, panelW, panelH, 7, GS_SETREG_RGBA(0x08, 0x08, 0x08, 0xFA));
 
-            snprintf(stepText, sizeof(stepText), "Step %d: %s", gPS5ControllerLogStep + 1, steps[gPS5ControllerLogStep] ? steps[gPS5ControllerLogStep] : "DONE");
-            snprintf(capturedText, sizeof(capturedText), "Captured: %d", gPS5ControllerLogCaptured);
+            snprintf(stepText, sizeof(stepText), "TEST: %s", steps[gPS5ControllerLogStep] ? steps[gPS5ControllerLogStep] : "COMPLETE");
+            snprintf(capturedText, sizeof(capturedText), "%d / 28 RECORDED", gPS5ControllerLogCaptured);
             snprintf(navLine, sizeof(navLine), "Nav Test: %s", gPS5ControllerLogNavTestEnabled ? "ON" : "OFF");
 
             fntRenderString(gPS5SemiBoldFont, panelX + 24, panelY + 26, ALIGN_LEFT, 0, 0, stepText, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
@@ -3491,8 +3540,10 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
             fntRenderString(gPS5SmallFont, panelX + 24, panelY + 146, ALIGN_LEFT, 0, 0, rawLine, GS_SETREG_RGBA(0x90, 0xFF, 0xA8, 0x78));
             fntRenderString(gPS5SmallFont, panelX + 24, panelY + 170, ALIGN_LEFT, 0, 0, ds2Line, GS_SETREG_RGBA(0xFF, 0xD0, 0x90, 0x78));
             fntRenderString(gPS5SmallFont, panelX + 24, panelY + 194, ALIGN_LEFT, 0, 0, latestLine, GS_SETREG_RGBA(0x88, 0x88, 0x88, 0x68));
-            fntRenderString(gPS5RegFont, panelX + 24, panelY + 218, ALIGN_LEFT, 0, 0, "Leave the controller idle here and report Raw + DS2 if movement appears.", GS_SETREG_RGBA(0xC8, 0xC8, 0xC8, 0x78));
+            fntRenderString(gPS5RegFont, panelX + 24, panelY + 218, ALIGN_LEFT, 0, 0, "Connect by USB. Hold the requested input, then press Cross on a PS2 controller.", GS_SETREG_RGBA(0xC8, 0xC8, 0xC8, 0x78));
             fntRenderString(gPS5SmallFont, panelX + 24, panelY + 232, ALIGN_LEFT, 0, 0, gPS5ControllerLogStatus, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x78));
+            if (strstr(gPS5ControllerLogStatus, "Saving") != NULL)
+                fntRenderString(gPS5RegFont, 42, panelY + 232, ALIGN_RIGHT, 0, 0, "Saving log...", GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
 
             if (gPS5ControllerLogLines[gPS5ControllerLogStep][0]) {
                 char savedLine[192];
@@ -3502,9 +3553,9 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
                 fntRenderString(gPS5SmallFont, panelX + 24, panelY + 268, ALIGN_LEFT, 0, 0, savedLine, GS_SETREG_RGBA(0x78, 0x78, 0x78, 0x60));
             }
 
-            drawPS5IconAndText(CROSS_ICON, "Capture", gPS5SemiBoldFont, 50, footerY, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
-            drawPS5IconAndText(SQUARE_ICON, "Save", gPS5SemiBoldFont, 170, footerY, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
-            drawPS5IconAndText(TRIANGLE_ICON, "Nav Test", gPS5SemiBoldFont, 270, footerY, gPS5ControllerLogNavTestEnabled ? GS_SETREG_RGBA(0x90, 0xFF, 0xA8, 0x80) : GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
+            drawPS5IconAndText(CROSS_ICON, "Record Current", gPS5SemiBoldFont, 50, footerY, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
+            drawPS5IconAndText(SQUARE_ICON, "Save Log", gPS5SemiBoldFont, 210, footerY, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
+            drawPS5IconAndText(TRIANGLE_ICON, "Nav Test", gPS5SemiBoldFont, 320, footerY, gPS5ControllerLogNavTestEnabled ? GS_SETREG_RGBA(0x90, 0xFF, 0xA8, 0x80) : GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
             drawPS5RightIconAndText(CIRCLE_ICON, "Close", gPS5SemiBoldFont, screenWidth - 50, footerY, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
             return;
         }
@@ -3650,32 +3701,42 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
         drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop, ALIGN_LEFT, "Resolution", gPS5SubSel == 0);
         drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop, ALIGN_RIGHT, valStr, gPS5SubSel == 0);
 
+        extern int gWideScreen;
+        const char *aspectText = "4:3";
+        if (gWideScreen == 1) aspectText = "16:9";
+        else if (gWideScreen == 2) aspectText = "21:9";
+
+        char aspectValStr[64];
+        snprintf(aspectValStr, sizeof(aspectValStr), "< %s >", aspectText);
+        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + rowStep, ALIGN_LEFT, "Aspect ratio", gPS5SubSel == 1);
+        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + rowStep, ALIGN_RIGHT, aspectValStr, gPS5SubSel == 1);
+
         char selectButtonStr[64];
         snprintf(selectButtonStr, sizeof(selectButtonStr), "< %s >", gPS5TempSelectButton == KEY_CROSS ? "Cross" : "Circle");
-        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + rowStep, ALIGN_LEFT, "Select button", gPS5SubSel == 1);
-        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + rowStep, ALIGN_RIGHT, selectButtonStr, gPS5SubSel == 1);
+        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 2), ALIGN_LEFT, "Select button", gPS5SubSel == 2);
+        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 2), ALIGN_RIGHT, selectButtonStr, gPS5SubSel == 2);
 
         // 2. Draw UI Sound label and bracketed value
         char uiSoundStr[64];
         snprintf(uiSoundStr, sizeof(uiSoundStr), "< %s >", gPS5TempUISound ? "On" : "Off");
 
-        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 2), ALIGN_LEFT, "UI Sound", gPS5SubSel == 2);
-        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 2), ALIGN_RIGHT, uiSoundStr, gPS5SubSel == 2);
+        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 3), ALIGN_LEFT, "UI Sound", gPS5SubSel == 3);
+        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 3), ALIGN_RIGHT, uiSoundStr, gPS5SubSel == 3);
 
         char showCoverStr[64];
         snprintf(showCoverStr, sizeof(showCoverStr), "< %s >", gPS5TempShowCoverImages ? "On" : "Off");
-        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 3), ALIGN_LEFT, "Show cover images", gPS5SubSel == 3);
-        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 3), ALIGN_RIGHT, showCoverStr, gPS5SubSel == 3);
+        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 4), ALIGN_LEFT, "Show cover images", gPS5SubSel == 4);
+        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 4), ALIGN_RIGHT, showCoverStr, gPS5SubSel == 4);
 
         char showLogoStr[64];
         snprintf(showLogoStr, sizeof(showLogoStr), "< %s >", gPS5TempShowGamesLogo ? "On" : "Off");
-        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 4), ALIGN_LEFT, "Show games logo", gPS5SubSel == 4);
-        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 4), ALIGN_RIGHT, showLogoStr, gPS5SubSel == 4);
+        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 5), ALIGN_LEFT, "Show games logo", gPS5SubSel == 5);
+        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 5), ALIGN_RIGHT, showLogoStr, gPS5SubSel == 5);
 
         char sortStr[96];
         snprintf(sortStr, sizeof(sortStr), "< %s >", gPS5TempSortMode ? "Available games" : "Each letter");
-        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 5), ALIGN_LEFT, "Sorting games", gPS5SubSel == 5);
-        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 5), ALIGN_RIGHT, sortStr, gPS5SubSel == 5);
+        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 6), ALIGN_LEFT, "Sorting games", gPS5SubSel == 6);
+        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 6), ALIGN_RIGHT, sortStr, gPS5SubSel == 6);
 
         char controllerStr[96];
         const char *controllerText = "PS2 DualShock 2";
@@ -3688,15 +3749,15 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
         else if (gPS5TempControllerType == 4)
             controllerText = "PS5 DualSense USB";
         snprintf(controllerStr, sizeof(controllerStr), "< %s >", controllerText);
-        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 6), ALIGN_LEFT, "Controller", gPS5SubSel == 6);
-        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 6), ALIGN_RIGHT, controllerStr, gPS5SubSel == 6);
+        drawPS5SettingsText(gPS5RegFont, rowX, rowY + listTop + (rowStep * 7), ALIGN_LEFT, "Controller", gPS5SubSel == 7);
+        drawPS5SettingsText(gPS5RegFont, rightX, rowY + listTop + (rowStep * 7), ALIGN_RIGHT, controllerStr, gPS5SubSel == 7);
 
         // 4. Draw quick action cards.
         char coverSummary[96];
         char smbSummary[96];
         char coverButton[32];
-        int coverFocused = gPS5SubSel == 7;
-        int smbFocused = gPS5SubSel == 8;
+        int coverFocused = gPS5SubSel == 8;
+        int smbFocused = gPS5SubSel == 9;
         u64 idleCardColor = GS_SETREG_RGBA(0x1C, 0x1C, 0x1C, 0x80);
         u64 focusedCardColor = GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80);
         u64 idleHeadingColor = GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80);
@@ -3780,7 +3841,8 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
             textStartX = 50 + 22;
         }
 
-        fntRenderString(gPS5SemiBoldFont, textStartX, footerY, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "irfanmatheena", GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
+        fntRenderString(gPS5RegFont, textStartX, footerY, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Made by ", GS_SETREG_RGBA(0x70, 0x70, 0x70, 0x60));
+        fntRenderString(gPS5SemiBoldFont, textStartX + 64, footerY, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "irfanmatheena", GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
 
         // 5. Draw footer action helpers as measured groups, so icons and text cannot overlap.
         int saveGroupX = drawPS5RightIconAndText(SQUARE_ICON, "Save", gPS5SemiBoldFont, screenWidth - 50, footerY, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
@@ -3791,13 +3853,15 @@ static void drawPS5Launcher(struct menu_list *menu, struct submenu_list *item, s
         }
 
         if (gPS5SaveNotifyFrame && guiFrameId >= (int)gPS5SaveNotifyFrame && guiFrameId - (int)gPS5SaveNotifyFrame < 120) {
+            extern int gPS5SaveNotifyStatus;
+            const char *toastMsg = (gPS5SaveNotifyStatus == 2) ? "Save Failed" : "Save Successful";
             int toastW = 188;
             int toastH = 38;
             int toastX = (screenWidth - toastW) / 2;
             int toastY = 386;
             rmDrawRoundedRect(toastX - 1, toastY - 1, toastW + 2, toastH + 2, 8, GS_SETREG_RGBA(0x30, 0x30, 0x30, 0x80));
             rmDrawRoundedRect(toastX, toastY, toastW, toastH, 7, GS_SETREG_RGBA(0x08, 0x08, 0x08, 0xFA));
-            fntRenderString(gPS5SemiBoldFont, toastX + toastW / 2, toastY + toastH / 2, ALIGN_CENTER | ALIGN_VCENTER, 0, 0, "Save Successful", GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
+            fntRenderString(gPS5SemiBoldFont, toastX + toastW / 2, toastY + toastH / 2, ALIGN_CENTER | ALIGN_VCENTER, 0, 0, toastMsg, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
         } else if (gPS5SaveNotifyFrame && guiFrameId - (int)gPS5SaveNotifyFrame >= 120) {
             gPS5SaveNotifyFrame = 0;
         }

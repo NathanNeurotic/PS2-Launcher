@@ -155,4 +155,27 @@ submenu_list_t *menuGetMainMenu(void);
 submenu_list_t *menuGetMainMenuCurrent(void);
 void menuSetMainMenuCurrent(submenu_list_t *item);
 
+#define PS5_MAX_FAVORITES 128
+#define PS5_MAX_RECENT    64
+
+typedef struct {
+    int mode;
+    char startup[32];
+    char title[128];
+    unsigned long time1;
+    unsigned long time2;
+} ps5_list_entry_t;
+
+void ps5LoadFavorites(void);
+void ps5SaveFavorites(void);
+int ps5IsGameFavorite(const char *startup);
+void ps5ToggleGameFavorite(const char *startup);
+void ps5ToggleGameFavoriteEx(int mode, const char *startup, const char *title);
+
+void ps5LoadRecent(void);
+void ps5SaveRecent(void);
+int ps5IsGameRecent(const char *startup);
+void ps5RecordRecentlyPlayed(const char *startup);
+void ps5RecordRecentlyPlayedEx(int mode, const char *startup, const char *title);
+
 #endif

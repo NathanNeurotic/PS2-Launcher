@@ -253,6 +253,7 @@ void sfxPlay(int id)
     extern int gPS5UISound;
     if (gEnableSFX && gPS5UISound) {
         int ret = audsrv_ch_play_adpcm(id, &sfx[id]);
+        (void)ret;
         LOG("SFX: SPU voice triggered for effect id=%d ('%s'), duration=%dms, SPU playback return/channel=%d (gEnableSFX=1, gPS5UISound=1)\n",
             id, sfx_files[id].name ? sfx_files[id].name : "unknown", sfx_files[id].duration_ms, ret);
     } else {

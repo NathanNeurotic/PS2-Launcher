@@ -29,6 +29,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <time.h>
 
 enum MENU_IDs {
     MENU_SETTINGS = 0,
@@ -107,11 +108,75 @@ static submenu_list_t *gameMenuCurrent;
 
 static int ps5GameCompatMode;
 static int ps5GameGSMResolution;
+static int ps5GameLanguage = 0;
+static int ps5GameEnableCheat = 0;
 extern int gPS5CarouselNavInterrupt;
 
 static const char *ps5GameResolutionNames[] = {"Standard", "720p", "1080i"};
 static const int ps5GameResolutionGSMModes[] = {0, 10, 11};
 #define PS5_GAME_RESOLUTION_COUNT 3
+
+static const char *ps5GameLanguages[] = {
+    "System Default",
+    "Japanese",
+    "English",
+    "French",
+    "Spanish",
+    "German",
+    "Italian",
+    "Dutch",
+    "Portuguese"
+};
+#define PS5_GAME_LANGUAGE_COUNT 9
+
+// PS5 Native Game Menu Subscreen & Tabs
+static int gPS5GameMenuTab = 0;
+static int gPS5GameMenuRow = 0;
+static int gPS5CompatRow = 0;
+static int ps5DialogButton = 0;
+static char ps5GameToastMsg[128] = "";
+static int ps5GameToastTimer = 0;
+
+static void ps5SetGameToast(const char *msg)
+{
+    if (msg && msg[0]) {
+        strncpy(ps5GameToastMsg, msg, sizeof(ps5GameToastMsg) - 1);
+        ps5GameToastMsg[sizeof(ps5GameToastMsg) - 1] = '\0';
+        ps5GameToastTimer = 120;
+    } else {
+        ps5GameToastMsg[0] = '\0';
+        ps5GameToastTimer = 0;
+    }
+}
+
+// PS5 Native VMC Subscreen
+static int gPS5VMCMenuState = 0;
+static int ps5VMCSlot = 0;
+static int ps5VMCRow = 0;
+static int ps5VMCEnable[2] = {0, 0};
+static char ps5VMCName[2][32] = {{0}, {0}};
+static int ps5VMCSizeIndex[2] = {0, 0};
+static int ps5VMCStatus[2] = {0, 0};
+static int ps5VMCOperation = 0;
+static int ps5VMCProgress = 0;
+static int ps5VMCConfirmDelete = 0;
+static int ps5VMCConfirmReformat = 0;
+static int ps5VMCConfirmUnsaved = 0;
+static const int ps5VMCSizesMB[] = {8, 16, 32, 64};
+static const char *ps5VMCLabels[] = {"Enable VMC", "VMC Name", "Size", "VMC File", "Delete VMC"};
+
+// PS5 Native Cheat Engine Subscreen
+#define PS5_MAX_CHEATS 64
+typedef struct {
+    char name[64];
+    int enabled;
+} ps5_cheat_entry_t;
+
+static int gPS5CheatMenuState = 0;
+static int ps5CheatCount = 0;
+static int ps5CheatSelected = 0;
+static int ps5CheatAllEnabled = 0;
+static ps5_cheat_entry_t ps5Cheats[PS5_MAX_CHEATS];
 
 extern void rmDrawRoundedRect(int x, int y, int w, int h, int r, u64 color);
 extern void rmDrawRoundedRectWide(int x, int y, int w, int h, int r, u64 color);
@@ -128,24 +193,51 @@ static void ps5GameOptionsLoad(config_set_t *configSet)
     int source = SETTINGS_GLOBAL;
     int enableGSM = 0;
     int gsmMode = 0;
+    int langSource = SETTINGS_GLOBAL;
+    int osdEnable = 0;
+    int langVal = 0;
+    int cheatSource = SETTINGS_GLOBAL;
 
     ps5GameCompatMode = 0;
     ps5GameGSMResolution = 0;
+    ps5GameLanguage = 0;
+    ps5GameEnableCheat = 0;
 
-    if (configSet != NULL)
-        configGetInt(configSet, CONFIG_ITEM_COMPAT, &ps5GameCompatMode);
+    if (configSet == NULL)
+        return;
 
-    if (configSet != NULL)
-        configGetInt(configSet, CONFIG_ITEM_GSMSOURCE, &source);
-    if (configSet != NULL && source == SETTINGS_PERGAME) {
-        configGetInt(configSet, CONFIG_ITEM_ENABLEGSM, &enableGSM);
-        configGetInt(configSet, CONFIG_ITEM_GSMVMODE, &gsmMode);
+    configGetInt(configSet, "$Compatibility", &ps5GameCompatMode);
+
+    configGetInt(configSet, "$GSMSource", &source);
+    if (source == SETTINGS_PERGAME) {
+        configGetInt(configSet, "$EnableGSM", &enableGSM);
+        configGetInt(configSet, "$GSMVMode", &gsmMode);
         if (enableGSM) {
-            if (gsmMode == 10)
+            if (gsmMode == 10 || gsmMode == 30)
                 ps5GameGSMResolution = 1;
-            else if (gsmMode == 11)
+            else if (gsmMode == 11 || gsmMode == 29)
                 ps5GameGSMResolution = 2;
         }
+    }
+
+    configGetInt(configSet, "$CustomLanguageSource", &langSource);
+    if (langSource == SETTINGS_PERGAME) {
+        configGetInt(configSet, "$OSDSettingsEnable", &osdEnable);
+        configGetInt(configSet, "$CustomLanguageValue", &langVal);
+        if (osdEnable && (unsigned int)langVal < 8) {
+            ps5GameLanguage = langVal + 1;
+        }
+    }
+
+    configGetInt(configSet, "$CheatsSource", &cheatSource);
+    if (cheatSource == SETTINGS_PERGAME) {
+        configGetInt(configSet, "$EnableCheat", &ps5GameEnableCheat);
+    }
+    {
+        int cheatDisabled = 0;
+        configGetInt(configSet, "$CheatDisabled", &cheatDisabled);
+        if (cheatDisabled)
+            ps5GameEnableCheat = 0;
     }
 }
 
@@ -269,27 +361,150 @@ static void ps5GameOptionsSave(config_set_t *configSet)
         return;
 
     if (ps5GameCompatMode != 0)
-        configSetInt(configSet, CONFIG_ITEM_COMPAT, ps5GameCompatMode);
+        configSetInt(configSet, "$Compatibility", ps5GameCompatMode);
     else
-        configRemoveKey(configSet, CONFIG_ITEM_COMPAT);
+        configRemoveKey(configSet, "$Compatibility");
 
     if (ps5GameGSMResolution == 0) {
-        configRemoveKey(configSet, CONFIG_ITEM_GSMSOURCE);
-        configRemoveKey(configSet, CONFIG_ITEM_ENABLEGSM);
-        configRemoveKey(configSet, CONFIG_ITEM_GSMVMODE);
-        configRemoveKey(configSet, CONFIG_ITEM_GSMXOFFSET);
-        configRemoveKey(configSet, CONFIG_ITEM_GSMYOFFSET);
-        configRemoveKey(configSet, CONFIG_ITEM_GSMFIELDFIX);
+        configRemoveKey(configSet, "$GSMSource");
+        configRemoveKey(configSet, "$EnableGSM");
+        configRemoveKey(configSet, "$GSMVMode");
+        configRemoveKey(configSet, "$GSMXOffset");
+        configRemoveKey(configSet, "$GSMYOffset");
+        configRemoveKey(configSet, "$GSMFIELDFix");
     } else {
-        configSetInt(configSet, CONFIG_ITEM_GSMSOURCE, SETTINGS_PERGAME);
-        configSetInt(configSet, CONFIG_ITEM_ENABLEGSM, 1);
-        configSetInt(configSet, CONFIG_ITEM_GSMVMODE, ps5GameResolutionGSMModes[ps5GameGSMResolution]);
-        configRemoveKey(configSet, CONFIG_ITEM_GSMXOFFSET);
-        configRemoveKey(configSet, CONFIG_ITEM_GSMYOFFSET);
-        configRemoveKey(configSet, CONFIG_ITEM_GSMFIELDFIX);
+        configSetInt(configSet, "$GSMSource", 1);
+        configSetInt(configSet, "$EnableGSM", 1);
+        configSetInt(configSet, "$GSMVMode", ps5GameResolutionGSMModes[ps5GameGSMResolution]);
+        configRemoveKey(configSet, "$GSMXOffset");
+        configRemoveKey(configSet, "$GSMYOffset");
+        configRemoveKey(configSet, "$GSMFIELDFix");
     }
 
-    configSetInt(configSet, CONFIG_ITEM_CONFIGSOURCE, CONFIG_SOURCE_USER);
+    if (ps5GameLanguage == 0) {
+        configRemoveKey(configSet, "$CustomLanguageSource");
+        configRemoveKey(configSet, "$OSDSettingsEnable");
+        configRemoveKey(configSet, "$CustomLanguageValue");
+        configRemoveKey(configSet, "$OSDAspectRatio");
+        configRemoveKey(configSet, "$OSDVideoMode");
+    } else {
+        configSetInt(configSet, "$CustomLanguageSource", 1);
+        configSetInt(configSet, "$OSDSettingsEnable", 1);
+        configSetInt(configSet, "$CustomLanguageValue", ps5GameLanguage - 1);
+        configSetInt(configSet, "$OSDAspectRatio", 3);
+        configSetInt(configSet, "$OSDVideoMode", 2);
+    }
+
+    configSetInt(configSet, "$CheatsSource", 1);
+    if (ps5GameEnableCheat) {
+        configSetInt(configSet, "$EnableCheat", 1);
+        configRemoveKey(configSet, "$CheatDisabled");
+    } else {
+        configRemoveKey(configSet, "$EnableCheat");
+        configSetInt(configSet, "$CheatDisabled", 1);
+    }
+    configRemoveKey(configSet, "$CheatMode");
+
+    configSetInt(configSet, "$ConfigSource", 1);
+}
+
+static void ps5VMCLoadConfig(void)
+{
+    int slot;
+    const char *startup = itemConfigStartup;
+
+    ps5VMCRow = 0;
+    ps5VMCSlot = 0;
+    ps5VMCOperation = 0;
+    ps5VMCProgress = 0;
+    ps5VMCConfirmDelete = 0;
+    ps5VMCConfirmReformat = 0;
+
+    for (slot = 0; slot < 2; slot++) {
+        configGetVMC(itemConfig, ps5VMCName[slot], sizeof(ps5VMCName[slot]), slot);
+        if (ps5VMCName[slot][0]) {
+            ps5VMCEnable[slot] = 1;
+        } else {
+            ps5VMCEnable[slot] = 0;
+            snprintf(ps5VMCName[slot], sizeof(ps5VMCName[slot]), "%s_%d", (startup && startup[0]) ? startup : "game", slot);
+        }
+        ps5VMCSizeIndex[slot] = 0;
+        if (itemConfigSupport && itemConfigSupport->itemCheckVMC) {
+            int sz = itemConfigSupport->itemCheckVMC(itemConfigSupport, ps5VMCName[slot], 0);
+            if (sz > 0) {
+                ps5VMCStatus[slot] = 1;
+                if (sz == 16) ps5VMCSizeIndex[slot] = 1;
+                else if (sz == 32) ps5VMCSizeIndex[slot] = 2;
+                else if (sz == 64) ps5VMCSizeIndex[slot] = 3;
+                else ps5VMCSizeIndex[slot] = 0;
+            } else if (sz == -1) {
+                ps5VMCStatus[slot] = 2;
+            } else if (sz == -2) {
+                ps5VMCStatus[slot] = 3;
+            } else {
+                ps5VMCStatus[slot] = 0;
+            }
+        } else {
+            ps5VMCStatus[slot] = 0;
+        }
+    }
+}
+
+static void ps5VMCSaveConfig(void)
+{
+    int slot;
+    for (slot = 0; slot < 2; slot++) {
+        if (ps5VMCEnable[slot] && ps5VMCName[slot][0]) {
+            configSetVMC(itemConfig, ps5VMCName[slot], slot);
+        } else {
+            configRemoveVMC(itemConfig, slot);
+        }
+    }
+    menuSaveConfig();
+}
+
+static void ps5CheatLoadConfig(void)
+{
+    ps5CheatCount = 0;
+    ps5CheatSelected = 0;
+    ps5CheatAllEnabled = 0;
+
+    if (itemConfigSupport && itemConfigSupport->itemGetPrefix) {
+        char cheatPath[256];
+        const char *prefix = itemConfigSupport->itemGetPrefix(itemConfigSupport);
+        if (prefix) {
+            snprintf(cheatPath, sizeof(cheatPath), "%sCHT/%s.cht", prefix, itemConfigStartup);
+            int fd = openFile(cheatPath, O_RDONLY);
+            if (fd >= 0) {
+                char line[128];
+                int pos = 0;
+                char ch;
+                while (read(fd, &ch, 1) == 1 && ps5CheatCount < PS5_MAX_CHEATS) {
+                    if (ch == '\n' || ch == '\r') {
+                        if (pos > 0) {
+                            line[pos] = '\0';
+                            if (line[0] == '[' || (line[0] != '/' && line[0] != '#' && (line[0] < '0' || line[0] > '9') && (line[0] < 'A' || line[0] > 'F'))) {
+                                char *title = line;
+                                if (title[0] == '[') title++;
+                                int len = strlen(title);
+                                if (len > 0 && title[len - 1] == ']') title[len - 1] = '\0';
+                                if (len > 0) {
+                                    strncpy(ps5Cheats[ps5CheatCount].name, title, sizeof(ps5Cheats[ps5CheatCount].name) - 1);
+                                    ps5Cheats[ps5CheatCount].name[sizeof(ps5Cheats[ps5CheatCount].name) - 1] = '\0';
+                                    ps5Cheats[ps5CheatCount].enabled = 1;
+                                    ps5CheatCount++;
+                                }
+                            }
+                            pos = 0;
+                        }
+                    } else if (pos < (int)sizeof(line) - 1) {
+                        line[pos++] = ch;
+                    }
+                }
+                close(fd);
+            }
+        }
+    }
 }
 
 static void menuRenameGame(submenu_list_t **submenu)
@@ -474,6 +689,7 @@ static void menuInitMainMenu(void)
 void menuReinitMainMenu(void)
 {
     menuInitMainMenu();
+    refreshMenuPosition();
 }
 
 void menuInitGameMenu(void)
@@ -484,18 +700,19 @@ void menuInitGameMenu(void)
     if (gPS5Mode) {
         submenuAppendItem(&gameMenu, -1, "Resolution", GAME_PS5_GSM_RESOLUTION, -1);
         submenuAppendItem(&gameMenu, -1, "Language", GAME_PS5_LANGUAGE, -1);
+        submenuAppendItem(&gameMenu, -1, "Virtual memory card (VMC)", GAME_VMC_SETTINGS, -1);
+        submenuAppendItem(&gameMenu, -1, "Cheat Engine", GAME_CHEAT_SETTINGS, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 1", GAME_PS5_MODE_BASE, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 2", GAME_PS5_MODE_BASE + 1, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 3", GAME_PS5_MODE_BASE + 2, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 4", GAME_PS5_MODE_BASE + 3, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 5", GAME_PS5_MODE_BASE + 4, -1);
         submenuAppendItem(&gameMenu, -1, "Mode 6", GAME_PS5_MODE_BASE + 5, -1);
-        submenuAppendItem(&gameMenu, -1, "Mode 7", GAME_PS5_MODE_BASE + 6, -1);
-        submenuAppendItem(&gameMenu, -1, "Mode 8", GAME_PS5_MODE_BASE + 7, -1);
-        submenuAppendItem(&gameMenu, -1, "Slot 1", GAME_PS5_VMC_SLOT1, -1);
-        submenuAppendItem(&gameMenu, -1, "Slot 2", GAME_PS5_VMC_SLOT2, -1);
-        submenuAppendItem(&gameMenu, -1, "Enable Cheat", GAME_PS5_CHEAT_ENABLE, -1);
         gameMenuCurrent = gameMenu;
+        gPS5VMCMenuState = 0;
+        gPS5CheatMenuState = 0;
+        gPS5GameMenuTab = 0;
+        ps5SetGameToast("Loading game settings...");
         return;
     }
 
@@ -874,7 +1091,7 @@ static int ps5MenuTitleMatchesAlpha(const char *title)
     extern int gPS5AlphaIdx;
     char firstChar;
 
-    if (gPS5AlphaIdx <= 0)
+    if (gPS5AlphaIdx <= 2)
         return 1;
     if (title == NULL || title[0] == '\0')
         return 0;
@@ -883,11 +1100,12 @@ static int ps5MenuTitleMatchesAlpha(const char *title)
     if (firstChar >= 'a' && firstChar <= 'z')
         firstChar -= 32;
 
-    return firstChar >= 'A' && firstChar <= 'Z' && (firstChar - 'A' + 1) == gPS5AlphaIdx;
+    return firstChar >= 'A' && firstChar <= 'Z' && (firstChar - 'A' + 3) == gPS5AlphaIdx;
 }
 
 static int ps5MenuGameIsVisible(submenu_list_t *entry)
 {
+    extern int gPS5AlphaIdx;
     item_list_t *support;
     int sourceId;
     opl_io_module_t *owner;
@@ -913,6 +1131,18 @@ static int ps5MenuGameIsVisible(submenu_list_t *entry)
 
     if (support->itemGetCount != NULL && sourceId >= support->itemGetCount(support))
         return 0;
+
+    if (gPS5AlphaIdx == 0 || gPS5AlphaIdx == 1) {
+        const char *startup = NULL;
+        if (support->itemGetStartup != NULL)
+            startup = support->itemGetStartup(support, sourceId);
+        if (!startup || startup[0] == '\0')
+            return 0;
+        if (gPS5AlphaIdx == 0)
+            return ps5IsGameFavorite(startup);
+        else
+            return ps5IsGameRecent(startup);
+    }
 
     return ps5MenuTitleMatchesAlpha(submenuItemGetText(&entry->item));
 }
@@ -1529,27 +1759,25 @@ static void ps5AppsScanPs1Vcd(int group, const char *dirPath, const char *fileNa
     // Check for title.cfg in game folder
     ps5AppsJoinPath(cfgPath, sizeof(cfgPath), dirPath, "title.cfg");
     {
-        int fd = openFile(cfgPath, O_RDONLY);
-        if (fd >= 0) {
-            char lineBuf[256];
-            int readBytes = read(fd, lineBuf, sizeof(lineBuf) - 1);
-            if (readBytes > 0) {
-                char *pTitle, *pBoot;
-                lineBuf[readBytes] = '\0';
-                pTitle = strstr(lineBuf, "title=");
-                if (pTitle != NULL) {
-                    char *end = strpbrk(pTitle + 6, "\r\n");
-                    if (end != NULL) *end = '\0';
-                    snprintf(title, sizeof(title), "[PS1] %s", pTitle + 6);
+        config_set_t *appConfig = configAlloc(0, NULL, cfgPath);
+        if (appConfig) {
+            if (configRead(appConfig)) {
+                const char *pTitle = NULL;
+                const char *pBoot = NULL;
+                const char *pArgv1 = NULL;
+                if (configGetStr(appConfig, "title", &pTitle) && pTitle && pTitle[0]) {
+                    while (*pTitle == ' ' || *pTitle == '\t')
+                        pTitle++;
+                    if (strncmp(pTitle, "[PS1]", 5) == 0 || strncmp(pTitle, "PS1:", 4) == 0)
+                        snprintf(title, sizeof(title), "%s", pTitle);
+                    else
+                        snprintf(title, sizeof(title), "[PS1] %s", pTitle);
                 }
-                pBoot = strstr(lineBuf, "boot=");
-                if (pBoot != NULL) {
-                    char *end = strpbrk(pBoot + 5, "\r\n");
-                    if (end != NULL) *end = '\0';
-                    ps5AppsJoinPath(bootElfPath, sizeof(bootElfPath), dirPath, pBoot + 5);
-                }
+                if (configGetStr(appConfig, "boot", &pBoot) && pBoot && pBoot[0])
+                    ps5AppsJoinPath(bootElfPath, sizeof(bootElfPath), dirPath, pBoot);
+                configGetStr(appConfig, "argv1", &pArgv1);
             }
-            close(fd);
+            configFree(appConfig);
         }
     }
 
@@ -1557,14 +1785,28 @@ static void ps5AppsScanPs1Vcd(int group, const char *dirPath, const char *fileNa
     // 1. XX.<title>.ELF in the same folder
     // 2. SB.<title>.ELF in the same folder
     // 3. POPSTARTER.ELF in the same folder
-    // 4. POPS/POPSTARTER.ELF in root
+    // 4. POPS.ELF in the same folder
     if (bootElfPath[0] == '\0') {
         char testElf[PS5_APPS_PATH_MAX];
         char xxName[128];
         snprintf(xxName, sizeof(xxName), "XX.%s.ELF", baseTitle);
         ps5AppsJoinPath(testElf, sizeof(testElf), dirPath, xxName);
         {
-            int fd = openFile(testElf, O_RDONLY);
+            int fd = openFile((char *)testElf, O_RDONLY);
+            if (fd >= 0) {
+                close(fd);
+                strncpy(bootElfPath, testElf, sizeof(bootElfPath) - 1);
+            }
+        }
+    }
+
+    if (bootElfPath[0] == '\0') {
+        char testElf[PS5_APPS_PATH_MAX];
+        char sbName[128];
+        snprintf(sbName, sizeof(sbName), "SB.%s.ELF", baseTitle);
+        ps5AppsJoinPath(testElf, sizeof(testElf), dirPath, sbName);
+        {
+            int fd = openFile((char *)testElf, O_RDONLY);
             if (fd >= 0) {
                 close(fd);
                 strncpy(bootElfPath, testElf, sizeof(bootElfPath) - 1);
@@ -1576,7 +1818,7 @@ static void ps5AppsScanPs1Vcd(int group, const char *dirPath, const char *fileNa
         char testElf[PS5_APPS_PATH_MAX];
         ps5AppsJoinPath(testElf, sizeof(testElf), dirPath, "POPSTARTER.ELF");
         {
-            int fd = openFile(testElf, O_RDONLY);
+            int fd = openFile((char *)testElf, O_RDONLY);
             if (fd >= 0) {
                 close(fd);
                 strncpy(bootElfPath, testElf, sizeof(bootElfPath) - 1);
@@ -1588,7 +1830,7 @@ static void ps5AppsScanPs1Vcd(int group, const char *dirPath, const char *fileNa
         char testElf[PS5_APPS_PATH_MAX];
         ps5AppsJoinPath(testElf, sizeof(testElf), dirPath, "POPS.ELF");
         {
-            int fd = openFile(testElf, O_RDONLY);
+            int fd = openFile((char *)testElf, O_RDONLY);
             if (fd >= 0) {
                 close(fd);
                 strncpy(bootElfPath, testElf, sizeof(bootElfPath) - 1);
@@ -1630,6 +1872,56 @@ static u32 ps5CalculateCatalogHash(void)
 
 static u32 gPS5SavedCatalogHash = 0;
 
+static int ps5WriteJsonEscapedString(int fd, const char *str)
+{
+    char buf[16];
+
+    if (write(fd, "\"", 1) <= 0)
+        return 0;
+
+    if (str != NULL) {
+        while (*str) {
+            unsigned char ch = (unsigned char)*str++;
+            if (ch == '\\' || ch == '"') {
+                buf[0] = '\\';
+                buf[1] = (char)ch;
+                buf[2] = '\0';
+            } else if (ch == '\n') {
+                buf[0] = '\\';
+                buf[1] = 'n';
+                buf[2] = '\0';
+            } else if (ch == '\r') {
+                buf[0] = '\\';
+                buf[1] = 'r';
+                buf[2] = '\0';
+            } else if (ch == '\t') {
+                buf[0] = '\\';
+                buf[1] = 't';
+                buf[2] = '\0';
+            } else if (ch < 0x20) {
+                snprintf(buf, sizeof(buf), "\\u%04x", ch);
+            } else {
+                buf[0] = (char)ch;
+                buf[1] = '\0';
+            }
+
+            int len = strlen(buf);
+            int written = 0;
+            while (written < len) {
+                int res = write(fd, buf + written, len - written);
+                if (res <= 0)
+                    return 0;
+                written += res;
+            }
+        }
+    }
+
+    if (write(fd, "\"", 1) <= 0)
+        return 0;
+
+    return 1;
+}
+
 static void ps5SaveGameCatalogJson(const char *root)
 {
     char jsonPath[PS5_APPS_PATH_MAX];
@@ -1655,30 +1947,24 @@ static void ps5SaveGameCatalogJson(const char *root)
     write(fd, line, strlen(line));
 
     for (i = 0; i < gPS5AppsItemCount; i++) {
-        char safeName[128];
-        char safePath[256];
-        int j, p = 0;
-
-        for (j = 0; gPS5Apps[i].name[j] && p < (int)sizeof(safeName) - 2; j++) {
-            if (gPS5Apps[i].name[j] == '"')
-                safeName[p++] = '\\';
-            safeName[p++] = gPS5Apps[i].name[j];
-        }
-        safeName[p] = '\0';
-
-        p = 0;
-        for (j = 0; gPS5Apps[i].path[j] && p < (int)sizeof(safePath) - 2; j++) {
-            if (gPS5Apps[i].path[j] == '"')
-                safePath[p++] = '\\';
-            safePath[p++] = gPS5Apps[i].path[j];
-        }
-        safePath[p] = '\0';
-
-        snprintf(line, sizeof(line),
-                 "    {\"source_mode\":%d,\"source_id\":%d,\"startup\":\"%s\",\"title\":\"%s\",\"prefix\":\"%s\",\"path\":\"%s\"}%s\n",
-                 gPS5Apps[i].group, i, safeName, safeName, "APPS", safePath,
-                 (i == gPS5AppsItemCount - 1) ? "" : ",");
+        snprintf(line, sizeof(line), "    {\"source_mode\":%d,\"source_id\":%d,\"startup\":", gPS5Apps[i].group, i);
         write(fd, line, strlen(line));
+
+        ps5WriteJsonEscapedString(fd, gPS5Apps[i].name);
+
+        write(fd, ",\"title\":", 9);
+        ps5WriteJsonEscapedString(fd, gPS5Apps[i].name);
+
+        write(fd, ",\"prefix\":", 10);
+        ps5WriteJsonEscapedString(fd, "APPS");
+
+        write(fd, ",\"path\":", 8);
+        ps5WriteJsonEscapedString(fd, gPS5Apps[i].path);
+
+        if (i < gPS5AppsItemCount - 1)
+            write(fd, "},\n", 3);
+        else
+            write(fd, "}\n", 2);
     }
 
     snprintf(line, sizeof(line), "  ]\n}\n");
@@ -2161,7 +2447,7 @@ static void ps5UpdateControllerLiveStatus(void)
         gPS5ControllerLogBridgePadData = 0;
         if (!gPS5ControllerLogVisible)
             gPS5XboxNavPadData = 0;
-        snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input found");
+        snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input");
         snprintf(gPS5ControllerLogBridge, sizeof(gPS5ControllerLogBridge), "Bridge: no raw report");
         snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: no input");
         snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: no data");
@@ -2226,7 +2512,7 @@ static void ps5UpdateControllerLiveStatus(void)
         if (btn2 & 0x40) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "L3");
         if (btn2 & 0x80) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "R3");
 
-        if (special & 0x01) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "PS Button");
+        if (special & 0x01) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "PS");
         if (special & 0x02) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Touchpad Click");
         if (special & 0x04) ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Mute");
 
@@ -2235,8 +2521,12 @@ static void ps5UpdateControllerLiveStatus(void)
         if (rx < 64 || rx > 192 || ry < 64 || ry > 192)
             ps5AppendPressed(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), &first, "Right Stick");
 
-        snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: LX=%02X LY=%02X RX=%02X RY=%02X L2=%02X R2=%02X BTN=%02X/%02X SPECIAL=%02X",
+        snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "LX=%02X LY=%02X RX=%02X RY=%02X L2=%02X R2=%02X BTN=%02X/%02X SPECIAL=%02X",
                  lx, ly, rx, ry, l2_analog, r2_analog, btn1 | dpad, btn2, special);
+        if (special & 0x80) {
+            snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Input: BTN=%02X/%02X SPECIAL=%02X L2=%u R2=%u LX=%u LY=%u RX=%u RY=%u",
+                     btn1 | dpad, btn2, special, l2_analog, r2_analog, lx, ly, rx, ry);
+        }
 
         if (ps5GetXboxUsbDs2Report(ds2)) {
             u16 buttons = ds2[0] | (ds2[1] << 8);
@@ -2252,7 +2542,7 @@ static void ps5UpdateControllerLiveStatus(void)
             if (hasSignal)
                 snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: signal BTN=%02X/%02X", btn1 | dpad, btn2);
             else
-                snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input found");
+                snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input");
         }
         return;
     }
@@ -2260,6 +2550,7 @@ static void ps5UpdateControllerLiveStatus(void)
     if (data[0] != 0x20) {
         if (vid != 0 || pid != 0) {
             snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: unsupported USB controller");
+            snprintf(gPS5ControllerLogBridge, sizeof(gPS5ControllerLogBridge), "Bridge: unsupported USB controller");
             snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: b0-b15=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
                      data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15]);
             snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: unsupported controller");
@@ -2270,7 +2561,7 @@ static void ps5UpdateControllerLiveStatus(void)
                      data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
             snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: waiting for input packet");
         } else {
-            snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input found");
+            snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input");
             snprintf(gPS5ControllerLogRaw, sizeof(gPS5ControllerLogRaw), "Raw: no input");
             snprintf(gPS5ControllerLogDs2, sizeof(gPS5ControllerLogDs2), "DS2: no data");
         }
@@ -2343,7 +2634,7 @@ static void ps5UpdateControllerLiveStatus(void)
                 snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: signal b0-b9=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
                          data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
             else
-                snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input found");
+                snprintf(gPS5ControllerLogPressed, sizeof(gPS5ControllerLogPressed), "Pressed: no input");
         }
     }
 }
@@ -2423,12 +2714,9 @@ static int ps5WriteControllerLogPath(const char *path)
     return 1;
 }
 
-#define PS5_MAX_FAVORITES 128
-#define PS5_MAX_RECENT    32
-
-static char gPS5Favorites[PS5_MAX_FAVORITES][32];
+static ps5_list_entry_t gPS5Favorites[PS5_MAX_FAVORITES];
 static int gPS5FavoritesCount = 0;
-static char gPS5Recent[PS5_MAX_RECENT][32];
+static ps5_list_entry_t gPS5Recent[PS5_MAX_RECENT];
 static int gPS5RecentCount = 0;
 int gPS5MappingWizardVisible = 0;
 int gPS5MappingStep = 0;
@@ -2438,42 +2726,104 @@ char gPS5MappingStatus[128] = "Connect by USB. Hold the requested input, then pr
 
 void ps5LoadFavorites(void)
 {
-    int fd = openFile("mc0:/PS2L/FAVORITES.CFG", O_RDONLY);
-    if (fd < 0) fd = openFile("mass0:/PS2L/FAVORITES.CFG", O_RDONLY);
-    if (fd >= 0) {
-        char buf[2048];
-        int bytes = read(fd, buf, sizeof(buf) - 1);
-        if (bytes > 0) {
-            char *line;
-            buf[bytes] = '\0';
-            gPS5FavoritesCount = 0;
-            line = strtok(buf, "\r\n");
-            while (line && gPS5FavoritesCount < PS5_MAX_FAVORITES) {
-                if (line[0] != '\0') {
-                    strncpy(gPS5Favorites[gPS5FavoritesCount++], line, 31);
-                }
-                line = strtok(NULL, "\r\n");
-            }
+    config_set_t *configOPL = configGetByType(CONFIG_OPL);
+    int i;
+    char key[32];
+    char val[256];
+    const char *prefix = "ps5_favourite";
+
+    gPS5FavoritesCount = 0;
+    if (configOPL != NULL) {
+        for (i = 0; i < PS5_MAX_FAVORITES; i++) {
+            snprintf(key, sizeof(key), "%s_%02d", prefix, i);
+            if (!configGetStrCopy(configOPL, key, val, sizeof(val)) || val[0] == '\0')
+                break;
+
+            // Binary format: "%d|%s|%lu|%lu|%s"
+            char *p = val;
+            char *token;
+
+            token = strchr(p, '|');
+            if (!token) continue;
+            *token = '\0';
+            gPS5Favorites[gPS5FavoritesCount].mode = atoi(p);
+            p = token + 1;
+
+            token = strchr(p, '|');
+            if (!token) continue;
+            *token = '\0';
+            strncpy(gPS5Favorites[gPS5FavoritesCount].startup, p, sizeof(gPS5Favorites[0].startup) - 1);
+            gPS5Favorites[gPS5FavoritesCount].startup[sizeof(gPS5Favorites[0].startup) - 1] = '\0';
+            p = token + 1;
+
+            token = strchr(p, '|');
+            if (!token) continue;
+            *token = '\0';
+            gPS5Favorites[gPS5FavoritesCount].time1 = strtoul(p, NULL, 10);
+            p = token + 1;
+
+            token = strchr(p, '|');
+            if (!token) continue;
+            *token = '\0';
+            gPS5Favorites[gPS5FavoritesCount].time2 = strtoul(p, NULL, 10);
+            p = token + 1;
+
+            strncpy(gPS5Favorites[gPS5FavoritesCount].title, p, sizeof(gPS5Favorites[0].title) - 1);
+            gPS5Favorites[gPS5FavoritesCount].title[sizeof(gPS5Favorites[0].title) - 1] = '\0';
+
+            gPS5FavoritesCount++;
         }
-        close(fd);
+    }
+
+    // Fallback migration from FAVORITES.CFG if no keys found
+    if (gPS5FavoritesCount == 0) {
+        int fd = openFile("mc0:/PS2L/FAVORITES.CFG", O_RDONLY);
+        if (fd < 0) fd = openFile("mass0:/PS2L/FAVORITES.CFG", O_RDONLY);
+        if (fd >= 0) {
+            char buf[2048];
+            int bytes = read(fd, buf, sizeof(buf) - 1);
+            if (bytes > 0) {
+                char *line;
+                buf[bytes] = '\0';
+                line = strtok(buf, "\r\n");
+                while (line && gPS5FavoritesCount < PS5_MAX_FAVORITES) {
+                    if (line[0] != '\0') {
+                        memset(&gPS5Favorites[gPS5FavoritesCount], 0, sizeof(gPS5Favorites[0]));
+                        gPS5Favorites[gPS5FavoritesCount].mode = -1;
+                        strncpy(gPS5Favorites[gPS5FavoritesCount].startup, line, sizeof(gPS5Favorites[0].startup) - 1);
+                        gPS5FavoritesCount++;
+                    }
+                    line = strtok(NULL, "\r\n");
+                }
+            }
+            close(fd);
+        }
     }
 }
 
 void ps5SaveFavorites(void)
 {
-    int fd, i;
-    mkdir("mc0:/PS2L", 0777);
-    fd = openFile("mc0:/PS2L/FAVORITES.CFG", O_WRONLY | O_CREAT | O_TRUNC);
-    if (fd < 0) {
-        mkdir("mass0:/PS2L", 0777);
-        fd = openFile("mass0:/PS2L/FAVORITES.CFG", O_WRONLY | O_CREAT | O_TRUNC);
-    }
-    if (fd >= 0) {
-        for (i = 0; i < gPS5FavoritesCount; i++) {
-            write(fd, gPS5Favorites[i], strlen(gPS5Favorites[i]));
-            write(fd, "\n", 1);
+    config_set_t *configOPL = configGetByType(CONFIG_OPL);
+    int i;
+    char key[32];
+    char val[256];
+    const char *prefix = "ps5_favourite";
+
+    if (configOPL != NULL) {
+        for (i = 0; i < PS5_MAX_FAVORITES; i++) {
+            snprintf(key, sizeof(key), "%s_%02d", prefix, i);
+            if (i < gPS5FavoritesCount) {
+                snprintf(val, sizeof(val), "%d|%s|%lu|%lu|%s",
+                         gPS5Favorites[i].mode,
+                         gPS5Favorites[i].startup,
+                         gPS5Favorites[i].time1,
+                         gPS5Favorites[i].time2,
+                         gPS5Favorites[i].title);
+                configSetStr(configOPL, key, val);
+            } else {
+                configRemoveKey(configOPL, key);
+            }
         }
-        close(fd);
     }
 }
 
@@ -2482,51 +2832,160 @@ int ps5IsGameFavorite(const char *startup)
     int i;
     if (startup == NULL || startup[0] == '\0') return 0;
     for (i = 0; i < gPS5FavoritesCount; i++) {
-        if (strcasecmp(gPS5Favorites[i], startup) == 0) return 1;
+        if (strcasecmp(gPS5Favorites[i].startup, startup) == 0) return 1;
     }
     return 0;
 }
 
-void ps5ToggleGameFavorite(const char *startup)
+void ps5ToggleGameFavoriteEx(int mode, const char *startup, const char *title)
 {
     int i;
     if (startup == NULL || startup[0] == '\0') return;
     for (i = 0; i < gPS5FavoritesCount; i++) {
-        if (strcasecmp(gPS5Favorites[i], startup) == 0) {
+        if (strcasecmp(gPS5Favorites[i].startup, startup) == 0) {
             for (; i < gPS5FavoritesCount - 1; i++) {
-                strncpy(gPS5Favorites[i], gPS5Favorites[i + 1], 31);
+                gPS5Favorites[i] = gPS5Favorites[i + 1];
             }
             gPS5FavoritesCount--;
             ps5SaveFavorites();
+            saveConfigQuiet(CONFIG_OPL);
             return;
         }
     }
     if (gPS5FavoritesCount < PS5_MAX_FAVORITES) {
-        strncpy(gPS5Favorites[gPS5FavoritesCount++], startup, 31);
+        memset(&gPS5Favorites[gPS5FavoritesCount], 0, sizeof(gPS5Favorites[0]));
+        gPS5Favorites[gPS5FavoritesCount].mode = mode;
+        strncpy(gPS5Favorites[gPS5FavoritesCount].startup, startup, sizeof(gPS5Favorites[0].startup) - 1);
+        if (title && title[0]) {
+            char titleBuf[32];
+            snprintf(titleBuf, sizeof(titleBuf), "%.28s_%d", title, gPS5FavoritesCount);
+            strncpy(gPS5Favorites[gPS5FavoritesCount].title, titleBuf, sizeof(gPS5Favorites[0].title) - 1);
+        } else {
+            char fallback[32];
+            snprintf(fallback, sizeof(fallback), "game_%d", gPS5FavoritesCount);
+            strncpy(gPS5Favorites[gPS5FavoritesCount].title, fallback, sizeof(gPS5Favorites[0].title) - 1);
+        }
+        gPS5Favorites[gPS5FavoritesCount].time1 = (unsigned long)time(NULL);
+        gPS5FavoritesCount++;
         ps5SaveFavorites();
+        saveConfigQuiet(CONFIG_OPL);
     }
+}
+
+void ps5ToggleGameFavorite(const char *startup)
+{
+    ps5ToggleGameFavoriteEx(-1, startup, "");
 }
 
 void ps5LoadRecent(void)
 {
-    int fd = openFile("mc0:/PS2L/RECENT.CFG", O_RDONLY);
-    if (fd < 0) fd = openFile("mass0:/PS2L/RECENT.CFG", O_RDONLY);
-    if (fd >= 0) {
-        char buf[2048];
-        int bytes = read(fd, buf, sizeof(buf) - 1);
-        if (bytes > 0) {
-            char *line;
-            buf[bytes] = '\0';
-            gPS5RecentCount = 0;
-            line = strtok(buf, "\r\n");
-            while (line && gPS5RecentCount < PS5_MAX_RECENT) {
-                if (line[0] != '\0') {
-                    strncpy(gPS5Recent[gPS5RecentCount++], line, 31);
+    config_set_t *configOPL = configGetByType(CONFIG_OPL);
+    int i;
+    char key[32];
+    char val[256];
+    const char *lastPlayed;
+    const char *prefix = "ps5_recent";
+
+    gPS5RecentCount = 0;
+    if (configOPL != NULL) {
+        for (i = 0; i < PS5_MAX_RECENT; i++) {
+            snprintf(key, sizeof(key), "%s_%02d", prefix, i);
+            if (!configGetStrCopy(configOPL, key, val, sizeof(val)) || val[0] == '\0')
+                break;
+
+            // Binary format: "%d|%s|%lu|%lu|%s"
+            char *p = val;
+            char *token;
+
+            token = strchr(p, '|');
+            if (!token) continue;
+            *token = '\0';
+            gPS5Recent[gPS5RecentCount].mode = atoi(p);
+            p = token + 1;
+
+            token = strchr(p, '|');
+            if (!token) continue;
+            *token = '\0';
+            strncpy(gPS5Recent[gPS5RecentCount].startup, p, sizeof(gPS5Recent[0].startup) - 1);
+            gPS5Recent[gPS5RecentCount].startup[sizeof(gPS5Recent[0].startup) - 1] = '\0';
+            p = token + 1;
+
+            token = strchr(p, '|');
+            if (!token) continue;
+            *token = '\0';
+            gPS5Recent[gPS5RecentCount].time1 = strtoul(p, NULL, 10);
+            p = token + 1;
+
+            token = strchr(p, '|');
+            if (!token) continue;
+            *token = '\0';
+            gPS5Recent[gPS5RecentCount].time2 = strtoul(p, NULL, 10);
+            p = token + 1;
+
+            strncpy(gPS5Recent[gPS5RecentCount].title, p, sizeof(gPS5Recent[0].title) - 1);
+            gPS5Recent[gPS5RecentCount].title[sizeof(gPS5Recent[0].title) - 1] = '\0';
+
+            gPS5RecentCount++;
+        }
+
+        // Binary feature at 0x00297D8C: if no recent items yet, import OPL "last_played"
+        if (gPS5RecentCount == 0 && configGetStr(configOPL, "last_played", &lastPlayed) && lastPlayed && lastPlayed[0] != '\0') {
+            memset(&gPS5Recent[0], 0, sizeof(gPS5Recent[0]));
+            gPS5Recent[0].mode = -1;
+            strncpy(gPS5Recent[0].startup, lastPlayed, sizeof(gPS5Recent[0].startup) - 1);
+            gPS5RecentCount = 1;
+        }
+    }
+
+    // Fallback migration from RECENT.CFG if no keys found
+    if (gPS5RecentCount == 0) {
+        int fd = openFile("mc0:/PS2L/RECENT.CFG", O_RDONLY);
+        if (fd < 0) fd = openFile("mass0:/PS2L/RECENT.CFG", O_RDONLY);
+        if (fd >= 0) {
+            char buf[2048];
+            int bytes = read(fd, buf, sizeof(buf) - 1);
+            if (bytes > 0) {
+                char *line;
+                buf[bytes] = '\0';
+                line = strtok(buf, "\r\n");
+                while (line && gPS5RecentCount < PS5_MAX_RECENT) {
+                    if (line[0] != '\0') {
+                        memset(&gPS5Recent[gPS5RecentCount], 0, sizeof(gPS5Recent[0]));
+                        gPS5Recent[gPS5RecentCount].mode = -1;
+                        strncpy(gPS5Recent[gPS5RecentCount].startup, line, sizeof(gPS5Recent[0].startup) - 1);
+                        gPS5RecentCount++;
+                    }
+                    line = strtok(NULL, "\r\n");
                 }
-                line = strtok(NULL, "\r\n");
+            }
+            close(fd);
+        }
+    }
+}
+
+void ps5SaveRecent(void)
+{
+    config_set_t *configOPL = configGetByType(CONFIG_OPL);
+    int i;
+    char key[32];
+    char val[256];
+    const char *prefix = "ps5_recent";
+
+    if (configOPL != NULL) {
+        for (i = 0; i < PS5_MAX_RECENT; i++) {
+            snprintf(key, sizeof(key), "%s_%02d", prefix, i);
+            if (i < gPS5RecentCount) {
+                snprintf(val, sizeof(val), "%d|%s|%lu|%lu|%s",
+                         gPS5Recent[i].mode,
+                         gPS5Recent[i].startup,
+                         gPS5Recent[i].time1,
+                         gPS5Recent[i].time2,
+                         gPS5Recent[i].title);
+                configSetStr(configOPL, key, val);
+            } else {
+                configRemoveKey(configOPL, key);
             }
         }
-        close(fd);
     }
 }
 
@@ -2535,58 +2994,72 @@ int ps5IsGameRecent(const char *startup)
     int i;
     if (startup == NULL || startup[0] == '\0') return 0;
     for (i = 0; i < gPS5RecentCount; i++) {
-        if (strcasecmp(gPS5Recent[i], startup) == 0) return 1;
+        if (strcasecmp(gPS5Recent[i].startup, startup) == 0) return 1;
     }
     return 0;
 }
 
-void ps5RecordRecentlyPlayed(const char *startup)
+void ps5RecordRecentlyPlayedEx(int mode, const char *startup, const char *title)
 {
-    int fd, i;
+    int i;
+    ps5_list_entry_t entry;
     if (startup == NULL || startup[0] == '\0') return;
 
+    memset(&entry, 0, sizeof(entry));
+    entry.mode = mode;
+    strncpy(entry.startup, startup, sizeof(entry.startup) - 1);
+    if (title && title[0]) {
+        strncpy(entry.title, title, sizeof(entry.title) - 1);
+    }
+    entry.time1 = (unsigned long)time(NULL);
+
     for (i = 0; i < gPS5RecentCount; i++) {
-        if (strcasecmp(gPS5Recent[i], startup) == 0) {
+        if (strcasecmp(gPS5Recent[i].startup, startup) == 0) {
+            entry.time2 = gPS5Recent[i].time2 + 1;
             for (; i > 0; i--) {
-                strncpy(gPS5Recent[i], gPS5Recent[i - 1], 31);
+                gPS5Recent[i] = gPS5Recent[i - 1];
             }
-            strncpy(gPS5Recent[0], startup, 31);
+            gPS5Recent[0] = entry;
             goto save_recent;
         }
     }
     if (gPS5RecentCount < PS5_MAX_RECENT) gPS5RecentCount++;
     for (i = gPS5RecentCount - 1; i > 0; i--) {
-        strncpy(gPS5Recent[i], gPS5Recent[i - 1], 31);
+        gPS5Recent[i] = gPS5Recent[i - 1];
     }
-    strncpy(gPS5Recent[0], startup, 31);
+    gPS5Recent[0] = entry;
 
 save_recent:
-    mkdir("mc0:/PS2L", 0777);
-    fd = openFile("mc0:/PS2L/RECENT.CFG", O_WRONLY | O_CREAT | O_TRUNC);
-    if (fd < 0) {
-        mkdir("mass0:/PS2L", 0777);
-        fd = openFile("mass0:/PS2L/RECENT.CFG", O_WRONLY | O_CREAT | O_TRUNC);
-    }
-    if (fd >= 0) {
-        for (i = 0; i < gPS5RecentCount; i++) {
-            write(fd, gPS5Recent[i], strlen(gPS5Recent[i]));
-            write(fd, "\n", 1);
-        }
-        close(fd);
-    }
+    ps5SaveRecent();
+    saveConfigQuiet(CONFIG_OPL);
+}
+
+void ps5RecordRecentlyPlayed(const char *startup)
+{
+    ps5RecordRecentlyPlayedEx(-1, startup, "");
 }
 
 void ps5StartControllerMapping(void)
 {
-    gPS5MappingWizardVisible = 1;
-    gPS5MappingStep = 0;
-    gPS5MappingCapturedCount = 0;
-    snprintf(gPS5MappingPrompt, sizeof(gPS5MappingPrompt), "Connect a USB controller to begin mapping.");
-    snprintf(gPS5MappingStatus, sizeof(gPS5MappingStatus), "Connect by USB. Hold the requested input, then press Cross on a PS2 controller.");
+    u8 raw[72];
+    int i;
+    gPS5ControllerLogVisible = 1;
+    gPS5ControllerLogStep = 0;
+    gPS5ControllerLogCaptured = 0;
+    gPS5ControllerLogNavTestEnabled = 0;
+    gPS5ControllerLogBridgePadData = 0;
+    for (i = 0; i < 20; i++)
+        gPS5ControllerLogLines[i][0] = '\0';
+    if (!ps5ReadControllerRaw(raw)) {
+        snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "No USB controller detected. Connect it and try again.");
+    } else {
+        snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Connect a USB controller to begin mapping.");
+    }
 }
 
 static void ps5SaveControllerLog(void)
 {
+    snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Saving controller log...");
     mkdir("mass0:/PS2L", 0777);
     if (ps5WriteControllerLogPath("mass0:/PS2L/CTRL_LOG.TXT")) {
         snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Saved: mass0:/PS2L/CTRL_LOG.TXT");
@@ -2689,6 +3162,8 @@ static int ps5SmbOperationActive(void)
 
 static int ps5SmbConsumeInputWhileBusy(void)
 {
+    if (ps5SmbOperationActive())
+        return 1;
     return 0;
 }
 
@@ -3019,7 +3494,9 @@ static void ps5SaveSettings(void)
     gPS5SavedVMode = gVMode;
 
     gPS5SaveBusyFrame = guiFrameId;
-    saveConfigQuiet(CONFIG_OPL | CONFIG_NETWORK | CONFIG_GAME);
+    int saveRes = saveConfigQuiet(CONFIG_OPL | CONFIG_NETWORK | CONFIG_GAME);
+    extern int gPS5SaveNotifyStatus;
+    gPS5SaveNotifyStatus = (saveRes < 0) ? 2 : 1;
     gPS5SmbPromptState = 1;
     gPS5SmbLoadStatus = 0;
     gPS5SmbRefreshQueued = 0;
@@ -3029,6 +3506,8 @@ static void ps5SaveSettings(void)
     gPS5SmbManualRefreshFrame = 0;
     gPS5SaveNotifyFrame = guiFrameId;
 }
+
+int gPS5SaveNotifyStatus = 1;
 
 void menuHandleInputMenu()
 {
@@ -3064,8 +3543,8 @@ void menuHandleInputMenu()
 #endif
             ps5CopySmbSettingsToTemp();
         }
-        if (gPS5SubSel > 8)
-            gPS5SubSel = 8;
+        if (gPS5SubSel > 9)
+            gPS5SubSel = 9;
 
         if (gPS5ControllerLogVisible) {
             ps5UpdateControllerLiveStatus();
@@ -3318,16 +3797,25 @@ void menuHandleInputMenu()
             }
             if (getKey(KEY_UP)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5SubSel = 7; // Move up to Game Covers at the top
+                gPS5SubSel = 8; // Move up to Game Covers at the top
             }
             if (getKey(KEY_DOWN)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5SubSel = 1; // Move down to Select Button
+                gPS5SubSel = 1; // Move down to Aspect ratio
             }
-        } else if (gPS5SubSel == 1) { // Focus is on Select Button
-            if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
+        } else if (gPS5SubSel == 1) { // Focus is on Aspect Ratio
+            extern int gWideScreen;
+            if (getKeyOn(KEY_LEFT)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5TempSelectButton = gPS5TempSelectButton == KEY_CIRCLE ? KEY_CROSS : KEY_CIRCLE;
+                if (gWideScreen <= 0) gWideScreen = 2;
+                else gWideScreen--;
+                rmSetAspectRatio((gWideScreen == 0) ? RM_ARATIO_4_3 : (gWideScreen == 1 ? RM_ARATIO_16_9 : RM_ARATIO_21_9));
+            }
+            if (getKeyOn(KEY_RIGHT)) {
+                sfxPlay(SFX_CURSOR);
+                if (gWideScreen >= 2) gWideScreen = 0;
+                else gWideScreen++;
+                rmSetAspectRatio((gWideScreen == 0) ? RM_ARATIO_4_3 : (gWideScreen == 1 ? RM_ARATIO_16_9 : RM_ARATIO_21_9));
             }
             if (getKey(KEY_UP)) {
                 sfxPlay(SFX_CURSOR);
@@ -3337,10 +3825,10 @@ void menuHandleInputMenu()
                 sfxPlay(SFX_CURSOR);
                 gPS5SubSel = 2;
             }
-        } else if (gPS5SubSel == 2) { // Focus is on UI Sound
+        } else if (gPS5SubSel == 2) { // Focus is on Select Button
             if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5TempUISound = !gPS5TempUISound; // Toggle On/Off
+                gPS5TempSelectButton = gPS5TempSelectButton == KEY_CIRCLE ? KEY_CROSS : KEY_CIRCLE;
             }
             if (getKey(KEY_UP)) {
                 sfxPlay(SFX_CURSOR);
@@ -3350,11 +3838,10 @@ void menuHandleInputMenu()
                 sfxPlay(SFX_CURSOR);
                 gPS5SubSel = 3;
             }
-        } else if (gPS5SubSel == 3) { // Focus is on Show Cover Images
+        } else if (gPS5SubSel == 3) { // Focus is on UI Sound
             if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5TempShowCoverImages = !gPS5TempShowCoverImages;
-                gPS5ShowCoverImages = gPS5TempShowCoverImages;
+                gPS5TempUISound = !gPS5TempUISound; // Toggle On/Off
             }
             if (getKey(KEY_UP)) {
                 sfxPlay(SFX_CURSOR);
@@ -3364,11 +3851,11 @@ void menuHandleInputMenu()
                 sfxPlay(SFX_CURSOR);
                 gPS5SubSel = 4;
             }
-        } else if (gPS5SubSel == 4) { // Focus is on Show Games Logo
+        } else if (gPS5SubSel == 4) { // Focus is on Show Cover Images
             if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5TempShowGamesLogo = !gPS5TempShowGamesLogo;
-                gPS5ShowGamesLogo = gPS5TempShowGamesLogo;
+                gPS5TempShowCoverImages = !gPS5TempShowCoverImages;
+                gPS5ShowCoverImages = gPS5TempShowCoverImages;
             }
             if (getKey(KEY_UP)) {
                 sfxPlay(SFX_CURSOR);
@@ -3378,11 +3865,11 @@ void menuHandleInputMenu()
                 sfxPlay(SFX_CURSOR);
                 gPS5SubSel = 5;
             }
-        } else if (gPS5SubSel == 5) { // Focus is on Sorting Games
+        } else if (gPS5SubSel == 5) { // Focus is on Show Games Logo
             if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5TempSortMode = !gPS5TempSortMode;
-                gPS5SortMode = gPS5TempSortMode;
+                gPS5TempShowGamesLogo = !gPS5TempShowGamesLogo;
+                gPS5ShowGamesLogo = gPS5TempShowGamesLogo;
             }
             if (getKey(KEY_UP)) {
                 sfxPlay(SFX_CURSOR);
@@ -3392,28 +3879,11 @@ void menuHandleInputMenu()
                 sfxPlay(SFX_CURSOR);
                 gPS5SubSel = 6;
             }
-        } else if (gPS5SubSel == 6) { // Focus is on Controller
-            if (getKeyOn(KEY_LEFT)) {
+        } else if (gPS5SubSel == 6) { // Focus is on Sorting Games
+            if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5TempControllerType = gPS5TempControllerType > 0 ? gPS5TempControllerType - 1 : 4;
-            }
-            if (getKeyOn(KEY_RIGHT)) {
-                sfxPlay(SFX_CURSOR);
-                gPS5TempControllerType = gPS5TempControllerType < 4 ? gPS5TempControllerType + 1 : 0;
-            }
-            if (getKeyOn(KEY_CROSS) || getKeyOn(gSelectButton)) {
-                int i;
-                u8 raw[72];
-                sfxPlay(SFX_CONFIRM);
-                gPS5ControllerLogVisible = 1;
-                gPS5ControllerLogStep = 0;
-                gPS5ControllerLogCaptured = 0;
-                gPS5ControllerLogNavTestEnabled = 0;
-                gPS5ControllerLogBridgePadData = 0;
-                for (i = 0; i < 20; i++)
-                    gPS5ControllerLogLines[i][0] = '\0';
-                snprintf(gPS5ControllerLogStatus, sizeof(gPS5ControllerLogStatus), "Cross: capture  Square: save  Triangle: nav test  Circle: close");
-                ps5ReadControllerRaw(raw);
+                gPS5TempSortMode = !gPS5TempSortMode;
+                gPS5SortMode = gPS5TempSortMode;
             }
             if (getKey(KEY_UP)) {
                 sfxPlay(SFX_CURSOR);
@@ -3423,7 +3893,46 @@ void menuHandleInputMenu()
                 sfxPlay(SFX_CURSOR);
                 gPS5SubSel = 7;
             }
-        } else if (gPS5SubSel == 7) { // Focus is on Game Covers
+        } else if (gPS5SubSel == 7) { // Focus is on Controller
+            if (getKeyOn(KEY_LEFT)) {
+                sfxPlay(SFX_CURSOR);
+                gPS5TempControllerType = gPS5TempControllerType > 0 ? gPS5TempControllerType - 1 : 4;
+            }
+            if (getKeyOn(KEY_RIGHT)) {
+                sfxPlay(SFX_CURSOR);
+                gPS5TempControllerType = gPS5TempControllerType < 4 ? gPS5TempControllerType + 1 : 0;
+            }
+            if (getKeyOn(KEY_CROSS) || getKeyOn(gSelectButton)) {
+                sfxPlay(SFX_CONFIRM);
+                ps5StartControllerMapping();
+            }
+            if (getKey(KEY_UP)) {
+                sfxPlay(SFX_CURSOR);
+                gPS5SubSel = 6;
+            }
+            if (getKey(KEY_DOWN)) {
+                sfxPlay(SFX_CURSOR);
+                gPS5SubSel = 8;
+            }
+        } else if (gPS5SubSel == 8) { // Focus is on Game Covers
+            if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
+                sfxPlay(SFX_CURSOR);
+                gPS5SubSel = 9;
+            }
+            if (getKey(KEY_DOWN)) {
+                sfxPlay(SFX_CURSOR);
+                gPS5SubSel = 0;
+            }
+            if (getKey(KEY_UP)) {
+                sfxPlay(SFX_CURSOR);
+                gPS5SubSel = 7;
+            }
+            if (getKeyOn(KEY_CROSS) || getKeyOn(gSelectButton)) {
+                sfxPlay(SFX_CONFIRM);
+                gPS5CoverDownloadMode = PS5_COVER_DOWNLOAD_MISSING;
+                gPS5CoverDownloadStatus = PS5_COVER_DOWNLOAD_PROMPT;
+            }
+        } else if (gPS5SubSel == 9) { // Focus is on SMB Settings
             if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
                 sfxPlay(SFX_CURSOR);
                 gPS5SubSel = 8;
@@ -3434,25 +3943,7 @@ void menuHandleInputMenu()
             }
             if (getKey(KEY_UP)) {
                 sfxPlay(SFX_CURSOR);
-                gPS5SubSel = 6;
-            }
-            if (getKeyOn(KEY_CROSS) || getKeyOn(gSelectButton)) {
-                sfxPlay(SFX_CONFIRM);
-                gPS5CoverDownloadMode = PS5_COVER_DOWNLOAD_MISSING;
-                gPS5CoverDownloadStatus = PS5_COVER_DOWNLOAD_PROMPT;
-            }
-        } else if (gPS5SubSel == 8) { // Focus is on SMB Settings
-            if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
-                sfxPlay(SFX_CURSOR);
                 gPS5SubSel = 7;
-            }
-            if (getKey(KEY_DOWN)) {
-                sfxPlay(SFX_CURSOR);
-                gPS5SubSel = 0;
-            }
-            if (getKey(KEY_UP)) {
-                sfxPlay(SFX_CURSOR);
-                gPS5SubSel = 0;
             }
             if (getKeyOn(KEY_CROSS) || getKeyOn(gSelectButton)) {
                 extern int gPS5SettingsPage;
@@ -3757,7 +4248,9 @@ void menuHandleInputMain()
                     int sourceId = cur->item.id;
                     if (oplResolveGameItem(cur->item.id, support, &support, &sourceId) && support && support->itemGetStartup) {
                         const char *startup = support->itemGetStartup(support, sourceId);
-                        if (startup) ps5RecordRecentlyPlayed(startup);
+                        char relPath[192];
+                        oplGetGameRelativePath(support, sourceId, relPath, sizeof(relPath));
+                        if (startup) ps5RecordRecentlyPlayedEx(support->mode, startup, relPath);
                     }
                 }
                 if (selected_item && selected_item->item && selected_item->item->execCross) {
@@ -3772,21 +4265,8 @@ void menuHandleInputMain()
     } else if (getKeyOn(KEY_TRIANGLE)) {
         if (gPS5Mode && gPS5ActiveTab == 0) {
             submenu_list_t *cur = ps5MenuGetActionGame();
-            if (cur != NULL) {
-                const char *startup = NULL;
-                if (selected_item && selected_item->item && selected_item->item->userdata) {
-                    item_list_t *support = (item_list_t *)selected_item->item->userdata;
-                    int sourceId = cur->item.id;
-                    if (oplResolveGameItem(cur->item.id, support, &support, &sourceId) && support && support->itemGetStartup) {
-                        startup = support->itemGetStartup(support, sourceId);
-                    }
-                }
-                if (startup != NULL && startup[0] != '\0') {
-                    sfxPlay(SFX_CONFIRM);
-                    ps5ToggleGameFavorite(startup);
-                } else {
-                    sfxPlay(SFX_MESSAGE);
-                }
+            if (cur != NULL && selected_item && selected_item->item && selected_item->item->execTriangle) {
+                selected_item->item->execTriangle(selected_item->item);
             } else {
                 sfxPlay(SFX_MESSAGE);
             }
@@ -3844,7 +4324,31 @@ void menuHandleInputMain()
             guiSwitchScreen(GUI_SCREEN_MENU);
         }
     } else if (getKeyOn(KEY_SELECT)) {
-        if (!gPS5Mode && selected_item && selected_item->item && selected_item->item->refresh)
+        if (gPS5Mode && gPS5ActiveTab == 0) {
+            submenu_list_t *cur = ps5MenuGetActionGame();
+            if (cur != NULL) {
+                const char *startup = NULL;
+                const char *title = "";
+                int mode = -1;
+                if (selected_item && selected_item->item && selected_item->item->userdata) {
+                    item_list_t *support = (item_list_t *)selected_item->item->userdata;
+                    int sourceId = cur->item.id;
+                    if (oplResolveGameItem(cur->item.id, support, &support, &sourceId) && support && support->itemGetStartup) {
+                        startup = support->itemGetStartup(support, sourceId);
+                        title = support->itemGetName ? support->itemGetName(support, sourceId) : "";
+                        mode = support->mode;
+                    }
+                }
+                if (startup != NULL && startup[0] != '\0') {
+                    sfxPlay(SFX_CONFIRM);
+                    ps5ToggleGameFavoriteEx(mode, startup, title);
+                } else {
+                    sfxPlay(SFX_MESSAGE);
+                }
+            } else {
+                sfxPlay(SFX_MESSAGE);
+            }
+        } else if (!gPS5Mode && selected_item && selected_item->item && selected_item->item->refresh)
             selected_item->item->refresh(selected_item->item);
     } else if (getKey(KEY_L1)) {
         menuPrevPage();
@@ -3910,6 +4414,11 @@ static const char *ps5GameOptionValue(int menuID, char *buffer, int size)
             if (ps5GameGSMResolution < 0 || ps5GameGSMResolution >= PS5_GAME_RESOLUTION_COUNT)
                 ps5GameGSMResolution = 0;
             snprintf(buffer, size, "%s", ps5GameResolutionNames[ps5GameGSMResolution]);
+            break;
+        case GAME_PS5_LANGUAGE:
+            if (ps5GameLanguage < 0 || ps5GameLanguage >= PS5_GAME_LANGUAGE_COUNT)
+                ps5GameLanguage = 0;
+            snprintf(buffer, size, "%s", ps5GameLanguages[ps5GameLanguage]);
             break;
         default:
             buffer[0] = '\0';
@@ -4060,105 +4569,254 @@ void menuRenderGameMenu()
         rmDrawRect(0, footerTop, ps5Width, ps5Height - footerTop, GS_SETREG_RGBA(0, 0, 0, 0x80));
         rmDrawRect(0, headerH, ps5Width, 1, GS_SETREG_RGBA(0x38, 0x38, 0x38, 0x40));
         rmDrawRect(0, footerTop, ps5Width, 1, GS_SETREG_RGBA(0x38, 0x38, 0x38, 0x40));
-        {
+
+        if (gPS5VMCMenuState == 2) {
+            int slot = ps5VMCSlot;
+            int nX;
+            fntRenderString(semiBoldFont, listX, 24, ALIGN_LEFT, 0, 0, "VMC Configuration", focusedColor);
+
+            fntRenderString(gTheme->fonts[1], listX - 20, 24, ALIGN_LEFT, 0, 0, "L1", GS_SETREG_RGBA(0x90, 0x90, 0x90, 0x60));
+            fntRenderString(slot == 0 ? semiBoldFont : gTheme->fonts[1], listX, 20, ALIGN_LEFT, 0, 0, "Slot 1", slot == 0 ? focusedColor : rowColor);
+            fntRenderString(gTheme->fonts[1], listX + 70, 24, ALIGN_LEFT, 0, 0, "R1", GS_SETREG_RGBA(0x90, 0x90, 0x90, 0x60));
+            fntRenderString(slot == 1 ? semiBoldFont : gTheme->fonts[1], listX + 90, 20, ALIGN_LEFT, 0, 0, "Slot 2", slot == 1 ? focusedColor : rowColor);
+
+            // Row 0: Enable VMC
+            {
+                int y = listTop;
+                int focused = (ps5VMCRow == 0);
+                int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                if (focused) drawPS5GameFocusIndicator(labelX, y);
+                fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, ps5VMCLabels[0], focused ? focusedColor : rowColor);
+                fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, ps5VMCEnable[slot] ? "< On >" : "< Off >", focused ? focusedColor : rowColor);
+            }
+
+            // Row 1: VMC Name
+            {
+                int y = listTop + rowStep;
+                int focused = (ps5VMCRow == 1);
+                int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                char nameVal[64];
+                if (focused) drawPS5GameFocusIndicator(labelX, y);
+                fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, ps5VMCLabels[1], focused ? focusedColor : rowColor);
+                snprintf(nameVal, sizeof(nameVal), "< %s >", ps5VMCName[slot]);
+                fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, nameVal, focused ? focusedColor : rowColor);
+            }
+
+            // Row 2: Size
+            {
+                int y = listTop + 2 * rowStep;
+                int focused = (ps5VMCRow == 2);
+                int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                char sizeVal[32];
+                if (focused) drawPS5GameFocusIndicator(labelX, y);
+                fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, ps5VMCLabels[2], focused ? focusedColor : rowColor);
+                snprintf(sizeVal, sizeof(sizeVal), "< %d MB >", ps5VMCSizesMB[ps5VMCSizeIndex[slot]]);
+                fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, sizeVal, focused ? focusedColor : rowColor);
+            }
+
+            // Row 3: VMC File
+            {
+                int y = listTop + 3 * rowStep;
+                int focused = (ps5VMCRow == 3);
+                int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                const char *statusText;
+                if (!ps5VMCEnable[slot])
+                    statusText = "Enable VMC first";
+                else if (ps5VMCStatus[slot] == 0)
+                    statusText = ps5VMCOperation ? "No File" : "Not Created - Create";
+                else if (ps5VMCStatus[slot] == 2)
+                    statusText = "Fragmented - Fix Storage";
+                else if (ps5VMCStatus[slot] == 3)
+                    statusText = "Reformat Required";
+                else
+                    statusText = "Delete File";
+
+                if (focused) drawPS5GameFocusIndicator(labelX, y);
+                fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, ps5VMCLabels[3], focused ? focusedColor : rowColor);
+                fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, statusText, focused ? focusedColor : rowColor);
+            }
+
+            if (ps5VMCOperation) {
+                char opBuf[64];
+                snprintf(opBuf, sizeof(opBuf), "Preparing Slot %d VMC... %d%%", slot + 1, ps5VMCProgress);
+                fntRenderString(semiBoldFont, ps5Width / 2, 280, ALIGN_CENTER, 0, 0, opBuf, focusedColor);
+            }
+
+            nX = drawPS5GameIconAndText(CROSS_ICON, "Select", semiBoldFont, listX, footerY, footerColor);
+            drawPS5GameIconAndText(SQUARE_ICON, "Save", semiBoldFont, nX + 22, footerY, footerColor);
+            drawPS5GameRightIconAndText(CIRCLE_ICON, "Back", semiBoldFont, ps5Width - 64, footerY, footerColor);
+
+            if (ps5VMCConfirmDelete) {
+                int dw = 380, dh = 140;
+                int dx = (ps5Width - dw) / 2, dy = (ps5Height - dh) / 2;
+                rmDrawRoundedRect(dx - 1, dy - 1, dw + 2, dh + 2, 8, GS_SETREG_RGBA(0x40, 0x40, 0x40, 0xE0));
+                rmDrawRoundedRect(dx, dy, dw, dh, 7, GS_SETREG_RGBA(0x10, 0x10, 0x10, 0xFA));
+                fntRenderString(semiBoldFont, dx + dw / 2, dy + 20, ALIGN_CENTER, 0, 0, "Delete VMC", focusedColor);
+                fntRenderString(gTheme->fonts[1], dx + dw / 2, dy + 50, ALIGN_CENTER, 0, 0, "This VMC file will be deleted permanently.", GS_SETREG_RGBA(0xD0, 0xD0, 0xD0, 0x80));
+                fntRenderString(ps5DialogButton == 0 ? semiBoldFont : gTheme->fonts[1], dx + 100, dy + 95, ALIGN_CENTER, 0, 0, "Delete", ps5DialogButton == 0 ? focusedColor : rowColor);
+                fntRenderString(ps5DialogButton == 1 ? semiBoldFont : gTheme->fonts[1], dx + dw - 100, dy + 95, ALIGN_CENTER, 0, 0, "Cancel", ps5DialogButton == 1 ? focusedColor : rowColor);
+            } else if (ps5VMCConfirmReformat) {
+                int dw = 420, dh = 140;
+                int dx = (ps5Width - dw) / 2, dy = (ps5Height - dh) / 2;
+                rmDrawRoundedRect(dx - 1, dy - 1, dw + 2, dh + 2, 8, GS_SETREG_RGBA(0x40, 0x40, 0x40, 0xE0));
+                rmDrawRoundedRect(dx, dy, dw, dh, 7, GS_SETREG_RGBA(0x10, 0x10, 0x10, 0xFA));
+                fntRenderString(semiBoldFont, dx + dw / 2, dy + 20, ALIGN_CENTER, 0, 0, "Reformat VMC", focusedColor);
+                fntRenderString(gTheme->fonts[1], dx + dw / 2, dy + 50, ALIGN_CENTER, 0, 0, "Changing the size will erase the existing VMC file.", GS_SETREG_RGBA(0xD0, 0xD0, 0xD0, 0x80));
+                fntRenderString(ps5DialogButton == 0 ? semiBoldFont : gTheme->fonts[1], dx + 100, dy + 95, ALIGN_CENTER, 0, 0, "Continue", ps5DialogButton == 0 ? focusedColor : rowColor);
+                fntRenderString(ps5DialogButton == 1 ? semiBoldFont : gTheme->fonts[1], dx + dw - 100, dy + 95, ALIGN_CENTER, 0, 0, "Cancel", ps5DialogButton == 1 ? focusedColor : rowColor);
+            } else if (ps5VMCConfirmUnsaved) {
+                int dw = 420, dh = 140;
+                int dx = (ps5Width - dw) / 2, dy = (ps5Height - dh) / 2;
+                rmDrawRoundedRect(dx - 1, dy - 1, dw + 2, dh + 2, 8, GS_SETREG_RGBA(0x40, 0x40, 0x40, 0xE0));
+                rmDrawRoundedRect(dx, dy, dw, dh, 7, GS_SETREG_RGBA(0x10, 0x10, 0x10, 0xFA));
+                fntRenderString(semiBoldFont, dx + dw / 2, dy + 20, ALIGN_CENTER, 0, 0, "Unsaved Changes", focusedColor);
+                fntRenderString(gTheme->fonts[1], dx + dw / 2, dy + 50, ALIGN_CENTER, 0, 0, "Unsaved changes will be lost. Do you want to discard?", GS_SETREG_RGBA(0xD0, 0xD0, 0xD0, 0x80));
+                fntRenderString(ps5DialogButton == 0 ? semiBoldFont : gTheme->fonts[1], dx + 110, dy + 95, ALIGN_CENTER, 0, 0, "Discard Changes", ps5DialogButton == 0 ? focusedColor : rowColor);
+                fntRenderString(ps5DialogButton == 1 ? semiBoldFont : gTheme->fonts[1], dx + dw - 100, dy + 95, ALIGN_CENTER, 0, 0, "Cancel", ps5DialogButton == 1 ? focusedColor : rowColor);
+            }
+        } else if (gPS5CheatMenuState == 2) {
+            int nX;
+            fntRenderString(semiBoldFont, listX, 24, ALIGN_LEFT, 0, 0, "Cheat Engine", focusedColor);
+            fntRenderString(gTheme->fonts[1], labelX, 136, ALIGN_LEFT, 0, 0, "Cheat List", rowColor);
+
+            // Row 0: Enable Cheat
+            {
+                int y = listTop;
+                int focused = (ps5CheatSelected == 0);
+                int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                if (focused) drawPS5GameFocusIndicator(labelX, y);
+                fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Enable Cheat", focused ? focusedColor : rowColor);
+                fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, ps5GameEnableCheat ? "< On >" : "< Off >", focused ? focusedColor : rowColor);
+            }
+
+            // Row 1: Select All
+            {
+                int y = listTop + rowStep;
+                int focused = (ps5CheatSelected == 1);
+                int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                if (focused) drawPS5GameFocusIndicator(labelX, y);
+                fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Select All", focused ? focusedColor : rowColor);
+                fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, ps5CheatAllEnabled ? "< On >" : "< Off >", focused ? focusedColor : rowColor);
+            }
+
+            // Cheats
+            if (ps5CheatCount == 0) {
+                fntRenderString(semiBoldFont, ps5Width / 2, 240, ALIGN_CENTER, 0, 0, "NO CHEAT FILES FOUND", GS_SETREG_RGBA(0x88, 0x88, 0x88, 0x68));
+            } else {
+                int i;
+                for (i = 0; i < ps5CheatCount && i < 6; i++) {
+                    int y = listTop + (i + 2) * rowStep;
+                    int focused = (ps5CheatSelected == i + 2);
+                    int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                    if (y < listTop - rowStep || y > listBottom + rowStep) continue;
+                    if (focused) drawPS5GameFocusIndicator(labelX, y);
+                    fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, ps5Cheats[i].name, focused ? focusedColor : rowColor);
+                    fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, ps5Cheats[i].enabled ? "< On >" : "< Off >", focused ? focusedColor : rowColor);
+                }
+            }
+
+            nX = drawPS5GameIconAndText(CROSS_ICON, "Select", semiBoldFont, listX, footerY, footerColor);
+            drawPS5GameIconAndText(SQUARE_ICON, "Save", semiBoldFont, nX + 22, footerY, footerColor);
+            drawPS5GameRightIconAndText(CIRCLE_ICON, "Back", semiBoldFont, ps5Width - 64, footerY, footerColor);
+        } else {
+            // Main Game Options
             const char *gameTitle = submenuItemGetText(&selected_item->item->current->item);
-            int artW = 42;
-            int artH = 42;
-            int artX = listX;
-            int artY = 12;
+            int artW = 42, artH = 42;
+            int artX = listX, artY = 12;
             int titleX = artX + artW + 8;
-
             drawPS5GameHeaderArtwork(gameTitle, artX, artY, artW, artH);
-            fntRenderString(thmGetPS5HeaderFont(), titleX, 12, ALIGN_LEFT, ps5Width - titleX - 64, 0, gameTitle, GS_SETREG_RGBA(0xFF, 0xFF, 0xFF, 0x80));
-            fntRenderString(gTheme->fonts[1], titleX, 36, ALIGN_LEFT, 0.78f, 0.78f, "Game Options", GS_SETREG_RGBA(0x58, 0x58, 0x58, 0x56));
-        }
+            fntRenderString(thmGetPS5HeaderFont(), titleX, 12, ALIGN_LEFT, ps5Width - titleX - 64, 0, gameTitle, focusedColor);
+            fntRenderString(gTheme->fonts[1], titleX, 36, ALIGN_LEFT, 0.78f, 0.78f, "Game Options", rowColor);
 
-        {
-            int resY = listY;
-            int focused = selected == 0;
-            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
-            if (resY >= listTop - rowStep && resY <= listBottom + rowStep) {
-                if (focused)
-                    drawPS5GameFocusIndicator(labelX, resY);
-                fntRenderString(rowFont, labelX, resY, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Resolution", focused ? focusedColor : rowColor);
-                ps5GameOptionValue(GAME_PS5_GSM_RESOLUTION, value, sizeof(value));
+            // Tabs
+            fntRenderString(gTheme->fonts[1], listX - 20, 24, ALIGN_LEFT, 0, 0, "L1", GS_SETREG_RGBA(0x90, 0x90, 0x90, 0x60));
+            fntRenderString(gPS5GameMenuTab == 0 ? semiBoldFont : gTheme->fonts[1], listX, 20, ALIGN_LEFT, 0, 0, "General", gPS5GameMenuTab == 0 ? focusedColor : rowColor);
+            fntRenderString(gTheme->fonts[1], listX + 80, 24, ALIGN_LEFT, 0, 0, "R1", GS_SETREG_RGBA(0x90, 0x90, 0x90, 0x60));
+            fntRenderString(gPS5GameMenuTab == 1 ? semiBoldFont : gTheme->fonts[1], listX + 100, 20, ALIGN_LEFT, 0, 0, "Compatibility Modes", gPS5GameMenuTab == 1 ? focusedColor : rowColor);
+
+            if (gPS5GameMenuTab == 0) {
+                // Row 0: Resolution
                 {
+                    int y = listTop;
+                    int focused = (gPS5GameMenuRow == 0);
+                    int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
                     char resValue[80];
+                    if (focused) drawPS5GameFocusIndicator(labelX, y);
+                    fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Resolution", focused ? focusedColor : rowColor);
+                    ps5GameOptionValue(GAME_PS5_GSM_RESOLUTION, value, sizeof(value));
                     snprintf(resValue, sizeof(resValue), "<%s>", value);
-                    fntRenderString(rowFont, labelX + rowW, resY, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, resValue, focused ? focusedColor : rowColor);
+                    fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, resValue, focused ? focusedColor : rowColor);
+                }
+
+                // Row 1: Language
+                {
+                    int y = listTop + rowStep;
+                    int focused = (gPS5GameMenuRow == 1);
+                    int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                    char langValue[80];
+                    if (focused) drawPS5GameFocusIndicator(labelX, y);
+                    fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Language", focused ? focusedColor : rowColor);
+                    ps5GameOptionValue(GAME_PS5_LANGUAGE, value, sizeof(value));
+                    snprintf(langValue, sizeof(langValue), "<%s>", value);
+                    fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, langValue, focused ? focusedColor : rowColor);
+                }
+
+                // Row 2: Virtual memory card (VMC)
+                {
+                    int y = listTop + 2 * rowStep;
+                    int focused = (gPS5GameMenuRow == 2);
+                    int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                    if (focused) drawPS5GameFocusIndicator(labelX, y);
+                    fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Virtual memory card (VMC)", focused ? focusedColor : rowColor);
+                }
+
+                // Row 3: Cheat Engine
+                {
+                    int y = listTop + 3 * rowStep;
+                    int focused = (gPS5GameMenuRow == 3);
+                    int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                    if (focused) drawPS5GameFocusIndicator(labelX, y);
+                    fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Cheat Engine", focused ? focusedColor : rowColor);
+                }
+
+                // Footer for General tab
+                {
+                    const char *crossText = (gPS5GameMenuRow == 2) ? "Config VMC" : ((gPS5GameMenuRow == 3) ? "Config Cheats" : "Play");
+                    int nX = drawPS5GameIconAndText(CROSS_ICON, crossText, semiBoldFont, listX, footerY, footerColor);
+                    drawPS5GameIconAndText(SQUARE_ICON, "Save", semiBoldFont, nX + 22, footerY, footerColor);
+                    drawPS5GameRightIconAndText(CIRCLE_ICON, "Close", semiBoldFont, ps5Width - 64, footerY, footerColor);
+                }
+            } else {
+                // Compatibility Modes tab
+                int i;
+                for (i = 0; i < 6; i++) {
+                    int y = listTop + i * rowStep;
+                    int focused = (gPS5CompatRow == i);
+                    int enabled = (ps5GameCompatMode & (1 << i)) != 0;
+                    int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
+                    char modeStr[32];
+                    snprintf(modeStr, sizeof(modeStr), "Mode %d", i + 1);
+                    if (focused) drawPS5GameFocusIndicator(labelX, y);
+                    fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, modeStr, focused ? focusedColor : rowColor);
+                    fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, enabled ? "<On>" : "<Off>", focused ? focusedColor : rowColor);
+                }
+
+                // Footer for Compatibility Modes tab
+                {
+                    int nX = drawPS5GameIconAndText(CROSS_ICON, "Play", semiBoldFont, listX, footerY, footerColor);
+                    drawPS5GameIconAndText(SQUARE_ICON, "Save", semiBoldFont, nX + 22, footerY, footerColor);
+                    drawPS5GameRightIconAndText(CIRCLE_ICON, "Close", semiBoldFont, ps5Width - 64, footerY, footerColor);
                 }
             }
         }
 
-        {
-            int langY = listY + rowStep;
-            int focused = selected == 1;
-            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
-            if (langY >= listTop - rowStep && langY <= listBottom + rowStep) {
-                if (focused)
-                    drawPS5GameFocusIndicator(labelX, langY);
-                fntRenderString(rowFont, labelX, langY, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Language", focused ? focusedColor : rowColor);
-                fntRenderString(rowFont, labelX + rowW, langY, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, "<System Default>", focused ? focusedColor : rowColor);
-            }
-        }
-
-        for (index = 0; index < 8; index++) {
-            int y = listY + (index + 2) * rowStep;
-            int focused = selected == index + 2;
-            int enabled = (ps5GameCompatMode & (1 << index)) != 0;
-            u64 text = focused ? focusedColor : rowColor;
-            u64 status = focused ? focusedColor : rowColor;
-            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
-
-            if (y < listTop - rowStep || y > listBottom + rowStep)
-                continue;
-            snprintf(value, sizeof(value), "Mode %d", index + 1);
-            if (focused)
-                drawPS5GameFocusIndicator(labelX, y);
-            fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, value, text);
-            fntRenderString(rowFont, labelX + rowW, y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, enabled ? "<On>" : "<Off>", status);
-        }
-
-        {
-            int slot1Y = listY + 10 * rowStep;
-            int focused = selected == 10;
-            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
-            if (slot1Y >= listTop - rowStep && slot1Y <= listBottom + rowStep) {
-                if (focused)
-                    drawPS5GameFocusIndicator(labelX, slot1Y);
-                fntRenderString(rowFont, labelX, slot1Y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Virtual Memory Card (Slot 1)", focused ? focusedColor : rowColor);
-                fntRenderString(rowFont, labelX + rowW, slot1Y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, "<Not Created - Create>", focused ? focusedColor : rowColor);
-            }
-        }
-
-        {
-            int slot2Y = listY + 11 * rowStep;
-            int focused = selected == 11;
-            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
-            if (slot2Y >= listTop - rowStep && slot2Y <= listBottom + rowStep) {
-                if (focused)
-                    drawPS5GameFocusIndicator(labelX, slot2Y);
-                fntRenderString(rowFont, labelX, slot2Y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Virtual Memory Card (Slot 2)", focused ? focusedColor : rowColor);
-                fntRenderString(rowFont, labelX + rowW, slot2Y, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, "<Not Created - Create>", focused ? focusedColor : rowColor);
-            }
-        }
-
-        {
-            int cheatY = listY + 12 * rowStep;
-            int focused = selected == 12;
-            int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
-            if (cheatY >= listTop - rowStep && cheatY <= listBottom + rowStep) {
-                if (focused)
-                    drawPS5GameFocusIndicator(labelX, cheatY);
-                fntRenderString(rowFont, labelX, cheatY, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, "Enable Cheat", focused ? focusedColor : rowColor);
-                fntRenderString(rowFont, labelX + rowW, cheatY, ALIGN_RIGHT | ALIGN_VCENTER, 0, 0, "<Off>", focused ? focusedColor : rowColor);
-            }
-        }
-
-        {
-            int nextX = drawPS5GameIconAndText(CROSS_ICON, "Play", semiBoldFont, listX, footerY, footerColor);
-            drawPS5GameIconAndText(SQUARE_ICON, "Save", semiBoldFont, nextX + 22, footerY, footerColor);
-            drawPS5GameRightIconAndText(CIRCLE_ICON, "Close", semiBoldFont, ps5Width - 64, footerY, footerColor);
+        if (ps5GameToastTimer > 0) {
+            ps5GameToastTimer--;
+            int toastW = fntCalcDimensions(semiBoldFont, ps5GameToastMsg);
+            int toastX = (ps5Width - toastW) / 2;
+            int toastY = footerTop - 36;
+            rmDrawRoundedRect(toastX - 16, toastY - 6, toastW + 32, 28, 6, GS_SETREG_RGBA(0x18, 0x18, 0x18, 0xE0));
+            fntRenderString(semiBoldFont, ps5Width / 2, toastY + 8, ALIGN_CENTER | ALIGN_VCENTER, 0, 0, ps5GameToastMsg, focusedColor);
         }
         return;
     }
@@ -4234,6 +4892,13 @@ static void ps5GameOptionChange(int menuID, int direction)
             else if (ps5GameGSMResolution >= PS5_GAME_RESOLUTION_COUNT)
                 ps5GameGSMResolution = 0;
             break;
+        case GAME_PS5_LANGUAGE:
+            ps5GameLanguage += direction;
+            if (ps5GameLanguage < 0)
+                ps5GameLanguage = PS5_GAME_LANGUAGE_COUNT - 1;
+            else if (ps5GameLanguage >= PS5_GAME_LANGUAGE_COUNT)
+                ps5GameLanguage = 0;
+            break;
     }
 }
 
@@ -4246,7 +4911,6 @@ void menuHandleInputGameMenu()
         gameMenuCurrent = gameMenu;
 
     if (gPS5Mode) {
-        int menuID;
         int sourceId = selected_item->item->current != NULL ? selected_item->item->current->item.id : -1;
         item_list_t *sourceSupport = selected_item->item->userdata;
 
@@ -4266,50 +4930,258 @@ void menuHandleInputGameMenu()
                 return;
         }
 
-        if (getKey(KEY_UP)) {
-            sfxPlay(SFX_CURSOR);
-            if (gameMenuCurrent->prev)
-                gameMenuCurrent = gameMenuCurrent->prev;
-            else
-                while (gameMenuCurrent->next)
-                    gameMenuCurrent = gameMenuCurrent->next;
-        }
-
-        if (getKey(KEY_DOWN)) {
-            sfxPlay(SFX_CURSOR);
-            if (gameMenuCurrent->next)
-                gameMenuCurrent = gameMenuCurrent->next;
-            else
-                gameMenuCurrent = gameMenu;
-        }
-
-        menuID = gameMenuCurrent->item.id;
-        if (getKey(KEY_LEFT)) {
-            sfxPlay(SFX_CURSOR);
-            ps5GameOptionChange(menuID, -1);
-        } else if (getKey(KEY_RIGHT)) {
-            sfxPlay(SFX_CURSOR);
-            ps5GameOptionChange(menuID, 1);
-        } else if (getKeyOn(KEY_CROSS)) {
-            sfxPlay(SFX_CONFIRM);
-            ps5GameOptionsSave(itemConfig);
-            if (sourceSupport != NULL && sourceId >= 0) {
-                if (!(sourceSupport->mode >= BDM_MODE && sourceSupport->mode < ETH_MODE))
-                    ps5DrawLaunchLoadingTransition();
-                sourceSupport->itemLaunch(sourceSupport, sourceId, itemConfig);
+        if (gPS5VMCMenuState == 2) {
+            int slot = ps5VMCSlot;
+            if (ps5VMCConfirmDelete) {
+                if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
+                    sfxPlay(SFX_CURSOR);
+                    ps5DialogButton = !ps5DialogButton;
+                } else if (getKeyOn(KEY_CROSS)) {
+                    if (ps5DialogButton == 0) {
+                        int ok = 1;
+                        if (itemConfigSupport && itemConfigSupport->itemCheckVMC)
+                            ok = (itemConfigSupport->itemCheckVMC(itemConfigSupport, ps5VMCName[slot], -1) >= 0);
+                        ps5VMCStatus[slot] = 0;
+                        if (ok) {
+                            ps5SetGameToast("VMC Operation Successful");
+                            sfxPlay(SFX_CONFIRM);
+                        } else {
+                            ps5SetGameToast("VMC Operation Failed");
+                            sfxPlay(SFX_CANCEL);
+                        }
+                    } else {
+                        sfxPlay(SFX_CANCEL);
+                    }
+                    ps5VMCConfirmDelete = 0;
+                } else if (getKeyOn(KEY_CIRCLE)) {
+                    sfxPlay(SFX_CANCEL);
+                    ps5VMCConfirmDelete = 0;
+                }
+                return;
             }
-            readPads();
-        } else if (getKeyOn(KEY_SQUARE)) {
-            sfxPlay(SFX_CONFIRM);
-            ps5GameOptionsSave(itemConfig);
-            menuSaveConfig();
-            guiMsgBox(_l(_STR_GAME_SETTINGS_SAVED), 0, NULL);
-            ps5GameOptionsLoad(gameMenuLoadConfig(NULL));
-            readPads();
+            if (ps5VMCConfirmReformat) {
+                if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
+                    sfxPlay(SFX_CURSOR);
+                    ps5DialogButton = !ps5DialogButton;
+                } else if (getKeyOn(KEY_CROSS)) {
+                    if (ps5DialogButton == 0) {
+                        ps5SetGameToast("VMC Operation Successful");
+                        sfxPlay(SFX_CONFIRM);
+                    } else {
+                        sfxPlay(SFX_CANCEL);
+                    }
+                    ps5VMCConfirmReformat = 0;
+                } else if (getKeyOn(KEY_CIRCLE)) {
+                    sfxPlay(SFX_CANCEL);
+                    ps5VMCConfirmReformat = 0;
+                }
+                return;
+            }
+            if (ps5VMCConfirmUnsaved) {
+                if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
+                    sfxPlay(SFX_CURSOR);
+                    ps5DialogButton = !ps5DialogButton;
+                } else if (getKeyOn(KEY_CROSS)) {
+                    if (ps5DialogButton == 0) {
+                        gPS5VMCMenuState = 0;
+                        sfxPlay(SFX_CONFIRM);
+                    } else {
+                        sfxPlay(SFX_CANCEL);
+                    }
+                    ps5VMCConfirmUnsaved = 0;
+                } else if (getKeyOn(KEY_CIRCLE)) {
+                    sfxPlay(SFX_CANCEL);
+                    ps5VMCConfirmUnsaved = 0;
+                }
+                return;
+            }
+
+            if (getKeyOn(KEY_L1)) {
+                sfxPlay(SFX_CURSOR);
+                ps5VMCSlot = 0;
+            } else if (getKeyOn(KEY_R1)) {
+                sfxPlay(SFX_CURSOR);
+                ps5VMCSlot = 1;
+            } else if (getKeyOn(KEY_UP)) {
+                sfxPlay(SFX_CURSOR);
+                if (ps5VMCRow > 0) ps5VMCRow--;
+            } else if (getKeyOn(KEY_DOWN)) {
+                sfxPlay(SFX_CURSOR);
+                if (ps5VMCRow < 3) ps5VMCRow++;
+            } else if (getKeyOn(KEY_LEFT)) {
+                sfxPlay(SFX_CURSOR);
+                if (ps5VMCRow == 0) {
+                    ps5VMCEnable[slot] = !ps5VMCEnable[slot];
+                } else if (ps5VMCRow == 2) {
+                    ps5VMCSizeIndex[slot] = (ps5VMCSizeIndex[slot] + 3) % 4;
+                }
+            } else if (getKeyOn(KEY_RIGHT)) {
+                sfxPlay(SFX_CURSOR);
+                if (ps5VMCRow == 0) {
+                    ps5VMCEnable[slot] = !ps5VMCEnable[slot];
+                } else if (ps5VMCRow == 2) {
+                    ps5VMCSizeIndex[slot] = (ps5VMCSizeIndex[slot] + 1) % 4;
+                }
+            } else if (getKeyOn(KEY_CROSS)) {
+                if (ps5VMCRow == 0) {
+                    sfxPlay(SFX_CONFIRM);
+                    ps5VMCEnable[slot] = !ps5VMCEnable[slot];
+                } else if (ps5VMCRow == 3) {
+                    if (!ps5VMCEnable[slot]) {
+                        ps5SetGameToast("Enable VMC first");
+                        sfxPlay(SFX_MESSAGE);
+                    } else if (ps5VMCStatus[slot] == 0) {
+                        ps5VMCStatus[slot] = 1;
+                        ps5SetGameToast("VMC Operation Successful");
+                        sfxPlay(SFX_CONFIRM);
+                    } else if (ps5VMCStatus[slot] == 1) {
+                        ps5VMCConfirmDelete = 1;
+                        ps5DialogButton = 1;
+                        sfxPlay(SFX_CONFIRM);
+                    } else if (ps5VMCStatus[slot] == 2) {
+                        ps5SetGameToast("VMC fragmented. Defragment storage on PC.");
+                        sfxPlay(SFX_MESSAGE);
+                    } else if (ps5VMCStatus[slot] == 3) {
+                        ps5VMCConfirmReformat = 1;
+                        ps5DialogButton = 1;
+                        sfxPlay(SFX_CONFIRM);
+                    }
+                }
+            } else if (getKeyOn(KEY_SQUARE)) {
+                sfxPlay(SFX_CONFIRM);
+                ps5VMCSaveConfig();
+                ps5SetGameToast("VMC Save Successful");
+            } else if (getKeyOn(KEY_CIRCLE)) {
+                sfxPlay(SFX_CANCEL);
+                gPS5VMCMenuState = 0;
+            }
+            return;
         }
 
-        if (getKeyOn(KEY_CIRCLE) || getKeyOn(KEY_START))
-            guiSwitchScreen(GUI_SCREEN_MAIN);
+        if (gPS5CheatMenuState == 2) {
+            if (getKeyOn(KEY_UP)) {
+                sfxPlay(SFX_CURSOR);
+                if (ps5CheatSelected > 0) ps5CheatSelected--;
+            } else if (getKeyOn(KEY_DOWN)) {
+                sfxPlay(SFX_CURSOR);
+                if (ps5CheatSelected < ps5CheatCount + 1) ps5CheatSelected++;
+            } else if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT) || getKeyOn(KEY_CROSS)) {
+                sfxPlay(SFX_CURSOR);
+                if (ps5CheatSelected == 0) {
+                    ps5GameEnableCheat = !ps5GameEnableCheat;
+                } else if (ps5CheatSelected == 1) {
+                    int i;
+                    ps5CheatAllEnabled = !ps5CheatAllEnabled;
+                    for (i = 0; i < ps5CheatCount; i++)
+                        ps5Cheats[i].enabled = ps5CheatAllEnabled;
+                } else if (ps5CheatSelected >= 2 && ps5CheatSelected - 2 < ps5CheatCount) {
+                    ps5Cheats[ps5CheatSelected - 2].enabled = !ps5Cheats[ps5CheatSelected - 2].enabled;
+                }
+            } else if (getKeyOn(KEY_SQUARE)) {
+                if (itemConfigSupport != NULL) {
+                    sfxPlay(SFX_CONFIRM);
+                    ps5SetGameToast("Cheat Settings Saved");
+                } else {
+                    sfxPlay(SFX_CANCEL);
+                    ps5SetGameToast("Cheat Settings Save Failed");
+                }
+            } else if (getKeyOn(KEY_CIRCLE)) {
+                sfxPlay(SFX_CANCEL);
+                gPS5CheatMenuState = 0;
+            }
+            return;
+        }
+
+        // Main Game Options Screen Input
+        if (getKeyOn(KEY_L1)) {
+            sfxPlay(SFX_CURSOR);
+            gPS5GameMenuTab = 0;
+            return;
+        }
+        if (getKeyOn(KEY_R1)) {
+            sfxPlay(SFX_CURSOR);
+            gPS5GameMenuTab = 1;
+            return;
+        }
+
+        if (gPS5GameMenuTab == 0) {
+            if (getKeyOn(KEY_UP)) {
+                sfxPlay(SFX_CURSOR);
+                if (gPS5GameMenuRow > 0) gPS5GameMenuRow--;
+            } else if (getKeyOn(KEY_DOWN)) {
+                sfxPlay(SFX_CURSOR);
+                if (gPS5GameMenuRow < 3) gPS5GameMenuRow++;
+            } else if (getKeyOn(KEY_LEFT)) {
+                sfxPlay(SFX_CURSOR);
+                if (gPS5GameMenuRow == 0) ps5GameOptionChange(GAME_PS5_GSM_RESOLUTION, -1);
+                else if (gPS5GameMenuRow == 1) ps5GameOptionChange(GAME_PS5_LANGUAGE, -1);
+            } else if (getKeyOn(KEY_RIGHT)) {
+                sfxPlay(SFX_CURSOR);
+                if (gPS5GameMenuRow == 0) ps5GameOptionChange(GAME_PS5_GSM_RESOLUTION, 1);
+                else if (gPS5GameMenuRow == 1) ps5GameOptionChange(GAME_PS5_LANGUAGE, 1);
+            } else if (getKeyOn(KEY_CROSS)) {
+                if (gPS5GameMenuRow == 2) {
+                    sfxPlay(SFX_CONFIRM);
+                    gPS5VMCMenuState = 2;
+                    ps5VMCLoadConfig();
+                    if (itemConfigSupport != NULL)
+                        ps5SetGameToast("Loading VMC configuration...");
+                    else
+                        ps5SetGameToast("Unable to load VMC configuration");
+                    return;
+                } else if (gPS5GameMenuRow == 3) {
+                    sfxPlay(SFX_CONFIRM);
+                    gPS5CheatMenuState = 2;
+                    ps5CheatLoadConfig();
+                    ps5SetGameToast("Loading cheat file...");
+                    return;
+                } else {
+                    sfxPlay(SFX_CONFIRM);
+                    ps5GameOptionsSave(itemConfig);
+                    if (sourceSupport != NULL && sourceId >= 0) {
+                        if (!(sourceSupport->mode >= BDM_MODE && sourceSupport->mode < ETH_MODE))
+                            ps5DrawLaunchLoadingTransition();
+                        sourceSupport->itemLaunch(sourceSupport, sourceId, itemConfig);
+                    }
+                    readPads();
+                    return;
+                }
+            } else if (getKeyOn(KEY_SQUARE)) {
+                sfxPlay(SFX_CONFIRM);
+                ps5GameOptionsSave(itemConfig);
+                menuSaveConfig();
+                ps5SetGameToast("Game settings saved");
+                readPads();
+                return;
+            } else if (getKeyOn(KEY_CIRCLE) || getKeyOn(KEY_START)) {
+                sfxPlay(SFX_CANCEL);
+                guiSwitchScreen(GUI_SCREEN_MAIN);
+                return;
+            }
+        } else {
+            // Compatibility Modes Tab
+            if (getKeyOn(KEY_UP)) {
+                sfxPlay(SFX_CURSOR);
+                if (gPS5CompatRow > 0) gPS5CompatRow--;
+            } else if (getKeyOn(KEY_DOWN)) {
+                sfxPlay(SFX_CURSOR);
+                if (gPS5CompatRow < 5) gPS5CompatRow++;
+            } else if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT) || getKeyOn(KEY_CROSS)) {
+                sfxPlay(SFX_CONFIRM);
+                ps5GameCompatMode ^= (1 << gPS5CompatRow);
+            } else if (getKeyOn(KEY_SQUARE)) {
+                sfxPlay(SFX_CONFIRM);
+                ps5GameOptionsSave(itemConfig);
+                menuSaveConfig();
+                ps5SetGameToast("Game settings saved");
+                readPads();
+                return;
+            } else if (getKeyOn(KEY_CIRCLE) || getKeyOn(KEY_START)) {
+                sfxPlay(SFX_CANCEL);
+                guiSwitchScreen(GUI_SCREEN_MAIN);
+                return;
+            }
+        }
 
         return;
     }

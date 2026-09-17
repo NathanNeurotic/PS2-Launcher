@@ -110,6 +110,7 @@ static void ethSMBConnect(void)
     }
 
     if ((result = fileXioDevctl(ethBase, SMB_DEVCTL_LOGON, (void *)&logon, sizeof(logon), NULL, 0)) >= 0) {
+        fileXioDevctl(ethBase, 0xC0DE0007, (void *)"PS2L SESSION CHECK", 18, NULL, 0);
         // SMB server alive test
         strcpy(echo.echo, "ALIVE ECHO TEST");
         echo.len = strlen("ALIVE ECHO TEST");

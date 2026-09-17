@@ -381,8 +381,8 @@ void guiGameShowGSConfig(void)
         "PS1 PAL (HDTV 576p @50Hz)",
         "HDTV 480p @60Hz",
         "HDTV 576p @50Hz",
-        "HDTV 720p @60Hz",
-        "HDTV 1080i @60Hz",
+        "Legacy 720p @60Hz (uses new 720p)",
+        "HDTV 1080i @60Hz (Old)",
         "HDTV 1080i @60Hz Non Interlaced",
         "VGA 640x480p @60Hz",
         "VGA 640x480p @72Hz",
@@ -400,6 +400,8 @@ void guiGameShowGSConfig(void)
         "VGA 1024x768p @85Hz",
         "VGA 1280x1024p @60Hz",
         "VGA 1280x1024p @75Hz",
+        "HDTV 1080i @60Hz",
+        "HDTV 720p @60Hz",
         NULL};
     // clang-format on
 

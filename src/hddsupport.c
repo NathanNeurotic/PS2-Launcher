@@ -405,59 +405,6 @@ static int hddNeedsUpdate(item_list_t *itemList)
     return 1;
 }
 
-static void hddGenerateMockGames(hdl_games_list_t *list)
-{
-    list->count = 10;
-    list->games = malloc(10 * sizeof(hdl_game_info_t));
-    if (list->games == NULL) {
-        list->count = 0;
-        return;
-    }
-    memset(list->games, 0, 10 * sizeof(hdl_game_info_t));
-
-    const char *names[10] = {
-        "Grand Theft Auto: San Andreas",
-        "Gran Turismo 4",
-        "Metal Gear Solid 3: Snake Eater",
-        "Shadow of the Colossus",
-        "Final Fantasy X",
-        "God of War II",
-        "Resident Evil 4",
-        "Devil May Cry 3",
-        "Silent Hill 2",
-        "Tekken 5"
-    };
-
-    const char *serial[10] = {
-        "SLUS_209.46",
-        "SCUS_973.28",
-        "SLUS_201.44",
-        "SCUS_974.72",
-        "SLUS_203.12",
-        "SCUS_974.81",
-        "SLUS_211.34",
-        "SLUS_211.53",
-        "SLUS_202.28",
-        "SLUS_210.59"
-    };
-
-    for (int i = 0; i < 10; i++) {
-        snprintf(list->games[i].partition_name, sizeof(list->games[i].partition_name), "PP.HDL.MOCKGAME%d", i);
-        strncpy(list->games[i].name, names[i], HDL_GAME_NAME_MAX);
-        list->games[i].name[HDL_GAME_NAME_MAX] = '\0';
-        strncpy(list->games[i].startup, serial[i], sizeof(list->games[i].startup) - 1);
-        list->games[i].startup[sizeof(list->games[i].startup) - 1] = '\0';
-        list->games[i].hdl_compat_flags = 0;
-        list->games[i].ops2l_compat_flags = 0;
-        list->games[i].dma_type = 0x40;
-        list->games[i].dma_mode = 4;
-        list->games[i].disctype = SCECdPS2DVD;
-        list->games[i].layer_break = 0;
-        list->games[i].start_sector = 1000 * i;
-        list->games[i].total_size_in_kb = 4ULL * 1024 * 1024; // 4GB
-    }
-}
-
 static int hddUpdateGameList(item_list_t *itemList)
 {
     hdl_games_list_t hddGamesNew;

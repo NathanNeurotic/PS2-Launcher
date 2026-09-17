@@ -227,6 +227,7 @@ void oplAbortGameCoverDownload(void);
 int oplMakeGameItemId(int mode, int id);
 int oplIsGameItemIdEncoded(int itemId);
 int oplResolveGameItem(int itemId, item_list_t *fallback, item_list_t **support, int *sourceId);
+void oplGetGameRelativePath(item_list_t *support, int id, char *dst, size_t maxLen);
 
 // These prefixes are relative to the device's name (meaning that they do not include the device name).
 extern char gBDMPrefix[32];

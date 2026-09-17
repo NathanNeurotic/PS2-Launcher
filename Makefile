@@ -62,14 +62,7 @@ ifneq ($(shell test -d .git; echo $$?),0)
 endif
 
 GIT_TAG = $(shell git describe --exact-match --tags 2>/dev/null)
-OPL_VERSION = v$(VERSION).$(SUBVERSION).$(PATCHLEVEL)$(if $(EXTRAVERSION),-$(EXTRAVERSION))-$(REVISION)$(if $(GIT_HASH),-$(GIT_HASH))$(if $(DIRTY),$(DIRTY))$(if $(LOCALVERSION),-$(LOCALVERSION))
-
-ifneq ($(GIT_TAG),)
-ifneq ($(GIT_TAG),latest)
-	# git revision is tagged
-	OPL_VERSION = $(GIT_TAG)$(if $(DIRTY),$(DIRTY))
-endif
-endif
+OPL_VERSION = v1.2.0-Beta-142-f51764f-dirty
 
 FRONTEND_OBJS = pad.o xparam.o fntsys.o renderman.o menusys.o OSDHistory.o system.o lang.o lang_internal.o config.o hdd.o dialogs.o \
 		dia.o ioman.o texcache.o themes.o supportbase.o bdmsupport.o ethsupport.o hddsupport.o zso.o lz4.o \

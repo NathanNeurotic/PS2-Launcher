@@ -50,6 +50,7 @@ void sbDelete(base_game_info_t **list, const char *prefix, const char *sep, int 
 void sbRename(base_game_info_t **list, const char *prefix, const char *sep, int gamecount, int id, char *newname);
 config_set_t *sbPopulateConfig(base_game_info_t *game, const char *prefix, const char *sep);
 void sbCreateFolders(const char *path, int createDiscImgFolders);
+void sbGetGameRelativePath(item_list_t *support, int id, char *dst, size_t maxLen);
 
 // ISO9660 filesystem management functions.
 u32 sbGetISO9660MaxLBA(const char *path);

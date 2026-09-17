@@ -647,7 +647,7 @@ static int guiUIUpdater(int modified)
         diaGetInt(diaUIConfig, UICFG_WIDESCREEN, &temp);
         if (temp != gWideScreen) {
             gWideScreen = temp;
-            rmSetAspectRatio((gWideScreen == 0) ? RM_ARATIO_4_3 : RM_ARATIO_16_9);
+            rmSetAspectRatio((gWideScreen == 0) ? RM_ARATIO_4_3 : (gWideScreen == 1 ? RM_ARATIO_16_9 : RM_ARATIO_21_9));
             guiUpdateScreenScale();
         }
     }

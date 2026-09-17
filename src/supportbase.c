@@ -909,3 +909,8 @@ int sbLoadCheats(const char *path, const char *file)
 
     return cheatMode;
 }
+
+void sbGetGameRelativePath(item_list_t *support, int id, char *dst, size_t maxLen)
+{
+    oplGetGameRelativePath(support, id, dst, maxLen);
+}

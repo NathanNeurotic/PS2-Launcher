@@ -1433,6 +1433,8 @@ static void _loadConfig()
             configGetInt(configOPL, "ps5_show_cover_images", &gPS5ShowCoverImages);
             configGetInt(configOPL, "ps5_show_games_logo", &gPS5ShowGamesLogo);
             configGetInt(configOPL, "ps5_sort_mode", &gPS5SortMode);
+            ps5LoadFavorites();
+            ps5LoadRecent();
 
             if (!(getKeyPressed(KEY_TRIANGLE) && getKeyPressed(KEY_CROSS))) {
                 configGetInt(configOPL, CONFIG_OPL_VMODE, &gVMode);
@@ -1628,6 +1630,8 @@ static void _saveConfig()
         configSetInt(configOPL, "ps5_show_cover_images", gPS5ShowCoverImages);
         configSetInt(configOPL, "ps5_show_games_logo", gPS5ShowGamesLogo);
         configSetInt(configOPL, "ps5_sort_mode", gPS5SortMode);
+        ps5SaveFavorites();
+        ps5SaveRecent();
         configSetInt(configOPL, CONFIG_OPL_VMODE, gVMode);
         configSetInt(configOPL, CONFIG_OPL_XOFF, gXOff);
         configSetInt(configOPL, CONFIG_OPL_YOFF, gYOff);
@@ -2152,6 +2156,37 @@ static void coverBuildFolderPath(char *path, int pathSize, const char *prefix, c
     }
 }
 
+void oplGetGameRelativePath(item_list_t *support, int id, char *dst, size_t maxLen)
+{
+    if (support == NULL || dst == NULL || support->itemGet == NULL || id < 0) {
+        if (dst != NULL)
+            dst[0] = '\0';
+        return;
+    }
+
+    base_game_info_t *game = (base_game_info_t *)support->itemGet(support, id);
+    if (game == NULL) {
+        dst[0] = '\0';
+        return;
+    }
+
+    if (support->mode == 6) {
+        strncpy(dst, (const char *)game, 191);
+        dst[191] = '\0';
+        return;
+    }
+
+    if (support->mode < 6) {
+        if (game->format == GAME_FORMAT_USBLD) {
+            snprintf(dst, 192, "UL/%s/%s", game->startup, game->name);
+        } else {
+            snprintf(dst, 192, "%s/%s%s", (game->media == 0x12) ? "CD" : "DVD", game->name, game->extension);
+        }
+    } else {
+        dst[0] = '\0';
+    }
+}
+
 static void coverBuildAssetPath(char *path, int pathSize, const char *prefix, const char *folder, const char *startup, const char *suffix, const char *ext)
 {
     char folderPath[128];
@@ -2604,6 +2639,7 @@ static void oplDownloadMissingGameCovers(void)
 
     queued = 0;
     gPS5CoverTotalGames = 0;
+    snprintf(gPS5CoverDownloadUrl, sizeof(gPS5CoverDownloadUrl), "Reading game IDs...");
     for (mode = 0; mode < MODE_COUNT; mode++) {
         support = list_support[mode].support;
         if (!coverIsLocalGameSupport(support) || !support->enabled)
@@ -2695,8 +2731,8 @@ static void oplDownloadMissingGameCovers(void)
                 return;
             }
 
-            snprintf(artUrl, sizeof(artUrl), "http://%s/art/%s_COV.png", COVER_HTTP_HOST, startup);
-            snprintf(logoUrl, sizeof(logoUrl), "http://%s/logo/%s_LOGO.png", COVER_HTTP_HOST, startup);
+            snprintf(artUrl, sizeof(artUrl), "http://%s/art/%s_COV.jpg", COVER_HTTP_HOST, startup);
+            snprintf(logoUrl, sizeof(logoUrl), "http://%s/icons/%s_LOGO.png", COVER_HTTP_HOST, startup);
 
             if (gPS5CoverDownloadMode == PS5_COVER_DOWNLOAD_FULL || !coverHasAsset(prefix, "ART", startup, "COV")) {
                 snprintf(gPS5CoverDownloadUrl, sizeof(gPS5CoverDownloadUrl), "Downloading...");
@@ -2749,7 +2785,7 @@ static void oplDownloadMissingGameCovers(void)
         snprintf(gPS5CoverDownloadUrl, sizeof(gPS5CoverDownloadUrl), "%d/%d covers downloaded\n%d covers are not available. Request them on Instagram @irfanmatheena",
             downloaded, queued, saveFailed);
     else
-        snprintf(gPS5CoverDownloadUrl, sizeof(gPS5CoverDownloadUrl), "%d/%d covers downloaded", downloaded, queued);
+        snprintf(gPS5CoverDownloadUrl, sizeof(gPS5CoverDownloadUrl), "%d/%d covers ready", downloaded, queued);
 }
 
 static void oplCoverDownloadThread(void *arg)
@@ -3187,6 +3223,7 @@ static void deferredInit(void)
         id->menu.menu = &list_support[device].menuItem;
         guiDeferUpdate(id);
     }
+    oplPath2Mode(NULL);
 }
 
 static void deferredAudioInit(void)

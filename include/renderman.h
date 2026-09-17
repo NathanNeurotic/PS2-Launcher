@@ -65,6 +65,7 @@ extern const u64 gDefaultAlpha;
 enum rm_aratio {
     RM_ARATIO_4_3 = 0,
     RM_ARATIO_16_9,
+    RM_ARATIO_21_9,
 };
 
 /** Initializes the rendering manager */
@@ -123,6 +124,7 @@ void rmSetAspectRatio(enum rm_aratio dar);
 /** Widescreen scaling */
 int rmWideScale(int x);
 int rmGetAspectWidth(void);
+int rmGetAspectHeight(void);
 
 /** Get Pixel Aspect Ratio of native resolution */
 float rmGetPAR();

@@ -67,6 +67,7 @@ static struct rm_mode rm_mode_table[NUM_RM_VMODES] = {
 
 // Display Aspect Ratio
 static int iAspectWidth = 4;
+static int iAspectHeight = 4;
 static enum rm_aratio DAR = RM_ARATIO_4_3;
 
 // Display dimensions after overscan compensation
@@ -243,7 +244,7 @@ int rmSetMode(int force)
 
     rmSetDisplayOffset(gXOff, gYOff);
     rmSetOverscan(gOverscan);
-    rmSetAspectRatio((gWideScreen == 0) ? RM_ARATIO_4_3 : RM_ARATIO_16_9);
+    rmSetAspectRatio((gWideScreen == 0) ? RM_ARATIO_4_3 : (gWideScreen == 1 ? RM_ARATIO_16_9 : RM_ARATIO_21_9));
 
     return changed;
 }
@@ -300,7 +301,10 @@ static void rmSetupQuad(GSTEXTURE *txt, int x, int y, short aligned, int w, int 
     y = Y_SCALE(y);
     if (scaled & SCALING_RATIO) {
         int isWidescreen = (DAR == RM_ARATIO_16_9) || (vmode >= 0 && rm_mode_table[vmode].aratio == RM_ARATIO_16_9);
-        if (isWidescreen) {
+        int isUltrawide = (DAR == RM_ARATIO_21_9);
+        if (isUltrawide) {
+            w = (X_SCALE(w * 4)) / 7;
+        } else if (isWidescreen) {
             w = X_SCALE(w * 3) >> 2;
         } else {
             w = X_SCALE(w * iAspectWidth) >> 2;
@@ -505,9 +509,15 @@ void rmSetAspectRatio(enum rm_aratio dar)
     switch (DAR) {
         case RM_ARATIO_4_3:
             iAspectWidth = 4; // width = width * 4 / 4
+            iAspectHeight = 4;
             break;
         case RM_ARATIO_16_9:
             iAspectWidth = 3; // width = width * 3 / 4
+            iAspectHeight = 4;
+            break;
+        case RM_ARATIO_21_9:
+            iAspectWidth = 4;
+            iAspectHeight = 7;
             break;
     };
 }
@@ -522,6 +532,11 @@ int rmGetAspectWidth(void)
     return iAspectWidth;
 }
 
+int rmGetAspectHeight(void)
+{
+    return iAspectHeight;
+}
+
 // Get the pixel aspect ratio (how wide or narrow are the pixels?)
 float rmGetPAR()
 {
@@ -530,6 +545,8 @@ float rmGetPAR()
     // In anamorphic mode the pixels are stretched to 16:9
     if ((DAR == RM_ARATIO_16_9) && (rm_mode_table[vmode].aratio == RM_ARATIO_4_3))
         fPAR *= 0.75f;
+    else if ((DAR == RM_ARATIO_21_9) && (rm_mode_table[vmode].aratio == RM_ARATIO_4_3))
+        fPAR *= (4.0f / 7.0f);
 
     // In interlaced frame mode, the pixel are (virtually) twice as high
     if ((gsGlobal->Interlace == GS_INTERLACED) && (gsGlobal->Field == GS_FRAME))
