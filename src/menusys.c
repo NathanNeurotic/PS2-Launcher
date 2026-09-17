@@ -137,6 +137,8 @@ static int ps5DialogButton = 0;
 static char ps5GameToastMsg[128] = "";
 static int ps5GameToastTimer = 0;
 
+static void refreshMenuPosition(void);
+
 static void ps5SetGameToast(const char *msg)
 {
     if (msg && msg[0]) {
@@ -2075,7 +2077,7 @@ int ps5CheckFileFragmentation(const char *path)
     if (path == NULL || path[0] == '\0')
         return 0;
 
-    fd = openFile(path, O_RDONLY);
+    fd = openFile((char *)path, O_RDONLY);
     if (fd < 0)
         return 0;
     close(fd);
@@ -2777,8 +2779,8 @@ void ps5LoadFavorites(void)
 
     // Fallback migration from FAVORITES.CFG if no keys found
     if (gPS5FavoritesCount == 0) {
-        int fd = openFile("mc0:/PS2L/FAVORITES.CFG", O_RDONLY);
-        if (fd < 0) fd = openFile("mass0:/PS2L/FAVORITES.CFG", O_RDONLY);
+        int fd = openFile((char *)"mc0:/PS2L/FAVORITES.CFG", O_RDONLY);
+        if (fd < 0) fd = openFile((char *)"mass0:/PS2L/FAVORITES.CFG", O_RDONLY);
         if (fd >= 0) {
             char buf[2048];
             int bytes = read(fd, buf, sizeof(buf) - 1);
@@ -2939,8 +2941,8 @@ void ps5LoadRecent(void)
 
     // Fallback migration from RECENT.CFG if no keys found
     if (gPS5RecentCount == 0) {
-        int fd = openFile("mc0:/PS2L/RECENT.CFG", O_RDONLY);
-        if (fd < 0) fd = openFile("mass0:/PS2L/RECENT.CFG", O_RDONLY);
+        int fd = openFile((char *)"mc0:/PS2L/RECENT.CFG", O_RDONLY);
+        if (fd < 0) fd = openFile((char *)"mass0:/PS2L/RECENT.CFG", O_RDONLY);
         if (fd >= 0) {
             char buf[2048];
             int bytes = read(fd, buf, sizeof(buf) - 1);
