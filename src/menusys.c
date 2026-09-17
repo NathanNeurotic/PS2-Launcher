@@ -2748,32 +2748,8 @@ void ps5LoadFavorites(void)
             gPS5FavoritesCount++;
         }
     }
-
-    // Fallback migration from FAVORITES.CFG if no keys found
-    if (gPS5FavoritesCount == 0) {
-        int fd = openFile((char *)"mc0:/PS2L/FAVORITES.CFG", O_RDONLY);
-        if (fd < 0) fd = openFile((char *)"mass0:/PS2L/FAVORITES.CFG", O_RDONLY);
-        if (fd >= 0) {
-            char buf[2048];
-            int bytes = read(fd, buf, sizeof(buf) - 1);
-            if (bytes > 0) {
-                char *line;
-                buf[bytes] = '\0';
-                line = strtok(buf, "\r\n");
-                while (line && gPS5FavoritesCount < PS5_MAX_FAVORITES) {
-                    if (line[0] != '\0') {
-                        memset(&gPS5Favorites[gPS5FavoritesCount], 0, sizeof(gPS5Favorites[0]));
-                        gPS5Favorites[gPS5FavoritesCount].mode = -1;
-                        strncpy(gPS5Favorites[gPS5FavoritesCount].startup, line, sizeof(gPS5Favorites[0].startup) - 1);
-                        gPS5FavoritesCount++;
-                    }
-                    line = strtok(NULL, "\r\n");
-                }
-            }
-            close(fd);
-        }
-    }
 }
+
 
 void ps5SaveFavorites(void)
 {
@@ -2910,32 +2886,8 @@ void ps5LoadRecent(void)
             gPS5RecentCount = 1;
         }
     }
-
-    // Fallback migration from RECENT.CFG if no keys found
-    if (gPS5RecentCount == 0) {
-        int fd = openFile((char *)"mc0:/PS2L/RECENT.CFG", O_RDONLY);
-        if (fd < 0) fd = openFile((char *)"mass0:/PS2L/RECENT.CFG", O_RDONLY);
-        if (fd >= 0) {
-            char buf[2048];
-            int bytes = read(fd, buf, sizeof(buf) - 1);
-            if (bytes > 0) {
-                char *line;
-                buf[bytes] = '\0';
-                line = strtok(buf, "\r\n");
-                while (line && gPS5RecentCount < PS5_MAX_RECENT) {
-                    if (line[0] != '\0') {
-                        memset(&gPS5Recent[gPS5RecentCount], 0, sizeof(gPS5Recent[0]));
-                        gPS5Recent[gPS5RecentCount].mode = -1;
-                        strncpy(gPS5Recent[gPS5RecentCount].startup, line, sizeof(gPS5Recent[0].startup) - 1);
-                        gPS5RecentCount++;
-                    }
-                    line = strtok(NULL, "\r\n");
-                }
-            }
-            close(fd);
-        }
-    }
 }
+
 
 void ps5SaveRecent(void)
 {
