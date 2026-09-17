@@ -2738,6 +2738,31 @@ const char *gPS5RegionTags[] = {
     "PAL", "NTSC", "NTSCU", "NTSCJ", NULL
 };
 
+static const char *ps5SkipTitleArticle(const char *title)
+{
+    if (!title)
+        return "";
+    while (*title == ' ')
+        title++;
+    if (strncasecmp(title, "The ", 4) == 0)
+        return title + 4;
+    if (strncasecmp(title, "A ", 2) == 0)
+        return title + 2;
+    if (strncasecmp(title, "An ", 3) == 0)
+        return title + 3;
+    if (strncasecmp(title, "Der ", 4) == 0)
+        return title + 4;
+    if (strncasecmp(title, "Die ", 4) == 0)
+        return title + 4;
+    if (strncasecmp(title, "Das ", 4) == 0)
+        return title + 4;
+    if (strncasecmp(title, "Ein ", 4) == 0)
+        return title + 4;
+    if (strncasecmp(title, "Eine ", 5) == 0)
+        return title + 5;
+    return title;
+}
+
 static int ps5GameMatchesFilter(void *userdata, submenu_list_t *curr, int filterIdx)
 {
     if (filterIdx == 2) // '#' - All games
@@ -2771,7 +2796,11 @@ static int ps5GameMatchesFilter(void *userdata, submenu_list_t *curr, int filter
     if (title == NULL || title[0] == '\0')
         return 0;
 
-    char firstChar = title[0];
+    const char *sortTitle = ps5SkipTitleArticle(title);
+    if (sortTitle[0] == '\0')
+        return 0;
+
+    char firstChar = sortTitle[0];
     if (firstChar >= 'a' && firstChar <= 'z')
         firstChar -= 32;
 
@@ -2787,7 +2816,11 @@ static int ps5TitleMatchesAlpha(const char *title, int alphaIdx)
     if (title == NULL || title[0] == '\0')
         return 0;
 
-    firstChar = title[0];
+    const char *sortTitle = ps5SkipTitleArticle(title);
+    if (sortTitle[0] == '\0')
+        return 0;
+
+    firstChar = sortTitle[0];
     if (firstChar >= 'a' && firstChar <= 'z')
         firstChar -= 32;
 

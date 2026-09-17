@@ -170,11 +170,40 @@ static int ps5VMCConfirmUnsaved = 0;
 static const int ps5VMCSizesMB[] = {8, 16, 32, 64};
 static const char *ps5VMCLabels[] = {"Enable VMC", "VMC Name", "Size", "VMC File", "Delete VMC"};
 
+static int sOrigVMCEnable[2] = {0, 0};
+static char sOrigVMCName[2][32] = {{0}, {0}};
+static int sOrigVMCSizeIndex[2] = {0, 0};
+
+static int ps5VMCIsModified(void)
+{
+    int slot;
+    for (slot = 0; slot < 2; slot++) {
+        if (ps5VMCEnable[slot] != sOrigVMCEnable[slot]) return 1;
+        if (ps5VMCSizeIndex[slot] != sOrigVMCSizeIndex[slot]) return 1;
+        if (strncmp(ps5VMCName[slot], sOrigVMCName[slot], sizeof(ps5VMCName[slot])) != 0) return 1;
+    }
+    return 0;
+}
+
 // PS5 Native Cheat Engine Subscreen
 static int gPS5CheatMenuState = 0;
 static int ps5CheatSelected = 0;
 static int ps5CheatAllEnabled = 0;
 
+static int sOrigGameCompatMode = 0;
+static int sOrigGameGSMResolution = 0;
+static int sOrigGameLanguage = 0;
+static int sOrigGameEnableCheat = 0;
+static int ps5GameConfirmUnsaved = 0;
+
+static int ps5GameOptionsIsModified(void)
+{
+    if (ps5GameCompatMode != sOrigGameCompatMode) return 1;
+    if (ps5GameGSMResolution != sOrigGameGSMResolution) return 1;
+    if (ps5GameLanguage != sOrigGameLanguage) return 1;
+    if (ps5GameEnableCheat != sOrigGameEnableCheat) return 1;
+    return 0;
+}
 
 extern void rmDrawRoundedRect(int x, int y, int w, int h, int r, u64 color);
 extern void rmDrawRoundedRectWide(int x, int y, int w, int h, int r, u64 color);
@@ -200,6 +229,7 @@ static void ps5GameOptionsLoad(config_set_t *configSet)
     ps5GameGSMResolution = 0;
     ps5GameLanguage = 0;
     ps5GameEnableCheat = 0;
+    ps5GameConfirmUnsaved = 0;
 
     if (configSet == NULL)
         return;
@@ -231,6 +261,11 @@ static void ps5GameOptionsLoad(config_set_t *configSet)
     if (cheatSource == SETTINGS_PERGAME) {
         configGetInt(configSet, "$EnableCheat", &ps5GameEnableCheat);
     }
+
+    sOrigGameCompatMode = ps5GameCompatMode;
+    sOrigGameGSMResolution = ps5GameGSMResolution;
+    sOrigGameLanguage = ps5GameLanguage;
+    sOrigGameEnableCheat = ps5GameEnableCheat;
 }
 
 static int drawPS5GameIconAndText(int iconId, const char *text, int font, int x, int y, u64 color)
@@ -398,6 +433,11 @@ static void ps5GameOptionsSave(config_set_t *configSet)
     set_cheats_list();
 
     configSetInt(configSet, "$ConfigSource", 1);
+
+    sOrigGameCompatMode = ps5GameCompatMode;
+    sOrigGameGSMResolution = ps5GameGSMResolution;
+    sOrigGameLanguage = ps5GameLanguage;
+    sOrigGameEnableCheat = ps5GameEnableCheat;
 }
 
 static void ps5VMCLoadConfig(void)
@@ -411,6 +451,7 @@ static void ps5VMCLoadConfig(void)
     ps5VMCProgress = 0;
     ps5VMCConfirmDelete = 0;
     ps5VMCConfirmReformat = 0;
+    ps5VMCConfirmUnsaved = 0;
 
     for (slot = 0; slot < 2; slot++) {
         configGetVMC(itemConfig, ps5VMCName[slot], sizeof(ps5VMCName[slot]), slot);
@@ -439,6 +480,11 @@ static void ps5VMCLoadConfig(void)
         } else {
             ps5VMCStatus[slot] = 0;
         }
+
+        sOrigVMCEnable[slot] = ps5VMCEnable[slot];
+        sOrigVMCSizeIndex[slot] = ps5VMCSizeIndex[slot];
+        strncpy(sOrigVMCName[slot], ps5VMCName[slot], sizeof(sOrigVMCName[slot]) - 1);
+        sOrigVMCName[slot][sizeof(sOrigVMCName[slot]) - 1] = '\0';
     }
 }
 
@@ -451,6 +497,10 @@ static void ps5VMCSaveConfig(void)
         } else {
             configRemoveVMC(itemConfig, slot);
         }
+        sOrigVMCEnable[slot] = ps5VMCEnable[slot];
+        sOrigVMCSizeIndex[slot] = ps5VMCSizeIndex[slot];
+        strncpy(sOrigVMCName[slot], ps5VMCName[slot], sizeof(sOrigVMCName[slot]) - 1);
+        sOrigVMCName[slot][sizeof(sOrigVMCName[slot]) - 1] = '\0';
     }
     menuSaveConfig();
 }
@@ -4749,12 +4799,13 @@ void menuRenderGameMenu()
             } else {
                 // Compatibility Modes tab
                 int i;
-                for (i = 0; i < 6; i++) {
-                    int y = listTop + i * rowStep;
+                for (i = 0; i < 8; i++) {
+                    int y = listTop + i * rowStep - listScrollOffset;
                     int focused = (gPS5CompatRow == i);
                     int enabled = (ps5GameCompatMode & (1 << i)) != 0;
                     int rowFont = focused ? semiBoldFont : gTheme->fonts[1];
                     char modeStr[32];
+                    if (y < listTop - rowStep || y > listBottom + rowStep) continue;
                     snprintf(modeStr, sizeof(modeStr), "Mode %d", i + 1);
                     if (focused) drawPS5GameFocusIndicator(labelX, y);
                     fntRenderString(rowFont, labelX, y, ALIGN_LEFT | ALIGN_VCENTER, 0, 0, modeStr, focused ? focusedColor : rowColor);
@@ -4767,6 +4818,17 @@ void menuRenderGameMenu()
                     drawPS5GameIconAndText(SQUARE_ICON, "Save", semiBoldFont, nX + 22, footerY, footerColor);
                     drawPS5GameRightIconAndText(CIRCLE_ICON, "Close", semiBoldFont, ps5Width - 64, footerY, footerColor);
                 }
+            }
+
+            if (ps5GameConfirmUnsaved) {
+                int dw = 420, dh = 140;
+                int dx = (ps5Width - dw) / 2, dy = (ps5Height - dh) / 2;
+                rmDrawRoundedRect(dx - 1, dy - 1, dw + 2, dh + 2, 8, GS_SETREG_RGBA(0x40, 0x40, 0x40, 0xE0));
+                rmDrawRoundedRect(dx, dy, dw, dh, 7, GS_SETREG_RGBA(0x10, 0x10, 0x10, 0xFA));
+                fntRenderString(semiBoldFont, dx + dw / 2, dy + 20, ALIGN_CENTER, 0, 0, "Unsaved Changes", focusedColor);
+                fntRenderString(gTheme->fonts[1], dx + dw / 2, dy + 50, ALIGN_CENTER, 0, 0, "Unsaved changes will be lost. Do you want to discard?", GS_SETREG_RGBA(0xD0, 0xD0, 0xD0, 0x80));
+                fntRenderString(ps5DialogButton == 0 ? semiBoldFont : gTheme->fonts[1], dx + 110, dy + 95, ALIGN_CENTER, 0, 0, "Discard Changes", ps5DialogButton == 0 ? focusedColor : rowColor);
+                fntRenderString(ps5DialogButton == 1 ? semiBoldFont : gTheme->fonts[1], dx + dw - 100, dy + 95, ALIGN_CENTER, 0, 0, "Cancel", ps5DialogButton == 1 ? focusedColor : rowColor);
             }
         }
 
@@ -5034,7 +5096,12 @@ void menuHandleInputGameMenu()
                 ps5SetGameToast("VMC Save Successful");
             } else if (getKeyOn(KEY_CIRCLE)) {
                 sfxPlay(SFX_CANCEL);
-                gPS5VMCMenuState = 0;
+                if (ps5VMCIsModified()) {
+                    ps5VMCConfirmUnsaved = 1;
+                    ps5DialogButton = 1;
+                } else {
+                    gPS5VMCMenuState = 0;
+                }
             }
             return;
         }
@@ -5078,6 +5145,26 @@ void menuHandleInputGameMenu()
             } else if (getKeyOn(KEY_CIRCLE)) {
                 sfxPlay(SFX_CANCEL);
                 gPS5CheatMenuState = 0;
+            }
+            return;
+        }
+
+        if (ps5GameConfirmUnsaved) {
+            if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT)) {
+                sfxPlay(SFX_CURSOR);
+                ps5DialogButton = !ps5DialogButton;
+            } else if (getKeyOn(KEY_CROSS)) {
+                if (ps5DialogButton == 0) {
+                    sfxPlay(SFX_CONFIRM);
+                    ps5GameConfirmUnsaved = 0;
+                    guiSwitchScreen(GUI_SCREEN_MAIN);
+                } else {
+                    sfxPlay(SFX_CANCEL);
+                    ps5GameConfirmUnsaved = 0;
+                }
+            } else if (getKeyOn(KEY_CIRCLE)) {
+                sfxPlay(SFX_CANCEL);
+                ps5GameConfirmUnsaved = 0;
             }
             return;
         }
@@ -5145,7 +5232,12 @@ void menuHandleInputGameMenu()
                 return;
             } else if (getKeyOn(KEY_CIRCLE) || getKeyOn(KEY_START)) {
                 sfxPlay(SFX_CANCEL);
-                guiSwitchScreen(GUI_SCREEN_MAIN);
+                if (ps5GameOptionsIsModified()) {
+                    ps5GameConfirmUnsaved = 1;
+                    ps5DialogButton = 1;
+                } else {
+                    guiSwitchScreen(GUI_SCREEN_MAIN);
+                }
                 return;
             }
         } else {
@@ -5155,7 +5247,7 @@ void menuHandleInputGameMenu()
                 if (gPS5CompatRow > 0) gPS5CompatRow--;
             } else if (getKeyOn(KEY_DOWN)) {
                 sfxPlay(SFX_CURSOR);
-                if (gPS5CompatRow < 5) gPS5CompatRow++;
+                if (gPS5CompatRow < 7) gPS5CompatRow++;
             } else if (getKeyOn(KEY_LEFT) || getKeyOn(KEY_RIGHT) || getKeyOn(KEY_CROSS)) {
                 sfxPlay(SFX_CONFIRM);
                 ps5GameCompatMode ^= (1 << gPS5CompatRow);
@@ -5168,7 +5260,12 @@ void menuHandleInputGameMenu()
                 return;
             } else if (getKeyOn(KEY_CIRCLE) || getKeyOn(KEY_START)) {
                 sfxPlay(SFX_CANCEL);
-                guiSwitchScreen(GUI_SCREEN_MAIN);
+                if (ps5GameOptionsIsModified()) {
+                    ps5GameConfirmUnsaved = 1;
+                    ps5DialogButton = 1;
+                } else {
+                    guiSwitchScreen(GUI_SCREEN_MAIN);
+                }
                 return;
             }
         }
